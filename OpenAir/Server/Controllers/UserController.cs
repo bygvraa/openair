@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using OpenAir.Shared.Models;
 using OpenAir.Server.DataAccess;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenAir.Server.Controllers
 {
@@ -45,63 +46,38 @@ namespace OpenAir.Server.Controllers
         [HttpPost]
         public async Task<ActionResult<UserClass>> Create([FromBody] UserClass user)
         {
-            Guid obj = Guid.NewGuid();
-            user.id = obj.ToString();
-            await _service.CreateUser(user);
+            if (ModelState.IsValid)
+            {
+                user.id = Guid.NewGuid().ToString();
+                await _service.CreateUser(user);
+            }
 
             return user;
         }
 
-        //// PUT: api/Account/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAccountClass(int id, AccountClass accountClass)
-        //{
-        //    if (id != accountClass.account_id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // PUT: api/user
+        [HttpPut]
+        public async Task<ActionResult<UserClass>> Edit([FromBody] UserClass user)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.UpdateUser(user);
+            }
 
-        //    _context.Entry(accountClass).State = EntityState.Modified;
+            return user;
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!AccountClassExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        // DELETE: api/Account/5
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (ModelState.IsValid)
+            {
+                await _service.DeleteUser(id);
+            }
 
-        //    return NoContent();
-        //}
+            return NoContent();
+        }
 
-        //// DELETE: api/Account/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAccountClass(int id)
-        //{
-        //    var accountClass = await _context.account.FindAsync(id);
-        //    if (accountClass == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.account.Remove(accountClass);
-        //    await _context.SaveChangesAsync();
-
-        //    return NoContent();
-        //}
-
-        //private bool AccountClassExists(int id)
-        //{
-        //    return _context.account.Any(e => e.account_id == id);
-        //}
     }
 }

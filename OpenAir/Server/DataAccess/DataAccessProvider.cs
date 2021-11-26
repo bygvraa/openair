@@ -1,5 +1,4 @@
 ﻿using OpenAir.Shared.Models;
-using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -10,42 +9,47 @@ namespace OpenAir.Server.DataAccess
 {
     public class DataAccessProvider : IDataAccessProvider
     {
-        private readonly DomainDbContext _context;
-        private readonly ILogger _logger;
+        private readonly DomainDbContext _dBContext;
 
-        public DataAccessProvider(DomainDbContext context, ILoggerFactory loggerFactory)
+        public DataAccessProvider(DomainDbContext _db)
         {
-            _context = context;
-            _logger = loggerFactory.CreateLogger("DataAccessProvider");
+            _dBContext = _db;
         }
 
 
-        // Users
+        // Brugere
 
         // GET (find) alle brugere
         public async Task<List<UserClass>> GetUsers()
         {
-            return await _context.user.ToListAsync();
+            return await _dBContext.user.ToListAsync();
         }
 
         // GET (find) specifik bruger
         public async Task<UserClass> GetSingleUser(string id)
         {
-            return await _context.user.FirstAsync(t => t.id == id);
+            return await _dBContext.user.FirstAsync(t => t.id == id);
         }
 
         // POST (lav) en bruger
         public async Task CreateUser(UserClass user)
         {
-            _context.user.Add(user);
-            await _context.SaveChangesAsync();
+            await _dBContext.user.AddAsync(user);
+            await _dBContext.SaveChangesAsync();
         }
 
         // PUT (opdater) en bruger
         public async Task UpdateUser(UserClass user)
         {
-            _context.user.Update(user);
-            await _context.SaveChangesAsync();
+            _dBContext.user.Update(user);
+            await _dBContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteUser(string id)
+        {
+            var entity = await _dBContext.user.FirstAsync(t => t.id == id);
+            _dBContext.user.Remove(entity);
+            await _dBContext.SaveChangesAsync();
         }
     }
 }
