@@ -5,7 +5,7 @@
 @using System.Net.Http
 @inject NavigationManager uriHelper
 
-<h3>LogIn</h3>
+<h3>Login</h3>
 @if (users == null)
 {
 <p><em>Loading...</em></p>
@@ -22,7 +22,7 @@ else
     <br />
     <button class="btn btn-success" @onclick="() => startLogin(email, password)">Login</button>
     <br />
-    <a href="https://localhost:5001/createuser">Dont have a user?</a>
+    <a href="/createuser">Dont have a user?</a>
 </p>
 
 
@@ -47,7 +47,7 @@ else
             {
                 if (user.role == user.role)
                 {
-                    uriHelper.NavigateTo($"fetchdata");
+                    uriHelper.NavigateTo($"/");
                     break;
 
                 }
