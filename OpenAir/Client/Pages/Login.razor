@@ -13,12 +13,12 @@
 else
             {
 
-<p>
+<p class="loginoplysninger">
     Email:
-    <input placeholder="Email" @bind="email" />
+    <input placeholder="Email" @bind="email" class="indtastoplysninger"/>
     <br />
     Password:
-    <input placeholder="Password" @bind="password" />
+    <input placeholder="Password" @bind="password" class="indtastoplysninger"/>
     <br />
     <button class="btn btn-success" @onclick="() => startLogin(email, password)">Login</button>
     <br />

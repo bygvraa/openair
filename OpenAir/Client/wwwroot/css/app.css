@@ -26,7 +26,7 @@ app {
 }
 
 .top-row {
-    height: 6.5rem;
+    height: 10.5rem;
     display: flex;
     align-items: center;
 }
@@ -55,6 +55,7 @@ app {
 .sidebar {
     background-color: white;
     color: black;
+    float: right;
 }
 
     .sidebar .top-row {
@@ -70,7 +71,7 @@ app {
         font-size: 1.1rem;
         vertical-align: text-top;
         top: -2px;
-        float: right;
+        
     }
 
     .sidebar .nav-item {
@@ -97,13 +98,15 @@ app {
         }
 
             .sidebar .nav-item a.active {
-                background-color: rgba(255,255,255,0.25);
-                color: white;
+                background-color: orange;
+                border-radius: 50px;
+                color: black;
             }
 
             .sidebar .nav-item a:hover {
                 background-color: rgba(255,255,255,0.1);
-                color: white;
+                border: 1px solid orange;
+                color: black;
             }
 
 .content {
@@ -168,12 +171,13 @@ app {
 @media (min-width: 768px) {
     app {
         flex-direction: column;
+        
     }
 
     .sidebar {
         position: sticky;
         top: 0;
-        float: right;
+        
     }
 
     .main .top-row {
@@ -197,10 +201,24 @@ app {
 
     /*Logo*/
     .logopic {
-        position: absolute;
-        width: 20%;
-        top: 2px;
+        width: 50%;
+        top: 10px;
+       
+      bottom: 20px;
+        
     }
 
-   
+    /*Loginknap*/
+    .btn-success {
+        background-color:orange;
+        color: black;
+        border: 1px solid orange;
+        border-radius: 50px;
+    }
+
+    .loginoplysninger {
+        text-align: center;
+    }
+
+
 }
