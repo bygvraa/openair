@@ -9,6 +9,7 @@ namespace OpenAir.Shared.Models
     public interface IDataAccessProvider
     {
         Task<List<UserClass>> GetUsers();
+        Task<UserClass> GetSingleUser(string id);
         Task CreateUser(UserClass user);
         Task UpdateUser(UserClass user);
     }

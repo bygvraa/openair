@@ -27,19 +27,19 @@ namespace OpenAir.Server.Controllers
             return await _service.GetUsers();
         }
 
-        //// GET: api/Account/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<AccountClass>> GetAccountClass(int id)
-        //{
-        //    var accountClass = await _service.account.FindAsync(id);
+        // GET: api/user/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserClass>> Details(string id)
+        {
+            var userClass = await _service.GetSingleUser(id);
 
-        //    if (accountClass == null)
-        //    {
-        //        return NotFound();
-        //    }
+            if (userClass == null)
+            {
+                return NotFound();
+            }
 
-        //    return accountClass;
-        //}
+            return userClass;
+        }
 
         // POST: api/user
         [HttpPost]
