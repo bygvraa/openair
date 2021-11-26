@@ -15,6 +15,7 @@ namespace OpenAir.Shared.Models
         public string email { get; set; }
         public string password { get; set; }
         public int? role { get; set; }
+        public DateTime created { get; set; }
 
         public UserClass() { }
 
