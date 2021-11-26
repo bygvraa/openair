@@ -1,7 +1,12 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: Avenir Next,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin: auto;
 }
 
 a, .btn-link {
@@ -9,9 +14,9 @@ a, .btn-link {
 }
 
 .btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
+    color: black;
+    background-color: white;
+    border-color: black;
 }
 
 app {
@@ -21,7 +26,7 @@ app {
 }
 
 .top-row {
-    height: 3.5rem;
+    height: 6.5rem;
     display: flex;
     align-items: center;
 }
@@ -41,17 +46,19 @@ app {
             margin-left: 1.5rem;
         }
 
-.main .top-row a:first-child {
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
+        .main .top-row a:first-child {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
 
 .sidebar {
-    background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
+    background-color: white;
+    color: black;
 }
 
     .sidebar .top-row {
-        background-color: rgba(0,0,0,0.4);
+        background-color: rgba(0,0,0,0);
     }
 
     .sidebar .navbar-brand {
@@ -63,28 +70,30 @@ app {
         font-size: 1.1rem;
         vertical-align: text-top;
         top: -2px;
+        float: right;
     }
 
     .sidebar .nav-item {
-        font-size: 0.9rem;
-        padding-bottom: 0.5rem;
+        font-size: 1rem;
+        padding-bottom: 0rem;
+        float: right;
     }
 
         .sidebar .nav-item:first-of-type {
-            padding-top: 1rem;
         }
 
         .sidebar .nav-item:last-of-type {
-            padding-bottom: 1rem;
+            padding-bottom: 0rem;
         }
 
         .sidebar .nav-item a {
             color: #d7d7d7;
-            border-radius: 4px;
+            border-radius: 0px;
             height: 3rem;
             display: flex;
             align-items: center;
             line-height: 3rem;
+            float: right;
         }
 
             .sidebar .nav-item a.active {
@@ -102,7 +111,7 @@ app {
 }
 
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: grey;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -129,12 +138,12 @@ app {
     z-index: 1000;
 }
 
-#blazor-error-ui .dismiss {
-    cursor: pointer;
-    position: absolute;
-    right: 0.75rem;
-    top: 0.5rem;
-}
+    #blazor-error-ui .dismiss {
+        cursor: pointer;
+        position: absolute;
+        right: 0.75rem;
+        top: 0.5rem;
+    }
 
 @media (max-width: 767.98px) {
     .main .top-row:not(.auth) {
@@ -148,18 +157,23 @@ app {
     .main .top-row a, .main .top-row .btn-link {
         margin-left: 0;
     }
+
+    .logopic {
+        position: absolute;
+        width: 30%;
+        top: 20px;
+    }
 }
 
 @media (min-width: 768px) {
     app {
-        flex-direction: row;
+        flex-direction: column;
     }
 
     .sidebar {
-        width: 250px;
-        height: 100vh;
         position: sticky;
         top: 0;
+        float: right;
     }
 
     .main .top-row {
@@ -180,4 +194,13 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: block;
     }
+
+    /*Logo*/
+    .logopic {
+        position: absolute;
+        width: 20%;
+        top: 2px;
+    }
+
+   
 }
