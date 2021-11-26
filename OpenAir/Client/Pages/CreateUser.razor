@@ -1,0 +1,45 @@
+﻿@using OpenAir.Shared.Models
+@page "/createuser"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+
+<h3>Create User</h3>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <label for="Name" class="control-label">Name</label>
+                <input for="Name" class="form-control" @bind="@user.name" />
+            </div>
+            <div class="form-group">
+                <label for="Email" class="control-label">email</label>
+                <input for="Email" class="form-control" @bind="@user.email" />
+            </div>
+            <div class="form-group">
+                <label for="Password" class="control-label">password</label>
+                <input for="Password" class="form-control" @bind="@user.password" />
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-info" @onclick="@(async () => await AddUser())" value="Save" />
+                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Cancel" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+    UserClass user = new UserClass();
+
+    protected async Task AddUser()
+    {
+        await Http.PostAsJsonAsync("User", user);
+        UriHelper.NavigateTo("/users");
+    }
+
+    void Cancel()
+    {
+        UriHelper.NavigateTo("/users");
+    }
+}

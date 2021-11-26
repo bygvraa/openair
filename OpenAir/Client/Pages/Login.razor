@@ -1,0 +1,67 @@
+﻿@page "/login"
+@using OpenAir.Shared.Models
+@inject HttpClient Http
+@inject IJSRuntime js
+@using System.Net.Http
+@inject NavigationManager uriHelper
+
+<h3>LogIn</h3>
+@if (users == null)
+{
+<p><em>Loading...</em></p>
+}
+else
+            {
+
+<p>
+    Email:
+    <input placeholder="Email" @bind="email" />
+    <br />
+    Password:
+    <input placeholder="Password" @bind="password" />
+    <br />
+    <button class="btn btn-success" @onclick="() => startLogin(email, password)">Login</button>
+    <br />
+    <a href="https://localhost:5001/createuser">Dont have a user?</a>
+</p>
+
+
+}
+
+@code {
+    public string email;
+    public string password;
+
+    public UserClass[] users;
+
+    protected override async Task OnInitializedAsync()
+    {
+        users = await Http.GetFromJsonAsync<UserClass[]>("User");
+    }
+
+    public void startLogin(string email, string password)
+    {
+        foreach (var user in users)
+        {
+            if (user.email == email && user.password == password)
+            {
+                if (user.role == user.role)
+                {
+                    uriHelper.NavigateTo($"fetchdata");
+                    break;
+
+                }
+                else if (user.role == user.role)
+                {   
+                    uriHelper.NavigateTo($"Counter");
+                    break;
+                }
+                else
+                {
+                    js.InvokeVoidAsync("alert", $"User access not permitted");
+                    break;
+                }
+            }
+        }
+    }
+}

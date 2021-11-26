@@ -1,0 +1,41 @@
+﻿@using OpenAir.Shared.Models
+@page "/users"
+@inject HttpClient Http
+
+<h3>Users</h3>
+<p>
+    <a href="/createuser">Create New User</a>
+</p>
+@if (userList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var user in userList)
+            {
+                <tr>
+                    <td>@user.name</td>
+                    <td>@user.email</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+@code {
+    UserClass[] userList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        userList = await Http.GetFromJsonAsync<UserClass[]>("User");
+    }
+}
