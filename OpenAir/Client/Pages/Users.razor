@@ -1,23 +1,37 @@
-﻿@using OpenAir.Shared.Models
-@page "/users"
+﻿@page "/users"
+@using OpenAir.Shared.Models
+@using OpenAir.Client.Components
 @inject HttpClient Http
 
-<h3>Users</h3>
+<h3>Brugere</h3>
 <p>
-    <a href="/createuser">Create New User</a>
+    Liste over alle sidens brugere
 </p>
+<br />
+
+<div style="float: right; margin-bottom: 5px">
+    <NavLink class="nav-link" href="/createuser">
+        <button href="/createuser" class="btn btn-primary">
+            Ny bruger
+        </button>
+    </NavLink>
+</div>
+<br />
+
 @if (userList == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Indlæser, vent venligst...</em></p>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Navn</th>
                 <th>Email</th>
-                <th>Created</th>
+                <th>Oprettelsesdato</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -26,18 +40,65 @@ else
                 <tr>
                     <td>@user.name</td>
                     <td>@user.email</td>
-                    <td>@user.created.ToUniversalTime()</td>
+                    <td>@user.created</td>
+                    <td></td>
+                    <td>
+                        <button type="button" class="btn btn-danger btn-sm"
+                                @onclick="() => OpenDeleteDialog(user)">
+                            Fjern
+                        </button>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+@if (DeleteDialogOpen)
+{
+    <ModalDialog Title="Er du sikker?"
+                 Text="Ønsker du at fjerne denne bruger?"
+                 OnClose="@CloseDeleteDialog"
+                 DialogType="ModalDialog.ModalDialogType.DeleteCancel">
+    </ModalDialog>
+}
+
 @code {
-    UserClass[] userList;
+    private UserClass[] userList;
+    private UserClass _user;
+
 
     protected override async Task OnInitializedAsync()
     {
         userList = await Http.GetFromJsonAsync<UserClass[]>("User");
     }
+
+    protected async Task Delete(string id)
+    {
+        await Http.DeleteAsync("User/" + id);
+    }
+
+
+    // Delete user modal
+    public bool DeleteDialogOpen { get; set; }
+
+    private void OpenDeleteDialog(UserClass user)
+    {
+        DeleteDialogOpen = true;
+        _user = user;
+        StateHasChanged();
+    }
+    private async Task CloseDeleteDialog(bool accepted)
+    {
+        if (accepted)
+        {
+            await Delete(_user.id);
+            await OnInitializedAsync();
+            _user = null;
+        }
+
+        DeleteDialogOpen = false;
+        StateHasChanged();
+    }
+
 }
