@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenAir.Shared.Models;
-using OpenAir.Server.DataAccess;
+using OpenAir.Server.DataAccess.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace OpenAir.Server.Controllers
@@ -14,14 +14,15 @@ namespace OpenAir.Server.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IDataAccessProvider _service;
+        private readonly IUserRepository _service;
 
-        public UserController(IDataAccessProvider service)
+        public UserController(IUserRepository service)
         {
             _service = service;
         }
 
         // GET: api/user
+        // Bruger en metode ('GetUsers()') fra 'UserRepository' til at retunere en liste over alle brugere
         [HttpGet]
         public async Task<ActionResult<IEnumerable<UserClass>>> Get()
         {
@@ -29,6 +30,7 @@ namespace OpenAir.Server.Controllers
         }
 
         // GET: api/user/5
+        // Tager id'et på en bestemt bruger og retunerer alle oplysninger på brugeren
         [HttpGet("{id}")]
         public async Task<ActionResult<UserClass>> Details(string id)
         {
@@ -43,6 +45,7 @@ namespace OpenAir.Server.Controllers
         }
 
         // POST: api/user
+        // Laver en ny bruger med et unikt id (guid)
         [HttpPost]
         public async Task<ActionResult<UserClass>> Create([FromBody] UserClass user)
         {
@@ -56,6 +59,7 @@ namespace OpenAir.Server.Controllers
         }
 
         // PUT: api/user
+        // Tager en bruger som argument og retunerer alle brugerens oplysninger
         [HttpPut]
         public async Task<ActionResult<UserClass>> Edit([FromBody] UserClass user)
         {
@@ -67,7 +71,8 @@ namespace OpenAir.Server.Controllers
             return user;
         }
 
-        // DELETE: api/Account/5
+        // DELETE: api/user/5
+        // Tager et id som argument og fjerner den tilhørende bruger
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
