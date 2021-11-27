@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
-using OpenAir.Shared.Models;
-using OpenAir.Server.DataAccess;
+using OpenAir.Server.DataAccess.Contexts;
+using OpenAir.Server.DataAccess.Repositories;
 
 namespace OpenAir.Server
 {
@@ -28,7 +28,7 @@ namespace OpenAir.Server
             services.AddDbContext<DomainDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddScoped<IDataAccessProvider, DataAccessProvider>();
+            services.AddScoped<IUserRepository, UserRepository>();
 
             services.AddControllersWithViews();
             services.AddRazorPages();
