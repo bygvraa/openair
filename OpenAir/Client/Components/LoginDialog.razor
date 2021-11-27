@@ -3,7 +3,7 @@
 @inject NavigationManager uriHelper
 @inject IJSRuntime js
 
-<div class="modal fade show" id="myModal"
+<div class="modal fade show" id="LoginModal"
      style="display: block; background-color: rgba(247, 247, 247, .7);"
      aria-modal="true" role="dialog">
 
@@ -11,20 +11,18 @@
         <div class="modal-content" style="background-color: rgba(247, 247, 247, .95)">
             <div class="modal-header" style="border: none">
                 <h4 class="modal-title">
-                    Login
+                    Log på
                 </h4>
                 <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
             </div>
             <div class="modal-body">
-                <div class="logininfo" style="text-align: center; margin-left: 20%; margin-right: 20%">
+                <div style="text-align: center; margin-left: 20%; margin-right: 20%">
                     <div style=" text-align: left">
                         <div>
-                            <label>Email:</label>
-                            <input placeholder="Email" @bind="email" class="logininfo" style="float: right" /><br />
+                            <input placeholder="Email" @bind="email" class="logininfo" /><br />
                         </div>
                         <div>
-                            <label>Password:</label>
-                            <input placeholder="Password" @bind="password" class="logininfo" style="float: right" />
+                            <input placeholder="Adgangskode" @bind="password" class="logininfo" />
                         </div>
                     </div>
                     <button class="btn btn-success" @onclick="() => startLogin(email, password)"
@@ -32,7 +30,7 @@
                         Login
                     </button><br />
                     <NavLink href="/createuser" @onclick="@ModalCancel">
-                        Dont have a user?
+                        Mangler du en bruger?
                     </NavLink>
                 </div>
             </div>

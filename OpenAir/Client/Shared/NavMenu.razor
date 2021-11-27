@@ -37,7 +37,7 @@
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" @onclick="() => OpenLoginDialog()">
+            <NavLink class="nav-link" @onclick="@(() => LoginDialogOpen = true)">
                 <span class="oi oi-account-login" aria-hidden="true"></span> LoginNu
             </NavLink>
         </li>
@@ -47,7 +47,7 @@
 @if (LoginDialogOpen)
 {
     <LoginDialog
-                 OnClose="@CloseLoginDialog">
+                 OnClose="@(() => LoginDialogOpen = false)">
     </LoginDialog>
 }
 
@@ -61,17 +61,6 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
-
     public bool LoginDialogOpen { get; set; }
 
-    private void OpenLoginDialog()
-    {
-        LoginDialogOpen = true;
-        StateHasChanged();
-    }
-    private async Task CloseLoginDialog(bool accepted)
-    {
-        LoginDialogOpen = false;
-        StateHasChanged();
-    }
 }
