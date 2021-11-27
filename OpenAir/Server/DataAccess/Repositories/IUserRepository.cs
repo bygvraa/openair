@@ -1,13 +1,11 @@
-﻿using System;
+﻿using OpenAir.Shared.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
-using OpenAir.Shared.Models;
 
-namespace OpenAir.Server.DataAccess
+
+namespace OpenAir.Server.DataAccess.Repositories
 {
-    public interface IDataAccessProvider
+    public interface IUserRepository
     {
         Task<List<UserClass>> GetUsers();
         Task<UserClass> GetSingleUser(string id);
