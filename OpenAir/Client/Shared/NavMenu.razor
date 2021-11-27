@@ -1,6 +1,8 @@
-﻿<div class="top-row pl-4 navbar navbar-dark">
+﻿@using OpenAir.Client.Components
+
+<div class="top-row pl-4 navbar navbar-dark">
     <a class="navbar-brand" href="">
-        <img src="images/openairlogo.png" class="logopic"/>
+        <img src="images/openairlogo.png" class="logopic" />
     </a>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
@@ -34,8 +36,20 @@
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Login
             </NavLink>
         </li>
+        <li class="nav-item px-3">
+            <NavLink class="nav-link" @onclick="() => OpenLoginDialog()">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> LoginNu
+            </NavLink>
+        </li>
     </ul>
 </div>
+
+@if (LoginDialogOpen)
+{
+    <LoginDialog
+                 OnClose="@CloseLoginDialog">
+    </LoginDialog>
+}
 
 @code {
     private bool collapseNavMenu = true;
@@ -45,5 +59,19 @@
     private void ToggleNavMenu()
     {
         collapseNavMenu = !collapseNavMenu;
+    }
+
+
+    public bool LoginDialogOpen { get; set; }
+
+    private void OpenLoginDialog()
+    {
+        LoginDialogOpen = true;
+        StateHasChanged();
+    }
+    private async Task CloseLoginDialog(bool accepted)
+    {
+        LoginDialogOpen = false;
+        StateHasChanged();
     }
 }

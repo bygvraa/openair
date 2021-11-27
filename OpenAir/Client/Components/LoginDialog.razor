@@ -1,0 +1,97 @@
+﻿@using OpenAir.Shared.Models
+@inject HttpClient Http
+@inject NavigationManager uriHelper
+@inject IJSRuntime js
+
+<div class="modal fade show" id="myModal"
+     style="display: block; background-color: rgba(247, 247, 247, .7);"
+     aria-modal="true" role="dialog">
+
+    <div class="modal-dialog">
+        <div class="modal-content" style="background-color: rgba(247, 247, 247, .95)">
+            <div class="modal-header" style="border: none">
+                <h4 class="modal-title">
+                    Login
+                </h4>
+                <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="logininfo" style="text-align: center; margin-left: 20%; margin-right: 20%">
+                    <div style=" text-align: left">
+                        <div>
+                            <label>Email:</label>
+                            <input placeholder="Email" @bind="email" class="logininfo" style="float: right" /><br />
+                        </div>
+                        <div>
+                            <label>Password:</label>
+                            <input placeholder="Password" @bind="password" class="logininfo" style="float: right" />
+                        </div>
+                    </div>
+                    <button class="btn btn-success" @onclick="() => startLogin(email, password)"
+                            style="margin: 10px; width: 100%">
+                        Login
+                    </button><br />
+                    <NavLink href="/createuser" @onclick="@ModalCancel">
+                        Dont have a user?
+                    </NavLink>
+                </div>
+            </div>
+            <div class="modal-footer" style="border: none">
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+    @code {
+        public string email;
+        public string password;
+
+        public UserClass[] users;
+
+        protected override async Task OnInitializedAsync()
+        {
+            users = await Http.GetFromJsonAsync<UserClass[]>("User");
+        }
+
+        public void startLogin(string email, string password)
+        {
+            foreach (var user in users)
+            {
+                if (user.email == email && user.password == password)
+                {
+                    if (user.role == null)
+                    {
+                        ModalCancel();
+                        uriHelper.NavigateTo($"/");
+                        break;
+
+                    }
+                    else if (user.role == user.role)
+                    {
+                        uriHelper.NavigateTo($"Counter");
+                        break;
+                    }
+                    else
+                    {
+                        js.InvokeVoidAsync("alert", $"User access not permitted");
+                        break;
+                    }
+                }
+            }
+        }
+
+
+        [Parameter] public EventCallback<bool> OnClose { get; set; }
+
+        private Task ModalCancel()
+        {
+            return OnClose.InvokeAsync(false);
+        }
+        private Task ModalOk()
+        {
+            return OnClose.InvokeAsync(true);
+        }
+
+    }
