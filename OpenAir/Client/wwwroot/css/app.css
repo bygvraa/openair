@@ -53,13 +53,22 @@ app {
 
 
 .sidebar {
-    background-color: white;
+    background-color: orange;
     color: black;
     float: right;
 }
 
     .sidebar .top-row {
         background-color: rgba(0,0,0,0);
+    }
+
+    .sidebar .bottom-row {
+        background-color: #00023c6e;
+        border-radius: 6px;
+        padding: 10px;
+        margin-left: 20px;
+        margin-right: 20px;
+        margin-bottom: 20px;
     }
 
     .sidebar .navbar-brand {
