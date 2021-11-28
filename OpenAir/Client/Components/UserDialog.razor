@@ -10,27 +10,37 @@
                 </h4>
                 <button type="button" class="close" @onclick="@ModalCancel">&times;</button>
             </div>
+
             <div class="modal-body">
-                <div>
-                     @Text
-                </div>
+                @switch (DialogType)
+                {
+                    case Type.DeleteCancel:
+                        <div>
+                            @Text
+                        </div>
+                        break;
+                }
             </div>
+
             <div class="modal-footer" style="border: none">
                 @switch (DialogType)
                 {
-                    case ModalDialogType.Ok:
+                    case Type.Ok:
                         <button type="button" class="btn btn-primary" @onclick=@ModalOk>OK</button>
                         break;
-                    case ModalDialogType.OkCancel:
+
+                    case Type.OkCancel:
                         <button type="button" class="btn btn-warning" @onclick="@ModalCancel">Fortryd</button>
                         <button type="button" class="btn btn-primary" @onclick=@ModalOk>OK</button>
                         break;
-                    case ModalDialogType.DeleteCancel:
+
+                    case Type.DeleteCancel:
                         <button type="button" class="btn btn-warning" @onclick="@ModalCancel">Fortryd</button>
                         <button type="button" class="btn btn-danger" @onclick=@ModalOk>Slet</button>
                         break;
                 }
             </div>
+
         </div>
     </div>
 
@@ -40,7 +50,7 @@
     [Parameter] public string Title { get; set; }
     [Parameter] public string Text { get; set; }
 
-    [Parameter] public ModalDialogType DialogType { get; set; }
+    [Parameter] public Type DialogType { get; set; }
     [Parameter] public EventCallback<bool> OnClose { get; set; }
 
 
@@ -48,7 +58,6 @@
     {
         return OnClose.InvokeAsync(false);
     }
-
     private Task ModalOk()
     {
         return OnClose.InvokeAsync(true);
@@ -56,7 +65,7 @@
 
 
     // Bruges til at give muligheder for hvor mange knapper ModalDialog skal indeholde
-    public enum ModalDialogType
+    public enum Type
     {
         Ok,
         OkCancel,
