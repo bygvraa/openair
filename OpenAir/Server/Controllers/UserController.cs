@@ -22,51 +22,45 @@ namespace OpenAir.Server.Controllers
         }
 
         // GET: api/user
-        // Bruger en metode ('GetUsers()') fra 'UserRepository' til at retunere en liste over alle brugere
+        // Bruger en metode ('GetAllUsers()') fra 'UserRepository' til at retunere en liste over alle brugere
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserClass>>> Get()
+        public async Task<ActionResult<IEnumerable<UserClass>>> GetAll()
         {
-            return await _service.GetUsers();
+            return await _service.GetAllUsers();
         }
 
         // GET: api/user/5
         // Tager id'et på en bestemt bruger og retunerer alle oplysninger på brugeren
         [HttpGet("{id}")]
-        public async Task<ActionResult<UserClass>> Details(string id)
+        public async Task<ActionResult<UserClass>> Get(string id)
         {
-            var userClass = await _service.GetSingleUser(id);
+            var user = await _service.GetUser(id);
 
-            if (userClass == null)
-            {
+            if (user == null)
                 return NotFound();
-            }
 
-            return userClass;
+            return user;
         }
 
         // POST: api/user
         // Laver en ny bruger med et unikt id (guid)
         [HttpPost]
-        public async Task<ActionResult<UserClass>> Create([FromBody] UserClass user)
+        public async Task<ActionResult> Create([FromBody] UserClass user)
         {
             if (ModelState.IsValid)
-            {
                 user.id = Guid.NewGuid().ToString();
                 await _service.CreateUser(user);
-            }
 
-            return user;
+            return Ok();
         }
 
         // PUT: api/user
         // Tager en bruger som argument og retunerer alle brugerens oplysninger
         [HttpPut]
-        public async Task<ActionResult<UserClass>> Edit([FromBody] UserClass user)
+        public async Task<ActionResult<UserClass>> Update([FromBody] UserClass user)
         {
             if (ModelState.IsValid)
-            {
                 await _service.UpdateUser(user);
-            }
 
             return user;
         }
@@ -77,11 +71,9 @@ namespace OpenAir.Server.Controllers
         public async Task<ActionResult> Delete(string id)
         {
             if (ModelState.IsValid)
-            {
                 await _service.DeleteUser(id);
-            }
 
-            return NoContent();
+            return Ok();
         }
 
     }

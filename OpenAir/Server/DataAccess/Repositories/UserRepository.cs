@@ -3,6 +3,7 @@ using OpenAir.Server.DataAccess.Contexts;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using System;
 
 namespace OpenAir.Server.DataAccess.Repositories
 {
@@ -10,24 +11,24 @@ namespace OpenAir.Server.DataAccess.Repositories
     {
         private readonly DomainDbContext _dBContext;
 
-        public UserRepository(DomainDbContext _db)
+        public UserRepository(DomainDbContext dBContext)
         {
-            _dBContext = _db;
+            _dBContext = dBContext;
         }
 
 
         // Brugere -----------------------------------------
 
         // GET    - find alle brugere
-        public async Task<List<UserClass>> GetUsers()
+        public async Task<List<UserClass>> GetAllUsers()
         {
             return await _dBContext.user.ToListAsync();
         }
 
         // GET    - find specifik bruger
-        public async Task<UserClass> GetSingleUser(string id)
+        public async Task<UserClass> GetUser(string id)
         {
-            return await _dBContext.user.FirstAsync(t => t.id == id);
+            return await _dBContext.user.FindAsync(id);
         }
 
         // POST   - lav en bruger
@@ -40,6 +41,11 @@ namespace OpenAir.Server.DataAccess.Repositories
         // PUT    - opdater en bruger
         public async Task UpdateUser(UserClass user)
         {
+            var userToUpdate = await _dBContext.user.FindAsync(user.id);
+
+            if (userToUpdate == null)
+                throw new NullReferenceException();
+
             _dBContext.user.Update(user);
             await _dBContext.SaveChangesAsync();
         }
@@ -47,8 +53,12 @@ namespace OpenAir.Server.DataAccess.Repositories
         // DELETE - fjern en bruger
         public async Task DeleteUser(string id)
         {
-            var entity = await _dBContext.user.FirstAsync(t => t.id == id);
-            _dBContext.user.Remove(entity);
+            var userToDelete = await _dBContext.user.FindAsync(id);
+
+            if (userToDelete == null)
+                throw new NullReferenceException();
+
+            _dBContext.user.Remove(userToDelete);
             await _dBContext.SaveChangesAsync();
         }
 
