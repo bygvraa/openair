@@ -5603,18 +5603,31 @@ a.badge-dark.focus, a.badge-dark:focus {
     font-size: 1.5rem;
     font-weight: 700;
     line-height: 1;
-    color: #000;
-    text-shadow: 0 1px 0 #fff;
-    opacity: .5
+    opacity: .5;
+    transition-duration: 0.2s;
 }
 
     .close:hover {
-        color: #000;
-        text-decoration: none
+        color: #f7f7f7;
+        background-color: #b50707;
+        text-decoration: none;
+        transition-duration: 0.2s;
     }
 
     .close:not(:disabled):not(.disabled):focus, .close:not(:disabled):not(.disabled):hover {
         opacity: .75
+    }
+
+    .close:active {
+        outline: 2px solid rgb(197 67 66);
+    }
+
+    .close:focus {
+        outline: 1px solid rgb(197 67 66);
+    }
+
+    .close:focus-visible {
+        outline-width: 0px;
     }
 
 button.close {
@@ -5781,11 +5794,12 @@ a.close.disabled {
     -ms-flex-direction: column;
     flex-direction: column;
     width: 100%;
+    min-width: 370px;
     pointer-events: auto;
-    background-color: #fff;
+    background-color: rgba(247, 247, 247, .95);
     background-clip: padding-box;
-    border: 1px solid rgba(0,0,0,.2);
-    border-radius: .1rem;
+    border: 2px solid rgba(0,0,0,.2);
+    border-radius: .4rem;
     outline: 0
 }
 
@@ -5815,14 +5829,16 @@ a.close.disabled {
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem 1rem;
+    border: none;
     border-bottom: 1px solid #dee2e6;
     border-top-left-radius: .3rem;
     border-top-right-radius: .3rem
 }
 
     .modal-header .close {
-        padding: 1rem 1rem;
-        margin: -1rem -1rem -1rem auto
+        padding: 0.5rem 0.72rem;
+        margin: -0.8rem -0.8rem -0.8rem auto;
+        border-radius: 4px;
     }
 
 .modal-title {
@@ -5845,6 +5861,7 @@ a.close.disabled {
     -ms-flex-pack: end;
     justify-content: flex-end;
     padding: 1rem;
+    border: none;
     border-top: 1px solid #dee2e6;
     border-bottom-right-radius: .3rem;
     border-bottom-left-radius: .3rem

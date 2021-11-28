@@ -64,13 +64,13 @@ else
 }
 
 @code {
-    private UserClass[] userList;
+    private List<UserClass> userList;
     private UserClass _user;
 
 
     protected override async Task OnInitializedAsync()
     {
-        userList = await Http.GetFromJsonAsync<UserClass[]>("User");
+        userList = await Http.GetFromJsonAsync<List<UserClass>>("User");
     }
 
     protected async Task Delete(string id)
@@ -93,7 +93,7 @@ else
         if (accepted)
         {
             await Delete(_user.id);
-            await OnInitializedAsync();
+            userList.Remove(_user);
             _user = null;
         }
 
