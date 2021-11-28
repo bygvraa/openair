@@ -219,14 +219,41 @@ app {
         
     }
 
-    /*Loginknap*/
-    .btn-success {
+    /*Login-knap*/
+    .btn-login {
         background-color: orange;
         color: black;
         border: 1px solid orange;
         border-radius: 50px;
     }
 
+    .btn-login:hover {
+        color: #fff;
+        background-color: darkorange;
+        border-color: darkorange;
+    }
+
+    .btn-login.focus, .btn-login:focus {
+        box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
+    }
+
+    .btn-login.disabled, .btn-login:disabled {
+        color: #fff;
+        background-color: #28a745;
+        border-color: #28a745;
+    }
+
+    .btn-login:not(:disabled):not(.disabled).active, .btn-login:not(:disabled):not(.disabled):active, .show > .btn-login.dropdown-toggle {
+        color: #fff;
+        background-color: darkgoldenrod;
+        border-color: rgb(184,134,11);
+    }
+
+        .btn-login:not(:disabled):not(.disabled).active:focus, .btn-login:not(:disabled):not(.disabled):active:focus, .show > .btn-login.dropdown-toggle:focus {
+            box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
+        }
+
+    /*Login-info/oplysninger*/
     .loginoplysninger {
         text-align: center;
     }

@@ -23,7 +23,7 @@
             </div>
             <div class="form-group">
                 <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="button" class="btn btn-primary" @onclick="@(async () => await AddUser())" value="Opret bruger" />
+                <input type="button" class="btn btn-success" @onclick="@(async () => await AddUser())" value="Opret bruger" />
             </div>
         </form>
     </div>
@@ -34,6 +34,7 @@
 
     protected async Task AddUser()
     {
+        user.created = DateTime.UtcNow;
         await Http.PostAsJsonAsync("User", user);
         UriHelper.NavigateTo("/users");
     }

@@ -2,6 +2,7 @@
 @using OpenAir.Shared.Models
 @using OpenAir.Client.Components
 @inject HttpClient Http
+@inject NavigationManager UriHelper
 
 <h3>Brugere</h3>
 <p>
@@ -9,7 +10,8 @@
 </p>
 
 <div style="float: right; margin-bottom: 5px">
-    <button href="/createuser" class="btn btn-primary">
+    <button type="button" class="btn btn-primary"
+            @onclick='@(() => UriHelper.NavigateTo("/createuser"))'>
         Opret bruger
     </button>
 </div>
@@ -42,7 +44,7 @@ else
                         <div style="float: right">
                             <button type="button" class="btn btn-danger btn-sm"
                                     @onclick="() => OpenDeleteDialog(user)">
-                                Fjern bruger
+                                Fjern
                             </button>
                         </div>
                     </td>
@@ -54,11 +56,11 @@ else
 
 @if (DeleteDialogOpen)
 {
-    <ModalDialog Title="Er du sikker?"
-                 Text="Ønsker du at fjerne denne bruger?"
+    <UserDialog Title="Fjern"
+                 Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
                  OnClose="@CloseDeleteDialog"
-                 DialogType="ModalDialog.ModalDialogType.DeleteCancel">
-    </ModalDialog>
+                 DialogType="UserDialog.Type.DeleteCancel">
+    </UserDialog>
 }
 
 @code {
