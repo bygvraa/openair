@@ -10,15 +10,15 @@
     <div class="col-md-4">
         <form>
             <div class="form-group">
-                @*<label for="Name" class="control-label">Navn</label>*@
-                <input for="Name" class="form-control" placeholder="Navn" @bind="@user.name" />
+                <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.first_name" />
             </div>
             <div class="form-group">
-                @*<label for="Email" class="control-label">Email</label>*@
+                <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.last_name" />
+            </div>
+            <div class="form-group">
                 <input for="Email" class="form-control" placeholder="Email" @bind="@user.email" />
             </div>
             <div class="form-group">
-                @*<label for="Password" class="control-label">Adgangskode</label>*@
                 <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.password" />
             </div>
             <div class="form-group">

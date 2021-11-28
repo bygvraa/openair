@@ -7,16 +7,12 @@
 <p>
     Liste over alle sidens brugere
 </p>
-<br />
 
 <div style="float: right; margin-bottom: 5px">
-    <NavLink class="nav-link" href="/createuser">
-        <button href="/createuser" class="btn btn-primary">
-            Opret bruger
-        </button>
-    </NavLink>
+    <button href="/createuser" class="btn btn-primary">
+        Opret bruger
+    </button>
 </div>
-<br />
 
 @if (userList == null)
 {
@@ -38,15 +34,17 @@ else
             @foreach (var user in userList)
             {
                 <tr>
-                    <td>@user.name</td>
+                    <td>@user.GetFullName()</td>
                     <td>@user.email</td>
-                    <td>@user.created</td>
+                    <td>@user.GetCreated()</td>
                     <td></td>
                     <td>
-                        <button type="button" class="btn btn-danger btn-sm"
-                                @onclick="() => OpenDeleteDialog(user)">
-                            Fjern bruger
-                        </button>
+                        <div style="float: right">
+                            <button type="button" class="btn btn-danger btn-sm"
+                                    @onclick="() => OpenDeleteDialog(user)">
+                                Fjern bruger
+                            </button>
+                        </div>
                     </td>
                 </tr>
             }
