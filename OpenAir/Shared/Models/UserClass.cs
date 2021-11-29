@@ -22,22 +22,24 @@ namespace OpenAir.Shared.Models
 
         public UserClass() { }
 
-        public UserClass(string id, string first_name, string last_name, string email, string password, int role)
+        public UserClass(string id, string first_name, string last_name, string email, string password, DateTime created, int role)
         {
             this.id = id;
             this.first_name = first_name;
             this.last_name = last_name;
             this.email = email;
             this.password = password;
+            this.created = created;
             this.role = role;
         }
 
-        public UserClass(string first_name, string last_name, string email, string password, int role = 0)
+        public UserClass(string first_name, string last_name, string email, string password, DateTime created, int role = 0)
         {
             this.first_name = first_name;
             this.last_name = last_name;
             this.email = email;
             this.password = password;
+            this.created = created;
             this.role = role;
         }
 
