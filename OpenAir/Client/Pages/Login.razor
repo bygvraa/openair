@@ -5,23 +5,34 @@
 @using System.Net.Http
 @inject NavigationManager uriHelper
 
-<h3>Login</h3>
+<h3 class="loginoplysninger login_overskrift">Login</h3>
+<br />
+<br />
 @if (users == null)
 {
-<p><em>Loading...</em></p>
+<p class="loginoplysninger"><em>Loading...</em></p>
 }
 else
             {
 
 <p class="loginoplysninger">
     Email:
-    <input placeholder="Email" @bind="email" class="indtastoplysninger"/>
+    <input placeholder="Email" @bind="email" class="indtastoplysninger" />
     <br />
+    <br />
+  
     Password:
-    <input placeholder="Password" @bind="password" class="indtastoplysninger"/>
+    <input placeholder="Password" @bind="password" class="indtastoplysninger" />
     <br />
+    <br />
+
+
+
     <button class="btn btn-success" @onclick="() => startLogin(email, password)">Login</button>
     <br />
+    <br />
+
+
     <a href="/createuser">Dont have a user?</a>
 </p>
 
