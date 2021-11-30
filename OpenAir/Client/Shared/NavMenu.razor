@@ -2,6 +2,11 @@
 
     <div class="bottom-row @NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
+            <li class="px-3">
+                <NavLink class="nav-link" href="">
+                    <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
+                </NavLink>
+            </li>
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
                     <span class="oi oi-home" aria-hidden="true"></span> Home
@@ -40,6 +45,10 @@
         </ul>
     </div>
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 43b8c9d72bb7ea1fe61bd6569c31ead19f3d8eed
 @if (LoginDialogOpen)
 {
     <LoginDialog
