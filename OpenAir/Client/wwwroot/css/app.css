@@ -1,7 +1,72 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
+.openairforsidebillede {
+    display: block;
+    width: 40%;
+    margin:auto;
+}
+
+.openairdiv{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px 20px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "kunsterdiv billetdiv tekstdiv1"
+        "tekstdiv2 scenerdiv miljødiv"
+        "frivilligdiv koordinatordiv kontaktosdiv";
+    width:100%;
+
+}
+
+.kunsterdiv {
+    grid-area: kunsterdiv;
+    
+}
+
+.billetdiv {
+    grid-area: billetdiv;
+}
+
+.tekstdiv1 {
+    grid-area: tekstdiv1;
+}
+
+.tekstdiv2 {
+    grid-area: tekstdiv2;
+}
+
+.scenerdiv {
+    grid-area: scenerdiv;
+}
+
+.miljødiv {
+    grid-area: miljødiv;
+}
+
+.frivilligdiv {
+    grid-area: frivilligdiv;
+}
+
+.koordinatordiv {
+    grid-area: koordinatordiv;
+}
+
+.kontaktosdiv {
+    grid-area: kontaktosdiv;
+}
+
+.divbillede {
+    width: 100%;
+    height: 100%;
+}
+
+
+
 html, body {
     font-family: Avenir Next,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+    background-color: #B3D8FF;
 }
 
 h1 {
@@ -53,8 +118,6 @@ app {
 
 
 .sidebar {
-    background-color: orange;
-    color: black;
     float: right;
 }
 
@@ -63,12 +126,12 @@ app {
     }
 
     .sidebar .bottom-row {
-        background-color: #00023c6e;
-        border-radius: 6px;
+        background-color: white;
         padding: 8px;
         margin-left: 20px;
         margin-right: 20px;
         margin-bottom: 20px;
+        margin-top: 20px;
     }
 
     .sidebar .navbar-brand {
@@ -97,9 +160,9 @@ app {
         }
 
         .sidebar .nav-item a {
+            color: black;
             color: #d7d7d7;
             border-radius: 6px;
-            height: 3rem;
             display: flex;
             align-items: center;
             line-height: 3rem;
@@ -108,18 +171,19 @@ app {
         }
 
             .sidebar .nav-item a.active {
-                background-color: orange;
                 border-radius: 50px;
                 color: black;
+                box-shadow: 2px 2px 5px;
             }
 
             .sidebar .nav-item a:hover {
-                background-color: rgba(255,255,255,0.1);
-                color: black;
+                color: #B3D8FF;
                 transition: initial;
                 transition-duration: 0.2s;
+                border-bottom: 3px solid #B3D8FF;
             }
 
+           
 .content {
     padding-top: 1.1rem;
 }
@@ -182,13 +246,11 @@ app {
 @media (min-width: 768px) {
     app {
         flex-direction: column;
-        
     }
 
     .sidebar {
         position: sticky;
         top: 0;
-        
     }
 
     .main .top-row {
@@ -214,62 +276,169 @@ app {
     .logopic {
         width: 50%;
         top: 10px;
-       
-      bottom: 20px;
-        
+        bottom: 20px;
     }
 
     /*Login-knap*/
     .btn-login {
-        background-color: orange;
+        background-color: #FF27E8;
         color: black;
-        border: 1px solid orange;
+<<<<<<< HEAD
+        border: 1px solid #FF27E8;
         border-radius: 50px;
+=======
+        border: 1px solid black;
+>>>>>>> 38bf858d2187ccd1aa1bb4366e6eec0f888bd14d
     }
 
-    .btn-login:hover {
-        color: #fff;
-        background-color: darkorange;
-        border-color: darkorange;
-    }
+        .btn-login:hover {
+            color: #fff;
+            background-color: grey;
+            border-color: grey;
+        }
 
-    .btn-login.focus, .btn-login:focus {
-        box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
-    }
-
-    .btn-login.disabled, .btn-login:disabled {
-        color: #fff;
-        background-color: #28a745;
-        border-color: #28a745;
-    }
-
-    .btn-login:not(:disabled):not(.disabled).active, .btn-login:not(:disabled):not(.disabled):active, .show > .btn-login.dropdown-toggle {
-        color: #fff;
-        background-color: darkgoldenrod;
-        border-color: rgb(184,134,11);
-    }
-
-        .btn-login:not(:disabled):not(.disabled).active:focus, .btn-login:not(:disabled):not(.disabled):active:focus, .show > .btn-login.dropdown-toggle:focus {
+        .btn-login.focus, .btn-login:focus {
             box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
         }
+
+        .btn-login.disabled, .btn-login:disabled {
+            color: #fff;
+            background-color: #28a745;
+            border-color: #28a745;
+        }
+
+        .btn-login:not(:disabled):not(.disabled).active, .btn-login:not(:disabled):not(.disabled):active, .show > .btn-login.dropdown-toggle {
+            color: #fff;
+            background-color: darkgoldenrod;
+            border-color: rgb(184,134,11);
+        }
+
+            .btn-login:not(:disabled):not(.disabled).active:focus, .btn-login:not(:disabled):not(.disabled):active:focus, .show > .btn-login.dropdown-toggle:focus {
+                box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
+            }
 
     /*Login-info/oplysninger*/
     .loginoplysninger {
         text-align: center;
     }
 
+
+    .login_overskrift {
+        margin-top: 20px;
+    }
+
     .logininfo {
         width: 100%;
         height: 35px;
         text-indent: 4px;
-
+<<<<<<< HEAD
         border: 1px solid rgba(0,0,0,.2);
         border-radius: 4px;
+=======
+
+        border: 1px solid black;
+>>>>>>> 38bf858d2187ccd1aa1bb4366e6eec0f888bd14d
         border-width: 1px;
         margin-bottom: 4px;
     }
 
         .logininfo:focus-visible {
-            outline-color: orange;
+            outline-color: #FF27E8;
         }
+
+    /*kunstner program*/
+    .container_program {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        gap: 20px 20px;
+        grid-auto-flow: row;
+        color: black;
+        text-align: center;
+        grid-template-areas:
+            "kunstner1 kunstner2 kunstner3"
+            "kunstner4 kunstner5 kunstner6"
+            "kunstner7 kunstner8 kunstner9"
+            "kunstner10 kunstner11 kunstner12";
+    }
+
+    .kunstner1 {
+        grid-area: kunstner1;
+    }
+
+    .kunstner2 {
+        grid-area: kunstner2;
+    }
+
+    .kunstner3 {
+        grid-area: kunstner3;
+    }
+
+    .kunstner4 {
+        grid-area: kunstner4;
+    }
+
+    .kunstner5 {
+        grid-area: kunstner5;
+    }
+
+    .kunstner6 {
+        grid-area: kunstner6;
+    }
+
+    .kunstner7 {
+        grid-area: kunstner7;
+    }
+
+    .kunstner8 {
+        grid-area: kunstner8;
+    }
+
+    .kunstner9 {
+        grid-area: kunstner9;
+    }
+
+    .kunstner10 {
+        grid-area: kunstner10;
+    }
+
+    .kunstner11 {
+        grid-area: kunstner11;
+    }
+
+    .kunstner12 {
+        grid-area: kunstner12;
+    }
+
+    /*kunstner billeder*/
+
+    .kunstner_billede {
+        width: 80%;
+        opacity: 70%;
+        
+    }
+
+    .kunstner_navn {
+        color: black;
+        text-align: center;
+        border: 3px solid #FF27E8;
+        background-color: #FF27E8;
+        box-shadow: inherit;
+        width: 80%;
+        font-size:25px;
+
+    }
+    .program_overskrift {
+        text-align: center;
+        padding: 20px;
+    }
+
+.logo_nav {
+    width: 100px;
+    left: -30px;
+    top: -20px;
+}
+   
+
+
 }

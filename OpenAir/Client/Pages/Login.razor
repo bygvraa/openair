@@ -5,14 +5,18 @@
 @inject IJSRuntime js
 
 
-<h3>Login</h3>
+<h3 class="loginoplysninger login_overskrift">Login</h3>
+<br />
+<br />
 @if (users == null)
 {
+
     <p><em>Loading...</em></p>
 }
 else
 {
     <div class="loginoplysninger">
+        <br />
         Email:
         <input placeholder="Email" @bind="email" class="indtastoplysninger" />
         <br />
