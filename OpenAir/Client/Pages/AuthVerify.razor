@@ -1,0 +1,42 @@
+﻿@page "/authverify"
+
+<h3>AuthVerify</h3>
+
+@if (isAuthenticated)
+{
+    <h4>
+        @userName is authentitated
+    </h4>
+    <ul>
+        <li>Access to Admin Role: @isAdminUser</li>
+        <li>Access to Coordinator Role: @isCoordinator</li>
+        <li>Access to Customer Role: @isCustomer</li>
+    </ul>
+}
+
+@code {
+    [CascadingParameter]
+    public Task<AuthenticationState> AuthState { get; set; }
+
+    private bool isAuthenticated = false;
+    private string userName;
+    private bool isAdminUser = false;
+    private bool isCoordinator = false;
+    private bool isCustomer = false;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthState;
+
+        if (authState.User.Identity.IsAuthenticated)
+        {
+            isAuthenticated = true;
+
+            userName = authState.User.FindFirst(System.Security.Claims.ClaimTypes.Name).Value;
+
+            isAdminUser = authState.User.IsInRole("Admin");
+            isCoordinator = authState.User.IsInRole("Coordinator");
+            isCustomer = authState.User.IsInRole("Customer");
+        }
+    }
+}
