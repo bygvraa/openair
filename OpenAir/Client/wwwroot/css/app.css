@@ -66,7 +66,7 @@
 
 html, body {
     font-family: Avenir Next,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-
+    background-color: #B3D8FF;
 }
 
 h1 {
@@ -118,12 +118,6 @@ app {
 
 
 .sidebar {
-<<<<<<< HEAD
-    background-color: #B3D8FF;
-=======
-
->>>>>>> 38bf858d2187ccd1aa1bb4366e6eec0f888bd14d
-    color: black;
     float: right;
 }
 
@@ -167,13 +161,8 @@ app {
 
         .sidebar .nav-item a {
             color: black;
-<<<<<<< HEAD
-            border-radius: 0px;
             color: #d7d7d7;
             border-radius: 6px;
-=======
->>>>>>> 38bf858d2187ccd1aa1bb4366e6eec0f888bd14d
-            height: 3rem;
             display: flex;
             align-items: center;
             line-height: 3rem;
@@ -182,24 +171,19 @@ app {
         }
 
             .sidebar .nav-item a.active {
-<<<<<<< HEAD
-                background-color: #FF27E8;
                 border-radius: 50px;
                 color: black;
                 box-shadow: 2px 2px 5px;
-=======
-                border-bottom: 3px solid orange;
-                color: orange;
->>>>>>> 38bf858d2187ccd1aa1bb4366e6eec0f888bd14d
             }
 
             .sidebar .nav-item a:hover {
-                color: orange;
+                color: #B3D8FF;
                 transition: initial;
                 transition-duration: 0.2s;
-                border-bottom: 3px solid orange;
+                border-bottom: 3px solid #B3D8FF;
             }
 
+           
 .content {
     padding-top: 1.1rem;
 }
@@ -448,4 +432,13 @@ app {
         text-align: center;
         padding: 20px;
     }
+
+.logo_nav {
+    width: 100px;
+    left: -30px;
+    top: -20px;
+}
+   
+
+
 }
