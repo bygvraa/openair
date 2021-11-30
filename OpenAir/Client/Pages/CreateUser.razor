@@ -2,45 +2,75 @@
 @using OpenAir.Shared.Models
 @inject HttpClient Http
 @inject NavigationManager UriHelper
+@inject IJSRuntime js
 
 <h3>Lav en bruger</h3>
 <hr />
 
 <div class="row" style=" text-align: center; place-content: center">
     <div class="col-md-4">
-        <form>
-            <div class="form-group">
-                <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.first_name" />
-            </div>
-            <div class="form-group">
-                <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.last_name" />
-            </div>
-            <div class="form-group">
-                <input for="Email" class="form-control" placeholder="Email" @bind="@user.email" />
-            </div>
-            <div class="form-group">
-                <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.password" />
-            </div>
-            <div class="form-group">
-                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="button" class="btn btn-success" @onclick="@(async () => await AddUser())" value="Opret bruger" />
-            </div>
-        </form>
+            <form>
+                <div class="form-group">
+                    <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.first_name" />
+                </div>
+                <div class="form-group">
+                    <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.last_name" />
+                </div>
+                <div class="form-group">
+                    <input for="Email" class="form-control" placeholder="Email" @bind="@user.email" />
+                </div>
+                <div class="form-group">
+                    <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.password" />
+                </div>
+                <div class="form-group">
+                    <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
+                    <input type="button" class="btn btn-success" @onclick="@(async () => await AddUser())" value="Opret bruger" />
+                </div>
+            </form>
+
     </div>
 </div>
 
 @code {
     UserClass user = new UserClass();
+    UserClass[] users;
 
-    protected async Task AddUser()
+    protected override async Task OnInitializedAsync()
     {
+        users = await Http.GetFromJsonAsync<UserClass[]>("User");
         user.created = DateTime.UtcNow;
-        await Http.PostAsJsonAsync("User", user);
-        UriHelper.NavigateTo("/users");
+    }
+
+    async Task AddUser()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {user.first_name}?"))
+        {
+            foreach (var _user in users)
+            {
+                if (_user.email == user.email)
+                {
+                    await js.InvokeVoidAsync("alert", "Email is already in use");
+                    break;
+                }
+                else if (_user.email != user.email && !string.IsNullOrEmpty(user.first_name) && !string.IsNullOrEmpty(user.last_name) && !string.IsNullOrEmpty(user.email) && !string.IsNullOrEmpty(user.password))
+                {
+                    await Http.PostAsJsonAsync("User", new UserClass(user.first_name, user.last_name, user.email, user.password, user.created));
+                    await js.InvokeVoidAsync("alert", $"Created successfully!");
+                    UriHelper.NavigateTo("/");
+                    break;
+                }
+            }
+
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
+        }
     }
 
     void Cancel()
     {
-        UriHelper.NavigateTo("/users");
+        UriHelper.NavigateTo("Users");
     }
+
 }
