@@ -29,6 +29,8 @@ namespace OpenAir.Server
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<ITaskRepository, TaskRepository>();
+
 
             services.AddControllersWithViews();
             services.AddRazorPages();
