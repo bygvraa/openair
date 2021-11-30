@@ -1,40 +1,34 @@
 ﻿@page "/login"
 @using OpenAir.Shared.Models
 @inject HttpClient Http
-@inject IJSRuntime js
-@using System.Net.Http
 @inject NavigationManager uriHelper
+@inject IJSRuntime js
+
 
 <h3 class="loginoplysninger login_overskrift">Login</h3>
 <br />
 <br />
 @if (users == null)
 {
-<p class="loginoplysninger"><em>Loading...</em></p>
+
+    <p><em>Loading...</em></p>
 }
 else
-            {
-
-<p class="loginoplysninger">
-    Email:
-    <input placeholder="Email" @bind="email" class="indtastoplysninger" />
-    <br />
-    <br />
-  
-    Password:
-    <input placeholder="Password" @bind="password" class="indtastoplysninger" />
-    <br />
-    <br />
-
-
-
-    <button class="btn btn-success" @onclick="() => startLogin(email, password)">Login</button>
-    <br />
-    <br />
-
-
-    <a href="/createuser">Dont have a user?</a>
-</p>
+{
+    <div class="loginoplysninger">
+        <br />
+        Email:
+        <input placeholder="Email" @bind="email" class="indtastoplysninger" />
+        <br />
+        Password:
+        <input placeholder="Password" @bind="password" class="indtastoplysninger" />
+        <br />
+        <button class="btn btn-login" @onclick="() => startLogin(email, password)">Login</button>
+        <br />
+        <NavLink href="/createuser">
+            Dont have a user?
+        </NavLink>
+    </div>
 
 
 }
@@ -63,7 +57,7 @@ else
 
                 }
                 else if (user.role == user.role)
-                {   
+                {
                     uriHelper.NavigateTo($"Counter");
                     break;
                 }

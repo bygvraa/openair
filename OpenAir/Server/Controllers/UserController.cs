@@ -5,7 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenAir.Shared.Models;
-using OpenAir.Server.DataAccess;
+using OpenAir.Server.DataAccess.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenAir.Server.Controllers
 {
@@ -13,95 +14,67 @@ namespace OpenAir.Server.Controllers
     [Route("[controller]")]
     public class UserController : ControllerBase
     {
-        private readonly IDataAccessProvider _service;
+        private readonly IUserRepository _service;
 
-        public UserController(IDataAccessProvider service)
+        public UserController(IUserRepository service)
         {
             _service = service;
         }
 
         // GET: api/user
+        // Bruger en metode ('GetAllUsers()') fra 'UserRepository' til at retunere en liste over alle brugere
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<UserClass>>> Get()
+        public async Task<ActionResult<IEnumerable<UserClass>>> GetAll()
         {
-            return await _service.GetUsers();
+            return await _service.GetAllUsers();
         }
 
-        //// GET: api/Account/5
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<AccountClass>> GetAccountClass(int id)
-        //{
-        //    var accountClass = await _service.account.FindAsync(id);
-
-        //    if (accountClass == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    return accountClass;
-        //}
-
-        // POST: api/user
-        [HttpPost]
-        public async Task<ActionResult<UserClass>> Create([FromBody] UserClass user)
+        // GET: api/user/5
+        // Tager id'et på en bestemt bruger og retunerer alle oplysninger på brugeren
+        [HttpGet("{id}")]
+        public async Task<ActionResult<UserClass>> Get(string id)
         {
-            Guid obj = Guid.NewGuid();
-            user.id = obj.ToString();
-            await _service.CreateUser(user);
+            var user = await _service.GetUser(id);
+
+            if (user == null)
+                return NotFound();
 
             return user;
         }
 
-        //// PUT: api/Account/5
-        //// To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutAccountClass(int id, AccountClass accountClass)
-        //{
-        //    if (id != accountClass.account_id)
-        //    {
-        //        return BadRequest();
-        //    }
+        // POST: api/user
+        // Laver en ny bruger med et unikt id (guid)
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] UserClass user)
+        {
+            if (ModelState.IsValid)
+                user.id = Guid.NewGuid().ToString();
+                await _service.CreateUser(user);
 
-        //    _context.Entry(accountClass).State = EntityState.Modified;
+            return Ok();
+        }
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!AccountClassExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+        // PUT: api/user
+        // Tager en bruger som argument og retunerer alle brugerens oplysninger
+        [HttpPut]
+        public async Task<ActionResult<UserClass>> Update([FromBody] UserClass user)
+        {
+            if (ModelState.IsValid)
+                await _service.UpdateUser(user);
 
-        //    return NoContent();
-        //}
+            return user;
+        }
 
-        //// DELETE: api/Account/5
-        //[HttpDelete("{id}")]
-        //public async Task<IActionResult> DeleteAccountClass(int id)
-        //{
-        //    var accountClass = await _context.account.FindAsync(id);
-        //    if (accountClass == null)
-        //    {
-        //        return NotFound();
-        //    }
+        // DELETE: api/user/5
+        // Tager et id som argument og fjerner den tilhørende bruger
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (ModelState.IsValid)
+                await _service.DeleteUser(id);
 
-        //    _context.account.Remove(accountClass);
-        //    await _context.SaveChangesAsync();
+            return Ok();
+        }
 
-        //    return NoContent();
-        //}
-
-        //private bool AccountClassExists(int id)
-        //{
-        //    return _context.account.Any(e => e.account_id == id);
-        //}
     }
 }

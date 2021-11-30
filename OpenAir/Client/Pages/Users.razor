@@ -1,41 +1,104 @@
-﻿@using OpenAir.Shared.Models
-@page "/users"
+﻿@page "/users"
+@using OpenAir.Shared.Models
+@using OpenAir.Client.Components
 @inject HttpClient Http
+@inject NavigationManager UriHelper
 
-<h3>Users</h3>
+<h3>Brugere</h3>
 <p>
-    <a href="/createuser">Create New User</a>
+    Liste over alle sidens brugere
 </p>
+
+<div style="float: right; margin-bottom: 5px">
+    <button type="button" class="btn btn-primary"
+            @onclick='@(() => UriHelper.NavigateTo("/createuser"))'>
+        Opret bruger
+    </button>
+</div>
+
 @if (userList == null)
 {
-    <p><em>Loading...</em></p>
+    <p><em>Indlæser, vent venligst...</em></p>
 }
 else
 {
     <table class="table">
         <thead>
             <tr>
-                <th>Name</th>
+                <th>Navn</th>
                 <th>Email</th>
+                <th>Oprettelsesdato</th>
+                <th>&nbsp;</th>
+                <th>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
             @foreach (var user in userList)
             {
                 <tr>
-                    <td>@user.name</td>
+                    <td>@user.GetFullName()</td>
                     <td>@user.email</td>
+                    <td>@user.GetCreated()</td>
+                    <td></td>
+                    <td>
+                        <div style="float: right">
+                            <button type="button" class="btn btn-danger btn-sm"
+                                    @onclick="() => OpenDeleteDialog(user)">
+                                Fjern
+                            </button>
+                        </div>
+                    </td>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+@if (DeleteDialogOpen)
+{
+    <UserDialog Title="Fjern"
+                 Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
+                 OnClose="@CloseDeleteDialog"
+                 DialogType="UserDialog.Type.DeleteCancel">
+    </UserDialog>
+}
+
 @code {
-    UserClass[] userList;
+    private List<UserClass> userList;
+    private UserClass _user;
+
 
     protected override async Task OnInitializedAsync()
     {
-        userList = await Http.GetFromJsonAsync<UserClass[]>("User");
+        userList = await Http.GetFromJsonAsync<List<UserClass>>("User");
     }
+
+    protected async Task Delete(string id)
+    {
+        await Http.DeleteAsync("User/" + id);
+    }
+
+
+    // Delete user modal
+    public bool DeleteDialogOpen { get; set; }
+
+    private void OpenDeleteDialog(UserClass user)
+    {
+        DeleteDialogOpen = true;
+        _user = user;
+        StateHasChanged();
+    }
+    private async Task CloseDeleteDialog(bool accepted)
+    {
+        if (accepted)
+        {
+            await Delete(_user.id);
+            userList.Remove(_user);
+            _user = null;
+        }
+
+        DeleteDialogOpen = false;
+        StateHasChanged();
+    }
+
 }
