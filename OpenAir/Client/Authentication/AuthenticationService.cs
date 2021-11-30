@@ -1,6 +1,6 @@
-﻿using Blazored.LocalStorage;
+using Blazored.LocalStorage;
 using Microsoft.AspNetCore.Components.Authorization;
-using OpenAir.Shared.Models;
+using OpenAir.Shared.Models.Authentication;
 using System;
 using System.Collections.Generic;
 using System.Linq;

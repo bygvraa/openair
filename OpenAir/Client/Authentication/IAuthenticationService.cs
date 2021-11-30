@@ -1,4 +1,4 @@
-﻿using OpenAir.Shared.Models;
+using OpenAir.Shared.Models.Authentication;
 using System.Threading.Tasks;
 
 namespace OpenAir.Client.Authentication

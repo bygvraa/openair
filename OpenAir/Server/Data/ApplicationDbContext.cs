@@ -13,8 +13,9 @@ namespace OpenAir.Server.Data
 
         // Tabellen 'user' fra databasen
         public DbSet<UserClass> user { get; set; }
-        public DbSet<TaskClass> task { get; set; }
 
+        // Tabellen 'task' fra databasen
+        public DbSet<TaskClass> task { get; set; }
 
 
 
