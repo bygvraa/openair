@@ -1,11 +1,12 @@
 ﻿using OpenAir.Shared.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace OpenAir.Server.DataAccess.Contexts
+namespace OpenAir.Server.Data
 {
-    public class DomainDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext
     {
-        public DomainDbContext(DbContextOptions<DomainDbContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }

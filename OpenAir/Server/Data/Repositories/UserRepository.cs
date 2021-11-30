@@ -1,17 +1,17 @@
 ﻿using OpenAir.Shared.Models;
-using OpenAir.Server.DataAccess.Contexts;
+using OpenAir.Server.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
 
-namespace OpenAir.Server.DataAccess.Repositories
+namespace OpenAir.Server.Data.Repositories
 {
     public class UserRepository : IUserRepository
     {
-        private readonly DomainDbContext _dBContext;
+        private readonly ApplicationDbContext _dBContext;
 
-        public UserRepository(DomainDbContext dBContext)
+        public UserRepository(ApplicationDbContext dBContext)
         {
             _dBContext = dBContext;
         }
