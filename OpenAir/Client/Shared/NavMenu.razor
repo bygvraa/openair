@@ -1,18 +1,13 @@
 ﻿@using OpenAir.Client.Components
 
-<<<<<<< HEAD
-
-   
-=======
->>>>>>> 4ceb9ba8dc97431ed51d2fb395e7262763a27c3d
-
     <div class="bottom-row @NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="nav flex-column">
-            <li class="nav-item px-3">
-                <NavLink class="nav-link" href="" Match="NavLinkMatch.All">
-                    <span class="oi oi-home" aria-hidden="true"></span> Home
+            <li class="px-3">
+                <NavLink class="nav-link" href="">
+                    <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
                 </NavLink>
             </li>
+         
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="program">
                     <span class="oi oi-plus" aria-hidden="true"></span> Program
@@ -24,10 +19,16 @@
                 </NavLink>
             </li>
             <li class="nav-item px-3">
-                <NavLink class="nav-link" href="fetchdata">
-                    <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+                <NavLink class="nav-link" href="Vagtplan">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Vagtplan
                 </NavLink>
             </li>
+            <li class="nav-item px-3">
+                <NavLink class="nav-link" href="Koordinator">
+                    <span class="oi oi-plus" aria-hidden="true"></span> Koordinator
+                </NavLink>
+            </li>
+          
             <li class="nav-item px-3">
                 <NavLink class="nav-link" href="users">
                     <span class="oi oi-person" aria-hidden="true"></span> Display users
@@ -47,10 +48,12 @@
     </div>
 
 <<<<<<< HEAD
-
 =======
->>>>>>> 4ceb9ba8dc97431ed51d2fb395e7262763a27c3d
 
+
+
+
+>>>>>>> 2671a0686d3418e3d2dbf86874fa79d456f5ddcf
 @if (LoginDialogOpen)
 {
     <LoginDialog
