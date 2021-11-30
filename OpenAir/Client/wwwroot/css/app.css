@@ -279,7 +279,7 @@ app {
 
     /*Logo på loading*/
     .loading-logo {
-        width: 100px;
+        zoom: 0.8;
         margin-top: 30vh;
         filter: opacity(80%)
                 blur(0.7px)
