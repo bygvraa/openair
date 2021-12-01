@@ -278,13 +278,16 @@ app {
         bottom: 20px;
     }
 
+    .logo_basket
+    {
+        width:20%;
+
+    }
     /*Logo på loading*/
     .loading-logo {
         zoom: 0.8;
         margin-top: 30vh;
-        filter: opacity(80%)
-                blur(0.7px)
-                drop-shadow(3px 3px yellow);
+        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
     }
 
         @-webkit-keyframes spin {
@@ -460,7 +463,43 @@ app {
     left: -30px;
     top: -20px;
 }
+
+/*Billetside*/
+
+    .container_billet{
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 20px 20px;
+        grid-auto-flow: row;
+        text-align: center;
+        grid-template-areas:
+            "Partout Billet1 Billet2 Billet-3";
+    }
+
+    .Partout {
+        grid-area: Partout;
+      
    
+    }
+
+    .Billet1 {
+        grid-area: Billet1;
+     
+
+    }
+
+    .Billet2 {
+        grid-area: Billet2;
+       
+  
+    }
+
+    .Billet-3 {
+        grid-area: Billet-3;
+     
+    }
+
 
 
 }
