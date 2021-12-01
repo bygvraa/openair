@@ -7,8 +7,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System.Linq;
-using OpenAir.Server.DataAccess.Contexts;
-using OpenAir.Server.DataAccess.Repositories;
+using OpenAir.Server.Data;
+using OpenAir.Server.Data.Repositories;
 
 namespace OpenAir.Server
 {
@@ -25,7 +25,7 @@ namespace OpenAir.Server
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DomainDbContext>(options =>
+            services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IUserRepository, UserRepository>();

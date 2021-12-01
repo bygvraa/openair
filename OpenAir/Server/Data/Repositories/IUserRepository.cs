@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace OpenAir.Server.DataAccess.Repositories
+namespace OpenAir.Server.Data.Repositories
 {
     public interface IUserRepository
     {

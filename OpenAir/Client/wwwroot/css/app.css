@@ -277,6 +277,38 @@ app {
         bottom: 20px;
     }
 
+    /*Logo på loading*/
+    .loading-logo {
+        zoom: 0.8;
+        margin-top: 30vh;
+        filter: opacity(80%)
+                blur(0.7px)
+                drop-shadow(3px 3px yellow);
+    }
+
+        @-webkit-keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            80% {
+                transform: rotate(355deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+
+        }
+
+        .spin-animated {
+            -webkit-animation: spin;
+            -webkit-animation-duration: 1000ms;
+            -webkit-animation-timing-function: ease-in-out;
+            -webkit-animation-iteration-count: infinite;
+        }
+
+
     /*Login-knap*/
     .btn-login {
         background-color: #FF27E8;

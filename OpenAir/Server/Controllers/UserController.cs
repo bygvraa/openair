@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using OpenAir.Shared.Models;
-using OpenAir.Server.DataAccess.Repositories;
+using OpenAir.Server.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace OpenAir.Server.Controllers
