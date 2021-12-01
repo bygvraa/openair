@@ -58,15 +58,16 @@
     grid-area: kontaktosdiv;
 }
 
-
-
-
-
 html, body {
     font-family: Avenir Next,BlinkMacSystemFont,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
     background-color: #B3D8FF;
+    background-image: url(https://tinderbox.dk/wp-content/themes/tinderbox/assets/img/smoke.png);
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
-
 h1 {
     text-align: center;
     margin: auto;
