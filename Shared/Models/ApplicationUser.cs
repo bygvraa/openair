@@ -19,6 +19,7 @@ namespace OpenAir.Shared.Models
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
+        // Metoder
         public string GetFullName()
         {
             return $"{FirstName} {LastName}";
