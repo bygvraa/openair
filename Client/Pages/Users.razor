@@ -65,54 +65,53 @@
             </UserDialog>
         }
 
-
-        @code {
-            private List<ApplicationUser> userList;
-            private ApplicationUser _user;
-
-
-            protected override async Task OnInitializedAsync()
-            {
-                var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-                var user = authState.User;
-
-                if (user.Identity.IsAuthenticated)
-                    userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
-                
-            }
-
-            protected async Task Delete(string id)
-            {
-                await Http.DeleteAsync("User/" + id);
-            }
-
-
-            // Delete user modal
-            public bool DeleteDialogOpen { get; set; }
-
-            private void OpenDeleteDialog(ApplicationUser user)
-            {
-                DeleteDialogOpen = true;
-                _user = user;
-                StateHasChanged();
-            }
-            private async Task CloseDeleteDialog(bool accepted)
-            {
-                if (accepted)
-                {
-                    await Delete(_user.Id);
-                    userList.Remove(_user);
-                    _user = null;
-                }
-
-                DeleteDialogOpen = false;
-                StateHasChanged();
-            }
-
-        }
-
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
     </NotAuthorized>
 </AuthorizeView>
+
+@code {
+    private List<ApplicationUser> userList;
+    private ApplicationUser _user;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+            userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
+
+    }
+
+    protected async Task Delete(string id)
+    {
+        await Http.DeleteAsync("User/" + id);
+    }
+
+
+    // Delete user modal
+    public bool DeleteDialogOpen { get; set; }
+
+    private void OpenDeleteDialog(ApplicationUser user)
+    {
+        DeleteDialogOpen = true;
+        _user = user;
+        StateHasChanged();
+    }
+    private async Task CloseDeleteDialog(bool accepted)
+    {
+        if (accepted)
+        {
+            await Delete(_user.Id);
+            userList.Remove(_user);
+            _user = null;
+        }
+
+        DeleteDialogOpen = false;
+        StateHasChanged();
+    }
+
+}
