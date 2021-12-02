@@ -3,65 +3,73 @@
 @using OpenAir.Client.Components
 @inject HttpClient Http
 @inject NavigationManager UriHelper
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<h3>Brugere</h3>
-<p>
-    Liste over alle sidens brugere
-</p>
+<AuthorizeView>
+    <Authorized>
 
-<div style="float: right; margin-bottom: 5px">
-    <button type="button" class="btn btn-primary"
-            @onclick='@(() => UriHelper.NavigateTo("/createuser"))'>
-        Opret bruger
-    </button>
-</div>
+        <h3>Brugere</h3>
+        <p>Liste over alle sidens brugere</p>
 
-@if (userList == null)
-{
-    <p><em>Indlæser, vent venligst...</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Navn</th>
-                <th>Email</th>
-                <th>Oprettelsesdato</th>
-                <th>&nbsp;</th>
-                <th>&nbsp;</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var user in userList)
-            {
-                <tr>
-                    <td>@user.GetFullName()</td>
-                    <td>@user.Email</td>
-                    <td>@user.GetCreated().ToUniversalTime()</td>
-                    <td></td>
-                    <td>
-                        <div style="float: right">
-                            <button type="button" class="btn btn-danger btn-sm"
-                                    @onclick="() => OpenDeleteDialog(user)">
-                                Fjern
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
+        <div style="float: right; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/createuser"))'>
+                Opret bruger
+            </button>
+        </div>
 
-@if (DeleteDialogOpen)
-{
-    <UserDialog Title="Fjern"
-                 Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
-                 OnClose="@CloseDeleteDialog"
-                 DialogType="UserDialog.Type.DeleteCancel">
-    </UserDialog>
-}
+        @if (userList == null)
+        {
+            <p><em>Indlæser, vent venligst...</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Email</th>
+                        <th>Oprettelsesdato</th>
+                        <th>&nbsp;</th>
+                        <th>&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var user in userList)
+                    {
+                        <tr>
+                            <td>@user.GetFullName()</td>
+                            <td>@user.Email</td>
+                            <td>@user.GetCreated().ToUniversalTime()</td>
+                            <td></td>
+                            <td>
+                                <div style="float: right">
+                                    <button type="button" class="btn btn-danger btn-sm"
+                                            @onclick="() => OpenDeleteDialog(user)">
+                                        Fjern
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+
+        @if (DeleteDialogOpen)
+        {
+            <UserDialog Title="Fjern"
+                        Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
+                        OnClose="@CloseDeleteDialog"
+                        DialogType="UserDialog.Type.DeleteCancel">
+            </UserDialog>
+        }
+
+    </Authorized>
+    <NotAuthorized>
+        <p>Du har ikke adgang til denne side.</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     private List<ApplicationUser> userList;
@@ -70,7 +78,12 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+            userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
+
     }
 
     protected async Task Delete(string id)

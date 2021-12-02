@@ -11,16 +11,16 @@
     <div class="col-md-4">
             <form>
                 <div class="form-group">
-                    <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.first_name" />
+                    <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.FirstName" />
                 </div>
                 <div class="form-group">
-                    <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.last_name" />
+                    <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.LastName" />
                 </div>
                 <div class="form-group">
-                    <input for="Email" class="form-control" placeholder="Email" @bind="@user.email" />
+                    <input for="Email" class="form-control" placeholder="Email" @bind="@user.Email" />
                 </div>
                 <div class="form-group">
-                    <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.password" />
+                    <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.Password" />
                 </div>
                 <div class="form-group">
                     <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
@@ -32,29 +32,29 @@
 </div>
 
 @code {
-    UserClass user = new UserClass();
-    UserClass[] users;
+    ApplicationUser user = new ApplicationUser();
+    ApplicationUser[] users;
 
     protected override async Task OnInitializedAsync()
     {
-        users = await Http.GetFromJsonAsync<UserClass[]>("User");
-        user.created = DateTime.UtcNow;
+        users = await Http.GetFromJsonAsync<ApplicationUser[]>("User");
+        user.Created = DateTime.UtcNow;
     }
 
     async Task AddUser()
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {user.first_name}?"))
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {user.FirstName}?"))
         {
             foreach (var _user in users)
             {
-                if (_user.email == user.email)
+                if (_user.Email == user.Email)
                 {
                     await js.InvokeVoidAsync("alert", "Email is already in use");
                     break;
                 }
-                else if (_user.email != user.email && !string.IsNullOrEmpty(user.first_name) && !string.IsNullOrEmpty(user.last_name) && !string.IsNullOrEmpty(user.email) && !string.IsNullOrEmpty(user.password))
+                else if (_user.Email != user.Email && !string.IsNullOrEmpty(user.FirstName) && !string.IsNullOrEmpty(user.LastName) && !string.IsNullOrEmpty(user.Email) && !string.IsNullOrEmpty(user.Password))
                 {
-                    await Http.PostAsJsonAsync("User", new UserClass(user.first_name, user.last_name, user.email, user.password, user.created));
+                    await Http.PostAsJsonAsync("User", new UserClass(user.FirstName, user.LastName, user.Email, user.Password, user.Created));
                     await js.InvokeVoidAsync("alert", $"Created successfully!");
                     UriHelper.NavigateTo("/");
                     break;

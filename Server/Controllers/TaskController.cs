@@ -21,7 +21,7 @@ namespace OpenAir.Server.Controllers
             _service = service;
         }
 
-        // GET: api/user
+        // GET: api/task
         // Bruger en metode ('GetAllTasks()') fra 'TaskRepository' til at retunere en liste over alle opgaver
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TaskClass>>> GetAll()
@@ -29,9 +29,9 @@ namespace OpenAir.Server.Controllers
             return await _service.GetAllTasks();
         }
 
-        // GET: api/user/5
+        // GET: api/task/5
         // Tager id'et på en bestemt opgave og retunerer alle oplysninger på opgaven
-        [HttpGet("{id}")]
+        [HttpGet("{task_id}")]
         public async Task<ActionResult<TaskClass>> Get(int task_id)
         {
             var task = await _service.GetTask(task_id);
@@ -42,7 +42,7 @@ namespace OpenAir.Server.Controllers
             return task;
         }
 
-        // POST: api/user
+        // POST: api/task
         // Laver en ny opgave med et unikt id (guid)
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] TaskClass task)
@@ -52,7 +52,7 @@ namespace OpenAir.Server.Controllers
             return Ok();
         }
 
-        // PUT: api/user
+        // PUT: api/task
         // Tager en opgave som argument og retunerer alle opgave oplysninger
         [HttpPut]
         public async Task<ActionResult<TaskClass>> Update([FromBody] TaskClass task)
@@ -63,7 +63,7 @@ namespace OpenAir.Server.Controllers
             return task;
         }
 
-        // DELETE: api/user/5
+        // DELETE: api/task/5
         // Tager et id som argument og fjerner den tilhørende opgave
         [HttpDelete("{task_id}")]
         public async Task<ActionResult> Delete(int task_id)
