@@ -1,56 +1,51 @@
-﻿@page "/vagtplan"
+﻿@page "/Vagtplan"
 @using OpenAir.Shared.Models
 @inject HttpClient Http
 
-<AuthorizeView>
-    <Authorized>
-        <h1>Vagtplan</h1>
+<h1>Vagtplan</h1>
 
-        @if (taskList == null)
-        {
-            <p><em>Loading..</em></p>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Opgave nr</th>
-                        <th>Beskrivelse</th>
-                        <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
-                        <th>Sluttid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var task in taskList)
-                    {
-                        <tr>
-                            <td>@task.task_id</td>
-                            <td>@task.description</td>
-                            <td>@task.location</td>
-                            <td>@task.volunteer</td>
-                            <td>@task.starttime</td>
-                            <td>@task.stoptime</td>
-                            <td></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+<button><a href="/CreateTask"</a></button>
 
-        @code {
-            private List<TaskClass> taskList;
-
-            protected override async Task OnInitializedAsync()
+@if (taskList == null)
+{
+    <p><em>Loading..</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Opgave nr</th>
+                <th>Beskrivelse</th>
+                <th>Lokation</th>
+                <th>Frivillig</th>
+                <th>Start tid</th>
+                <th>Sluttid</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var task in taskList)
             {
-                taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+                <tr>
+                    <td>@task.task_id</td>
+                    <td>@task.description</td>
+                    <td>@task.location</td>
+                    <td>@task.volunteer</td>
+                    <td>@task.starttime</td>
+                    <td>@task.stoptime</td>
+                    <td></td>
+                </tr>
             }
-        }
+        </tbody>
+    </table>
+}
 
-    </Authorized>
-    <NotAuthorized>
-        <p>Du har ikke adgang til denne side.</p>
-    </NotAuthorized>
-</AuthorizeView>
+@code {
+    private List<TaskClass> taskList;
+
+    protected override async Task OnInitializedAsync()
+    {
+        taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+    }
+
+    }
