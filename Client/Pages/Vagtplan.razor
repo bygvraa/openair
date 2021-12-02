@@ -2,49 +2,6 @@
 @using OpenAir.Shared.Models
 @inject HttpClient Http
 @inject NavigationManager UriHelper
-
-<h1>Vagtplan</h1>
-
-<div style="float: right; margin-bottom: 5px">
-    <button type="button" class="btn btn-primary"
-            @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
-        Opret vagt
-    </button>
-</div>
-@if (taskList == null)
-{
-    <p><em>Loading..</em></p>
-}
-else
-{
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Opgave nr</th>
-                <th>Beskrivelse</th>
-                <th>Lokation</th>
-                <th>Frivillig</th>
-                <th>Start tid</th>
-                <th>Sluttid</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var task in taskList)
-            {
-                <tr>
-                    <td>@task.task_id</td>
-                    <td>@task.description</td>
-                    <td>@task.location</td>
-                    <td>@task.volunteer</td>
-                    <td>@task.starttime</td>
-                    <td>@task.stoptime</td>
-                    <td></td>
-                </tr>
-            }
-        </tbody>
-    </table>
-}
-=======
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 <AuthorizeView>
@@ -93,7 +50,6 @@ else
         <p>Du har ikke adgang til denne side.</p>
     </NotAuthorized>
 </AuthorizeView>
->>>>>>> 43a4a0343a02d9b70c7fd7bf5dc1431c97073fd4
 
 @code {
     private List<TaskClass> taskList;
