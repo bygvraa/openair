@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace OpenAir.Server.Models
+namespace OpenAir.Shared.Models
 {
     public class ApplicationRole : IdentityRole
     {

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OpenAir.Server.Data;
-using OpenAir.Server.Models;
+using OpenAir.Shared.Models;
 
 [assembly: HostingStartup(typeof(OpenAir.Server.Areas.Identity.IdentityHostingStartup))]
 namespace OpenAir.Server.Areas.Identity
