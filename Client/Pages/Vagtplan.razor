@@ -1,11 +1,16 @@
 ﻿@page "/Vagtplan"
 @using OpenAir.Shared.Models
 @inject HttpClient Http
+@inject NavigationManager UriHelper
 
 <h1>Vagtplan</h1>
 
-<button><a href="/CreateTask"</a></button>
-
+<div style="float: right; margin-bottom: 5px">
+    <button type="button" class="btn btn-primary"
+            @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+        Opret vagt
+    </button>
+</div>
 @if (taskList == null)
 {
     <p><em>Loading..</em></p>
@@ -48,4 +53,4 @@ else
         taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
     }
 
-    }
+}
