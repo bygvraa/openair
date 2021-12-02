@@ -43,6 +43,8 @@ else
     </table>
 }
 
+
+
 @if (DeleteDialogOpen)
             {
                 <UserDialog Title="Fjern"
@@ -90,5 +92,8 @@ else
     {
         await Http.DeleteAsync("Task/" + task_id);
     }
+
+
+
 
     }

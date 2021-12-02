@@ -35,35 +35,18 @@
 </div>
 
 @code {
-    TaskClass task = new TaskClass();
-    TaskClass[] tasks;
+        TaskClass task = new TaskClass();
+        TaskClass[] tasks;
 
     protected override async Task OnInitializedAsync()
     {
         tasks = await Http.GetFromJsonAsync<TaskClass[]>("Task");
-      
+
     }
 
     async Task AddTask()
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Do you want to create task {task.description}?"))
-        {
-            foreach (var _task in tasks)
-            {
-                if (_task.description != task.description && !string.IsNullOrEmpty(task.volunteer) && !string.IsNullOrEmpty(task.location) && !DateTime.UtcNow(task.starttime) && !DateTime.IsNullOrEmpty(task.stoptime))
-                {
-                    await Http.PostAsJsonAsync("Task", new TaskClass(task.description, task.volunteer, task.location, task.starttime, task.stoptime));
-                    await js.InvokeVoidAsync("alert", $"Created successfully!");
-                    UriHelper.NavigateTo("/koordinator");
-                    break;
-                }
-            }
-
-        }
-        else
-        {
-            await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
-        }
+        await Http.PostAsJsonAsync<TaskClass>("Task/", task);
     }
 
     void Cancel()
