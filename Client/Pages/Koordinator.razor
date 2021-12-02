@@ -32,18 +32,63 @@ else
                     <td>@task.starttime</td>
                     <td>@task.stoptime</td>
                     <td></td>
+                    <div>
+                        <button type="button" @onclick="() => OpenDeleteDialog(task)">
+                            FJERN
+                        </button>
+                    </div>
                 </tr>
             }
         </tbody>
     </table>
 }
 
+@if (DeleteDialogOpen)
+            {
+                <UserDialog Title="Fjern"
+                            Text="Sikker?"
+                            OnClose="@CloseDeleteDialog"
+                            DialogType="UserDialog.Type.DeleteCancel">
+
+                </UserDialog>
+            }
+
 @code {
     private List<TaskClass> taskList;
+
+    private TaskClass _task;
+
+    //DELETE MODAL
+    public bool DeleteDialogOpen { get; set; }
+    private void OpenDeleteDialog(TaskClass task)
+    {
+        DeleteDialogOpen = true;
+        _task = task;
+        StateHasChanged();
+    }
+
+
+    private async Task CloseDeleteDialog(bool accepted)
+    {
+        if (accepted)
+        {
+            await Delete(_task.task_id);
+            taskList.Remove(_task);
+            _task = null;
+        }
+
+        DeleteDialogOpen = false;
+        StateHasChanged();
+    }
 
     protected override async Task OnInitializedAsync()
     {
         taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+    }
+
+    protected async Task Delete(int task_id)
+    {
+        await Http.DeleteAsync("Task/" + task_id);
     }
 
     }

@@ -65,7 +65,7 @@ namespace OpenAir.Server.Controllers
 
         // DELETE: api/user/5
         // Tager et id som argument og fjerner den tilhørende opgave
-        [HttpDelete("{id}")]
+        [HttpDelete("{task_id}")]
         public async Task<ActionResult> Delete(int task_id)
         {
             if (ModelState.IsValid)
