@@ -1,56 +1,63 @@
-﻿@using OpenAir.Client.Components
+﻿@*<div class="top-row pl-4 navbar navbar-dark">
+    <a class="navbar-brand" href="">OpenAir</a>
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+</div>*@
 
-<div class="top-row pl-4 navbar navbar-dark">
-    @*<a class="navbar-brand" href="">OpenAir</a>*@
+<div>
     <button class="navbar-toggler" @onclick="ToggleNavMenu">
         <span class="navbar-toggler-icon"></span>
     </button>
 </div>
 
 <div class="bottom-row @NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-row">
+    <ul class="nav flex-row" style="min-height: 75px; vertical-align: text-top">
         <li class="px-3">
-            <NavLink class="nav-link" href="">
+            <NavLink class="nav-link" href="/">
                 <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
             </NavLink>
         </li>
 
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="program">
-                <span class="oi oi-plus" aria-hidden="true"></span> Program
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Program
             </NavLink>
         </li>
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="tickets">
-                <span class="oi oi-plus" aria-hidden="true"></span> Køb
+                <span class="oi oi-musical-note" aria-hidden="true"></span> Køb
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Vagtplan">
-                <span class="oi oi-plus" aria-hidden="true"></span> Vagtplan
+            <NavLink class="nav-link" href="vagtplan">
+                <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
             </NavLink>
         </li>
         <li class="nav-item px-3">
-            <NavLink class="nav-link" href="Koordinator">
-                <span class="oi oi-plus" aria-hidden="true"></span> Koordinator
+            <NavLink class="nav-link" href="koordinator">
+                <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
             </NavLink>
         </li>
 
         <li class="nav-item px-3">
             <NavLink class="nav-link" href="users">
-                <span class="oi oi-person" aria-hidden="true"></span> Display users
+                <span class="oi oi-person" aria-hidden="true"></span> Brugere
             </NavLink>
         </li>
-    
+
         @*<li class="nav-item px-3">
                 <NavLink class="nav-link" @onclick="@(() => LoginDialogOpen = true)">
                     <span class="oi oi-account-login" aria-hidden="true"></span> LoginNu
                 </NavLink>
-            </li>*@
+          </li>*@
     </ul>
-    <div style="display: inline-flex">
+    <ul class="nav flex-row" style="vertical-align: text-top; margin-left: auto;">
         <LoginDisplay />
-    </div>
+    </ul>
+    @*<div style="display: inline-flex">
+            <LoginDisplay />
+        </div>*@
 </div>
 
 @if (LoginDialogOpen)

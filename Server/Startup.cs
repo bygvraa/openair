@@ -44,6 +44,13 @@ namespace OpenAir.Server
             services.AddAuthentication()
                 .AddIdentityServerJwt();
 
+            // Signin indstillinger
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.SignIn.RequireConfirmedEmail = false;
+                options.SignIn.RequireConfirmedPhoneNumber = false;
+            });
+
             // Password indstillinger
             services.Configure<IdentityOptions>(options =>
             {
