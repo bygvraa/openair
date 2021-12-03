@@ -52,7 +52,7 @@ namespace OpenAir.Server.Data.Repositories
         public async Task DeleteTask(int task_id)
         {
             var taskToDelete = await _dBContext.task.FindAsync(task_id);
-
+            
             if (taskToDelete == null)
           throw new NullReferenceException();
         

@@ -6,13 +6,16 @@
 
 <AuthorizeView>
     <Authorized>
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
         <h1>Vagtplan</h1>
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
-                    @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                    @onclick='@(() => UriHelper.NavigateTo("/Createtask"))'>
                 Opret vagt
             </button>
         </div>
@@ -25,7 +28,6 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>Opgave nr</th>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Frivillig</th>
@@ -36,6 +38,7 @@
                 <tbody>
                     @foreach (var task in taskList)
                     {
+<<<<<<< HEAD
                     <tr>
                         <td>@task.task_id</td>
                         <td>@task.description</td>
@@ -55,6 +58,22 @@
                             </button>
                         </td>
                     </tr>
+=======
+                        <tr>
+
+                            <td>@task.description</td>
+                            <td>@task.location</td>
+                            <td>@task.volunteer</td>
+                            <td>@task.starttime</td>
+                            <td>@task.stoptime</td>
+                            <td></td>
+                            <div>
+                                <button type="button" @onclick="() => OpenDeleteDialog(task)">
+                                    FJERN
+                                </button>
+                            </div>
+                        </tr>
+>>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
                     }
                 </tbody>
             </table>
