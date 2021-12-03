@@ -47,11 +47,12 @@
     async Task AddTask()
     {
         await Http.PostAsJsonAsync<TaskClass>("Task/", task);
+        UriHelper.NavigateTo("/Koordinator");
     }
 
     void Cancel()
     {
-        UriHelper.NavigateTo("/koordinator");
+        UriHelper.NavigateTo("/Koordinator");
     }
 
 }
