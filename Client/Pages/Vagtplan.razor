@@ -7,57 +7,70 @@
 <h1>Vagtplan</h1>
 <AuthorizeView>
     <Authorized>
-        @if (taskList == null)
-        {
-            <p><em>Loading..</em></p>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Opgave nr</th>
-                        <th>Beskrivelse</th>
-                        <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
-                        <th>Sluttid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var task in taskList)
-                    {
-                        <tr>
-                            <td>@task.task_id</td>
-                            <td>@task.description</td>
-                            <td>@task.location</td>
-                            <td>@task.volunteer</td>
-                            <td>@task.starttime</td>
-                            <td>@task.stoptime</td>
-                            <td></td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
-        }
+            <h1>Vagtplan</h1>
 
-    </Authorized>
-    <NotAuthorized>
-        <p>Du har ikke adgang til denne side.</p>
-    </NotAuthorized>
-</AuthorizeView>
+            <div style="float: right; margin-bottom: 5px">
+                <button type="button" class="btn btn-primary"
+                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                    Opret vagt
+                </button>
+            </div>
+            @if (taskList == null)
+            {
+                <p><em>Loading..</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Opgave nr</th>
+                            <th>Beskrivelse</th>
+                            <th>Lokation</th>
+                            <th>Frivillig</th>
+                            <th>Start tid</th>
+                            <th>Sluttid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var task in taskList)
+                        {
+                            <tr>
+                                <td>@task.task_id</td>
+                                <td>@task.description</td>
+                                <td>@task.location</td>
+                                <td>@task.volunteer</td>
+                                <td>@task.starttime</td>
+                                <td>@task.stoptime</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+
+        </Authorized>
+        <NotAuthorized>
+            <p>Du har ikke adgang til denne side.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+
 
 
 @code {
     private List<TaskClass> taskList;
 
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
 
-        if (user.Identity.IsAuthenticated)
-            taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+    @code {
+        private List<TaskClass> taskList;
+
+        protected override async Task OnInitializedAsync()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity.IsAuthenticated)
+                taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+        }
+
     }
-
-}
