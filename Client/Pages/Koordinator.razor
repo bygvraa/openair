@@ -2,9 +2,18 @@
 @using OpenAir.Shared.Models
 @inject HttpClient Http
 @inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager UriHelper
 
 <AuthorizeView>
     <Authorized>
+
+        <div style="float: right; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                Opret vagt
+            </button>
+        </div>
+
         <h1>Vagtplan</h1>
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"

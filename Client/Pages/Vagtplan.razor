@@ -4,47 +4,61 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+<h1>Vagtplan</h1>
 <AuthorizeView>
     <Authorized>
 
-        <h1>Vagtplan</h1>
 
-        <button><a href="/CreateTask"</a></button>
 
-        @if (taskList == null)
-        {
-            <p><em>Loading..</em></p>
-        }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Opgave nr</th>
-                        <th>Beskrivelse</th>
-                        <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
-                        <th>Sluttid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var task in taskList)
-                    {
+            <h1>Vagtplan</h1>
+
+            <div style="float: right; margin-bottom: 5px">
+                <button type="button" class="btn btn-primary"
+                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                    Opret vagt
+                </button>
+            </div>
+            @if (taskList == null)
+            {
+                <p><em>Loading..</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
                         <tr>
-                            <td>@task.task_id</td>
-                            <td>@task.description</td>
-                            <td>@task.location</td>
-                            <td>@task.volunteer</td>
-                            <td>@task.starttime</td>
-                            <td>@task.stoptime</td>
-                            <td></td>
+                            <th>Opgave nr</th>
+                            <th>Beskrivelse</th>
+                            <th>Lokation</th>
+                            <th>Frivillig</th>
+                            <th>Start tid</th>
+                            <th>Sluttid</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
-        }
+                    </thead>
+                    <tbody>
+                        @foreach (var task in taskList)
+                        {
+                            <tr>
+                                <td>@task.task_id</td>
+                                <td>@task.description</td>
+                                <td>@task.location</td>
+                                <td>@task.volunteer</td>
+                                <td>@task.starttime</td>
+                                <td>@task.stoptime</td>
+                                <td></td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
 
+        </Authorized>
+        <NotAuthorized>
+            <p>Du har ikke adgang til denne side.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+
+<<<<<<< HEAD
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
@@ -53,17 +67,24 @@
 
 
 
+=======
+
+>>>>>>> 0007e4dd3d6c66e8ff68d0bc4c771d0c37173f65
 
 @code {
     private List<TaskClass> taskList;
+>>>>>>> ceac7dffec33bdd7a997d449286702d4111a927c
 
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
+    @code {
+        private List<TaskClass> taskList;
 
-        if (user.Identity.IsAuthenticated)
-            taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+        protected override async Task OnInitializedAsync()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity.IsAuthenticated)
+                taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+        }
+
     }
-
-}
