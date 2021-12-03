@@ -42,20 +42,17 @@ namespace OpenAir.Server.Data.Repositories
         // PUT    - opdater en opgave
         public async Task UpdateTask(TaskClass task)
         {
-            var taskToUpdate = await _dBContext.task.FindAsync(task.task_id);
-
-            if (taskToUpdate == null)
-                throw new NullReferenceException();
-
+  
             _dBContext.task.Update(task);
             await _dBContext.SaveChangesAsync();
+            Console.WriteLine("HEY");
         }
 
         // DELETE - fjern en opgave
         public async Task DeleteTask(int task_id)
         {
             var taskToDelete = await _dBContext.task.FindAsync(task_id);
-
+            
             if (taskToDelete == null)
           throw new NullReferenceException();
         

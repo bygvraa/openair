@@ -4,10 +4,26 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
-<h1>Vagtplan</h1>
+
 <AuthorizeView>
     <Authorized>
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+
+            <h1>Vagtplan</h1>
+
+            <div style="float: right; margin-bottom: 5px">
+                <button type="button" class="btn btn-primary"
+                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                    Opret vagt
+                </button>
+            </div>
+
+=======
+>>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
+>>>>>>> 21fdb969cc5ef7d772641665a59a47bbd71a0b0d
             @if (taskList == null)
             {
                 <p><em>Loading..</em></p>
@@ -45,6 +61,7 @@
             <p>Du har ikke adgang til denne side.</p>
         </NotAuthorized>
     </AuthorizeView>
+
 
     @code {
         private List<TaskClass> taskList;

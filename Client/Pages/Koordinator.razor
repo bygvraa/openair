@@ -6,6 +6,12 @@
 
 <AuthorizeView>
     <Authorized>
+<<<<<<< HEAD
+
+
+
+=======
+>>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
         <h1>Vagtplan</h1>
 
         <div style="float: right; margin-bottom: 5px">
@@ -34,6 +40,27 @@
                 <tbody>
                     @foreach (var task in taskList)
                     {
+<<<<<<< HEAD
+                    <tr>
+                        <td>@task.task_id</td>
+                        <td>@task.description</td>
+                        <td>@task.location</td>
+                        <td>@task.volunteer</td>
+                        <td>@task.starttime</td>
+                        <td>@task.stoptime</td>
+                        <td>
+
+
+                            <button class="btn btn-primary" @onclick="@(async () => await EditTask(task.task_id))">
+                                Rediger
+                            </button>
+
+                            <button class="btn btn-danger btn-sm" type="button" @onclick="() => OpenDeleteDialog(task)">
+                                FJERN
+                            </button>
+                        </td>
+                    </tr>
+=======
                         <tr>
 
                             <td>@task.description</td>
@@ -48,12 +75,59 @@
                                 </button>
                             </div>
                         </tr>
+>>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
                     }
                 </tbody>
             </table>
+       
+
+        if (isEdit)
+        {
+        <div class="modal" tabindex="-1" style="display: block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" style="background-color: #f7f7f7">
+                    <div class="modal-header" style="border: none">
+                        <h3 class="modal-title">RedigerTask</h3>
+                        <button type="button" class="close" @onclick="@this.CloseModal">
+                            <span aria-hidden="true">
+                                X
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                        <form>
+                            <div class="form-group">
+
+                                <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
+                                <input type="text" for="Beskrivelse" class="form-control" @bind="@_task.description" /><br />
+
+                                <label for="TaskLokation" class="control-label"> Lokation</label>
+                                <textarea type="text" for="TaskLokation" class="form-control" style="overflow-y: scroll; min-height: calc(1.5em + 0.75rem + 2px);" @bind="@_task.location" /><br />
+
+                                <label for="TaskVolunteer" class="control-label">Frivillig</label>
+                                <input type="text" for="TaskFrivillig" class="form-control" @bind="@_task.volunteer" /><br />
+
+                                <label for="TaskStartTime" class="control-label"> Starttid</label>
+                                <input type="text" for="TaskStartTime" class="form-control" @bind="@_task.starttime" /><br />
+
+                                <label for="TaskStopTime" class="control-label"> Stoptid</label>
+                                <input type="text" for="TaskStopTime" class="form-control" @bind="@_task.stoptime" /><br />
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="border: none">
+                        <button class="btn btn-block btn-success" @onclick="@(async () => await SaveTask())" data-dismiss="modal">
+                            Gem shelter
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
         }
 
 
+        }
 
         @if (DeleteDialogOpen)
         {
@@ -71,9 +145,42 @@
 </AuthorizeView>
 
 @code {
+
     private List<TaskClass> taskList;
 
     private TaskClass _task;
+
+    //Edit modal
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+    }
+
+    protected Boolean isEdit = false;
+
+    protected async Task EditTask(int task_id)
+    {
+        _task = await Http.GetFromJsonAsync<TaskClass>("Task/" + task_id);
+
+        this.isEdit = true;
+        await GetTasks().ConfigureAwait(false);
+    }
+
+    protected async Task SaveTask()
+    {
+        Console.WriteLine("HALLØJ");
+        await Http.PutAsJsonAsync("Task", _task);
+
+        this.isEdit = false;
+
+        Console.WriteLine("Hej");
+        await GetTasks();
+
+
+    }
+
+
+
 
     //DELETE MODAL
     public bool DeleteDialogOpen { get; set; }
@@ -111,4 +218,11 @@
     {
         await Http.DeleteAsync("Task/" + task_id);
     }
+
+    protected void CloseModal()
+    {
+        this.isEdit = false;
+
+    }
+
 }
