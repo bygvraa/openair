@@ -7,16 +7,14 @@
 <AuthorizeView>
     <Authorized>
         <h1>Vagtplan</h1>
-<<<<<<< HEAD
-        
-=======
+
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
                     @onclick='@(() => UriHelper.NavigateTo("/Createtask"))'>
                 Opret vagt
             </button>
         </div>
->>>>>>> b80140ceced888bbc9b590c7cb3843ce5c9cbaec
+
         @if (taskList == null)
         {
             <p><em>Loading..</em></p>
