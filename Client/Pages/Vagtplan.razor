@@ -7,9 +7,20 @@
 <h1>Vagtplan</h1>
 <AuthorizeView>
     <Authorized>
+<<<<<<< HEAD
 
 
          
+=======
+            <h1>Vagtplan</h1>
+
+            <div style="float: right; margin-bottom: 5px">
+                <button type="button" class="btn btn-primary"
+                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                    Opret vagt
+                </button>
+            </div>
+>>>>>>> 4a47a6467bdc5ec35620a9a53c3e535a684a0f4e
             @if (taskList == null)
             {
                 <p><em>Loading..</em></p>
@@ -50,9 +61,12 @@
         </NotAuthorized>
     </AuthorizeView>
 
+<<<<<<< HEAD
 
 
 
+=======
+>>>>>>> 4a47a6467bdc5ec35620a9a53c3e535a684a0f4e
     @code {
         private List<TaskClass> taskList;
 

@@ -8,6 +8,7 @@
     <Authorized>
 
         <div style="float: right; margin-bottom: 5px">
+<<<<<<< HEAD
         <button type="button" class="btn btn-primary"
                 @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
             Opret vagt
@@ -16,8 +17,21 @@
 
        
 
+=======
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/CreateTask"))'>
+                Opret vagt
+            </button>
+        </div>
+            
+>>>>>>> 4a47a6467bdc5ec35620a9a53c3e535a684a0f4e
         <h1>Vagtplan</h1>
-
+        <div style="float: right; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
+                Opret vagt
+            </button>
+        </div>
         @if (taskList == null)
         {
             <p><em>Loading..</em></p>
