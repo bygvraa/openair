@@ -7,14 +7,6 @@
 <h1>Vagtplan</h1>
 <AuthorizeView>
     <Authorized>
-            <h1>Vagtplan</h1>
-
-            <div style="float: right; margin-bottom: 5px">
-                <button type="button" class="btn btn-primary"
-                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
-                    Opret vagt
-                </button>
-            </div>
             @if (taskList == null)
             {
                 <p><em>Loading..</em></p>
@@ -24,7 +16,6 @@
                 <table class="table">
                     <thead>
                         <tr>
-                            <th>Opgave nr</th>
                             <th>Beskrivelse</th>
                             <th>Lokation</th>
                             <th>Frivillig</th>
@@ -36,7 +27,6 @@
                         @foreach (var task in taskList)
                         {
                             <tr>
-                                <td>@task.task_id</td>
                                 <td>@task.description</td>
                                 <td>@task.location</td>
                                 <td>@task.volunteer</td>
