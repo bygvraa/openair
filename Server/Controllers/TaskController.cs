@@ -55,12 +55,11 @@ namespace OpenAir.Server.Controllers
         // PUT: api/task
         // Tager en opgave som argument og retunerer alle opgave oplysninger
         [HttpPut]
-        public async Task<ActionResult<TaskClass>> Update([FromBody] TaskClass task)
+        public async Task Update([FromBody] TaskClass task)
         {
-            if (ModelState.IsValid)
-                await _service.UpdateTask(task);
-
-            return task;
+            Console.WriteLine("hej du");
+            await _service.UpdateTask(task);
+            Console.WriteLine("Hej");
         }
 
         // DELETE: api/task/5
