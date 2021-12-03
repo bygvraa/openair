@@ -10,14 +10,14 @@
 
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
-                    @onclick='@(() => UriHelper.NavigateTo("/Createtask"))'>
+                    @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
                 Opret vagt
             </button>
         </div>
 
         @if (taskList == null)
         {
-            <p><em>Loading..</em></p>
+            <p><em>Indlæser...</em></p>
         }
         else
         {
@@ -32,21 +32,21 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var task in taskList)
+                    @foreach (var _task in taskList)
                     {
                         <tr>
-                            <td>@task.description</td>
-                            <td>@task.location</td>
-                            <td>@task.volunteer</td>
-                            <td>@task.starttime</td>
-                            <td>@task.stoptime</td>
+                            <td>@_task.description</td>
+                            <td>@_task.location</td>
+                            <td>@_task.volunteer</td>
+                            <td>@_task.starttime</td>
+                            <td>@_task.stoptime</td>
                             <td>
-                                <button class="btn btn-primary btn-sm" @onclick="@(async () => await EditTask(task.task_id))">
+                                <button class="btn btn-primary btn-sm" @onclick="@(async () => await EditTask(_task.task_id))">
                                     Rediger
                                 </button>
                             </td>
                             <td>
-                                <button class="btn btn-danger btn-sm" type="button" @onclick="() => OpenDeleteDialog(task)">
+                                <button class="btn btn-danger btn-sm" @onclick="() => OpenDeleteDialog(_task)">
                                     Fjern
                                 </button>
                             </td>
@@ -73,19 +73,19 @@
                                     <div class="form-group">
 
                                         <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
-                                        <input type="text" for="TaskBeskrivelse" class="form-control" @bind="@_task.description" /><br />
+                                        <input type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.description" /><br />
 
                                         <label for="TaskLokation" class="control-label"> Lokation</label>
-                                        <textarea type="text" for="TaskLokation" class="form-control" @bind="@_task.location" /><br />
+                                        <textarea type="text" for="TaskLokation" class="form-control" @bind="@task.location" /><br />
 
-                                        <label for="TaskVolunteer" class="control-label">Frivillig</label>
-                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@_task.volunteer" /><br />
+                                        <label for="TaskVolunteer" class="control-label"> Frivillig</label>
+                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.volunteer" /><br />
 
                                         <label for="TaskStartTime" class="control-label"> Starttid</label>
-                                        <input type="text" for="TaskStartTime" class="form-control" @bind="@_task.starttime" /><br />
+                                        <input type="text" for="TaskStartTime" class="form-control" @bind="@task.starttime" /><br />
 
                                         <label for="TaskStopTime" class="control-label"> Stoptid</label>
-                                        <input type="text" for="TaskStopTime" class="form-control" @bind="@_task.stoptime" /><br />
+                                        <input type="text" for="TaskStopTime" class="form-control" @bind="@task.stoptime" /><br />
 
                                     </div>
                                 </form>
@@ -99,7 +99,6 @@
                     </div>
                 </div>
             }
-
 
         }
 
@@ -120,7 +119,7 @@
 
 @code {
     private List<TaskClass> taskList;
-    private TaskClass _task;
+    private TaskClass task;
 
     protected override async Task OnInitializedAsync()
     {
@@ -131,10 +130,6 @@
             taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
     }
 
-
-    // Edit modal
-    protected Boolean isEdit = false;
-
     protected async Task GetTasks()
     {
         taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
@@ -142,7 +137,7 @@
 
     protected async Task EditTask(int task_id)
     {
-        _task = await Http.GetFromJsonAsync<TaskClass>("Task/" + task_id);
+        task = await Http.GetFromJsonAsync<TaskClass>("Task/" + task_id);
 
         this.isEdit = true;
         await GetTasks().ConfigureAwait(false);
@@ -150,46 +145,46 @@
 
     protected async Task SaveTask()
     {
-        await Http.PutAsJsonAsync("Task", _task);
+        await Http.PutAsJsonAsync("Task", task);
 
         this.isEdit = false;
         await GetTasks();
     }
 
+    protected async Task DeleteTask(int task_id)
+    {
+        await Http.DeleteAsync("Task/" + task_id);
+    }
 
 
+    // Modal
+    protected void CloseModal()
+    {
+        this.isEdit = false;
+    }
 
-    //DELETE MODAL
+    // Edit modal
+    protected Boolean isEdit = false;
+
+    // Delete modal
     public bool DeleteDialogOpen { get; set; }
 
-    private void OpenDeleteDialog(TaskClass task)
+    private void OpenDeleteDialog(TaskClass _task)
     {
         DeleteDialogOpen = true;
-        _task = task;
+        task = _task;
         StateHasChanged();
     }
 
     private async Task CloseDeleteDialog(bool accepted)
     {
         if (accepted)
-        {
-            await Delete(_task.task_id);
-            taskList.Remove(_task);
-            _task = null;
-        }
+            await DeleteTask(task.task_id);
+        taskList.Remove(task);
+        task = null;
 
         DeleteDialogOpen = false;
         StateHasChanged();
-    }
-
-    protected async Task Delete(int task_id)
-    {
-        await Http.DeleteAsync("Task/" + task_id);
-    }
-
-    protected void CloseModal()
-    {
-        this.isEdit = false;
     }
 
 }

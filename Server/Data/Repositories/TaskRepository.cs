@@ -42,6 +42,7 @@ namespace OpenAir.Server.Data.Repositories
         // PUT    - opdater en opgave
         public async Task UpdateTask(TaskClass task)
         {
+            _dBContext.task.Update(task);
             await _dBContext.SaveChangesAsync();
         }
 
