@@ -1,63 +1,51 @@
-﻿@*<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">OpenAir</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>*@
-
-<div>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
-
+﻿
 <div class="bottom-row @NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-row" style="min-height: 75px; vertical-align: text-top">
-        <li class="px-3">
-            <NavLink class="nav-link" href="/">
-                <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
-            </NavLink>
-        </li>
 
-        <li class="nav-item px-3">
+    <div class="px-2">
+        <NavLink class="nav-link" href="/">
+            <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
+        </NavLink>
+    </div>
+    <ul class="nav flex-row" >
+
+        <li class="nav-item px-1">
             <NavLink class="nav-link" href="program">
                 <span class="oi oi-list-rich" aria-hidden="true"></span> Program
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item px-1">
             <NavLink class="nav-link" href="tickets">
                 <span class="oi oi-musical-note" aria-hidden="true"></span> Køb
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item px-1">
             <NavLink class="nav-link" href="vagtplan">
                 <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
             </NavLink>
         </li>
-        <li class="nav-item px-3">
+        <li class="nav-item px-1">
             <NavLink class="nav-link" href="koordinator">
                 <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
             </NavLink>
         </li>
 
-        <li class="nav-item px-3">
+        <li class="nav-item px-1">
             <NavLink class="nav-link" href="users">
                 <span class="oi oi-person" aria-hidden="true"></span> Brugere
             </NavLink>
         </li>
 
-        @*<li class="nav-item px-3">
-                <NavLink class="nav-link" @onclick="@(() => LoginDialogOpen = true)">
-                    <span class="oi oi-account-login" aria-hidden="true"></span> LoginNu
-                </NavLink>
-          </li>*@
     </ul>
     <ul class="nav flex-row nu">
         <LoginDisplay />
     </ul>
-    @*<div style="display: inline-flex">
-            <LoginDisplay />
-        </div>*@
+
+    <div class="pl-2 navbar navbar-light">
+        <button class="navbar-toggler" @onclick="ToggleNavMenu">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+
 </div>
 
 @if (LoginDialogOpen)
@@ -67,6 +55,7 @@
 }
 
 @code {
+    // NavMenu
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -76,6 +65,7 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
+    // LoginDialog
     public bool LoginDialogOpen { get; set; }
 
 }

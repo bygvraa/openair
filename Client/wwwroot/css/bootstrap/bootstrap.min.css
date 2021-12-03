@@ -3989,7 +3989,6 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     display: flex;
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    padding-left: 0;
     margin-bottom: 0;
     list-style: none
 }
@@ -4425,7 +4424,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
 
 .navbar-light .navbar-toggler {
     color: rgba(0,0,0,.5);
-    border-color: rgba(0,0,0,.1)
+/*    border-color: rgba(0,0,0,.1)*/
 }
 
 .navbar-light .navbar-toggler-icon {

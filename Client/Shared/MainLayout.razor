@@ -1,14 +1,17 @@
 ﻿@inherits LayoutComponentBase
 
 <div class="page">
-    <div class="top-row auth">
-        <div class="sidebar">
-            <NavMenu />
-        </div>
+    <div class="navbar-main">
+        <NavMenu />
     </div>
+
     <div class="main" style="margin-top: 180px">
+        <div class="top-row auth">
+
+        </div>
         <div class="content px-4">
             @Body
         </div>
+
     </div>
 </div>
