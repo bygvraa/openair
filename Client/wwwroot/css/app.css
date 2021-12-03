@@ -134,11 +134,13 @@ app {
         background-color: #fcfcfcde;
         backdrop-filter: blur(10px);
         padding: 8px;
+        display: flex;
+        flex-wrap: nowrap;
         border-radius: 15px;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-bottom: 20px;
+        margin-left: -10px;
+        margin-right: -10px;
         margin-top: 20px;
+        margin-bottom: 20px;
     }
 
     .sidebar .navbar-brand {
@@ -264,10 +266,10 @@ app {
         top: 0;
     }
 
-    .main > div {
+/*    .main > div {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
-    }
+    }*/
 
     .navbar-toggler {
         display: none;
@@ -277,6 +279,13 @@ app {
         /* Never collapse the sidebar for wide screens */
         display: flex;
     }
+}
+
+.nu {
+    vertical-align: text-top;
+    margin-left: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
 }
 
 /*Logo*/
@@ -301,13 +310,13 @@ app {
         padding-top: 2px;
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
     .logo_nav a.active {
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
 /*Logo på loading*/
