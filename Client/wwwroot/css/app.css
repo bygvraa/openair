@@ -116,7 +116,8 @@ app {
 .navbar-main {
     width: 100%;
     position: sticky;
-    top: 0;
+    top: 10px;
+    z-index: 1;
 }
 
     .navbar-main .top-row {
@@ -150,7 +151,6 @@ app {
     .navbar-main .nav-item {
         font-size: 1rem;
         padding-bottom: 0rem;
-        float: right;
     }
 
         .navbar-main .nav-item:first-of-type {
@@ -190,6 +190,7 @@ app {
 
 .navbar-toggler {
     background-color: rgba(255, 255, 255, 0.1);
+    place-self: center;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -223,6 +224,7 @@ app {
         top: 0.5rem;
     }
 
+
 @media (max-width: 800px) {
     .main .top-row:not(.auth) {
         display: none;
@@ -236,6 +238,15 @@ app {
         margin-left: 0;
     }
 
+    .navbar-main {
+        top: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
     .navbar-main .bottom-row {
         margin: 0px 0px 20px 0px;
         border-radius: 0px;
@@ -244,7 +255,7 @@ app {
         left: 0;
     }
 
-    .nav:not(.nu) {
+    .nav:not(.login-collapse) {
         background-color: #ffffffde;
         backdrop-filter: blur(10px);
         width: 100%;
@@ -259,6 +270,15 @@ app {
         display: block;
     }
 
+/*    .login-collapse {
+        display: contents;
+        white-space: nowrap;
+    }*/
+
+    .login-extend {
+        display: none;
+    }
+
     .logopic {
         position: absolute;
         width: 30%;
@@ -266,15 +286,9 @@ app {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
     app {
         flex-direction: column;
-    }
-
-    .navbar-main {
-        position: sticky;
-        z-index: 1;
-        top: 10px;
     }
 
     .main .top-row {
@@ -291,18 +305,22 @@ app {
         display: none;
     }
 
+    .login-collapse {
+        display: none;
+    }
+
+    .login-extend {
+        display: flex;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+    }
+
     .collapse {
         /* Never collapse the navbar-main for wide screens */
         display: block;
     }
 }
 
-.nu {
-    padding-left: 0px;
-    margin-left: auto;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-}
 
 /*Logo*/
     .logopic {
