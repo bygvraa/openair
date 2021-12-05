@@ -9,7 +9,7 @@ namespace OpenAir.Shared.Models
 {
     public class ApplicationRole : IdentityRole
     {
-        public int role_access { get; set; }
-        public string role_name { get; set; }
+        public override string Id { get; set; }
+        public override string Name { get; set; }
     }
 }
