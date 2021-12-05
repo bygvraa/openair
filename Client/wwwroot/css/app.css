@@ -123,9 +123,10 @@ app {
         }
 
             .navbar-main .nav-item a.active {
+                background-color: #ffffff99;
                 border-radius: 50px;
                 color: black;
-                box-shadow: 2px 2px 5px;
+                box-shadow: #e5e5e5 0px 0px 5px;
             }
 
             .navbar-main .nav-item a:hover {
@@ -133,6 +134,10 @@ app {
                 transition: initial;
                 transition-duration: 0.2s;
                 border-bottom: 3px solid #B3D8FF;
+            }
+
+            .nav-item a:focus-visible {
+                outline: none;
             }
 
 .content {

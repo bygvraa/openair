@@ -4254,8 +4254,8 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
             }
 
             .navbar-expand-md .navbar-nav .nav-link {
-                padding-right: .5rem;
-                padding-left: .5rem
+/*                padding-right: .5rem;
+                padding-left: .5rem*/
             }
 
         .navbar-expand-md > .container, .navbar-expand-md > .container-fluid {

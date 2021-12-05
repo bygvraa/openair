@@ -6,7 +6,8 @@
 <AuthorizeView>
     <Authorized>
 
-        <h1>Vagtplan</h1>
+        <h2>Vagtplan</h2>
+        <p>Liste over alle vagter</p>
 
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -29,6 +30,8 @@
                         <th>Frivillig</th>
                         <th>Start tid</th>
                         <th>Sluttid</th>
+                        <th style="width: 0px"></th>
+                        <th style="width: 0px"></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -104,8 +107,8 @@
 
         @if (DeleteDialogOpen)
         {
-            <UserDialog Title="Fjern"
-                        Text="Sikker?"
+            <UserDialog Title="Fjern vagt"
+                        Text="Er du sikker på at du vil slette denne vagt?"
                         OnClose="@CloseDeleteDialog"
                         DialogType="UserDialog.Type.DeleteCancel">
 
@@ -179,8 +182,11 @@
     private async Task CloseDeleteDialog(bool accepted)
     {
         if (accepted)
+        {
             await DeleteTask(task.task_id);
-        taskList.Remove(task);
+            taskList.Remove(task);
+        }
+
         task = null;
 
         DeleteDialogOpen = false;
