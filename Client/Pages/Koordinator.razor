@@ -22,7 +22,7 @@
         }
         else
         {
-            <table class="table">
+            <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
                         <th>Beskrivelse</th>
@@ -67,7 +67,7 @@
                                 <h3 class="modal-title">Rediger vagt</h3>
                                 <button type="button" class="close" @onclick="@this.CloseModal">
                                     <span aria-hidden="true">
-                                        X
+                                        &times;
                                     </span>
                                 </button>
                             </div>
@@ -76,10 +76,10 @@
                                     <div class="form-group">
 
                                         <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
-                                        <input type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.description" /><br />
+                                        <textarea type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.description" /><br />
 
                                         <label for="TaskLokation" class="control-label"> Lokation</label>
-                                        <textarea type="text" for="TaskLokation" class="form-control" @bind="@task.location" /><br />
+                                        <input type="text" for="TaskLokation" class="form-control" @bind="@task.location" /><br />
 
                                         <label for="TaskVolunteer" class="control-label"> Frivillig</label>
                                         <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.volunteer" /><br />
@@ -95,7 +95,7 @@
                             </div>
                             <div class="modal-footer" style="border: none">
                                 <button class="btn btn-block btn-success" @onclick="@(async () => await SaveTask())" data-dismiss="modal">
-                                    Gem shelter
+                                    Gem vagt
                                 </button>
                             </div>
                         </div>

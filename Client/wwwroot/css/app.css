@@ -157,6 +157,13 @@ app {
         outline: #00000080 auto 1px;
     }
 
+.table-openair {
+    background-color: #fcfcfc42;
+    backdrop-filter: blur(15px);
+    display: inline-table;
+    border-radius: 0.25rem;
+}
+
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
 }
