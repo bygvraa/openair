@@ -5,26 +5,6 @@
 
 <AuthorizeView>
     <Authorized>
-<<<<<<< HEAD
-            <h1>Vagtplan</h1>
-
-            <div style="float: right; margin-bottom: 5px">
-                <button type="button" class="btn btn-primary"
-                        @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
-                    Opret vagt
-                </button>
-            </div>
-
-
-            @if (taskList == null)
-            {
-                <p><em>Loading..</em></p>
-            }
-            else
-            {
-                <table class="table">
-                    <thead>
-=======
 
         <h2>Vagtplan</h2>
         <p>Liste over alle vagter</p>
@@ -35,6 +15,7 @@
                 Opret vagt
             </button>
         </div>
+
         @if (taskList == null)
         {
             <p><em>Indlæser...</em></p>
@@ -55,7 +36,6 @@
                 <tbody>
                     @foreach (var task in taskList)
                     {
->>>>>>> 0f3dfc9dfc5cc8bf4c805d785db1879ddf6c5a66
                         <tr>
                             <td>@task.description</td>
                             <td>@task.location</td>

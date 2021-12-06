@@ -4087,7 +4087,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     align-items: center;
     -ms-flex-pack: justify;
     align-items: flex-start;
-    padding: .5rem 1rem;
+    padding: 1rem .5rem;
     /*justify-content: space-between;*/
 }
 

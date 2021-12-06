@@ -206,6 +206,14 @@ app {
         top: 0;
     }
 
+    .link-logo {
+        padding: .5rem .0rem;
+    }
+
+    .nav-link {
+        padding: .5rem .5rem;
+    }
+
     .navbar-nav {
         flex-direction: row;
         justify-content: space-around;
@@ -298,26 +306,24 @@ app {
         width: 20%;
     }
 
-/*Logo på navbar*/
-.logo_nav {
+/* Logo på navbar */
+.logo-nav {
     width: 100px;
-    left: -30px;
-    top: -20px;
 }
-    .logo_nav:hover {
+    .logo-nav:hover {
         padding-top: 2px;
         padding-left: 2px;
         padding-right: 2px;
         filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
-    .logo_nav a.active {
+    .logo-nav a.active {
         padding-left: 2px;
         padding-right: 2px;
         filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
-/*Logo på loading*/
+/* Logo på loading */
     .loading-logo {
         zoom: 0.8;
         margin-top: 30vh;
