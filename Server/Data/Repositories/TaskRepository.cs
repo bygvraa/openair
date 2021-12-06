@@ -28,7 +28,6 @@ namespace OpenAir.Server.Data.Repositories
         // GET    - find specifik opgaver
         public async Task<TaskClass> GetTask(int task_id)
         {
-            
             return await _dBContext.task.FindAsync(task_id);
         }
 

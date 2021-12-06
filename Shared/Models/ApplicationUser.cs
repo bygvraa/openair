@@ -29,6 +29,11 @@ namespace OpenAir.Shared.Models
         {
             return Created;
         }
+
+        public DateTime GetModified()
+        {
+            return Modified;
+        }
     }
 
 }
