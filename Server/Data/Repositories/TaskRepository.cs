@@ -36,16 +36,14 @@ namespace OpenAir.Server.Data.Repositories
         public async Task CreateTask(TaskClass task)
         {
             await _dBContext.task.AddAsync(task);
-          await _dBContext.SaveChangesAsync();
+            await _dBContext.SaveChangesAsync();
         }
 
         // PUT    - opdater en opgave
         public async Task UpdateTask(TaskClass task)
         {
-  
             _dBContext.task.Update(task);
             await _dBContext.SaveChangesAsync();
-            Console.WriteLine("HEY");
         }
 
         // DELETE - fjern en opgave
@@ -54,10 +52,10 @@ namespace OpenAir.Server.Data.Repositories
             var taskToDelete = await _dBContext.task.FindAsync(task_id);
             
             if (taskToDelete == null)
-          throw new NullReferenceException();
+                throw new NullReferenceException();
         
-         _dBContext.task.Remove(taskToDelete);
-           await _dBContext.SaveChangesAsync();
+            _dBContext.task.Remove(taskToDelete);
+                await _dBContext.SaveChangesAsync();
          }
 
         // -------------------------------------------------

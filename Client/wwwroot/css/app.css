@@ -1,71 +1,22 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
-.openairforsidebillede {
-    display: block;
-    margin: auto;
-    margin-bottom: 10%;
-}
-
-.openairdiv {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px 20px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "kunsterdiv billetdiv tekstdiv1"
-        "tekstdiv2 scenerdiv miljødiv"
-        "frivilligdiv koordinatordiv kontaktosdiv";
-    width: 100%;
-}
-
-.kunsterdiv {
-    grid-area: kunsterdiv;
-}
-
-.billetdiv {
-    grid-area: billetdiv;
-}
-
-.tekstdiv1 {
-    grid-area: tekstdiv1;
-}
-
-.tekstdiv2 {
-    grid-area: tekstdiv2;
-}
-
-.scenerdiv {
-    grid-area: scenerdiv;
-}
-
-.miljødiv {
-    grid-area: miljødiv;
-}
-
-.frivilligdiv {
-    grid-area: frivilligdiv;
-}
-
-.koordinatordiv {
-    grid-area: koordinatordiv;
-}
-
-.kontaktosdiv {
-    grid-area: kontaktosdiv;
-}
-
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background-color: #B3D8FF;
-    background-image: url('../images/skyer.png');
-    width: 100%;
-    height: 100%;
+    /*    background-color: #B3D8FF;
+    background-image: url(../images/skyer.png);*/
+    background: linear-gradient(#81bbf885,#2f93fc85,#2586ec85,#0455ab85) scroll,
+                url(../images/skyer.png) fixed;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed;
 }
 
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 60px;
+}
 
 h1 {
     text-align: center;
@@ -89,7 +40,6 @@ app {
 }
 
 .top-row {
-    margin-top: 2.5rem;
     display: flex;
     align-items: center;
 }
@@ -100,7 +50,7 @@ app {
 
     .main .top-row {
         background-color: #f7f7f7;
-        border-bottom: 1px solid #d6d5d5;
+        /*border-bottom: 1px solid #d6d5d5;*/
         justify-content: flex-end;
     }
 
@@ -114,58 +64,54 @@ app {
             text-overflow: ellipsis;
         }
 
-
-.sidebar {
-
-    float: right;
-
-
+.navbar-main {
     width: 100%;
-    padding-left: 1.5rem !important;
-    padding-right: 1.5rem !important;
-
+    position: sticky;
+    top: 10px;
+    z-index: 1;
 }
 
-    .sidebar .top-row {
+    .navbar-main .top-row {
         background-color: rgba(0,0,0,0);
     }
 
-    .sidebar .bottom-row {
+    .navbar-main .bottom-row{
         background-color: #fcfcfcde;
         backdrop-filter: blur(10px);
         padding: 8px;
+        display: flex;
+        flex-wrap: nowrap;
         border-radius: 15px;
-        margin-left: 20px;
-        margin-right: 20px;
-        margin-bottom: 20px;
+        margin-left: 10px;
+        margin-right: 10px;
         margin-top: 20px;
+        margin-bottom: 20px;
     }
 
-    .sidebar .navbar-brand {
+    .navbar-main .navbar-brand {
         font-size: 1.1rem;
     }
 
-    .sidebar .oi {
+    .navbar-main .oi {
         width: 2rem;
         font-size: 1.1rem;
         vertical-align: text-top;
         top: -2px;
     }
 
-    .sidebar .nav-item {
+    .navbar-main .nav-item {
         font-size: 1rem;
         padding-bottom: 0rem;
-        float: right;
     }
 
-        .sidebar .nav-item:first-of-type {
+        .navbar-main .nav-item:first-of-type {
         }
 
-        .sidebar .nav-item:last-of-type {
+        .navbar-main .nav-item:last-of-type {
             padding-bottom: 0rem;
         }
 
-        .sidebar .nav-item a {
+        .navbar-main .nav-item a {
             color: #838383;
             border-bottom: 3px solid transparent;
             border-radius: 6px;
@@ -176,17 +122,22 @@ app {
             float: right;
         }
 
-            .sidebar .nav-item a.active {
+            .navbar-main .nav-item a.active {
+                background-color: #ffffff99;
                 border-radius: 50px;
                 color: black;
-                box-shadow: 2px 2px 5px;
+                box-shadow: #e5e5e5 0px 0px 5px;
             }
 
-            .sidebar .nav-item a:hover {
+            .navbar-main .nav-item a:hover {
                 color: #B3D8FF;
                 transition: initial;
                 transition-duration: 0.2s;
                 border-bottom: 3px solid #B3D8FF;
+            }
+
+            .nav-item a:focus-visible {
+                outline: none;
             }
 
 .content {
@@ -194,7 +145,8 @@ app {
 }
 
 .navbar-toggler {
-    background-color: grey;
+    background-color: rgba(255, 255, 255, 0.1);
+    place-self: center;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -228,7 +180,8 @@ app {
         top: 0.5rem;
     }
 
-@media (max-width: 767.98px) {
+
+@media (max-width: 800px) {
     .main .top-row:not(.auth) {
         display: none;
     }
@@ -241,6 +194,47 @@ app {
         margin-left: 0;
     }
 
+    .navbar-main {
+        top: 0;
+    }
+
+    .navbar-nav {
+        flex-direction: row;
+        justify-content: space-around;
+    }
+
+    .navbar-main .bottom-row {
+        margin: 0px 0px 20px 0px;
+        border-radius: 0px;
+        top: 0;
+        right: 0;
+        left: 0;
+    }
+
+    .nav:not(.login-collapse) {
+        background-color: #ffffffde;
+        backdrop-filter: blur(10px);
+        width: 100%;
+        position: absolute;
+        padding: 8px;
+        top: 87px;
+        right: 0vh;
+        /*transform: translate(100%);*/
+    }
+
+    .navbar-toggler {
+        display: block;
+    }
+
+/*    .login-collapse {
+        display: contents;
+        white-space: nowrap;
+    }*/
+
+    .login-extend {
+        display: none;
+    }
+
     .logopic {
         position: absolute;
         width: 30%;
@@ -248,15 +242,9 @@ app {
     }
 }
 
-@media (min-width: 768px) {
+@media (min-width: 800px) {
     app {
         flex-direction: column;
-    }
-
-    .sidebar {
-        position: fixed;
-        z-index: 1;
-        top: 0;
     }
 
     .main .top-row {
@@ -273,11 +261,22 @@ app {
         display: none;
     }
 
-    .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
+    .login-collapse {
+        display: none;
+    }
+
+    .login-extend {
         display: flex;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+    }
+
+    .collapse {
+        /* Never collapse the navbar-main for wide screens */
+        display: block;
     }
 }
+
 
 /*Logo*/
     .logopic {
@@ -301,13 +300,13 @@ app {
         padding-top: 2px;
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
     .logo_nav a.active {
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
 /*Logo på loading*/
@@ -339,7 +338,7 @@ app {
     }
 
 
-    /*Login-knap*/
+/* Login-knap */
     .btn-login {
         background-color: #FF27E8;
         color: black;
@@ -373,11 +372,10 @@ app {
                 box-shadow: 0 0 0 .2rem rgba(184,134,11,.5);
             }
 
-    /*Login-info/oplysninger*/
+/* Login-info/oplysninger */
     .loginoplysninger {
         text-align: center;
     }
-
 
     .login_overskrift {
         margin-top: 20px;
@@ -396,125 +394,3 @@ app {
         .logininfo:focus-visible {
             outline-color: #FF27E8;
         }
-
-/*kunstner program*/
-    .container_program {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
-        gap: 20px 20px;
-        grid-auto-flow: row;
-        color: black;
-        text-align: center;
-        grid-template-areas:
-            "kunstner1 kunstner2 kunstner3"
-            "kunstner4 kunstner5 kunstner6"
-            "kunstner7 kunstner8 kunstner9"
-            "kunstner10 kunstner11 kunstner12";
-    }
-
-    .kunstner1 {
-        grid-area: kunstner1;
-    }
-
-    .kunstner2 {
-        grid-area: kunstner2;
-    }
-
-    .kunstner3 {
-        grid-area: kunstner3;
-    }
-
-    .kunstner4 {
-        grid-area: kunstner4;
-    }
-
-    .kunstner5 {
-        grid-area: kunstner5;
-    }
-
-    .kunstner6 {
-        grid-area: kunstner6;
-    }
-
-    .kunstner7 {
-        grid-area: kunstner7;
-    }
-
-    .kunstner8 {
-        grid-area: kunstner8;
-    }
-
-    .kunstner9 {
-        grid-area: kunstner9;
-    }
-
-    .kunstner10 {
-        grid-area: kunstner10;
-    }
-
-    .kunstner11 {
-        grid-area: kunstner11;
-    }
-
-    .kunstner12 {
-        grid-area: kunstner12;
-    }
-
-/*kunstner billeder*/
-
-    .kunstner_billede {
-        width: 80%;
-        opacity: 70%;
-    }
-
-    .kunstner_navn {
-        color: black;
-        text-align: center;
-        border: 3px solid #FF27E8;
-        background-color: #FF27E8;
-        box-shadow: inherit;
-        width: 80%;
-        font-size: 25px;
-    }
-
-    .program_overskrift {
-        text-align: center;
-        padding: 20px;
-    }
-
-/*Billetside*/
-
-    .container_billet{
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr;
-        gap: 20px 20px;
-        grid-auto-flow: row;
-        text-align: center;
-        grid-template-areas:
-            "Partout Billet1 Billet2 Billet-3";
-    }
-
-    .Partout {
-        grid-area: Partout;
-      
-   
-    }
-
-    .Billet1 {
-        grid-area: Billet1;
-     
-
-    }
-
-    .Billet2 {
-        grid-area: Billet2;
-       
-  
-    }
-
-    .Billet-3 {
-        grid-area: Billet-3;
-     
-    }

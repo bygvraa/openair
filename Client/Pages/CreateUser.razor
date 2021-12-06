@@ -1,5 +1,4 @@
 ﻿@page "/createuser"
-@using OpenAir.Shared.Models
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 @inject IJSRuntime js
@@ -9,24 +8,25 @@
 
 <div class="row" style=" text-align: center; place-content: center">
     <div class="col-md-4">
-            <form>
-                <div class="form-group">
-                    <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.FirstName" />
-                </div>
-                <div class="form-group">
-                    <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.LastName" />
-                </div>
-                <div class="form-group">
-                    <input for="Email" class="form-control" placeholder="Email" @bind="@user.Email" />
-                </div>
-                <div class="form-group">
-                    <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.Password" />
-                </div>
-                <div class="form-group">
-                    <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                    <input type="button" class="btn btn-success" @onclick="@(async () => await AddUser())" value="Opret bruger" />
-                </div>
-            </form>
+
+        <form>
+            <div class="form-group">
+                <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.FirstName" />
+            </div>
+            <div class="form-group">
+                <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.LastName" />
+            </div>
+            <div class="form-group">
+                <input for="Email" class="form-control" placeholder="Email" @bind="@user.Email" />
+            </div>
+            <div class="form-group">
+                <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.Password" />
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
+                <input type="button" class="btn btn-success" @onclick="@(async () => await AddUser())" value="Opret bruger" />
+            </div>
+        </form>
 
     </div>
 </div>
@@ -67,7 +67,7 @@
             await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
         }
     }
-        
+
     void Cancel()
     {
         UriHelper.NavigateTo("Users");

@@ -1,64 +1,65 @@
-﻿@*<div class="top-row pl-4 navbar navbar-dark">
-    <a class="navbar-brand" href="">OpenAir</a>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>*@
+﻿<nav class="navbar navbar-expand-md navbar-light bg-light">
 
-<div>
-    <button class="navbar-toggler" @onclick="ToggleNavMenu">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-</div>
+    <!-- Logo -->
+    <div class="px-1">
+        <NavLink class="nav-link" href="/" Match="NavLinkMatch.All">
+            <span aria-hidden="true">
+                <img src="images/openairlogo.png" class="logo_nav" />
+            </span>
+        </NavLink>
+    </div>
 
-<div class="bottom-row @NavMenuCssClass" @onclick="ToggleNavMenu">
-    <ul class="nav flex-row" style="min-height: 75px; vertical-align: text-top">
-        <li class="px-3">
-            <NavLink class="nav-link" href="/">
-                <span aria-hidden="true"></span> <img src="images/openairlogo.png" class="logo_nav" />
-            </NavLink>
-        </li>
-
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="program">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Program
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="tickets">
-                <span class="oi oi-musical-note" aria-hidden="true"></span> Køb
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="vagtplan">
-                <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
-            </NavLink>
-        </li>
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="koordinator">
-                <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
-            </NavLink>
-        </li>
-
-        <li class="nav-item px-3">
-            <NavLink class="nav-link" href="users">
-                <span class="oi oi-person" aria-hidden="true"></span> Brugere
-            </NavLink>
-        </li>
-
-        @*<li class="nav-item px-3">
-                <NavLink class="nav-link" @onclick="@(() => LoginDialogOpen = true)">
-                    <span class="oi oi-account-login" aria-hidden="true"></span> LoginNu
-                </NavLink>
-          </li>*@
-    </ul>
-    <ul class="nav flex-row" style="vertical-align: text-top; margin-left: auto;">
+    <!-- Registrer + log ind/ud -->
+    <ul class="nav flex-row login-box login-collapse ml-auto">
         <LoginDisplay />
     </ul>
-    @*<div style="display: inline-flex">
-            <LoginDisplay />
-        </div>*@
-</div>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler" @onclick="ToggleNavMenu">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse @NavMenuCssClass" @onclick="ToggleNavMenu">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item px-1">
+                <NavLink class="nav-link" href="program">
+                    <span class="oi oi-list-rich" aria-hidden="true"></span> Program
+                </NavLink>
+            </li>
+            <li class="nav-item px-1">
+                <NavLink class="nav-link" href="tickets">
+                    <span class="oi oi-musical-note" aria-hidden="true"></span> Billetter
+                </NavLink>
+            </li>
+
+            <AuthorizeView>
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="vagtplan">
+                        <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
+                    </NavLink>
+                </li>
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="koordinator">
+                        <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
+                    </NavLink>
+                </li>
+
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="users">
+                        <span class="oi oi-person" aria-hidden="true"></span> Brugere
+                    </NavLink>
+                </li>
+            </AuthorizeView>
+
+        </ul>
+    </div>
+
+    <!-- Registrer + log ind/ud -->
+    <ul class="nav flex-row login-box login-extend ml-auto">
+        <LoginDisplay />
+    </ul>
+
+</nav>
 
 @if (LoginDialogOpen)
 {
@@ -67,6 +68,7 @@
 }
 
 @code {
+    // NavMenu
     private bool collapseNavMenu = true;
 
     private string NavMenuCssClass => collapseNavMenu ? "collapse" : null;
@@ -76,6 +78,7 @@
         collapseNavMenu = !collapseNavMenu;
     }
 
+    // LoginDialog
     public bool LoginDialogOpen { get; set; }
 
 }

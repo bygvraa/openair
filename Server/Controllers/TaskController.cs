@@ -43,7 +43,7 @@ namespace OpenAir.Server.Controllers
         }
 
         // POST: api/task
-        // Laver en ny opgave med et unikt id (guid)
+        // Laver en ny opgave
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] TaskClass task)
         {
@@ -53,13 +53,11 @@ namespace OpenAir.Server.Controllers
         }
 
         // PUT: api/task
-        // Tager en opgave som argument og retunerer alle opgave oplysninger
+        // Tager en opgave som argument og opdateren den eksisterende opgave med en ny
         [HttpPut]
         public async Task Update([FromBody] TaskClass task)
         {
-            Console.WriteLine("hej du");
             await _service.UpdateTask(task);
-            Console.WriteLine("Hej");
         }
 
         // DELETE: api/task/5

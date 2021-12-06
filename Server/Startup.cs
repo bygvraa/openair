@@ -35,7 +35,7 @@ namespace OpenAir.Server
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddDefaultIdentity<ApplicationUser>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
             services.AddIdentityServer()
@@ -51,6 +51,14 @@ namespace OpenAir.Server
                 options.SignIn.RequireConfirmedPhoneNumber = false;
             });
 
+            // Email indstillinger
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.User.AllowedUserNameCharacters =
+                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.RequireUniqueEmail = true;
+            });
+
             // Password indstillinger
             services.Configure<IdentityOptions>(options =>
             {
@@ -62,14 +70,6 @@ namespace OpenAir.Server
                 options.Password.RequiredUniqueChars = 0;
             });
 
-            // Bruger indstillinger
-            services.Configure<IdentityOptions>(options =>
-            {
-                options.User.AllowedUserNameCharacters =
-                        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
-                options.User.RequireUniqueEmail = true;
-
-            });
 
             services.AddControllersWithViews();
             services.AddRazorPages();

@@ -1,0 +1,169 @@
+﻿/* Forside */
+    .openair-forside-billede {
+        display: block;
+        margin: auto;
+        margin-bottom: 10%;
+    }
+
+    .openair-forside-indhold {
+        display: grid;
+        width: 100%;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 20px 20px;
+        grid-auto-flow: row;
+        grid-template-areas:
+            "kunstner-div billet-div tekst1-div"
+            "tekst2-div scener-div miljø-div"
+            "frivillig-div koordinator-div kontakt-div";
+    }
+
+    .kunstner-div {
+        grid-area: kunstner-div;
+    }
+
+    .billet-div {
+        grid-area: billet-div;
+    }
+
+    .tekst1-div {
+        grid-area: tekst1-div;
+    }
+
+    .tekst2-div {
+        grid-area: tekst2-div;
+    }
+
+    .scener-div {
+        grid-area: scener-div;
+    }
+
+    .miljø-div {
+        grid-area: miljø-div;
+    }
+
+    .frivillig-div {
+        grid-area: frivillig-div;
+    }
+
+    .koordinator-div {
+        grid-area: koordinator-div;
+    }
+
+    .kontakt-div {
+        grid-area: kontakt-div;
+    }
+
+/* Kunstner program */
+    .container_program {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr;
+        gap: 20px 20px;
+        grid-auto-flow: row;
+        color: black;
+        text-align: center;
+        grid-template-areas:
+            "kunstner1 kunstner2 kunstner3"
+            "kunstner4 kunstner5 kunstner6"
+            "kunstner7 kunstner8 kunstner9"
+            "kunstner10 kunstner11 kunstner12";
+    }
+
+    .kunstner1 {
+        grid-area: kunstner1;
+    }
+
+    .kunstner2 {
+        grid-area: kunstner2;
+    }
+
+    .kunstner3 {
+        grid-area: kunstner3;
+    }
+
+    .kunstner4 {
+        grid-area: kunstner4;
+    }
+
+    .kunstner5 {
+        grid-area: kunstner5;
+    }
+
+    .kunstner6 {
+        grid-area: kunstner6;
+    }
+
+    .kunstner7 {
+        grid-area: kunstner7;
+    }
+
+    .kunstner8 {
+        grid-area: kunstner8;
+    }
+
+    .kunstner9 {
+        grid-area: kunstner9;
+    }
+
+    .kunstner10 {
+        grid-area: kunstner10;
+    }
+
+    .kunstner11 {
+        grid-area: kunstner11;
+    }
+
+    .kunstner12 {
+        grid-area: kunstner12;
+    }
+
+/* Kunstner billeder */
+    .kunstner_billede {
+        width: 80%;
+        opacity: 70%;
+    }
+
+    .kunstner_navn {
+        color: black;
+        text-align: center;
+        border: 3px solid #FF27E8;
+        background-color: #FF27E8;
+        box-shadow: inherit;
+        width: 80%;
+        font-size: 25px;
+    }
+
+    .program_overskrift {
+        text-align: center;
+        padding: 20px;
+    }
+
+/* Billetside */
+    .container_billet {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr;
+        gap: 20px 20px;
+        grid-auto-flow: row;
+        text-align: center;
+        grid-template-areas:
+            "Partout Billet1 Billet2 Billet-3";
+    }
+
+    .Partout {
+        grid-area: Partout;
+    }
+
+    .Billet1 {
+        grid-area: Billet1;
+    }
+
+    .Billet2 {
+        grid-area: Billet2;
+    }
+
+    .Billet-3 {
+        grid-area: Billet-3;
+    }
+
