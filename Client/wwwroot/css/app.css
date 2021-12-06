@@ -68,25 +68,9 @@ app {
     width: 100%;
     position: sticky;
     top: 10px;
-    z-index: 1;
+    z-index: 100;
+    transition-duration: .4s;
 }
-
-    .navbar-main .top-row {
-        background-color: rgba(0,0,0,0);
-    }
-
-    .navbar-main .bottom-row{
-        background-color: #fcfcfcde;
-        backdrop-filter: blur(10px);
-        padding: 8px;
-        display: flex;
-        flex-wrap: nowrap;
-        border-radius: 15px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
 
     .navbar-main .navbar-brand {
         font-size: 1.1rem;
@@ -162,6 +146,16 @@ app {
     backdrop-filter: blur(15px);
     display: inline-table;
     border-radius: 0.25rem;
+    border-collapse: initial;
+}
+
+.navbar-openair {
+    padding: .5rem .5rem;
+    transition-duration: .4s;
+}
+
+.NavMenuCssClass {
+
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -214,16 +208,16 @@ app {
     }
 
     .link-logo {
-        padding: .5rem .0rem;
-    }
-
-    .nav-link {
         padding: .5rem .5rem;
     }
 
+/*    .nav-link {
+        padding: .5rem .5rem;
+    }*/
+
     .navbar-nav {
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .navbar-main .bottom-row {
