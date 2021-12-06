@@ -145,9 +145,17 @@ app {
 }
 
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #ffffff1a;
+    color: rgba(0,0,0,.5);
     place-self: center;
 }
+
+    .navbar-toggler:focus {
+        background-color: #ffffff99;
+        color: rgba(0,0,0,.9);
+        box-shadow: #e5e5e5 0px 0px 5px;
+        outline: #00000080 auto 1px;
+    }
 
 .valid.modified:not([type=checkbox]) {
     outline: 1px solid #26b050;
@@ -181,7 +189,7 @@ app {
     }
 
 
-@media (max-width: 800px) {
+@media (max-width: 959px) {
     .main .top-row:not(.auth) {
         display: none;
     }
@@ -242,7 +250,7 @@ app {
     }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     app {
         flex-direction: column;
     }
