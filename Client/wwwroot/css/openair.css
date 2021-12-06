@@ -1,4 +1,13 @@
-﻿/* Forside */
+﻿
+/* Modal */
+    .modal-openair {
+        background-color: #f7f7f7c9;
+        backdrop-filter: blur(10px);
+    }
+
+
+
+/* Forside */
     .openair-forside-billede {
         display: block;
         margin: auto;
