@@ -39,7 +39,7 @@ namespace OpenAir.Server.Data
             modelBuilder.Entity<ApplicationUser>(b =>
             {
                 b.ToTable("user");
-                b.Property(b => b.BirthDate).HasColumnType("timestamp with time zone");
+                b.Property(b => b.BirthDate).HasColumnType("date");
                 b.Property(b => b.Created).HasColumnType("timestamp with time zone");
                 b.Property(b => b.Modified).HasColumnType("timestamp with time zone");
             });
