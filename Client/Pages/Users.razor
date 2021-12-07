@@ -27,6 +27,7 @@
                     <tr>
                         <th>Navn</th>
                         <th>Email</th>
+                        <th>Fødselsdato</th>
                         <th>Oprettelsesdato</th>
                         <th>Seneste ændring</th>
                         <th style="width: 0px">&nbsp;</th>
@@ -38,7 +39,8 @@
                     {
                         <tr>
                             <td>@_user.GetFullName()</td>
-                            <td>@_user.Email</td>
+                            <td>@_user.GetEmail()</td>
+                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
                             <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>
