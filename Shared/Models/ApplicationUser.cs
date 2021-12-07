@@ -15,24 +15,20 @@ namespace OpenAir.Shared.Models
         public string LastName { get; set; }
         public override string Email { get; set; }
         public string Password { get; set; }
-        public int? Role { get; set; }
+        public DateTime BirthDate { get; set; }
+
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
         // Metoder
-        public string GetFullName()
-        {
-            return $"{FirstName} {LastName}";
-        }
+        public string GetFullName() { return $"{FirstName} {LastName}"; }
 
-        public DateTime GetCreated()
-        {
-            return Created;
-        }
+        public string GetEmail() { return Email; }
 
-        public DateTime GetModified()
-        {
-            return Modified;
-        }
+        public DateTime GetBirthDate() { return BirthDate; }
+
+        public DateTime GetCreated() { return Created; }
+
+        public DateTime GetModified() { return Modified; }
     }
 }

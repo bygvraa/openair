@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace OpenAir.Shared.Models
 {
-    class ApplicationShift
+    public class ApplicationTask
     {
         [Key]
         public int Id { get; set; }
         public string Description { get; set; }
-        public string Person { get; set; }
+        public string User { get; set; }
         public string Location { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
