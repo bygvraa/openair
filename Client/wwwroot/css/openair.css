@@ -1,4 +1,33 @@
-﻿/* Forside */
+﻿
+/* Modal */
+    .modal-openair {
+        background-color: #f7f7f7c9;
+        backdrop-filter: blur(10px);
+    }
+
+/* Tabel */
+    .table-openair {
+        background-color: #fcfcfc42;
+        backdrop-filter: blur(15px);
+        display: inline-table;
+        border-radius: 0.25rem;
+        border-collapse: collapse;
+    }
+
+/* Knap */
+    .openair-blue-btn {
+        color: #fff;
+        background-color: #1b6ec261;
+        border-color: #ffffff0a;
+    }
+
+    .openair-red-btn {
+        color: #fff;
+        background-color: #ea000061;
+        border-color: #ffffff0a;
+    }
+
+/* Forside */
     .openair-forside-billede {
         display: block;
         margin: auto;

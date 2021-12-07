@@ -7,11 +7,11 @@ using System;
 
 namespace OpenAir.Server.Data.Repositories
 {
-    public class TaskRepository : ITaskRepository
+    public class BilletRepository : IBilletRepository
     {
         private readonly ApplicationDbContext _dBContext;
 
-        public TaskRepository(ApplicationDbContext dBContext)
+        public BilletRepository(ApplicationDbContext dBContext)
         {
             _dBContext = dBContext;
         }
@@ -20,14 +20,15 @@ namespace OpenAir.Server.Data.Repositories
         // Task -----------------------------------------
 
         // GET    - find alle opgaver
-        public async Task<List<TaskClass>> GetAllTasks()
+        public async Billet<List<BilletClass>> GetAllBilletter()
         {
             return await _dBContext.task.ToListAsync();
         }
-        
+
         // GET    - find specifik opgaver
         public async Task<TaskClass> GetTask(int task_id)
         {
+
             return await _dBContext.task.FindAsync(task_id);
         }
 
@@ -49,13 +50,13 @@ namespace OpenAir.Server.Data.Repositories
         public async Task DeleteTask(int task_id)
         {
             var taskToDelete = await _dBContext.task.FindAsync(task_id);
-            
+
             if (taskToDelete == null)
                 throw new NullReferenceException();
-        
+
             _dBContext.task.Remove(taskToDelete);
-                await _dBContext.SaveChangesAsync();
-         }
+            await _dBContext.SaveChangesAsync();
+        }
 
         // -------------------------------------------------
     }

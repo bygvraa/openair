@@ -4233,7 +4233,7 @@ input[type=button].btn-block, input[type=reset].btn-block, input[type=submit].bt
     }
 }
 
-@media (min-width:800px) {
+@media (min-width:960px) {
     .navbar-expand-md {
         -ms-flex-flow: row nowrap;
         flex-flow: row nowrap;

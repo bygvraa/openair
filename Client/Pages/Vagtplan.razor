@@ -15,13 +15,14 @@
                 Opret vagt
             </button>
         </div>
+
         @if (taskList == null)
         {
             <p><em>Indlæser...</em></p>
         }
         else
         {
-            <table class="table">
+            <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
                         <th>Beskrivelse</th>
@@ -35,7 +36,10 @@
                 <tbody>
                     @foreach (var task in taskList)
                     {
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7c60b0e249f800aea4930a3c6926d6da91936fd3
                         <tr>
                             <td>@task.description</td>
                             <td>@task.location</td>
