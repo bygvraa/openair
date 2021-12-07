@@ -30,5 +30,4 @@ namespace OpenAir.Shared.Models
             return Created;
         }
     }
-
 }
