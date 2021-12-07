@@ -19,31 +19,29 @@ namespace OpenAir.Server.Data
         {
         }
 
+
         // Tabellen 'user' fra databasen
         public DbSet<ApplicationUser> user { get; set; }
 
         // Tabellen 'task' fra databasen
         public DbSet<TaskClass> task { get; set; }
 
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
             modelBuilder.Entity<ApplicationUser>().ToTable("user");
-            //modelBuilder.Entity<ApplicationUser>().ToTable("user").Property(p => p.Id).HasColumnName("id");
-            //modelBuilder.Entity<ApplicationUser>().ToTable("user").Property(p => p.Email).HasColumnName("email");
-            //modelBuilder.Entity<ApplicationUser>().ToTable("user").Property(p => p.UserName).HasColumnName("username");
-            //modelBuilder.Entity<ApplicationUser>().ToTable("user").Property(p => p.PasswordHash).HasColumnName("password");
-
-            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("user_role");
-            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("user_login");
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("user_claim");
-            modelBuilder.Entity<IdentityRole>().ToTable("role");
-            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("role_claim");
-            modelBuilder.Entity<PersistedGrant>().ToTable("persisted_grant");
-            modelBuilder.Entity<DeviceFlowCodes>().ToTable("device_code");
+            modelBuilder.Entity<IdentityUserLogin<string>>().ToTable("user_login");
+            modelBuilder.Entity<IdentityUserRole<string>>().ToTable("user_role");
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("user_token");
 
+            modelBuilder.Entity<ApplicationRole>().ToTable("role");
+            modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("role_claim");
+
+            modelBuilder.Entity<PersistedGrant>().ToTable("persisted_grant");
+            modelBuilder.Entity<DeviceFlowCodes>().ToTable("device_code");
         }
     }
 }

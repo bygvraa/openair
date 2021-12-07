@@ -141,14 +141,6 @@ app {
         outline: #00000080 auto 1px;
     }
 
-.table-openair {
-    background-color: #fcfcfc42;
-    backdrop-filter: blur(15px);
-    display: inline-table;
-    border-radius: 0.25rem;
-    border-collapse: initial;
-}
-
 .navbar-openair {
     padding: .5rem .5rem;
     transition-duration: .4s;
