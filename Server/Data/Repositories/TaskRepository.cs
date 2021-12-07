@@ -20,35 +20,35 @@ namespace OpenAir.Server.Data.Repositories
         // Task -----------------------------------------
 
         // GET    - find alle opgaver
-        public async Task<List<TaskClass>> GetAllTasks()
+        public async Task<List<ApplicationTask>> GetAllTasks()
         {
             return await _dBContext.task.ToListAsync();
         }
         
         // GET    - find specifik opgaver
-        public async Task<TaskClass> GetTask(int task_id)
+        public async Task<ApplicationTask> GetTask(int id)
         {
-            return await _dBContext.task.FindAsync(task_id);
+            return await _dBContext.task.FindAsync(id);
         }
 
         // POST   - lav en opgave
-        public async Task CreateTask(TaskClass task)
+        public async Task CreateTask(ApplicationTask task)
         {
             await _dBContext.task.AddAsync(task);
             await _dBContext.SaveChangesAsync();
         }
 
         // PUT    - opdater en opgave
-        public async Task UpdateTask(TaskClass task)
+        public async Task UpdateTask(ApplicationTask task)
         {
             _dBContext.task.Update(task);
             await _dBContext.SaveChangesAsync();
         }
 
         // DELETE - fjern en opgave
-        public async Task DeleteTask(int task_id)
+        public async Task DeleteTask(int id)
         {
-            var taskToDelete = await _dBContext.task.FindAsync(task_id);
+            var taskToDelete = await _dBContext.task.FindAsync(id);
             
             if (taskToDelete == null)
                 throw new NullReferenceException();
