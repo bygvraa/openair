@@ -24,17 +24,17 @@ namespace OpenAir.Server.Controllers
         // GET: api/task
         // Bruger en metode ('GetAllTasks()') fra 'TaskRepository' til at retunere en liste over alle opgaver
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<TaskClass>>> GetAll()
+        public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetAll()
         {
             return await _service.GetAllTasks();
         }
 
         // GET: api/task/5
         // Tager id'et på en bestemt opgave og retunerer alle oplysninger på opgaven
-        [HttpGet("{task_id}")]
-        public async Task<ActionResult<TaskClass>> Get(int task_id)
+        [HttpGet("{id}")]
+        public async Task<ActionResult<ApplicationTask>> Get(int id)
         {
-            var task = await _service.GetTask(task_id);
+            var task = await _service.GetTask(id);
 
             if (task == null)
                 return NotFound();
@@ -45,7 +45,7 @@ namespace OpenAir.Server.Controllers
         // POST: api/task
         // Laver en ny opgave
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] TaskClass task)
+        public async Task<ActionResult> Create([FromBody] ApplicationTask task)
         {
             await _service.CreateTask(task);
 
@@ -55,18 +55,18 @@ namespace OpenAir.Server.Controllers
         // PUT: api/task
         // Tager en opgave som argument og opdateren den eksisterende opgave med en ny
         [HttpPut]
-        public async Task Update([FromBody] TaskClass task)
+        public async Task Update([FromBody] ApplicationTask task)
         {
             await _service.UpdateTask(task);
         }
 
         // DELETE: api/task/5
         // Tager et id som argument og fjerner den tilhørende opgave
-        [HttpDelete("{task_id}")]
-        public async Task<ActionResult> Delete(int task_id)
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> Delete(int id)
         {
             if (ModelState.IsValid)
-                await _service.DeleteTask(task_id);
+                await _service.DeleteTask(id);
 
             return Ok();
         }
