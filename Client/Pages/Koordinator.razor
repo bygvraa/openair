@@ -1,4 +1,4 @@
-﻿@page "/Koordinator"
+﻿@page "/koordinator"
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -18,11 +18,11 @@
 
         @if (taskList == null)
         {
-            <p><em>Indlæser...</em></p>
+            <p><em>Indlæser, vent venligst...</em></p>
         }
         else
         {
-            <table class="table">
+            <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
                         <th>Beskrivelse</th>
@@ -30,8 +30,8 @@
                         <th>Frivillig</th>
                         <th>Start tid</th>
                         <th>Sluttid</th>
-                        <th style="width: 0px"></th>
-                        <th style="width: 0px"></th>
+                        <th style="width: 0px">&nbsp;</th>
+                        <th style="width: 0px">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,8 +41,8 @@
                             <td>@_task.description</td>
                             <td>@_task.location</td>
                             <td>@_task.volunteer</td>
-                            <td>@_task.starttime</td>
-                            <td>@_task.stoptime</td>
+                            <td>@_task.starttime.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_task.stoptime.ToString("dd-MM-yyyy HH:mm")</td>
                             <td>
                                 <button class="btn btn-primary btn-sm" @onclick="@(async () => await EditTask(_task.task_id))">
                                     Rediger
@@ -62,12 +62,12 @@
             {
                 <div class="modal" tabindex="-1" style="display: block" role="dialog">
                     <div class="modal-dialog">
-                        <div class="modal-content" style="background-color: #f7f7f7">
+                        <div class="modal-content modal-openair">
                             <div class="modal-header" style="border: none">
                                 <h3 class="modal-title">Rediger vagt</h3>
                                 <button type="button" class="close" @onclick="@this.CloseModal">
                                     <span aria-hidden="true">
-                                        X
+                                        &times;
                                     </span>
                                 </button>
                             </div>
@@ -76,39 +76,47 @@
                                     <div class="form-group">
 
                                         <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
-                                        <input type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.description" /><br />
+                                        <textarea type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.description" /><br />
 
                                         <label for="TaskLokation" class="control-label"> Lokation</label>
-                                        <textarea type="text" for="TaskLokation" class="form-control" @bind="@task.location" /><br />
+                                        <input type="text" for="TaskLokation" class="form-control" @bind="@task.location" /><br />
 
                                         <label for="TaskVolunteer" class="control-label"> Frivillig</label>
                                         <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.volunteer" /><br />
 
                                         <label for="TaskStartTime" class="control-label"> Starttid</label>
-                                        <input type="text" for="TaskStartTime" class="form-control" @bind="@task.starttime" /><br />
+                                        <input for="TaskStartTime" class="form-control" type="datetime-local"
+                                               min="@todayDateTime"
+                                               @bind="@task.starttime"
+                                               @bind:format="yyyy-MM-ddTHH:mm" />
 
                                         <label for="TaskStopTime" class="control-label"> Stoptid</label>
-                                        <input type="text" for="TaskStopTime" class="form-control" @bind="@task.stoptime" /><br />
+                                        <input for="TaskStopTime" class="form-control" type="datetime-local"
+                                               min="@todayDateTime"
+                                               @bind="@task.stoptime"
+                                               @bind:format="yyyy-MM-ddTHH:mm" />
 
                                     </div>
                                 </form>
                             </div>
                             <div class="modal-footer" style="border: none">
-                                <button class="btn btn-block btn-success" @onclick="@(async () => await SaveTask())" data-dismiss="modal">
-                                    Gem shelter
+                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
+                                    Fortryd
+                                </button>
+                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveTask())" data-dismiss="modal">
+                                    Gem
                                 </button>
                             </div>
                         </div>
                     </div>
                 </div>
             }
-
         }
 
         @if (DeleteDialogOpen)
         {
             <UserDialog Title="Fjern vagt"
-                        Text="Er du sikker på at du vil slette denne vagt?"
+                        Text="Er du sikker på, at du ønsker at slette denne vagt?"
                         OnClose="@CloseDeleteDialog"
                         DialogType="UserDialog.Type.DeleteCancel">
 
@@ -124,13 +132,18 @@
     private List<TaskClass> taskList;
     private TaskClass task;
 
+    string todayDateTime = (DateTime.Now.ToString("yyyy-MM-dd")) + "T00:00";
+
+
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
-            taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
+        {
+            await GetTasks();
+        }
     }
 
     protected async Task GetTasks()
@@ -138,9 +151,9 @@
         taskList = await Http.GetFromJsonAsync<List<TaskClass>>("Task");
     }
 
-    protected async Task EditTask(int task_id)
+    protected async Task EditTask(int id)
     {
-        task = await Http.GetFromJsonAsync<TaskClass>("Task/" + task_id);
+        task = await Http.GetFromJsonAsync<TaskClass>("Task/" + id);
 
         this.isEdit = true;
         await GetTasks().ConfigureAwait(false);
@@ -154,9 +167,9 @@
         await GetTasks();
     }
 
-    protected async Task DeleteTask(int task_id)
+    protected async Task DeleteTask(int id)
     {
-        await Http.DeleteAsync("Task/" + task_id);
+        await Http.DeleteAsync("Task/" + id);
     }
 
 
@@ -166,10 +179,10 @@
         this.isEdit = false;
     }
 
-    // Edit modal
+    // Edit task modal
     protected Boolean isEdit = false;
 
-    // Delete modal
+    // Delete task modal
     public bool DeleteDialogOpen { get; set; }
 
     private void OpenDeleteDialog(TaskClass _task)
