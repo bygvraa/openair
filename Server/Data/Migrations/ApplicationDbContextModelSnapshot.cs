@@ -335,6 +335,9 @@ namespace OpenAir.Server.Data.Migrations
                         .IsUnique()
                         .HasDatabaseName("UserNameIndex");
 
+                    b.Property<int>("Role")
+                        .HasColumnType("integer");
+
                     b.ToTable("user");
                 });
 
