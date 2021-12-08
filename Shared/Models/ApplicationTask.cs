@@ -16,5 +16,7 @@ namespace OpenAir.Shared.Models
         public string Location { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
+        public DateTime Created { get; set; }
+        public DateTime Modified { get; set; }
     }
 }
