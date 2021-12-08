@@ -25,4 +25,10 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Ticket\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Ticket\" />
+  </ItemGroup>
 </Project>
