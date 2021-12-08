@@ -27,11 +27,7 @@
                     <tr>
                         <th>Navn</th>
                         <th>Email</th>
-<<<<<<< HEAD
-                        <th>Alder</th>
-=======
                         <th>Fødselsdato</th>
->>>>>>> 59f75175cbd51f7464dc7ffa50834be7a0ff71e4
                         <th>Oprettelsesdato</th>
                         <th>Seneste ændring</th>
                         <th style="width: 0px">&nbsp;</th>
@@ -42,13 +38,6 @@
                     @foreach (var _user in userList)
                     {
                         <tr>
-<<<<<<< HEAD
-                            <td>@user.GetFullName()</td>
-                            <td>@user.Email</td>
-                            <td>@user.Birthday</td>
-                            <td>@user.GetCreated().ToUniversalTime()</td>
-                            <td></td>
-=======
                             <td>@_user.GetFullName()</td>
                             <td>@_user.GetEmail()</td>
                             <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
@@ -59,14 +48,10 @@
                                     Rediger
                                 </button>
                             </td>
->>>>>>> 59f75175cbd51f7464dc7ffa50834be7a0ff71e4
                             <td>
-                                <div style="float: right">
-                                    <button type="button" class="btn btn-danger btn-sm"
-                                            @onclick="() => OpenDeleteDialog(_user)">
-                                        Fjern
-                                    </button>
-                                </div>
+                                <button type="button" class="btn btn-danger btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                    Fjern
+                                </button>
                             </td>
                         </tr>
                     }

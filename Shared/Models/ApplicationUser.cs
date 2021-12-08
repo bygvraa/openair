@@ -15,26 +15,19 @@ namespace OpenAir.Shared.Models
         public string LastName { get; set; }
         public override string Email { get; set; }
         public string Password { get; set; }
-<<<<<<< HEAD
-        public DateTime Birthday { get; set; }
-        public int? Role { get; set; }
-=======
         public DateTime BirthDate { get; set; }
-
->>>>>>> 59f75175cbd51f7464dc7ffa50834be7a0ff71e4
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
         public ApplicationUser() { }
-        public ApplicationUser(string Id, string FirstName, string LastName, string Email, string Password, DateTime Birthday, int? Role, DateTime Created)
+        public ApplicationUser(string Id, string FirstName, string LastName, string Email, string Password, DateTime BirthDate, DateTime Created)
         {
             this.Id = Id;
             this.FirstName = FirstName;
             this.LastName = LastName;
             this.Email = Email;
             this.Password = Password;
-            this.Birthday = Birthday;
-            this.Role = Role;
+            this.BirthDate = BirthDate;
             this.Created = Created;
         }
 
