@@ -11,16 +11,19 @@
 
         <form>
             <div class="form-group">
-                <input for="FirstName" class="form-control" placeholder="Fornavn" @bind="@user.FirstName" />
+                <input for="first_name" class="form-control" placeholder="Fornavn" @bind="@user.FirstName" />
             </div>
             <div class="form-group">
-                <input for="LastName" class="form-control" placeholder="Efternavn" @bind="@user.LastName" />
+                <input for="last_name" class="form-control" placeholder="Efternavn" @bind="@user.LastName" />
             </div>
             <div class="form-group">
-                <input for="Email" class="form-control" placeholder="Email" @bind="@user.Email" />
+                <input for="age" class="form-control" placeholder="Alder" @bind="@user.BirthDate" />
             </div>
             <div class="form-group">
-                <input for="Password" class="form-control" placeholder="Adgangskode" @bind="@user.Password" />
+                <input for="email" class="form-control" placeholder="Email" @bind="@user.Email" />
+            </div>
+            <div class="form-group">
+                <input for="password" class="form-control" placeholder="Adgangskode" @bind="@user.Password" />
             </div>
             <div class="form-group">
                 <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
@@ -38,10 +41,9 @@
     protected override async Task OnInitializedAsync()
     {
         users = await Http.GetFromJsonAsync<ApplicationUser[]>("User");
-        user.Created = DateTime.UtcNow;
     }
 
-    async Task AddUser()
+    async Task AddUser()    
     {
         if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {user.FirstName}?"))
         {
@@ -54,7 +56,7 @@
                 }
                 else if (_user.Email != user.Email && !string.IsNullOrEmpty(user.FirstName) && !string.IsNullOrEmpty(user.LastName) && !string.IsNullOrEmpty(user.Email) && !string.IsNullOrEmpty(user.Password))
                 {
-                    await Http.PostAsJsonAsync("User", new UserClass(user.FirstName, user.LastName, user.Email, user.Password, user.Created));
+                    await Http.PostAsJsonAsync("User", new ApplicationUser(user.Id, user.FirstName, user.LastName, user.Email, user.Password, user.BirthDate, user.Created));
                     await js.InvokeVoidAsync("alert", $"Created successfully!");
                     UriHelper.NavigateTo("/");
                     break;

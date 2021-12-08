@@ -16,6 +16,8 @@ namespace OpenAir.Server.Controllers
     {
         private readonly IUserRepository _service;
 
+        
+
         public UserController(IUserRepository service)
         {
             _service = service;
@@ -32,9 +34,9 @@ namespace OpenAir.Server.Controllers
         // GET: api/user/5
         // Tager id'et på en bestemt bruger og retunerer alle oplysninger på brugeren
         [HttpGet("{id}")]
-        public async Task<ActionResult<ApplicationUser>> Get(string id)
+        public async Task<ActionResult<ApplicationUser>> Get(string Id)
         {
-            var user = await _service.GetUser(id);
+            var user = await _service.GetUser(Id);
 
             if (user == null)
                 return NotFound();

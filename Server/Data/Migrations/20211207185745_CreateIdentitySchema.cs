@@ -65,17 +65,17 @@ namespace OpenAir.Server.Data.Migrations
                 name: "task",
                 columns: table => new
                 {
-                    task_id = table.Column<int>(type: "integer", nullable: false)
+                    Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    description = table.Column<string>(type: "text", nullable: true),
-                    volunteer = table.Column<string>(type: "text", nullable: true),
-                    location = table.Column<string>(type: "text", nullable: true),
-                    starttime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    stoptime = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                    Description = table.Column<string>(type: "text", nullable: true),
+                    User = table.Column<string>(type: "text", nullable: true),
+                    Location = table.Column<string>(type: "text", nullable: true),
+                    StartTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    StopTime = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_task", x => x.task_id);
+                    table.PrimaryKey("PK_task", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -87,9 +87,9 @@ namespace OpenAir.Server.Data.Migrations
                     LastName = table.Column<string>(type: "text", nullable: true),
                     Email = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     Password = table.Column<string>(type: "text", nullable: true),
-                    Role = table.Column<int>(type: "integer", nullable: true),
-                    Created = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Modified = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    BirthDate = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Created = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Modified = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     UserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "character varying(256)", maxLength: 256, nullable: true),
@@ -102,7 +102,7 @@ namespace OpenAir.Server.Data.Migrations
                     TwoFactorEnabled = table.Column<bool>(type: "boolean", nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(type: "timestamp with time zone", nullable: true),
                     LockoutEnabled = table.Column<bool>(type: "boolean", nullable: false),
-                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false)
+                    AccessFailedCount = table.Column<int>(type: "integer", nullable: false),
                 },
                 constraints: table =>
                 {
