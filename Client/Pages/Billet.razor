@@ -1,0 +1,50 @@
+﻿@page "/billetter"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<h3>BILLETTER</h3>
+
+
+@if (billetList == null)
+{
+    <p><em>Indlæser...</em></p>
+}
+else
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Beskrivelse</th>
+                <th>Lokation</th>
+                <th>Frivillig</th>
+                <th>Start tid</th>
+                <th>Sluttid</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach (var billet in billetList)
+            {
+                <tr>
+                    <td>@billet.billet</td>
+                    <td>@billet.pris</td>
+                    <td>@billet.dato</td>
+                    <td>@billet.</td>
+                </tr>
+            }
+        </tbody>
+
+    </table>
+}
+
+@code {
+    private List<BilletClass> billetList;
+
+    protected override async Task OnInitializedAsync()
+    {
+
+        billetList = await Http.GetFromJsonAsync<List<BilletClass>>("Billet");
+    }
+
+}

@@ -7,10 +7,10 @@ namespace OpenAir.Server.Data.Repositories
 {
     public interface ITaskRepository
     {
-        Task<List<TaskClass>> GetAllTasks();
-        Task<TaskClass> GetTask(int task_id);
-        Task CreateTask(TaskClass task);
-        Task UpdateTask(TaskClass task);
-        Task DeleteTask(int task_id);
+        Task<List<ApplicationTask>> GetAllTasks();
+        Task<ApplicationTask> GetTask(int id);
+        Task CreateTask(ApplicationTask task);
+        Task UpdateTask(ApplicationTask task);
+        Task DeleteTask(int id);
     }
 }

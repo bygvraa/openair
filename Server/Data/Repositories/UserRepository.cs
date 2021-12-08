@@ -41,11 +41,6 @@ namespace OpenAir.Server.Data.Repositories
         // PUT    - opdater en bruger
         public async Task UpdateUser(ApplicationUser user)
         {
-            var userToUpdate = await _dBContext.user.FindAsync(user.Id);
-
-            if (userToUpdate == null)
-                throw new NullReferenceException();
-
             _dBContext.user.Update(user);
             await _dBContext.SaveChangesAsync();
         }

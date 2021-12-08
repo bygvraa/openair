@@ -22,30 +22,48 @@
         }
         else
         {
-            <table class="table">
+            <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
                         <th>Navn</th>
                         <th>Email</th>
+<<<<<<< HEAD
                         <th>Alder</th>
+=======
+                        <th>Fødselsdato</th>
+>>>>>>> 59f75175cbd51f7464dc7ffa50834be7a0ff71e4
                         <th>Oprettelsesdato</th>
-                        <th>&nbsp;</th>
-                        <th>&nbsp;</th>
+                        <th>Seneste ændring</th>
+                        <th style="width: 0px">&nbsp;</th>
+                        <th style="width: 0px">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var user in userList)
+                    @foreach (var _user in userList)
                     {
                         <tr>
+<<<<<<< HEAD
                             <td>@user.GetFullName()</td>
                             <td>@user.Email</td>
                             <td>@user.Birthday</td>
                             <td>@user.GetCreated().ToUniversalTime()</td>
                             <td></td>
+=======
+                            <td>@_user.GetFullName()</td>
+                            <td>@_user.GetEmail()</td>
+                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                    Rediger
+                                </button>
+                            </td>
+>>>>>>> 59f75175cbd51f7464dc7ffa50834be7a0ff71e4
                             <td>
                                 <div style="float: right">
                                     <button type="button" class="btn btn-danger btn-sm"
-                                            @onclick="() => OpenDeleteDialog(user)">
+                                            @onclick="() => OpenDeleteDialog(_user)">
                                         Fjern
                                     </button>
                                 </div>
@@ -54,6 +72,48 @@
                     }
                 </tbody>
             </table>
+
+            if (isEdit)
+            {
+                <div class="modal" tabindex="-1" style="display: block" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-openair">
+                            <div class="modal-header" style="border: none">
+                                <h3 class="modal-title">Rediger bruger</h3>
+                                <button type="button" class="close" @onclick="@this.CloseModal">
+                                    <span aria-hidden="true">
+                                        &times;
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                                <form>
+                                    <div class="form-group">
+
+                                        <label for="UserFirstName" class="control-label"> Fornavn</label>
+                                        <input type="text" for="UserFirstName" class="form-control" @bind="@user.FirstName" /><br />
+
+                                        <label for="UserLastName" class="control-label"> Efternavn</label>
+                                        <input type="text" for="UserLastName" class="form-control" @bind="@user.LastName" /><br />
+
+                                        <label for="TaskVolunteer" class="control-label"> Email</label>
+                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@user.Email" /><br />
+
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="border: none">
+                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
+                                    Fortryd
+                                </button>
+                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveUser())" data-dismiss="modal">
+                                    Gem
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
         }
 
         @if (DeleteDialogOpen)
@@ -73,7 +133,7 @@
 
 @code {
     private List<ApplicationUser> userList;
-    private ApplicationUser _user;
+    private ApplicationUser user;
 
 
     protected override async Task OnInitializedAsync()
@@ -82,33 +142,65 @@
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
-            userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
-
+        {
+            await GetUsers();
+        }
     }
 
-    protected async Task Delete(string id)
+    protected async Task GetUsers()
+    {
+        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
+    }
+
+    protected async Task EditUser(string id)
+    {
+        user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
+
+        this.isEdit = true;
+        await GetUsers().ConfigureAwait(false);
+    }
+
+    protected async Task SaveUser()
+    {
+        await Http.PutAsJsonAsync("User", user);
+
+        this.isEdit = false;
+        await GetUsers();
+    }
+
+    protected async Task DeleteUser(string id)
     {
         await Http.DeleteAsync("User/" + id);
     }
 
 
+    // Modal
+    protected void CloseModal()
+    {
+        this.isEdit = false;
+    }
+
+    // Edit user modal
+    protected Boolean isEdit = false;
+
     // Delete user modal
     public bool DeleteDialogOpen { get; set; }
 
-    private void OpenDeleteDialog(ApplicationUser user)
+    private void OpenDeleteDialog(ApplicationUser _user)
     {
         DeleteDialogOpen = true;
-        _user = user;
+        user = _user;
         StateHasChanged();
     }
     private async Task CloseDeleteDialog(bool accepted)
     {
         if (accepted)
         {
-            await Delete(_user.Id);
-            userList.Remove(_user);
-            _user = null;
+            await DeleteUser(user.Id);
+            userList.Remove(user);
         }
+
+        user = null;
 
         DeleteDialogOpen = false;
         StateHasChanged();

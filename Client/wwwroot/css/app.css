@@ -68,25 +68,9 @@ app {
     width: 100%;
     position: sticky;
     top: 10px;
-    z-index: 1;
+    z-index: 100;
+    transition-duration: .4s;
 }
-
-    .navbar-main .top-row {
-        background-color: rgba(0,0,0,0);
-    }
-
-    .navbar-main .bottom-row{
-        background-color: #fcfcfcde;
-        backdrop-filter: blur(10px);
-        padding: 8px;
-        display: flex;
-        flex-wrap: nowrap;
-        border-radius: 15px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 20px;
-        margin-bottom: 20px;
-    }
 
     .navbar-main .navbar-brand {
         font-size: 1.1rem;
@@ -145,8 +129,21 @@ app {
 }
 
 .navbar-toggler {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: #ffffff1a;
+    color: rgba(0,0,0,.5);
     place-self: center;
+}
+
+    .navbar-toggler:focus {
+        background-color: #ffffff99;
+        color: rgba(0,0,0,.9);
+        box-shadow: #e5e5e5 0px 0px 5px;
+        outline: #00000080 auto 1px;
+    }
+
+.navbar-openair {
+    padding: .5rem .5rem;
+    transition-duration: .4s;
 }
 
 .valid.modified:not([type=checkbox]) {
@@ -181,7 +178,7 @@ app {
     }
 
 
-@media (max-width: 800px) {
+@media (max-width: 959px) {
     .main .top-row:not(.auth) {
         display: none;
     }
@@ -198,9 +195,17 @@ app {
         top: 0;
     }
 
+    .link-logo {
+        padding: .5rem .5rem;
+    }
+
+/*    .nav-link {
+        padding: .5rem .5rem;
+    }*/
+
     .navbar-nav {
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
     }
 
     .navbar-main .bottom-row {
@@ -242,7 +247,7 @@ app {
     }
 }
 
-@media (min-width: 800px) {
+@media (min-width: 960px) {
     app {
         flex-direction: column;
     }
@@ -290,26 +295,24 @@ app {
         width: 20%;
     }
 
-/*Logo på navbar*/
-.logo_nav {
+/* Logo på navbar */
+.logo-nav {
     width: 100px;
-    left: -30px;
-    top: -20px;
 }
-    .logo_nav:hover {
+    .logo-nav:hover {
         padding-top: 2px;
         padding-left: 2px;
         padding-right: 2px;
         filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
-    .logo_nav a.active {
+    .logo-nav a.active {
         padding-left: 2px;
         padding-right: 2px;
         filter: opacity(80%) drop-shadow(3px 3px yellow);
     }
 
-/*Logo på loading*/
+/* Logo på loading */
     .loading-logo {
         zoom: 0.8;
         margin-top: 30vh;

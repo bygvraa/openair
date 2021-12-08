@@ -7,11 +7,11 @@ using System;
 
 namespace OpenAir.Server.Data.Repositories
 {
-    public class TaskRepository : ITaskRepository
+    public class BilletRepository : IBilletRepository
     {
         private readonly ApplicationDbContext _dBContext;
 
-        public TaskRepository(ApplicationDbContext dBContext)
+        public BilletRepository(ApplicationDbContext dBContext)
         {
             _dBContext = dBContext;
         }
@@ -20,42 +20,43 @@ namespace OpenAir.Server.Data.Repositories
         // Task -----------------------------------------
 
         // GET    - find alle opgaver
-        public async Task<List<ApplicationTask>> GetAllTasks()
+        public async Billet<List<BilletClass>> GetAllBilletter()
         {
             return await _dBContext.task.ToListAsync();
         }
-        
+
         // GET    - find specifik opgaver
-        public async Task<ApplicationTask> GetTask(int id)
+        public async Task<TaskClass> GetTask(int task_id)
         {
-            return await _dBContext.task.FindAsync(id);
+
+            return await _dBContext.task.FindAsync(task_id);
         }
 
         // POST   - lav en opgave
-        public async Task CreateTask(ApplicationTask task)
+        public async Task CreateTask(TaskClass task)
         {
             await _dBContext.task.AddAsync(task);
             await _dBContext.SaveChangesAsync();
         }
 
         // PUT    - opdater en opgave
-        public async Task UpdateTask(ApplicationTask task)
+        public async Task UpdateTask(TaskClass task)
         {
             _dBContext.task.Update(task);
             await _dBContext.SaveChangesAsync();
         }
 
         // DELETE - fjern en opgave
-        public async Task DeleteTask(int id)
+        public async Task DeleteTask(int task_id)
         {
-            var taskToDelete = await _dBContext.task.FindAsync(id);
-            
+            var taskToDelete = await _dBContext.task.FindAsync(task_id);
+
             if (taskToDelete == null)
                 throw new NullReferenceException();
-        
+
             _dBContext.task.Remove(taskToDelete);
-                await _dBContext.SaveChangesAsync();
-         }
+            await _dBContext.SaveChangesAsync();
+        }
 
         // -------------------------------------------------
     }

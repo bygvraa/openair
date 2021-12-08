@@ -9,6 +9,7 @@ namespace OpenAir.Shared.Models
 {
     public class ApplicationRole : IdentityRole
     {
+        [Key]
         public override string Id { get; set; }
         public override string Name { get; set; }
     }
