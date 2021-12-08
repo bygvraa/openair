@@ -9,6 +9,9 @@ using Microsoft.Extensions.Hosting;
 using OpenAir.Server.Data;
 using OpenAir.Server.Data.Repositories;
 using OpenAir.Shared.Models;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
 
 namespace OpenAir.Server
 {
@@ -39,11 +42,27 @@ namespace OpenAir.Server
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
+
+            //services.AddIdentity<ApplicationUser, ApplicationRole>()
+            //    .AddRoles<ApplicationRole>()
+            //    .AddEntityFrameworkStores<ApplicationDbContext>();
+
             services.AddIdentityServer()
-                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
+                .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
+                    options.IdentityResources["openid"].UserClaims.Add("name");
+                    //options.ApiResources.Single().UserClaims.Add("name");
+                    options.IdentityResources["openid"].UserClaims.Add("role");
+                    //options.ApiResources.Single().UserClaims.Add("role");
+                });
+
+            JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
+
+            services.Configure<IdentityOptions>(options =>
+                options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
+
 
             // Signin indstillinger
             services.Configure<IdentityOptions>(options =>
@@ -101,6 +120,8 @@ namespace OpenAir.Server
             app.UseIdentityServer();
             app.UseAuthentication();
             app.UseAuthorization();
+
+           
 
             app.UseEndpoints(endpoints =>
             {
