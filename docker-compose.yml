@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  openair.server:
+    image: ${DOCKER_REGISTRY-}openair
+    build:
+      context: .
+      dockerfile: Server/Dockerfile

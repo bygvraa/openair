@@ -34,18 +34,19 @@
         margin-bottom: 10%;
     }
 
-    .openair-forside-indhold {
-        display: grid;
-        width: 100%;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        gap: 20px 20px;
-        grid-auto-flow: row;
-        grid-template-areas:
-            "kunstner-div billet-div tekst1-div"
-            "tekst2-div scener-div miljø-div"
-            "frivillig-div koordinator-div kontakt-div";
-    }
+.openair-forside-indhold {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 20px 20px;
+    grid-auto-flow: row;
+    font-family: 'Rajdhani', sans-serif;
+    grid-template-areas:
+        "kunstner-div billet-div tekst1-div"
+        "tekst2-div scener-div miljø-div"
+        "frivillig-div koordinator-div kontakt-div";
+}
 
     .kunstner-div {
         grid-area: kunstner-div;
@@ -87,14 +88,17 @@
     .container_program {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 40px 1fr 40px 1fr 40px 1fr 1fr;
         gap: 20px 20px;
         grid-auto-flow: row;
         color: black;
         text-align: center;
         grid-template-areas:
+            "torsdag torsdag torsdag"
             "kunstner1 kunstner2 kunstner3"
+            "fredag fredag fredag"
             "kunstner4 kunstner5 kunstner6"
+            "lørdag lørdag lørdag"
             "kunstner7 kunstner8 kunstner9"
             "kunstner10 kunstner11 kunstner12";
     }
@@ -147,21 +151,40 @@
         grid-area: kunstner12;
     }
 
+.fredag {
+    grid-area: fredag;
+    border: 1px solid #f5f65d;
+    margin: 20px;
+}
+
+.torsdag {
+    grid-area: torsdag;
+    border: 1px solid #f5f65d;
+    margin: 20px;
+}
+
+.lørdag {
+    grid-area: lørdag;
+    border: 1px solid #f5f65d;
+    margin: 20px;
+}
+
+
 /* Kunstner billeder */
     .kunstner_billede {
         width: 80%;
         opacity: 70%;
     }
 
-    .kunstner_navn {
-        color: black;
-        text-align: center;
-        border: 3px solid #FF27E8;
-        background-color: #FF27E8;
-        box-shadow: inherit;
-        width: 80%;
-        font-size: 25px;
-    }
+.kunstner_navn {
+    color: black;
+    text-align: center;
+    border: 3px solid #f5f65d;
+    background-color: #f5f65d;
+    box-shadow: inherit;
+    width: 80%;
+    font-size: 25px;
+}
 
     .program_overskrift {
         text-align: center;
