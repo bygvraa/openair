@@ -12,26 +12,26 @@
             
             <div class="form-group">
                 <label>Beskrivelse</label>
-                <input for="description" class="form-control" placeholder="Beskrivelse" @bind="@task.description" />
+                <input for="description" class="form-control" placeholder="Beskrivelse" @bind="@task.Description" />
             </div>
             <div class="form-group">
                 <label>Ansvarlig</label>
                 <input for="volunteer" class="form-control"
                        placeholder="Frivillig"
-                       @bind="@task.volunteer" />
+                       @bind="@task.User" />
             </div>
             <div class="form-group">
                 <label>Lokation</label>
                 <input for="location" class="form-control"
                        placeholder="Lokation"
-                       @bind="@task.location" />
+                       @bind="@task.Location" />
             </div>
 
             <div class="form-group">
                 <label>Starttidspunkt</label>
                 <input for="starttime" class="form-control" type="datetime-local"
                        min="@todayDateTime"
-                       @bind="@task.starttime"
+                       @bind="@task.StartTime"
                        @bind:format="yyyy-MM-ddTHH:mm" />
             </div>
 
@@ -39,7 +39,7 @@
                 <label>Sluttidspunkt</label>
                 <input for="stoptime" class="form-control" type="datetime-local"
                        min="@todayDateTime"
-                       @bind="@task.stoptime"
+                       @bind="@task.StopTime"
                        @bind:format="yyyy-MM-ddTHH:mm" />
             </div>
 
@@ -53,21 +53,21 @@
 </div>
 
 @code {
-    TaskClass task = new TaskClass();
-    TaskClass[] tasks;
+    ApplicationTask task = new ApplicationTask();
+    ApplicationTask[] tasks;
 
     string todayDateTime = (DateTime.Now.ToString("yyyy-MM-dd")) + "T00:00";
 
     protected override async Task OnInitializedAsync()
     {
-        tasks = await Http.GetFromJsonAsync<TaskClass[]>("Task");
+        tasks = await Http.GetFromJsonAsync<ApplicationTask[]>("Task");
     }
 
     protected async Task AddTask()
     {
-        Console.WriteLine(task.starttime);
-        Console.WriteLine(task.stoptime);
-        await Http.PostAsJsonAsync<TaskClass>("Task/", task);
+        Console.WriteLine(task.StartTime);
+        Console.WriteLine(task.StopTime);
+        await Http.PostAsJsonAsync<ApplicationTask>("Task/", task);
         UriHelper.NavigateTo("/koordinator");
     }
 

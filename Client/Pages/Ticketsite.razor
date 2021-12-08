@@ -1,13 +1,43 @@
 ﻿@page "/tickets"
-@using OpenAir.Shared
+@using OpenAir.Shared.Models;
+@using System;
+@using System.Collections.Generic;
+@using System.Text;
 @inject HttpClient Http
+@using Newtonsoft.Json;
+@using Microsoft.AspNetCore.Authorization;
 
 <h1>KØB DIN BILLET HER</h1>
+<table class="table">
+    <thead>
+        <tr>
+            <th>BILLET</th>
+            <th>DATO</th>
+            <th>PRIS</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var Ticketsss in TicketListe)
+        {
+            <tr>
+                <td>@Ticketsss.Title</td>
+                <td>@Ticketsss.Date</td>
+                <td>@Ticketsss.Pris</td>
+            </tr>
+        }
+    </tbody>
+</table>
 
-<div class="container_billet">
-    <div class="Partout"><img src="images/partout.png"/><h2 class="kunstnernavn">KØB</h2></div>
-    <div class="Billet1"><h1 class="kunstnernavn">TORSDAGSBILLET</h1><h2 class="kunstnernavn">KØB</h2></div>
-    <div class="Billet2"><h1 class="kunstnernavn">FREDAGSBILLET</h1><h2 class="kunstnernavn">KØB</h2></div>
-    <div class="Billet-3"><h1 class="kunstnernavn">LØRDAGSBILLET</h1><h2 class="kunstnernavn">KØB</h2></div>
-</div>
+@code{
+
+    public IList<TicketClass> Ticketsss = new List<TicketClass>();
+
+    public TicketClass[] TicketListe = Array.Empty<TicketClass>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        TicketListe = await Http.GetFromJsonAsync<TicketClass[]>("Ticket");
+
+    }
+}
 
