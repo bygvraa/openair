@@ -16,6 +16,20 @@
                     <option value="Kontaktperson">Kontaktperson</option>
                 </select>
             </div>
+
+            <div class="form-group">
+                <label for="categories">Vælg en kategori</label>
+                <select class="form-control" @bind="@task.Category">
+                    <option value="Sceneopsætning">Frivillig</option>
+                    <option value="Rengøring">Kontaktperson</option>
+                    <option value="Bar">Kontaktperson</option>
+                    <option value="Entre">Kontaktperson</option>
+                    <option value="Vagt">Kontaktperson</option>
+                    <option value="Madbod">Kontaktperson</option>
+                    <option value="Backstage">Kontaktperson</option>
+                </select>
+            </div>
+
             <div class="form-group">
                 <label>Beskrivelse</label>
                 <input for="description" class="form-control" placeholder="Beskrivelse" @bind="@task.Description" />
