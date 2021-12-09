@@ -4,10 +4,31 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     /*    background-color: #B3D8FF;
     background-image: url(../images/skyer.png);*/
-    background: linear-gradient(#81bbf885,#2f93fc85,#2586ec85,#0455ab85) scroll,
-                url(../images/skyer.png) fixed;
-    background-repeat: no-repeat;
+/*    background: linear-gradient(#81bbf885,#2f93fc85,#2586ec85,#0455ab85) scroll, url(../images/skyer.png) fixed;
+*/    background-repeat: no-repeat;
     background-size: cover;
+}
+
+.app-wrapper {
+    width: auto;
+    height: auto;
+    min-width: 100%;
+    min-height: 100vh;
+    position: absolute;
+    background-image: linear-gradient(170deg, #429fff85,#0051a785,#005aff85,#41105185);
+}
+
+.cloud-overlay {
+    width: 100%;
+    height: 100%;
+}
+
+.cloud-img {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    object-fit: cover;
+    filter: blur(8px) brightness(0.8) invert(0.4);
 }
 
 .footer {
