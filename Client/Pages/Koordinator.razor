@@ -6,8 +6,9 @@
 <AuthorizeView>
     <Authorized>
 
-        <h2>Vagtplan</h2>
+        <h2>Koordinatorside</h2>
         <p>Liste over alle vagter</p>
+        <br />
 
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -25,11 +26,12 @@
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
-                        <th>Type</th>
+                        <th>Jobgruppe</th>
+                        <th>Jobkategori</th>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
+                        <th>Koordinator</th>
+                        <th>Starttid</th>
                         <th>Sluttid</th>
                         <th style="width: 0px">&nbsp;</th>
                         <th style="width: 0px">&nbsp;</th>
@@ -38,24 +40,25 @@
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-                    <tr>
-                        <td>@_task.Type</td>
-                        <td>@_task.Description</td>
-                        <td>@_task.Location</td>
-                        <td>@_task.User</td>
-                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                <span class="oi oi-wrench" aria-hidden="true"></span>
-                            </button>
-                        </td>
-                        <td>
-                            <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                <span class="oi oi-trash" aria-hidden="true"></span>
-                            </button>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>@_task.Type</td>
+                            <td>@_task.Category</td>
+                            <td>@_task.Description</td>
+                            <td>@_task.Location</td>
+                            <td>@_task.User</td>
+                            <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>
+                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
+                                    <span class="oi oi-wrench" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
+                                    <span class="oi oi-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>
@@ -77,13 +80,37 @@
                                 <form>
                                     <div class="form-group">
 
+                                        <div class="form-group">
+                                            <label for="types">Vælg en vagttype</label>
+                                            <select class="form-control" @bind="@task.Type" required >
+                                                <option title="" value="">--- Vælg ---</option>
+                                                <option value="Frivillig">Frivillig</option>
+                                                <option value="Kontaktperson">Kontaktperson</option>
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label for="categories">Vælg en jobkategori</label>
+                                            <select class="form-control" @bind="@task.Category" required>
+                                                <option value="">--- Vælg ---</option>
+                                                <option value="Sceneopsætning">Sceneopsætning</option>
+                                                <option value="Rengøring">Rengøring</option>
+                                                <option value="Bar">Bar</option>
+                                                <option value="Entre">Entre</option>
+                                                <option value="Vagt">Vagt</option>
+                                                <option value="Madbod">Madbod</option>
+                                                <option value="Backstage">Backstage</option>
+                                                <option value="Andet">Andet</option>
+                                            </select>
+                                        </div>
+
                                         <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
                                         <textarea type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.Description" /><br />
 
                                         <label for="TaskLokation" class="control-label"> Lokation</label>
                                         <input type="text" for="TaskLokation" class="form-control" @bind="@task.Location" /><br />
 
-                                        <label for="TaskVolunteer" class="control-label"> Frivillig</label>
+                                        <label for="TaskVolunteer" class="control-label"> Koordinator</label>
                                         <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.User" /><br />
 
                                         <label for="TaskStartTime" class="control-label"> Starttid</label>

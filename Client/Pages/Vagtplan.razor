@@ -6,10 +6,11 @@
 <AuthorizeView>
     <Authorized>
 
-        <div><input type="text" placeholder="Search.."></div>
-
-        <h2>Vagtplan</h2>
+        <h2>VAGTPLAN FOR FRIVILLIGE</h2>
         <p>Liste over alle vagter</p>
+
+        <div><input type="text" placeholder="Søg.."></div>
+        <br />
 
         @if (taskList == null)
         {
@@ -22,8 +23,8 @@
                     <tr>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
+                        <th>Koordinator</th>
+                        <th>Starttid</th>
                         <th>Sluttid</th>
                     </tr>
                 </thead>
@@ -33,17 +34,18 @@
                     {
 
 
-        @if (_task.Type == "Frivillig") { 
+                        @if (_task.Type == "Frivillig")
+                        {
 
-                    <tr>
-                        <td>@_task.Description</td>
-                        <td>@_task.Location</td>
-                        <td>@_task.User</td>
-                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                            <tr>
+                                <td>@_task.Description</td>
+                                <td>@_task.Location</td>
+                                <td>@_task.User</td>
+                                <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
 
-                    </tr>
-                    }
+                            </tr>
+                        }
                     }
                 </tbody>
 
