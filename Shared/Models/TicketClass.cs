@@ -9,5 +9,6 @@ namespace OpenAir.Shared.Models
         public string Title { get; set; }
         public string Date { get; set; }
         public int Pris { get; set; }
+        public bool IsDone { get; set; }
     }
 }
