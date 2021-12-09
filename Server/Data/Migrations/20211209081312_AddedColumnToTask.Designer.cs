@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
@@ -9,9 +10,10 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211209081312_AddedColumnToTask")]
+    partial class AddedColumnToTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,61 +263,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-<<<<<<< HEAD
-                            Id = "508ad851-b7cf-4d6c-9b2c-b3fa34f986a9",
-                            ConcurrencyStamp = "7313afeb-433b-4e5d-b983-26b73539b17d",
-=======
                             Id = "456f3502-06c8-483b-b599-e10f2e840a98",
                             ConcurrencyStamp = "c3a0c770-d442-4887-82fa-4e014775ddd2",
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "6271454e-6612-47ce-91e7-0aea7ef299f2",
-                            ConcurrencyStamp = "55842daa-8eea-43aa-98aa-c993220b52dc",
-=======
                             Id = "c023a974-433c-4d09-a651-bde5b9c41e6e",
                             ConcurrencyStamp = "c897cdd0-3f71-40fa-b98c-77d02b8e9bfb",
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "b0b2ac16-d04a-4114-897f-98f9c87bcbac",
-                            ConcurrencyStamp = "e171ac10-96fe-4b41-8291-969f3843762a",
-=======
                             Id = "d605214f-daa2-479f-8623-1644c95066cc",
                             ConcurrencyStamp = "9dd95b6c-5e60-4db9-ba06-24802cf398ed",
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "a7fab35e-d7f6-4304-a398-3edc5b38ad59",
-                            ConcurrencyStamp = "e640c2d8-25e5-489e-bb7f-64fe116954a0",
-=======
                             Id = "5399b195-0a0a-4654-afad-ae0f3aea0bc2",
                             ConcurrencyStamp = "e0a64ef3-b91e-4393-8f55-239880fad427",
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-<<<<<<< HEAD
-                            Id = "1a44edb7-7a25-42dd-a69e-4e48669cc050",
-                            ConcurrencyStamp = "f779de14-85d9-48e8-ba4d-c650b16f8066",
-=======
                             Id = "49df8e49-1e00-4f89-b2d6-176e35a363ca",
                             ConcurrencyStamp = "02b66ecf-87ef-4ed9-8912-050f04e59766",
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
@@ -328,12 +305,6 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-<<<<<<< HEAD
-                    b.Property<string>("Category")
-                        .HasColumnType("text");
-
-=======
->>>>>>> 73478c781f87679abd2daa1db77b3f48e061b8eb
                     b.Property<DateTime>("Created")
                         .HasColumnType("timestamp with time zone");
 
