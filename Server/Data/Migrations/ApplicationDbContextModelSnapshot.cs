@@ -261,36 +261,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "704cd4ed-6a98-40ee-98ea-44099162cafd",
-                            ConcurrencyStamp = "1412651b-f202-460d-8ca2-7efbaaa12fd3",
+                            Id = "74b78003-776b-4a58-b562-4962b2fc795b",
+                            ConcurrencyStamp = "5ab14c9a-565b-4d85-9000-9e84bb23f73b",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "b31e4eab-e885-496d-8952-e70e698c5e2a",
-                            ConcurrencyStamp = "f15f08fd-c767-4297-8e5b-79be21e67f30",
+                            Id = "13e5d5cb-8bfd-47b0-a5fc-4efd3ab9d1cb",
+                            ConcurrencyStamp = "e98ad864-811c-435d-96e3-14191ce703a1",
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-                            Id = "2930ce41-2658-405e-b7da-162a80eb0d0b",
-                            ConcurrencyStamp = "91a692af-e673-42f1-90e2-649335693dc5",
+                            Id = "818e03cc-65e6-4582-9b56-82b4e745bf70",
+                            ConcurrencyStamp = "f7fac062-c06a-4538-8813-8637c35c69b8",
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-                            Id = "6e9f23e8-7d00-4425-aa68-e315218f402b",
-                            ConcurrencyStamp = "7b2956ee-2dca-43ba-89ed-29fc912fef96",
+                            Id = "b5706ba0-0bcc-4495-8caa-db4d9663ee69",
+                            ConcurrencyStamp = "725fee72-81e3-4db3-940c-5780cdc50b0e",
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-                            Id = "bc0da442-7824-4a3f-85f2-24f8b56d4230",
-                            ConcurrencyStamp = "fdd46695-e2bd-4550-9919-cbc7f5eb8be9",
+                            Id = "d098708a-76c5-4279-a34d-feddbf15c759",
+                            ConcurrencyStamp = "e74c310d-b242-4bf2-8e6a-7a4c248c0102",
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
