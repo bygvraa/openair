@@ -39,9 +39,9 @@ namespace OpenAir.Server.Data
             modelBuilder.Entity<ApplicationUser>(b =>
             {
                 b.ToTable("user");
-                b.Property(b => b.BirthDate).HasColumnType("date");
-                b.Property(b => b.Created).HasColumnType("timestamp with time zone");
-                b.Property(b => b.Modified).HasColumnType("timestamp with time zone");
+                b.Property(e => e.BirthDate).HasColumnType("date");
+                b.Property(e => e.Created).HasColumnType("timestamp with time zone");
+                b.Property(e => e.Modified).HasColumnType("timestamp with time zone");
             });
 
             modelBuilder.Entity<IdentityUserClaim<string>>().ToTable("user_claim");
@@ -50,7 +50,40 @@ namespace OpenAir.Server.Data
             modelBuilder.Entity<IdentityUserToken<string>>().ToTable("user_token");
 
             // 'role'-tabel
-            modelBuilder.Entity<ApplicationRole>().ToTable("role");
+            modelBuilder.Entity<ApplicationRole>(b =>
+            {
+                b.ToTable("role");
+                b.HasData(new ApplicationRole {
+                    Name = "Administrator",
+                    NormalizedName = "ADMINISTRATOR",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString() });
+                b.HasData(new ApplicationRole
+                {
+                    Name = "Koordinator",
+                    NormalizedName = "KOORDINATOR",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                });
+                b.HasData(new ApplicationRole
+                {
+                    Name = "Frivillig",
+                    NormalizedName = "FRIVILLIG",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                });
+                b.HasData(new ApplicationRole
+                {
+                    Name = "Kontaktperson",
+                    NormalizedName = "KONTAKTPERSON",
+                    Id = Guid.NewGuid().ToString(),
+                    ConcurrencyStamp = Guid.NewGuid().ToString()
+                });
+                b.HasData(new ApplicationRole { 
+                    Name = "Kunde", 
+                    NormalizedName = "KUNDE", Id = Guid.NewGuid().ToString(), 
+                    ConcurrencyStamp = Guid.NewGuid().ToString() });
+            });
 
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("role_claim");
 
@@ -63,6 +96,8 @@ namespace OpenAir.Server.Data
                 b.ToTable("task");
                 b.Property(e => e.StartTime).HasColumnType("timestamp with time zone");
                 b.Property(e => e.StopTime).HasColumnType("timestamp with time zone");
+                b.Property(e => e.Created).HasColumnType("timestamp with time zone");
+                b.Property(e => e.Modified).HasColumnType("timestamp with time zone");
             });
 
         }

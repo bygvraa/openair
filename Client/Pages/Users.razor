@@ -37,23 +37,23 @@
                 <tbody>
                     @foreach (var _user in userList)
                     {
-                        <tr>
-                            <td>@_user.GetFullName()</td>
-                            <td>@_user.GetEmail()</td>
-                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
-                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>
-                                <button class="btn btn-primary btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
-                                    Rediger
-                                </button>
-                            </td>
-                            <td>
-                                <button type="button" class="btn btn-danger btn-sm" @onclick="() => OpenDeleteDialog(_user)">
-                                    Fjern
-                                </button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@_user.GetFullName()</td>
+                        <td>@_user.GetEmail()</td>
+                        <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                        <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                <span class="oi oi-wrench" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                <span class="oi oi-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
