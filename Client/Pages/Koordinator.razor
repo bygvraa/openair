@@ -25,6 +25,7 @@
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
+                        <th>Type</th>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Frivillig</th>
@@ -37,23 +38,24 @@
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-                        <tr>
-                            <td>@_task.Description</td>
-                            <td>@_task.Location</td>
-                            <td>@_task.User</td>
-                            <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>@_task.Type</td>
+                        <td>@_task.Description</td>
+                        <td>@_task.Location</td>
+                        <td>@_task.User</td>
+                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
+                                <span class="oi oi-wrench" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
+                                <span class="oi oi-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
