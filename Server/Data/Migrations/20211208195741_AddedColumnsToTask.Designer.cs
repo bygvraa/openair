@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
@@ -9,9 +10,10 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208195741_AddedColumnsToTask")]
+    partial class AddedColumnsToTask
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,36 +263,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "456f3502-06c8-483b-b599-e10f2e840a98",
-                            ConcurrencyStamp = "c3a0c770-d442-4887-82fa-4e014775ddd2",
+                            Id = "206f8ab2-4401-4bab-a582-c0a3497b2cf2",
+                            ConcurrencyStamp = "dafbb343-6db4-44c8-a183-c16bb49ad373",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "c023a974-433c-4d09-a651-bde5b9c41e6e",
-                            ConcurrencyStamp = "c897cdd0-3f71-40fa-b98c-77d02b8e9bfb",
+                            Id = "b21fbd50-2a20-444c-820c-9fe0af611c4a",
+                            ConcurrencyStamp = "52af4d79-ee83-4fd6-bf3e-6c5d7e36fc38",
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-                            Id = "d605214f-daa2-479f-8623-1644c95066cc",
-                            ConcurrencyStamp = "9dd95b6c-5e60-4db9-ba06-24802cf398ed",
+                            Id = "2518f051-42e0-4a0b-9427-3e01fedf7045",
+                            ConcurrencyStamp = "8e660a40-8e44-4743-8e50-f8917b0ad081",
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-                            Id = "5399b195-0a0a-4654-afad-ae0f3aea0bc2",
-                            ConcurrencyStamp = "e0a64ef3-b91e-4393-8f55-239880fad427",
+                            Id = "7b65297c-6db6-40d1-90ac-69101d16d51d",
+                            ConcurrencyStamp = "b540d493-6db5-43dd-b477-ab57fe318553",
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-                            Id = "49df8e49-1e00-4f89-b2d6-176e35a363ca",
-                            ConcurrencyStamp = "02b66ecf-87ef-4ed9-8912-050f04e59766",
+                            Id = "43e7e463-fb7b-4a78-a33d-4c330568a646",
+                            ConcurrencyStamp = "054d6792-9c50-4e39-af44-f7991863590d",
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
@@ -320,9 +322,6 @@ namespace OpenAir.Server.Data.Migrations
 
                     b.Property<DateTime>("StopTime")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
 
                     b.Property<string>("User")
                         .HasColumnType("text");

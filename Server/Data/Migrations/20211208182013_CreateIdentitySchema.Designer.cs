@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
@@ -9,9 +10,10 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208182013_CreateIdentitySchema")]
+    partial class CreateIdentitySchema
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -257,43 +259,6 @@ namespace OpenAir.Server.Data.Migrations
                         .HasDatabaseName("RoleNameIndex");
 
                     b.ToTable("role");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "456f3502-06c8-483b-b599-e10f2e840a98",
-                            ConcurrencyStamp = "c3a0c770-d442-4887-82fa-4e014775ddd2",
-                            Name = "Administrator",
-                            NormalizedName = "ADMINISTRATOR"
-                        },
-                        new
-                        {
-                            Id = "c023a974-433c-4d09-a651-bde5b9c41e6e",
-                            ConcurrencyStamp = "c897cdd0-3f71-40fa-b98c-77d02b8e9bfb",
-                            Name = "Koordinator",
-                            NormalizedName = "KOORDINATOR"
-                        },
-                        new
-                        {
-                            Id = "d605214f-daa2-479f-8623-1644c95066cc",
-                            ConcurrencyStamp = "9dd95b6c-5e60-4db9-ba06-24802cf398ed",
-                            Name = "Frivillig",
-                            NormalizedName = "FRIVILLIG"
-                        },
-                        new
-                        {
-                            Id = "5399b195-0a0a-4654-afad-ae0f3aea0bc2",
-                            ConcurrencyStamp = "e0a64ef3-b91e-4393-8f55-239880fad427",
-                            Name = "Kontaktperson",
-                            NormalizedName = "KONTAKTPERSON"
-                        },
-                        new
-                        {
-                            Id = "49df8e49-1e00-4f89-b2d6-176e35a363ca",
-                            ConcurrencyStamp = "02b66ecf-87ef-4ed9-8912-050f04e59766",
-                            Name = "Kunde",
-                            NormalizedName = "KUNDE"
-                        });
                 });
 
             modelBuilder.Entity("OpenAir.Shared.Models.ApplicationTask", b =>
@@ -303,26 +268,17 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("StopTime")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
 
                     b.Property<string>("User")
                         .HasColumnType("text");

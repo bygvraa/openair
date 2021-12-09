@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
@@ -9,9 +10,10 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211208194550_SeedRoles")]
+    partial class SeedRoles
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -261,36 +263,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "456f3502-06c8-483b-b599-e10f2e840a98",
-                            ConcurrencyStamp = "c3a0c770-d442-4887-82fa-4e014775ddd2",
+                            Id = "6eda37cc-5c0d-4302-b20c-87e2818b811a",
+                            ConcurrencyStamp = "cf0bf6ea-51ae-4b1d-9f2f-ddeae3c3678c",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "c023a974-433c-4d09-a651-bde5b9c41e6e",
-                            ConcurrencyStamp = "c897cdd0-3f71-40fa-b98c-77d02b8e9bfb",
+                            Id = "baf4726b-0f83-4500-96a8-2ce28166ad76",
+                            ConcurrencyStamp = "a64c2141-7b99-4e50-911a-1c4ff2f56a6f",
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-                            Id = "d605214f-daa2-479f-8623-1644c95066cc",
-                            ConcurrencyStamp = "9dd95b6c-5e60-4db9-ba06-24802cf398ed",
+                            Id = "a91aa131-3fd2-41ec-ab20-9179fcbc18c8",
+                            ConcurrencyStamp = "88c8a64a-1eb0-434d-8962-e8ab6d2f19d0",
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-                            Id = "5399b195-0a0a-4654-afad-ae0f3aea0bc2",
-                            ConcurrencyStamp = "e0a64ef3-b91e-4393-8f55-239880fad427",
+                            Id = "56f42721-4190-4b53-b9d3-16ff2db4544a",
+                            ConcurrencyStamp = "71b4aacf-a317-44bc-aea9-c3037e07732d",
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-                            Id = "49df8e49-1e00-4f89-b2d6-176e35a363ca",
-                            ConcurrencyStamp = "02b66ecf-87ef-4ed9-8912-050f04e59766",
+                            Id = "3bdb0987-3be7-4675-a1d5-96cfd19c3ccc",
+                            ConcurrencyStamp = "21e8444c-2146-4f17-b5e0-25db4fe33d18",
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
@@ -303,26 +305,17 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<string>("Description")
                         .HasColumnType("text");
 
                     b.Property<string>("Location")
                         .HasColumnType("text");
 
-                    b.Property<DateTime>("Modified")
-                        .HasColumnType("timestamp with time zone");
-
                     b.Property<DateTime>("StartTime")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("StopTime")
                         .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("text");
 
                     b.Property<string>("User")
                         .HasColumnType("text");
