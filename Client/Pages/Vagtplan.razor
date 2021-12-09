@@ -6,6 +6,8 @@
 <AuthorizeView>
     <Authorized>
 
+        <div><input type="text" placeholder="Search.."></div>
+
         <h2>Vagtplan</h2>
         <p>Liste over alle vagter</p>
 
@@ -29,10 +31,7 @@
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-<<<<<<< HEAD
 
-=======
->>>>>>> f85e198818cf95d8fc31da0cb640885316457925
                         <tr>
                             <td>@_task.Description</td>
                             <td>@_task.Location</td>
