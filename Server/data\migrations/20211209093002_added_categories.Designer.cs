@@ -2,16 +2,18 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
 
-namespace OpenAir.Server.Data.Migrations
+namespace OpenAir.Server.datamigrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211209093002_added_categories")]
+    partial class added_categories
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,7 +68,7 @@ namespace OpenAir.Server.Data.Migrations
 
                     b.HasIndex("Expiration");
 
-                    b.ToTable("device_code");
+                    b.ToTable("DeviceCodes");
                 });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
@@ -261,36 +263,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "704cd4ed-6a98-40ee-98ea-44099162cafd",
-                            ConcurrencyStamp = "1412651b-f202-460d-8ca2-7efbaaa12fd3",
+                            Id = "a66fb4ce-9ee6-4a49-b12b-0b3186266e9b",
+                            ConcurrencyStamp = "75ea64d7-2d89-4cf3-8a2d-c0ba01d123fc",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "b31e4eab-e885-496d-8952-e70e698c5e2a",
-                            ConcurrencyStamp = "f15f08fd-c767-4297-8e5b-79be21e67f30",
+                            Id = "2f476bbb-2de4-4cc6-905e-3635cd8c8c2c",
+                            ConcurrencyStamp = "54824d5b-4c54-4d42-b8ab-91b38ee8ddb6",
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-                            Id = "2930ce41-2658-405e-b7da-162a80eb0d0b",
-                            ConcurrencyStamp = "91a692af-e673-42f1-90e2-649335693dc5",
+                            Id = "8aac62f6-4f12-4b3b-bdd7-7238b3b61da2",
+                            ConcurrencyStamp = "542c2f70-02e7-4226-81a5-86e08034ad73",
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-                            Id = "6e9f23e8-7d00-4425-aa68-e315218f402b",
-                            ConcurrencyStamp = "7b2956ee-2dca-43ba-89ed-29fc912fef96",
+                            Id = "eda4889b-ce44-477b-ac69-856f04cacc3b",
+                            ConcurrencyStamp = "2af8f15c-6fe6-40a5-a93d-8fb883b5e896",
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-                            Id = "bc0da442-7824-4a3f-85f2-24f8b56d4230",
-                            ConcurrencyStamp = "fdd46695-e2bd-4550-9919-cbc7f5eb8be9",
+                            Id = "faa75e61-366d-45b9-91da-d8a029cd5bd1",
+                            ConcurrencyStamp = "c4c6784c-8152-4867-bd91-6c1e49392335",
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
