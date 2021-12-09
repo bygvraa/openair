@@ -1,4 +1,4 @@
-﻿3@page "/createtask"
+﻿@page "/createtask"
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 @inject IJSRuntime js
@@ -21,13 +21,13 @@
                 <label for="categories">Vælg en jobkategori</label>
                 <select class="form-control" @bind="@task.Category">
 
-                    <option value="Sceneopsætning">Frivillig</option>
-                    <option value="Rengøring">Kontaktperson</option>
-                    <option value="Bar">Kontaktperson</option>
-                    <option value="Entre">Kontaktperson</option>
-                    <option value="Vagt">Kontaktperson</option>
-                    <option value="Madbod">Kontaktperson</option>
-                    <option value="Backstage">Kontaktperson</option>
+                    <option value="Sceneopsætning">Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
                 </select>
             </div>
 

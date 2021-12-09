@@ -20,12 +20,15 @@
     <tbody>
         @foreach (var Ticketsss in TicketListe)
         {
-            <li>
+            <tr>
+        <td>@Ticketsss.Title</td>
+        <td>@Ticketsss.Date</td>
+        <td>@Ticketsss.Pris</td>
 
-            </li>
-        }
-    </tbody>
-</table>
+        </tr>
+    }
+        </tbody>
+    </table>
 
 
 
