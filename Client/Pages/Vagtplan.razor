@@ -31,8 +31,9 @@
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-<<<<<<< HEAD
-                    @if (_task.Type == "Frivillig") { 
+
+                    @if (_task.Type == "Frivillig")
+                    {
                     <tr>
                         <td>@_task.Description</td>
                         <td>@_task.Location</td>
@@ -42,16 +43,6 @@
 
                     </tr>
                     }
-=======
-
-                        <tr>
-                            <td>@_task.Description</td>
-                            <td>@_task.Location</td>
-                            <td>@_task.User</td>
-                            <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        </tr>
->>>>>>> 08fc0209ef4c1efe99ddc3f0d236a764e0a64a4f
                     }
                 </tbody>
 
