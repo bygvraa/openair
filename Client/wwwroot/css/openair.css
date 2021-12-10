@@ -245,4 +245,21 @@
     .topnav input[type=text] {
         border: 1px solid #ccc;
     }
+
+    .container_program {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .openair-forside-indhold {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+    }
 }
+
