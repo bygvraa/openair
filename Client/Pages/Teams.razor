@@ -8,6 +8,8 @@
 
         <h2>VAGTPLAN FOR TEAMS</h2>
         <p>Liste over alle vagter</p>
+        <br />
+        <br />
 
         @if (taskList == null)
         {
@@ -20,35 +22,36 @@
                     <tr>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
-                        <th>Frivillig</th>
-                        <th>Start tid</th>
+                        <th>Koordinator</th>
+                        <th>Starttid</th>
                         <th>Sluttid</th>
-                        <th style="width: 0px">&nbsp;</th>
-                        <th style="width: 0px">&nbsp;</th>
+                        @*<th style="width: 0px">&nbsp;</th>
+                        <th style="width: 0px">&nbsp;</th>*@
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-                        @if (_task.Type == "Kontaktperson") { 
-                        <tr>
-                            <td>@_task.Description</td>
-                            <td>@_task.Location</td>
-                            <td>@_task.User</td>
-                            <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    }
+                        @if (_task.Type == "Kontaktperson")
+                        {
+                            <tr>
+                                <td>@_task.Description</td>
+                                <td>@_task.Location</td>
+                                <td>@_task.User</td>
+                                <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                @*<td>
+                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
+                                        <span class="oi oi-wrench" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
+                                        <span class="oi oi-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>*@
+                            </tr>
+                        }
                     }
                 </tbody>
             </table>
