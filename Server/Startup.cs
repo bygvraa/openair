@@ -34,7 +34,7 @@ namespace OpenAir.Server
             // Startup af repositoreis
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
-
+            services.AddScoped<IBilletRepository, BilletRepository>();
 
             services.AddDatabaseDeveloperPageExceptionFilter();
 
