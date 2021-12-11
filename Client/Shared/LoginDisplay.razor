@@ -5,7 +5,13 @@
     <Authorized>
         <li class="nav-item nav-login px-1">
             <NavLink class="nav-link" href="authentication/profile">
-                <span></span> Hej @context.User.Identity.Name!
+                @if (context.User.FindFirst("given_name") is not null)
+                {
+                    <span> Hej @context.User.FindFirst("given_name").Value!</span>
+                } else
+                {
+                    <span> Hej @context.User.Identity.Name!</span>
+                }
             </NavLink>
         </li>
 
