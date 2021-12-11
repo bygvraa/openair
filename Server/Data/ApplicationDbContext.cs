@@ -27,7 +27,10 @@ namespace OpenAir.Server.Data
         // Tabellen 'task' fra databasen
         public DbSet<ApplicationTask> task { get; set; }
 
-        // Tabellen 'task' fra databasen
+        //Tabellen 'ticket' fra databasen
+        public DbSet<TicketClass> ticket { get; set; }
+
+        // Tabellen 'role' fra databasen
         public DbSet<ApplicationRole> role { get; set; }
 
 
