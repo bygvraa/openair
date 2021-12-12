@@ -46,6 +46,15 @@
         "kunstner-div billet-div tekst1-div"
         "tekst2-div scener-div miljø-div"
         "frivillig-div koordinator-div kontakt-div";
+    
+    background-color: #fcfcfc42;
+/*    backdrop-filter: blur(10px);*/
+    padding: 20px;
+    border-radius: 10px;
+
+    align-items: end;
+    text-align: -webkit-center;
+    justify-items: stretch;
 }
 
     .kunstner-div {
@@ -174,6 +183,7 @@
     .kunstner_billede {
         width: 80%;
         opacity: 70%;
+        border-radius: 6px 6px 0 0;
     }
 
 .kunstner_navn {

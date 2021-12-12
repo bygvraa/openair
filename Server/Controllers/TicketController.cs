@@ -12,7 +12,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OpenAir.Server.Controllers
 {
-    [ApiController]
+   
     [Route("[controller]")]
     [AllowAnonymous]
     public class TicketController : ControllerBase

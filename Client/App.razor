@@ -3,7 +3,11 @@
         <Found Context="routeData">
             <AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)">
                 <Authorizing>
-                    <p>Vent venligst...</p>
+                    <div style="text-align: center">
+                        <img class="loading-logo spin-animated" src="images/openairlogo_small.png" width="100" />
+                        <br />
+                        <p>Vent venligst...</p>
+                    </div>
                 </Authorizing>
                 <NotAuthorized>
                     @if (!context.User.Identity.IsAuthenticated)

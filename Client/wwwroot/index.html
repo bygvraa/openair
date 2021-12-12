@@ -9,24 +9,33 @@
     <link href="css/bootstrap/bootstrap.min.css" rel="stylesheet" />
     <link href="css/app.css" rel="stylesheet" />
     <link href="css/openair.css" rel="stylesheet" />
-    <link href="OpenAir.Client.styles.css" rel="stylesheet" />
+    <!--<link href="OpenAir.Client.styles.css" rel="stylesheet" />-->
     <link href="manifest.json" rel="manifest" />
     <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png" />
 </head>
 
-<body style="min-height: 100vh; height: auto">
+<body>
+    <div class="cloud-overlay" aria-hidden="true">
+        <picture class="">
+            <img class="cloud-img" src="images/skyer.png" aria-hidden="true" />
+        </picture>
+    </div>
+    <div class="app-wrapper">
 
-    <div id="app">
-        <div style="text-align: center">
-            <img class="loading-logo spin-animated" src="images/openairlogo_small.png" />
+        <div id="app">
+            <div style="text-align: center">
+                <img class="loading-logo spin-animated" src="images/openairlogo_small.png" />
+            </div>
         </div>
+
+        <div id="blazor-error-ui">
+            An unhandled error has occurred.
+            <a href="" class="reload">Reload</a>
+            <a class="dismiss">🗙</a>
+        </div>
+
     </div>
 
-    <div id="blazor-error-ui">
-        An unhandled error has occurred.
-        <a href="" class="reload">Reload</a>
-        <a class="dismiss">🗙</a>
-    </div>
     <script src="_content/Microsoft.AspNetCore.Components.WebAssembly.Authentication/AuthenticationService.js"></script>
     <script src="_framework/blazor.webassembly.js"></script>
     <script>navigator.serviceWorker.register('service-worker.js');</script>

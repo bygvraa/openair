@@ -20,7 +20,6 @@
             <div class="form-group">
                 <label for="categories">Vælg en jobkategori</label>
                 <select class="form-control" @bind="@task.Category">
-
                     <option value="Sceneopsætning">Sceneopsætning</option>
                     <option value="Rengøring">Rengøring</option>
                     <option value="Bar">Bar</option>
@@ -28,6 +27,7 @@
                     <option value="Vagt">Vagt</option>
                     <option value="Madbod">Madbod</option>
                     <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
                 </select>
             </div>
 
@@ -36,7 +36,7 @@
                 <input for="description" class="form-control" placeholder="Beskrivelse" @bind="@task.Description" />
             </div>
             <div class="form-group">
-                <label>Ansvarlig</label>
+                <label>Koordinator</label>
                 <input for="volunteer" class="form-control"
                        placeholder="Frivillig"
                        @bind="@task.User" />
