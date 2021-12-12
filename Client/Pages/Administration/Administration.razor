@@ -3,12 +3,13 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator")]
+
 <AuthorizeView>
     <Authorized>
 
         <h2>Administration</h2>
         <p>Administratorside</p>
-        <br />
 
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -106,10 +107,10 @@
                                         }
                                         else
                                         {
-                                            <p>Har ingen roller</p>
+                                            <p>Brugeren har ingen roller.</p>
                                         }
-
                                         <br />
+
                                         <label for="role" class="control-label"> Tilføj til ny rolle</label>
                                         <select class="form-control" @bind="@userRole">
                                             <option value="">--- Vælg ---</option>
@@ -200,7 +201,7 @@
 
 
 
-    //UserManager
+    // User manager (vedrører kun en specifik bruger ad gangen)
     private List<string> userRoleList;
     private string userRole;
 
@@ -217,17 +218,15 @@
         await Http.PutAsJsonAsync("Admin", userRoleClass);
     }
 
-
     protected async Task RemoveRoleFromUser(ApplicationUser _user, string _role)
     {
         await Http.DeleteAsync($"Admin/{_user.Id}/{_role}");
         userRoleList.Remove(_role);
-        StateHasChanged();
     }
 
 
 
-    // RoleManager
+    // Role manager (viser alle roller i systemet)
     private List<ApplicationRole> roleList;
     private ApplicationRole role;
 

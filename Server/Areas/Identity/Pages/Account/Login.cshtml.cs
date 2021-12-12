@@ -43,12 +43,13 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Indtast en mailaddresse")]
             [EmailAddress]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Indtast en adgangskode")]
             [DataType(DataType.Password)]
+            [Display(Name = "Adgangskode")]
             public string Password { get; set; }
 
             [Display(Name = "Husk mig?")]

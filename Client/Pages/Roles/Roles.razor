@@ -3,12 +3,21 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator")]
+
 <AuthorizeView>
     <Authorized>
 
         <h2>Rolleadministration</h2>
         <p>Liste over alle roller</p>
         <br />
+
+        <div style="float: left; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/admin"))'>
+                Adminside
+            </button>
+        </div>
 
         <div style="float: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -29,6 +38,8 @@
                     <tr>
                         <th>Navn</th>
                         <th>Beskrivelse</th>
+                        <th style="width: 0px">&nbsp;</th>
+                        <th style="width: 0px">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
