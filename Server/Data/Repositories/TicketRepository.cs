@@ -7,11 +7,11 @@ using System;
 
 namespace OpenAir.Server.Data.Repositories
 {
-    public class BilletRepository : IBilletRepository
+    public class TicketRepository : ITicketRepository
     {
         private readonly ApplicationDbContext _dBContext;
 
-        public BilletRepository(ApplicationDbContext dBContext)
+        public TicketRepository(ApplicationDbContext dBContext)
         {
             _dBContext = dBContext;
         }
