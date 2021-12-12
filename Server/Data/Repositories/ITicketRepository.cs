@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace OpenAir.Server.Data.Repositories
 {
-    public interface IBilletRepository
+    public interface ITicketRepository
     {
         Task <List<TicketClass>> GetAllTickets();
         Task <TicketClass> GetTicket(int Id);

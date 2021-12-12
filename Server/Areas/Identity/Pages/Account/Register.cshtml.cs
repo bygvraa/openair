@@ -47,27 +47,27 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Indtast et fornavn")]
             [StringLength(100, ErrorMessage = "Fornavnet skal være på mellem {2} og {1} bogstaver.", MinimumLength = 1)]
             [Display(Name = "Fornavn")]
             public string FirstName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Indtast et efternavn")]
             [StringLength(100, ErrorMessage = "Efternavnet skal være på mellem {2} og {1} bogstaver.", MinimumLength = 1)]
             [Display(Name = "Efternavn")]
             public string LastName { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Indtast en fødselsdato")]
             [DataType(DataType.Date)]
-            [Display(Name = "Fødselsdag")]
+            [Display(Name = "Fødselsdato")]
             public DateTime BirthDay { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Indtast en mailadresse")]
             [EmailAddress]
-            [Display(Name = "Email")]
+            [Display(Name = "Mailadresse")]
             public string Email { get; set; }
 
-            [Required]
+            [Required(ErrorMessage = "Indtast en adgangskode")]
             [StringLength(100, ErrorMessage = "Adgangskoden skal være på mellem {2} og {1} tegn.", MinimumLength = 1)]
             [DataType(DataType.Password)]
             [Display(Name = "Adgangskode")]
@@ -106,6 +106,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
                 {
                     _logger.LogInformation("User created a new account with password.");
 
+                    await _userManager.AddToRoleAsync(user, "Bruger");
                     await _userManager.AddClaimAsync(user, new Claim("given_name", user.FirstName));
 
 

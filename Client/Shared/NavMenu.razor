@@ -19,39 +19,58 @@
         <span class="navbar-toggler-icon"></span>
     </button>
 
+    <!-- Navbar -->
     <div class="navbar-collapse @NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="navbar-nav mr-auto">
+
             <li class="nav-item px-1">
                 <NavLink class="nav-link" href="program">
                     <span class="oi oi-list-rich" aria-hidden="true"></span> Program
                 </NavLink>
             </li>
+
             <li class="nav-item px-1">
                 <NavLink class="nav-link" href="ticket">
                     <span class="oi oi-musical-note" aria-hidden="true"></span> Billetter
                 </NavLink>
             </li>
 
-            <AuthorizeView>
+            <AuthorizeView Roles="Administrator, Kontaktperson">
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="teams">
                         <span class="oi oi-people" aria-hidden="true"></span> Teams
                     </NavLink>
                 </li>
+            </AuthorizeView>
+
+            <AuthorizeView Roles="Administrator, Frivillig">
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="vagtplan">
                         <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
                     </NavLink>
                 </li>
+            </AuthorizeView>
+
+            <AuthorizeView Roles="Administrator, Koordinator">
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="koordinator">
                         <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
                     </NavLink>
                 </li>
+            </AuthorizeView>
 
+            <AuthorizeView>
                 <li class="nav-item px-1">
                     <NavLink class="nav-link" href="users">
                         <span class="oi oi-person" aria-hidden="true"></span> Brugere
+                    </NavLink>
+                </li>
+            </AuthorizeView>
+
+            <AuthorizeView Roles="Administrator">
+                <li class="nav-item px-1">
+                    <NavLink class="nav-link" href="admin">
+                        <span class="oi oi-wrench" aria-hidden="true"></span> Admin
                     </NavLink>
                 </li>
             </AuthorizeView>

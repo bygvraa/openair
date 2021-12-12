@@ -31,31 +31,31 @@ namespace OpenAir.Server
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
-            // Startup af repositoreis
+
+            // Startup af repositories
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<ITaskRepository, TaskRepository>();
-            services.AddScoped<IBilletRepository, BilletRepository>();
+            services.AddScoped<ITicketRepository, TicketRepository>();
+
 
             services.AddDatabaseDeveloperPageExceptionFilter();
+
 
             services.AddDefaultIdentity<ApplicationUser>()
                 .AddRoles<ApplicationRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
 
 
-            //services.AddIdentity<ApplicationUser, ApplicationRole>()
-            //    .AddRoles<ApplicationRole>()
-            //    .AddEntityFrameworkStores<ApplicationDbContext>();
-
             services.AddIdentityServer()
                 .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options => {
                     options.IdentityResources["openid"].UserClaims.Add("name");
-                    //options.ApiResources.Single().UserClaims.Add("name");
+                    options.ApiResources.Single().UserClaims.Add("name");
                     options.IdentityResources["openid"].UserClaims.Add("role");
-                    //options.ApiResources.Single().UserClaims.Add("role");
+                    options.ApiResources.Single().UserClaims.Add("role");
                 });
 
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
+
 
             services.AddAuthentication()
                 .AddIdentityServerJwt();
@@ -121,7 +121,7 @@ namespace OpenAir.Server
             app.UseAuthentication();
             app.UseAuthorization();
 
-           
+
 
             app.UseEndpoints(endpoints =>
             {

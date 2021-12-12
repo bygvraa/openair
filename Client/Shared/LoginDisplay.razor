@@ -7,8 +7,10 @@
             <NavLink class="nav-link" href="authentication/profile">
                 @if (context.User.FindFirst("given_name") is not null)
                 {
+                    <span class="oi oi-dashboard" aria-hidden="true"></span>
                     <span> Hej @context.User.FindFirst("given_name").Value!</span>
-                } else
+                }
+                else
                 {
                     <span> Hej @context.User.Identity.Name!</span>
                 }

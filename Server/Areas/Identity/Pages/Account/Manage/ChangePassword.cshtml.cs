@@ -34,20 +34,20 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
-            [Required]
+            [Required(ErrorMessage = "Indtast nuværende adgangskode")]
             [DataType(DataType.Password)]
-            [Display(Name = "Current password")]
+            [Display(Name = "Nuværende adgangskode")]
             public string OldPassword { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Indtast ny adgangskode")]
+            [StringLength(100, ErrorMessage = "Adgangskoden skal være på mellem {2} og {1} tegn.", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "New password")]
+            [Display(Name = "Ny adgangskode")]
             public string NewPassword { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm new password")]
-            [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
+            [Display(Name = "Bekræft ny adgangskode")]
+            [Compare("NewPassword", ErrorMessage = "Adgangskoderne er ikke ens.")]
             public string ConfirmPassword { get; set; }
         }
 

@@ -14,9 +14,9 @@ namespace OpenAir.Server.Controllers
     [Route("[controller]")]
     public class TicketController : ControllerBase
     {
-        private readonly IBilletRepository _service;
+        private readonly ITicketRepository _service;
 
-        public TicketController(IBilletRepository service)
+        public TicketController(ITicketRepository service)
         {
             _service = service;
         }
