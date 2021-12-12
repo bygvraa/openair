@@ -2,7 +2,9 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -18,13 +20,25 @@ namespace OpenAir.Client
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.RootComponents.Add<App>("#app");
 
-            builder.Services.AddHttpClient("OpenAir.ServerAPI", client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+            builder.Services.AddHttpClient("OpenAir.ServerAPI", 
+                client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
                 .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
             // Supply HttpClient instances that include access tokens when making requests to the server project
-            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>().CreateClient("OpenAir.ServerAPI"));
+            builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+                .CreateClient("OpenAir.ServerAPI"));
 
-            builder.Services.AddApiAuthorization();
+            builder.Services.AddAuthorizationCore();
+
+            builder.Services.AddApiAuthorization()
+                .AddAccountClaimsPrincipalFactory<RolesClaimsPrincipalFactory>();
+
+            builder.Services.AddApiAuthorization(options =>
+            {
+                options.UserOptions.RoleClaim = "role";
+            });
+
+            builder.Services.AddOptions();
 
             await builder.Build().RunAsync();
         }

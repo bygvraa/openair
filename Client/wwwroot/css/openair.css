@@ -14,6 +14,32 @@
         border-collapse: collapse;
     }
 
+/* Card */
+    .card-openair-sm {
+        width: fit-content;
+        display: table-cell;
+        text-align-last: right;
+    }
+
+    .card-body-openair-sm {
+        padding: 0rem 1rem 1rem 1rem;
+    }
+
+/* Lukkeknap */
+    .card-openair-sm .close-openair-sm {
+        color: darkgrey;
+        padding: 0px 5.5px 1px;
+        border-radius: 4px;
+        float: none;
+    }
+        .card-openair-sm .close-openair-sm:hover {
+            color: #f7f7f7;
+            padding: 0px 5.5px 1px;
+            background-color: #b50707;
+            text-decoration: none;
+            transition-duration: 0.2s;
+        }
+
 /* Knap */
     .openair-blue-btn {
         color: #fff;
