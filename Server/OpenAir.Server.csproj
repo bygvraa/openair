@@ -31,4 +31,22 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.12" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Areas\images\" />
+    <None Remove="Areas\images\nytlogo.png" />
+    <None Remove="Areas\images\skyer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Areas\images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\images\nytlogo.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="Areas\images\skyer.png">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
 </Project>

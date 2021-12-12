@@ -15,7 +15,7 @@ html, body {
     min-width: 100%;
     min-height: 100vh;
     position: absolute;
-    background-image: linear-gradient(170deg, #429fff85,#0051a785,#005aff85,#41105185);
+    background-image: linear-gradient(170deg, #57923E85,#70A3C285,#2C7C3F85,#14682885);
 }
 
 .cloud-overlay {
@@ -324,21 +324,21 @@ app {
         padding-top: 2px;
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px #B3D8FF);
     }
 
     .logo-nav a.active {
         padding-left: 2px;
         padding-right: 2px;
-        filter: opacity(80%) drop-shadow(3px 3px yellow);
+        filter: opacity(80%) drop-shadow(3px 3px #B3D8FF);
     }
 
 /* Logo på loading */
-    .loading-logo {
-        zoom: 0.8;
-        margin-top: 30vh;
-        filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px yellow);
-    }
+.loading-logo {
+    zoom: 0.8;
+    margin-top: 30vh;
+    filter: opacity(80%) blur(0.7px) drop-shadow(3px 3px #2C7C3F85);
+}
 
     @-webkit-keyframes spin {
         0% {

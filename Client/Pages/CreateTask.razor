@@ -12,6 +12,7 @@
             <div class="form-group">
                 <label for="types">Vælg en Vagt type</label>
                 <select class="form-control" @bind="@task.Type">
+                    <option value="">--Vælg--</option>
                     <option value="Frivillig">Frivillig</option>
                     <option value="Kontaktperson">Kontaktperson</option>
                 </select>
@@ -20,6 +21,7 @@
             <div class="form-group">
                 <label for="categories">Vælg en jobkategori</label>
                 <select class="form-control" @bind="@task.Category">
+                    <option value="">--Vælg--</option>
                     <option value="Sceneopsætning">Sceneopsætning</option>
                     <option value="Rengøring">Rengøring</option>
                     <option value="Bar">Bar</option>

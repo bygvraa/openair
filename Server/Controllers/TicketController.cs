@@ -1,32 +1,54 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Newtonsoft.Json;
-using System.IO;
-using OpenAir.Shared;
-using Microsoft.Extensions.Logging;
 using OpenAir.Shared.Models;
-using Microsoft.AspNetCore.Authorization;
+using OpenAir.Server.Data.Repositories;
+using Microsoft.EntityFrameworkCore;
 
 namespace OpenAir.Server.Controllers
 {
    
     [Route("[controller]")]
-    [AllowAnonymous]
     public class TicketController : ControllerBase
     {
-        [HttpGet]
-        public IEnumerable<TicketClass> Get()
+        private readonly IBilletRepository _service;
+
+        public TicketController(IBilletRepository service)
         {
-            using (StreamReader r = new StreamReader("tickets.json"))
-            {
-                string json = r.ReadToEnd();
-                List<TicketClass> items = JsonConvert.DeserializeObject<List<TicketClass>>(json);
-                return items;
-            }
+            _service = service;
         }
+        // GET: /<controller>/
+
+        // GET: api/task
+        // Bruger en metode ('GetAllTasks()') fra 'TaskRepository' til at retunere en liste over alle opgaver
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<TicketClass>>> GetAll()
+        {
+            return await _service.GetAllTickets();
+        }
+
+
+        [HttpGet("{Id}")]
+        public async Task<ActionResult<TicketClass>> Get(int Id)
+        {
+            var ticket = await _service.GetTicket(Id);
+
+            if (ticket == null)
+                return NotFound();
+
+            return ticket;
+        }
+        //update IsBought 
+        [HttpPut]
+        public async Task<ActionResult<TicketClass>> Update(TicketClass ticket)
+        {
+            await _service.UpdateTicket(ticket);
+
+            return ticket;
+        }
+
     }
 }
-

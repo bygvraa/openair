@@ -261,36 +261,36 @@ namespace OpenAir.Server.Data.Migrations
                     b.HasData(
                         new
                         {
-                            Id = "623bcb11-f4ab-4b42-8b06-409dcf07a38f",
-                            ConcurrencyStamp = "80998d57-1621-4217-95cc-0e354ba2fefa",
+                            Id = "fb7313d0-8f31-4a45-a7e4-2f8251855aec",
+                            ConcurrencyStamp = "8dcc6468-e14b-43c7-9b40-948597450310",
                             Name = "Administrator",
                             NormalizedName = "ADMINISTRATOR"
                         },
                         new
                         {
-                            Id = "e32a74c6-3897-42a4-ac1c-afb70c3eb826",
-                            ConcurrencyStamp = "c25e61a6-ba18-4c14-a08d-ee250e0db4ce",
+                            Id = "3df8a451-0d42-449a-98c5-7a32503830b4",
+                            ConcurrencyStamp = "da53c6b5-a149-472c-a1fc-28f4dfe8db1c",
                             Name = "Koordinator",
                             NormalizedName = "KOORDINATOR"
                         },
                         new
                         {
-                            Id = "0e229e27-92a1-44c1-8799-d3859a293670",
-                            ConcurrencyStamp = "00fbbb32-61c6-4d85-94ea-6d924a561505",
+                            Id = "a4e02a7a-28d6-4b8e-8c27-bf4342d6d270",
+                            ConcurrencyStamp = "f71d3f02-2f12-456d-ad59-8424292f7095",
                             Name = "Frivillig",
                             NormalizedName = "FRIVILLIG"
                         },
                         new
                         {
-                            Id = "2155cab6-f2b6-46e1-99b9-0adf96faaa34",
-                            ConcurrencyStamp = "9b6852c5-dbd2-4cec-9647-e2503ef5e746",
+                            Id = "45e9186c-caaf-4eca-87c7-cf2cf1579389",
+                            ConcurrencyStamp = "8b1c4711-2f8e-4853-837e-8a6fffe5dd73",
                             Name = "Kontaktperson",
                             NormalizedName = "KONTAKTPERSON"
                         },
                         new
                         {
-                            Id = "063caae1-3e05-4ef1-80d6-2bb0679111bb",
-                            ConcurrencyStamp = "7fb7770e-0e86-4817-9f86-04c8c6bb2676",
+                            Id = "3fb478a5-50b5-439f-8c15-c5596b4b3f07",
+                            ConcurrencyStamp = "b0b573dd-84bf-4360-86b0-fc49ec64f348",
                             Name = "Kunde",
                             NormalizedName = "KUNDE"
                         });
@@ -415,6 +415,27 @@ namespace OpenAir.Server.Data.Migrations
                         .HasDatabaseName("UserNameIndex");
 
                     b.ToTable("user");
+                });
+
+            modelBuilder.Entity("OpenAir.Shared.Models.TicketClass", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
+
+                    b.Property<bool>("IsBought")
+                        .HasColumnType("boolean");
+
+                    b.Property<int>("Price")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ticket");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -35,64 +35,18 @@
     }
 
 .openair-forside-indhold {
-    display: grid;
+    display: block;
     width: 100%;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr;
-    gap: 20px 20px;
-    grid-auto-flow: row;
-    font-family: 'Rajdhani', sans-serif;
-    grid-template-areas:
-        "kunstner-div billet-div tekst1-div"
-        "tekst2-div scener-div miljø-div"
-        "frivillig-div koordinator-div kontakt-div";
-    
-    background-color: #fcfcfc42;
-/*    backdrop-filter: blur(10px);*/
-    padding: 20px;
-    border-radius: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
 
-    align-items: end;
-    text-align: -webkit-center;
-    justify-items: stretch;
+    background-color: #fcfcfc42;
+    /*    backdrop-filter: blur(10px);*/
 }
 
-    .kunstner-div {
-        grid-area: kunstner-div;
-    }
 
-    .billet-div {
-        grid-area: billet-div;
-    }
-
-    .tekst1-div {
-        grid-area: tekst1-div;
-    }
-
-    .tekst2-div {
-        grid-area: tekst2-div;
-    }
-
-    .scener-div {
-        grid-area: scener-div;
-    }
-
-    .miljø-div {
-        grid-area: miljø-div;
-    }
-
-    .frivillig-div {
-        grid-area: frivillig-div;
-    }
-
-    .koordinator-div {
-        grid-area: koordinator-div;
-    }
-
-    .kontakt-div {
-        grid-area: kontakt-div;
-    }
-
+  
 /* Kunstner program */
     .container_program {
         display: grid;
@@ -162,39 +116,42 @@
 
 .fredag {
     grid-area: fredag;
-    border: 1px solid #f5f65d;
-    margin: 20px;
+    margin-bottom: 30px;
+  
 }
 
 .torsdag {
     grid-area: torsdag;
-    border: 1px solid #f5f65d;
-    margin: 20px;
+   
+    margin-bottom: 30px;
 }
 
 .lørdag {
     grid-area: lørdag;
-    border: 1px solid #f5f65d;
-    margin: 20px;
+    margin-bottom: 30px;
+ 
 }
 
 
 /* Kunstner billeder */
-    .kunstner_billede {
-        width: 80%;
-        opacity: 70%;
-        border-radius: 6px 6px 0 0;
-    }
-
-.kunstner_navn {
-    color: black;
-    text-align: center;
-    border: 3px solid #f5f65d;
-    background-color: #f5f65d;
-    box-shadow: inherit;
-    width: 80%;
-    font-size: 25px;
+.kunstner_billede {
+    width: 100%;
+    opacity: 70%;
+    border-radius: 6px 6px 0 0;
 }
+
+        .kunstner_billede:hover {
+            filter: opacity(80%);
+        }
+
+        .kunstner_navn {
+            color: black;
+            text-align: center;
+            
+            box-shadow: inherit;
+            width: 80%;
+            font-size: 25px;
+        }
 
     .program_overskrift {
         text-align: center;
@@ -208,6 +165,7 @@
         grid-template-rows: 1fr;
         gap: 20px 20px;
         grid-auto-flow: row;
+
         text-align: center;
         grid-template-areas:
             "Partout Billet1 Billet2 Billet-3";
@@ -241,6 +199,70 @@
     font-size: 17px;
 }
 
+/*email forside*/
+* {
+    box-sizing: border-box
+
+}
+
+/* Add padding to containers */
+.container{
+    padding: 16px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: 70%;
+}
+
+/* Full-width input fields */
+input[type=text], input[type=password] {
+    width: 70%;
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+    input[type=text]:focus, input[type=password]:focus {
+        background-color: #ddd;
+        outline: none;
+    }
+
+/* Overwrite default styles of hr */
+hr {
+    border: 1px solid #f1f1f1;
+    margin-bottom: 25px;
+}
+
+/* Set a style for the submit/register button */
+.registerbtn {
+    background-color: #14682885;
+    color: white;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+    .registerbtn:hover {
+        opacity: 1;
+    }
+
+/* Add a blue text color to links */
+a {
+    color: #14682885;
+}
+
+/* Set a grey background color and center the text of the "sign in" section */
+.signin {
+    background-color: #f1f1f1;
+    text-align: center;
+}
+
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
@@ -262,6 +284,10 @@
         display: block;
         margin-left: auto;
         margin-right: auto;
+        background-color: #fcfcfc42;
+        /*    backdrop-filter: blur(10px);*/
+        padding: 20px;
+        border-radius: 10px;
     }
 
     .openair-forside-indhold {

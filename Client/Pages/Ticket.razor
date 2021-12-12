@@ -1,0 +1,131 @@
+﻿@page "/ticket"
+@using OpenAir.Shared.Models;
+@using System;
+@using System.Collections.Generic;
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject IJSRuntime js
+@inject AuthenticationStateProvider AuthenticationStateProvider
+
+<AuthorizeView>
+    <Authorized>
+
+        <h1>KØB DIN BILLET HER</h1>
+        @if (TicketListe == null)
+        {
+            <p><em>DER ER LIGE NU IKKE NOGLE TILGÆNGLIGE BILLETTER</em></p>
+        }
+        else
+        {
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>BILLETTER</th>
+                        <th>PRIS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var Ticketsss in TicketListe)
+                    {
+                        <tr>
+                            <td>@Ticketsss.Title</td>
+                            <td>@Ticketsss.Price</td>
+                            <td>
+                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await BuyTicket(Ticketsss.Id))">
+                                        <span class="oi oi-dollar" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </Authorized>
+    <NotAuthorized>
+        <h3>BILLETTER</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>BILLETTER</th>
+                    <th>PRIS</th>
+                    <th style="width: 0px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PARTOUT</td>
+                    <td>9999</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TORSDAG</td>
+                    <td>250</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>FREDAG</td>
+                    <td>500</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>LØRDAG</td>
+                    <td>500</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </NotAuthorized>
+</AuthorizeView>
+
+@code{
+    private List<TicketClass> TicketListe = new List<TicketClass>();
+
+    private TicketClass ticket;
+
+    //authorize
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            TicketListe = await Http.GetFromJsonAsync<List<TicketClass>>("Ticket");
+        }
+    }
+
+    //køb billet, ændre 'IsBought = false' => 'IsBought = true'
+    protected async Task BuyTicket(int Id)
+    {
+        ticket = await Http.GetFromJsonAsync<TicketClass>("Ticket/" + Id);
+        if (ticket.IsBought == false) {
+            ticket.IsBought = true;
+            await Http.PutAsJsonAsync("Ticket", ticket);
+        }
+    }
+
+
+
+    void BuySite()
+    {
+        UriHelper.NavigateTo("/login");
+    }
+}
+
