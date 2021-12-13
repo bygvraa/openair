@@ -3,6 +3,8 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator, Frivillig")]
+
 <AuthorizeView>
     <Authorized>
 
@@ -52,25 +54,23 @@
         }
 
         <div class="form-group">
-            <label for="categories">Vælg en jobkategori</label>
-            <select class="form-control" @bind="@Soegefelt">
-                <option value="Sceneopsætning">Sceneopsætning</option>
-                <option value="Rengøring">Rengøring</option>
-                <option value="Bar">Bar</option>
-                <option value="Entre">Entre</option>
-                <option value="Vagt">Vagt</option>
-                <option value="Madbod">Madbod</option>
-                <option value="Backstage">Backstage</option>
-                <option value="Andet">Andet</option>
-            </select>
+            <form method="post" asp-page-handler"FilterGenerated">
+                <label asp-for="categories">Vælg en jobkategori</label>
+                <select asp-for="categories" class="form-control">
+                    <option value="Sceneopsætning">Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
+                </select>
+            </form>
         </div>
         <tbody>
             @foreach (var _task in taskList)
             {
-
-                @if (_task.Category == (Soegefelt))
-                {
-
                     <tr>
                         <td>@_task.Description</td>
                         <td>@_task.Location</td>
@@ -80,7 +80,6 @@
                         <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
 
                     </tr>
-                }
             }
         </tbody>
 
@@ -100,7 +99,7 @@
 @code {
     private List<ApplicationTask> taskList;
 
-    public string Soegefelt;
+    public string categories { get; set; }
 
     protected override async Task OnInitializedAsync()
     {

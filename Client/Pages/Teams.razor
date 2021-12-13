@@ -3,6 +3,8 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator, Kontaktperson")]
+
 <AuthorizeView>
     <Authorized>
 
@@ -26,7 +28,7 @@
                         <th>Starttid</th>
                         <th>Sluttid</th>
                         @*<th style="width: 0px">&nbsp;</th>
-                        <th style="width: 0px">&nbsp;</th>*@
+                            <th style="width: 0px">&nbsp;</th>*@
                     </tr>
                 </thead>
                 <tbody>
@@ -41,15 +43,15 @@
                                 <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 @*<td>
-                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                        <span class="oi oi-wrench" aria-hidden="true"></span>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                        <span class="oi oi-trash" aria-hidden="true"></span>
-                                    </button>
-                                </td>*@
+                                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
+                                            <span class="oi oi-wrench" aria-hidden="true"></span>
+                                        </button>
+                                    </td>
+                                    <td>
+                                        <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
+                                            <span class="oi oi-trash" aria-hidden="true"></span>
+                                        </button>
+                                    </td>*@
                             </tr>
                         }
                     }
