@@ -67,7 +67,6 @@
             </table>
         }
 
-<<<<<<< HEAD
         <div class="form-group">
             <form method="post" asp-page-handler"FilterGenerated">
                 <label asp-for="categories">Vælg en jobkategori</label>
@@ -97,12 +96,6 @@
                     </tr>
             }
         </tbody>
-=======
-
-
-
-
->>>>>>> 159ae82aa247aca81bcb4ffadd4d09db8efeb0c7
         <br />
 
     </Authorized>
@@ -124,14 +117,5 @@
         if (user.Identity.IsAuthenticated)
             taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
     }
-<<<<<<< HEAD
-=======
 
-    protected async Task Getcategories(string category)
-    {
-        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/" + category);
-    }
-
-
->>>>>>> 159ae82aa247aca81bcb4ffadd4d09db8efeb0c7
 }
