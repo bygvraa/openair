@@ -76,7 +76,6 @@
 
 @code {
     private List<ApplicationTask> taskList;
-
     public string category;
 
 
@@ -88,6 +87,22 @@
         if (user.Identity.IsAuthenticated)
         {
             await GetTasks();
+        }
+    }
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+    }
+
+    protected async Task GetTaskCategory(string _category)
+    {
+        if (_category == "Alle" || _category == null)
+        {
+            await GetTasks();
+        }
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
         }
     }
 
@@ -112,22 +127,6 @@
                     x = rows[i].getElementsByTagName("TD")[0];
                     y = rows[i + 1].getElementsByTagName("TD")[1];
 
-    protected async Task GetTasks()
-    {
-        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
-    }
-
-    protected async Task GetTaskCategory(string _category)
-    {
-        if (_category == "Alle" || _category == null)
-        {
-            await GetTasks();
-        }
-        else
-        {
-            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
-        }
-    }
 
                     if (dir == "asc")
                     {
