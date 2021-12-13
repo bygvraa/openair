@@ -3,6 +3,8 @@
 @inject NavigationManager UriHelper
 @inject IJSRuntime js
 
+@attribute [Authorize(Roles = "Administrator, Koordinator")]
+
 <h3>Lav en bruger</h3>
 <hr />
 
@@ -42,7 +44,7 @@
         users = await Http.GetFromJsonAsync<ApplicationUser[]>("User");
     }
 
-    async Task AddUser()    
+    async Task AddUser()
     {
         if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {user.FirstName}?"))
         {

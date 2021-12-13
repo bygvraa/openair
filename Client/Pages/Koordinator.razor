@@ -3,6 +3,9 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator, Koordinator")]
+
+
 <AuthorizeView>
     <Authorized>
 
@@ -82,7 +85,7 @@
 
                                         <div class="form-group">
                                             <label for="types">Vælg en vagttype</label>
-                                            <select class="form-control" @bind="@task.Type" required >
+                                            <select class="form-control" @bind="@task.Type" required>
                                                 <option title="" value="">--- Vælg ---</option>
                                                 <option value="Frivillig">Frivillig</option>
                                                 <option value="Kontaktperson">Kontaktperson</option>
