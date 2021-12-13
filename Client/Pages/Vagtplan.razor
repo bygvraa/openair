@@ -82,13 +82,7 @@
                     </tr>
             }
         </tbody>
-
-
-
-
-
         <br />
-
 
     </Authorized>
     <NotAuthorized>
@@ -109,8 +103,4 @@
         if (user.Identity.IsAuthenticated)
             taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
     }
-
-
-
-
 }

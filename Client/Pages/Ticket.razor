@@ -31,10 +31,10 @@
                             <td>@Ticketsss.Title</td>
                             <td>@Ticketsss.Price</td>
                             <td>
-                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await BuyTicket(Ticketsss.Id))">
-                                        <span class="oi oi-dollar" aria-hidden="true"></span>
-                                    </button>
-                                </td>
+                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                    <span class="oi oi-dollar" aria-hidden="true"></span>
+                                </button>
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -111,12 +111,11 @@
         }
     }
 
-    //køb billet, ændre 'IsBought = false' => 'IsBought = true'
-    protected async Task BuyTicket(int Id)
+    //køb billet /createticket page
+    void BuyTicket()
     {
-        ticket = await Http.GetFromJsonAsync<TicketClass>("ticket/" + Id);
-            await Http.PutAsJsonAsync("ticket", ticket);
-        
+        UriHelper.NavigateTo("/CreateTicket");
+
     }
 
     void BuySite()
