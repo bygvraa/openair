@@ -1,0 +1,62 @@
+﻿@page "/createticket"
+@inject HttpClient Http
+@inject NavigationManager UriHelper
+@inject IJSRuntime js
+
+@attribute [Authorize(Roles = "Administrator, Frivillig")]
+
+<h3>KØB BILLET</h3>
+<hr />
+
+<div class="row" style=" text-align: center; place-content: center">
+    <div class="col-md-4">
+        <form>
+            <div class="form-group">
+                <input for="Title" class="form-control" placeholder="Title" @bind="@ticket.Title" />
+            </div>
+            <div class="form-group">
+                <input for="Price" class="form-control" placeholder="Price" @bind="@ticket.Price" />
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
+                <input type="button" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Opret Billet" />
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+    TicketClass ticket = new TicketClass();
+    TicketClass[] ticketsss;
+
+    protected override async Task OnInitializedAsync()
+    {
+        ticketsss = await Http.GetFromJsonAsync<TicketClass[]>("Ticket");
+    }
+
+    async Task AddTicket()
+    {
+        if (await js.InvokeAsync<bool>("confirm", $"Do you want to create user {ticket.Title}?"))
+        {
+            foreach (var _ticket in ticketsss)
+            {
+                if (_ticket.Id != ticket.Id && !string.IsNullOrEmpty(ticket.Title))
+                {
+                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Price));
+                    await js.InvokeVoidAsync("alert", $"Created successfully!");
+                    UriHelper.NavigateTo("/Index");
+                }
+                else
+                {
+                    await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
+                }
+            }
+
+        }
+    }
+
+    void Cancel()
+    {
+        UriHelper.NavigateTo("ticket");
+    }
+}

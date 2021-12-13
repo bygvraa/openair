@@ -1,14 +1,20 @@
 ﻿@page
 @model LoginModel
-@using OpenAir.Client; 
+@using OpenAir.Client;
 
 <div class="cloud-overlay" aria-hidden="true">
+</div>
 
+<<<<<<< HEAD
     <img class="cloud-img" src="images/skyer.png" aria-hidden="true" />
+=======
+<img class="cloud-img" src="images/skyer.png" aria-hidden="true" />
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6
 
 @{
     ViewData["Title"] = "Log ind";
 }
+
 
 <h1>@ViewData["Title"]</h1>
 <div class="row">
@@ -28,37 +34,40 @@
                     <input asp-for="Input.Password" class="form-control" />
                     <span asp-validation-for="Input.Password" class="text-danger"></span>
                 </div>
+
                 <div class="form-group">
                     <div class="checkbox">
                         <label asp-for="Input.RememberMe">
                             <input asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
+<<<<<<< HEAD
                     </div>
                     <div class="form-group">
                         <button type="submit" class="btn btn-primary">Log ind</button>
+=======
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6
                     </div>
-                    <div class="form-group">
-                        <p>
-                            <a id="forgot-password" asp-page="./ForgotPassword">Glemt adgangskode?</a>
-                        </p>
-                        <p>
-                            <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Opret ny bruger</a>
-                        </p>
-                        <p>
-                            <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Send ny bekræftelsesmail</a>
-                        </p>
-                    </div>
-                </form>
-            </section>
-        </div>
-    </div>
-    <div class="col">
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-primary">Log ind</button>
+                </div>
+                <div class="form-group">
+                    <p>
+                        <a id="forgot-password" asp-page="./ForgotPassword">Glemt adgangskode?</a>
+                    </p>
+                    <p>
+                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Opret ny bruger</a>
+                    </p>
+                    <p>
+                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Send ny bekræftelsesmail</a>
+                    </p>
+                </div>
+            </form>
+        </section>
     </div>
 </div>
 
-    @section Scripts {
-        <partial name="_ValidationScriptsPartial" />
-    }
-
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

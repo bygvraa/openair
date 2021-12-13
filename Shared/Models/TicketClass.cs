@@ -11,6 +11,13 @@ namespace OpenAir.Shared.Models
         public int Id { get; set; }
         public string Title { get; set; }
         public int Price { get; set; }
-        public bool IsBought { get; set; }
+
+        public TicketClass() { }
+        public TicketClass(int Id, string Title, int Price)
+        {
+            this.Id = Id;
+            this.Title = Title;
+            this.Price = Price;
+        }
     }
 }

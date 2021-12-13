@@ -3,6 +3,8 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator, Frivillig")]
+
 <AuthorizeView>
     <Authorized>
 
@@ -15,7 +17,30 @@
         }
         else
         {
+<<<<<<< HEAD:Client/Pages/Vagtplan.razor
             <table id="vagtTable" class="table table-borderless table-openair table-hover">
+=======
+            <div class="form-group">
+                <label asp-for="categories" class="control-label">
+                    Vælg en jobkategori
+                </label>
+                <select asp-for="categories" class="form-control"
+                        @bind="category"
+                        @onclick="@(async () => await GetTaskCategory(category))">
+                    <option value="Alle"> Vis alle kategorier</option>
+                    <option value="Sceneopsætning"> Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
+                </select>
+            </div>
+
+            <table class="table table-borderless table-openair table-hover">
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6:Client/Pages/Tasks/Vagtplan.razor
                 <thead>
                     <tr>
                         <th onclick="sortTable(0)">Beskrivelse</th>
@@ -29,11 +54,8 @@
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-
-
                         @if (_task.Type == "Frivillig")
                         {
-
                             <tr>
                                 <td>@_task.Description</td>
                                 <td>@_task.Location</td>
@@ -41,12 +63,12 @@
                                 <td>@_task.Category</td>
                                 <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-
                             </tr>
                         }
                     }
                 </tbody>
             </table>
+<<<<<<< HEAD:Client/Pages/Vagtplan.razor
 
 
             @*<div class="form-group">
@@ -63,6 +85,10 @@
                     </select>
                 </div>*@ <br />
         }
+=======
+        }
+
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6:Client/Pages/Tasks/Vagtplan.razor
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
@@ -72,15 +98,23 @@
 @code {
     private List<ApplicationTask> taskList;
 
+<<<<<<< HEAD:Client/Pages/Vagtplan.razor
+=======
+    public string category;
+
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6:Client/Pages/Tasks/Vagtplan.razor
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
-            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+        {
+            await GetTasks();
+        }
     }
 
+<<<<<<< HEAD:Client/Pages/Vagtplan.razor
     @*function sortTable(n)
         {
             var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
@@ -100,6 +134,24 @@
 
                     x = rows[i].getElementsByTagName("TD")[0];
                     y = rows[i + 1].getElementsByTagName("TD")[1];
+=======
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+    }
+
+    protected async Task GetTaskCategory(string _category)
+    {
+        if (_category == "Alle" || _category == null)
+        {
+            await GetTasks();
+        }
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
+        }
+    }
+>>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6:Client/Pages/Tasks/Vagtplan.razor
 
                     if (dir == "asc")
                     {
