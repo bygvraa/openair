@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Linq;
 
 namespace OpenAir.Server.Data.Repositories
 {
@@ -56,6 +57,15 @@ namespace OpenAir.Server.Data.Repositories
             _dBContext.task.Remove(taskToDelete);
                 await _dBContext.SaveChangesAsync();
          }
+
+        public async Task<List<ApplicationTask>> GetAllTasksCategory(string category)
+        {
+            var tasksCategory = _dBContext.task
+                .Where(c => c.Category == category)
+                .ToListAsync();
+
+            return await tasksCategory;
+        }
 
         // -------------------------------------------------
     }
