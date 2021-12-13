@@ -15,7 +15,7 @@
         <div style="float: left; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
                     @onclick='@(() => UriHelper.NavigateTo("/admin"))'>
-                Adminside
+                Administrer brugere
             </button>
         </div>
 
@@ -84,7 +84,7 @@
                                         <input type="text" for="RoleName" class="form-control" @bind="@role.Name" /><br />
 
                                         <label for="RoleDescription" class="control-label"> Beskrivelse</label>
-                                        <input type="text" for="RoleDescription" class="form-control" @bind="@role.Description" /><br />
+                                        <textarea type="text" for="RoleDescription" class="form-control" @bind="@role.Description" /><br />
 
                                     </div>
                                 </form>

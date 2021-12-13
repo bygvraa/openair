@@ -17,6 +17,20 @@
         }
         else
         {
+            <div class="form-group">
+                <label asp-for="categories">Vælg en jobkategori</label>
+                <select @bind="category" @onclick="@(async()=> await Getcategories(category))" asp-for="category" class="form-control">
+                    <option value="Sceneopsætning">Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
+                </select>
+            </div>
+
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
@@ -53,6 +67,7 @@
             </table>
         }
 
+<<<<<<< HEAD
         <div class="form-group">
             <form method="post" asp-page-handler"FilterGenerated">
                 <label asp-for="categories">Vælg en jobkategori</label>
@@ -82,6 +97,12 @@
                     </tr>
             }
         </tbody>
+=======
+
+
+
+
+>>>>>>> 159ae82aa247aca81bcb4ffadd4d09db8efeb0c7
         <br />
 
     </Authorized>
@@ -93,7 +114,7 @@
 @code {
     private List<ApplicationTask> taskList;
 
-    public string categories { get; set; }
+    public string category;
 
     protected override async Task OnInitializedAsync()
     {
@@ -103,4 +124,14 @@
         if (user.Identity.IsAuthenticated)
             taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
     }
+<<<<<<< HEAD
+=======
+
+    protected async Task Getcategories(string category)
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/" + category);
+    }
+
+
+>>>>>>> 159ae82aa247aca81bcb4ffadd4d09db8efeb0c7
 }

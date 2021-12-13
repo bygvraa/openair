@@ -43,6 +43,16 @@ namespace OpenAir.Server.Controllers
             return task;
         }
 
+        // Filtrering
+        [HttpGet("{category}")]
+
+        public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetAllCategories(string category)
+        {
+            Console.WriteLine("LOUISE");
+            return await _service.GetAllTasksCategory(category);
+        }
+
+
         // POST: api/task
         // Laver en ny opgave
         [HttpPost]
