@@ -114,15 +114,9 @@
     //køb billet, ændre 'IsBought = false' => 'IsBought = true'
     protected async Task BuyTicket(int Id)
     {
-<<<<<<< HEAD
         ticket = await Http.GetFromJsonAsync<TicketClass>("ticket/" + Id);
             await Http.PutAsJsonAsync("ticket", ticket);
         
-=======
-        ticket = await Http.GetFromJsonAsync<TicketClass>("Ticket/" + Id);
-        
-        await Http.PutAsJsonAsync("Ticket", ticket);
->>>>>>> 925c294eb6455bc28eba38daa6026beb7d5b7b05
     }
 
     void BuySite()
