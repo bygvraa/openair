@@ -5,6 +5,7 @@
 
 @attribute [Authorize(Roles = "Administrator, Frivillig")]
 
+
 <AuthorizeView>
     <Authorized>
 
@@ -17,9 +18,12 @@
         }
         else
         {
+<<<<<<< HEAD
 
             <table id="vagtTable" class="table table-borderless table-openair table-hover">
 
+=======
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
             <div class="form-group">
                 <label asp-for="categories" class="control-label">
                     Vælg en jobkategori
@@ -39,13 +43,17 @@
                 </select>
             </div>
 
+<<<<<<< HEAD
+=======
+            <table class="table table-borderless table-openair table-hover">
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
                 <thead>
                     <tr>
-                        <th onclick="sortTable(0)">Beskrivelse</th>
+                        <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Koordinator</th>
                         <th>Jobkategori</th>
-                        <th onclick="sortTable(1)">Starttid</th>
+                        <th>Starttid</th>
                         <th>Sluttid</th>
                     </tr>
                 </thead>
@@ -66,8 +74,14 @@
                     }
                 </tbody>
             </table>
+<<<<<<< HEAD
 
         }
+=======
+            <br />
+        }
+
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
@@ -76,9 +90,15 @@
 
 @code {
     private List<ApplicationTask> taskList;
+<<<<<<< HEAD
 
     public string category;
 
+=======
+    public string category;
+
+
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
     protected override async Task OnInitializedAsync()
     {
         var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
@@ -107,8 +127,11 @@
         }
     }
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
 
     @*function sortTable(n)
         {
@@ -130,7 +153,10 @@
                     x = rows[i].getElementsByTagName("TD")[0];
                     y = rows[i + 1].getElementsByTagName("TD")[1];
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> c9070b90150cb5ff35d0c3cb54e6eb7e6fbbf0cf
 
                     if (dir == "asc")
                     {
