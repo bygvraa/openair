@@ -27,11 +27,11 @@ namespace OpenAir.Server.Data
         // Tabellen 'task' fra databasen
         public DbSet<ApplicationTask> task { get; set; }
 
-        //Tabellen 'ticket' fra databasen
-        public DbSet<TicketClass> ticket { get; set; }
-
         // Tabellen 'role' fra databasen
         public DbSet<ApplicationRole> role { get; set; }
+
+        //Tabellen 'ticket' fra databasen
+        public DbSet<TicketClass> ticket { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -56,36 +56,36 @@ namespace OpenAir.Server.Data
             modelBuilder.Entity<ApplicationRole>(b =>
             {
                 b.ToTable("role");
-                b.HasData(new ApplicationRole {
-                    Name = "Administrator",
-                    NormalizedName = "ADMINISTRATOR",
-                    Id = Guid.NewGuid().ToString(),
-                    ConcurrencyStamp = Guid.NewGuid().ToString() });
-                b.HasData(new ApplicationRole
-                {
-                    Name = "Koordinator",
-                    NormalizedName = "KOORDINATOR",
-                    Id = Guid.NewGuid().ToString(),
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
-                });
-                b.HasData(new ApplicationRole
-                {
-                    Name = "Frivillig",
-                    NormalizedName = "FRIVILLIG",
-                    Id = Guid.NewGuid().ToString(),
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
-                });
-                b.HasData(new ApplicationRole
-                {
-                    Name = "Kontaktperson",
-                    NormalizedName = "KONTAKTPERSON",
-                    Id = Guid.NewGuid().ToString(),
-                    ConcurrencyStamp = Guid.NewGuid().ToString()
-                });
-                b.HasData(new ApplicationRole { 
-                    Name = "Kunde", 
-                    NormalizedName = "KUNDE", Id = Guid.NewGuid().ToString(), 
-                    ConcurrencyStamp = Guid.NewGuid().ToString() });
+                //b.HasData(new ApplicationRole {
+                //    Name = "Administrator",
+                //    NormalizedName = "ADMINISTRATOR",
+                //    Id = Guid.NewGuid().ToString(),
+                //    ConcurrencyStamp = Guid.NewGuid().ToString() });
+                //b.HasData(new ApplicationRole
+                //{
+                //    Name = "Koordinator",
+                //    NormalizedName = "KOORDINATOR",
+                //    Id = Guid.NewGuid().ToString(),
+                //    ConcurrencyStamp = Guid.NewGuid().ToString()
+                //});
+                //b.HasData(new ApplicationRole
+                //{
+                //    Name = "Frivillig",
+                //    NormalizedName = "FRIVILLIG",
+                //    Id = Guid.NewGuid().ToString(),
+                //    ConcurrencyStamp = Guid.NewGuid().ToString()
+                //});
+                //b.HasData(new ApplicationRole
+                //{
+                //    Name = "Kontaktperson",
+                //    NormalizedName = "KONTAKTPERSON",
+                //    Id = Guid.NewGuid().ToString(),
+                //    ConcurrencyStamp = Guid.NewGuid().ToString()
+                //});
+                //b.HasData(new ApplicationRole { 
+                //    Name = "Kunde", 
+                //    NormalizedName = "KUNDE", Id = Guid.NewGuid().ToString(), 
+                //    ConcurrencyStamp = Guid.NewGuid().ToString() });
             });
 
             modelBuilder.Entity<IdentityRoleClaim<string>>().ToTable("role_claim");
