@@ -42,12 +42,21 @@ namespace OpenAir.Server.Controllers
             return ticket;
         }
         //update IsBought 
-        [HttpPut]
-        public async Task<ActionResult<TicketClass>> Update(TicketClass ticket)
-        {
-            await _service.UpdateTicket(ticket);
+        //[HttpPut]
+        //public async Task<ActionResult<TicketClass>> Update(TicketClass ticket)
+        //{
+        //    await _service.UpdateTicket(ticket);
 
-            return ticket;
+        //    return ticket;
+        //}
+
+        //Lav en billet
+        [HttpPost]
+        public async Task<ActionResult> Create([FromBody] TicketClass ticket)
+        {
+            await _service.CreateTicket(ticket);
+
+            return Ok();
         }
 
     }
