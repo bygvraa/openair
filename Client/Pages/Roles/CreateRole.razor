@@ -10,8 +10,8 @@
 
 <div class="row" style=" text-align: center; place-content: center">
     <div class="col-md-4 text-left">
-        <EditForm Model="role" OnValidSubmit="@(async () => await AddRole())">
 
+        <EditForm Model="role" OnValidSubmit="@(async () => await AddRole())">
             <div class="form-group">
                 <label>Navn</label>
                 <input type="text" for="name" class="form-control"
@@ -37,7 +37,7 @@
 
 @code {
     private List<ApplicationRole> roleList;
-    private ApplicationRole role;
+    private ApplicationRole role = new ApplicationRole();
 
     protected override async Task OnInitializedAsync()
     {
