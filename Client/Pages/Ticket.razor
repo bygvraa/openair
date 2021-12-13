@@ -114,18 +114,14 @@
     //køb billet, ændre 'IsBought = false' => 'IsBought = true'
     protected async Task BuyTicket(int Id)
     {
-        ticket = await Http.GetFromJsonAsync<TicketClass>("Ticket/" + Id);
-        if (ticket.IsBought == false) {
-            ticket.IsBought = true;
-            await Http.PutAsJsonAsync("Ticket", ticket);
-        }
+        ticket = await Http.GetFromJsonAsync<TicketClass>("ticket/" + Id);
+            await Http.PutAsJsonAsync("ticket", ticket);
+        
     }
-
-
 
     void BuySite()
     {
-        UriHelper.NavigateTo("/login");
+        UriHelper.NavigateTo("/authentication/login");
     }
 }
 

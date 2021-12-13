@@ -28,11 +28,10 @@ namespace OpenAir.Server.Data.Repositories
         // GET    - find specifik opgaver
         public async Task<TicketClass> GetTicket(int Id)
         {
-
             return await _dBContext.ticket.FindAsync(Id);
         }
 
-        // POST   - lav en opgave
+        // POST   - lav en ticket
         public async Task CreateTicket(TicketClass ticket)
         {
             await _dBContext.ticket.AddAsync(ticket);
