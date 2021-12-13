@@ -5,6 +5,7 @@
 
 @attribute [Authorize(Roles = "Administrator, Frivillig")]
 
+
 <AuthorizeView>
     <Authorized>
 
@@ -17,6 +18,7 @@
         }
         else
         {
+            <table class="table table-borderless table-openair table-hover">
             <div class="form-group">
                 <label asp-for="categories" class="control-label">
                     Vælg en jobkategori
@@ -35,8 +37,6 @@
                     <option value="Andet">Andet</option>
                 </select>
             </div>
-
-            <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
                         <th>Beskrivelse</th>
@@ -64,6 +64,8 @@
                     }
                 </tbody>
             </table>
+                <br />
+        }
         }
 
     </Authorized>
@@ -74,8 +76,8 @@
 
 @code {
     private List<ApplicationTask> taskList;
-
     public string category;
+
 
     protected override async Task OnInitializedAsync()
     {
@@ -87,7 +89,6 @@
             await GetTasks();
         }
     }
-
     protected async Task GetTasks()
     {
         taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
@@ -105,4 +106,61 @@
         }
     }
 
+
+    @*function sortTable(n)
+        {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = Vagtplan.getElementbyId("vagtTable");
+            switching = true;
+
+            dir = "asc";
+            while (switching)
+            {
+                switching = false;
+                rows = table.rows;
+
+                for (i = 1; i < (rows.length - 1); i++)
+                {
+
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[1];
+
+
+                    if (dir == "asc")
+                    {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())
+                        {
+                            shouldSwitch = true;
+                            break;
+                        }
+
+                    }
+                    else if (dir == "desc")
+                    {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())
+                        {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch)
+                {
+
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                }
+                else
+                {
+                    if (switchcount == 0 && dir == "asc")
+                    {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }*@
 }
