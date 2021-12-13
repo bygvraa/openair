@@ -115,10 +115,8 @@
     protected async Task BuyTicket(int Id)
     {
         ticket = await Http.GetFromJsonAsync<TicketClass>("Ticket/" + Id);
-        if (ticket.IsBought == false) {
-            ticket.IsBought = true;
-            await Http.PutAsJsonAsync("Ticket", ticket);
-        }
+        
+        await Http.PutAsJsonAsync("Ticket", ticket);
     }
 
 
