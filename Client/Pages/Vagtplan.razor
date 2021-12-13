@@ -51,45 +51,7 @@
             </table>
         }
 
-        <div class="form-group">
-            <label for="categories">Vælg en jobkategori</label>
-            <select class="form-control" @bind="@Soegefelt">
-                <option value="Sceneopsætning">Sceneopsætning</option>
-                <option value="Rengøring">Rengøring</option>
-                <option value="Bar">Bar</option>
-                <option value="Entre">Entre</option>
-                <option value="Vagt">Vagt</option>
-                <option value="Madbod">Madbod</option>
-                <option value="Backstage">Backstage</option>
-                <option value="Andet">Andet</option>
-            </select>
-        </div>
-        <tbody>
-            @foreach (var _task in taskList)
-            {
-
-                @if (_task.Category == (Soegefelt))
-                {
-
-                    <tr>
-                        <td>@_task.Description</td>
-                        <td>@_task.Location</td>
-                        <td>@_task.User</td>
-                        <td>@_task.Category</td>
-                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-
-                    </tr>
-                }
-            }
-        </tbody>
-
-
-
-
-
         <br />
-
 
     </Authorized>
     <NotAuthorized>

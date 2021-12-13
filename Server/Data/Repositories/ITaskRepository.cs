@@ -12,5 +12,6 @@ namespace OpenAir.Server.Data.Repositories
         Task CreateTask(ApplicationTask task);
         Task UpdateTask(ApplicationTask task);
         Task DeleteTask(int id);
+        Task GetTask(string category);
     }
 }
