@@ -60,8 +60,6 @@ namespace OpenAir.Server.Data.Repositories
 
         public async Task<List<ApplicationTask>> GetAllTasksCategory(string category)
         {
-            Console.WriteLine("hej");
-            Console.WriteLine("hej2");
             var tasksCategory = _dBContext.task
                 .Where(c => c.Category == category)
                 .ToListAsync();
