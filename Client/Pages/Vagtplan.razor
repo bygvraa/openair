@@ -3,6 +3,8 @@
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
+@attribute [Authorize(Roles = "Administrator, Frivillig")]
+
 <AuthorizeView>
     <Authorized>
 
