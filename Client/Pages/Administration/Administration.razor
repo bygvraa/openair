@@ -10,8 +10,9 @@
 
         <h2>Administration</h2>
         <p>Administratorside</p>
+        <br />
 
-        <div style="float: right; margin-bottom: 5px">
+        <div style="float: left; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
                     @onclick='@(() => UriHelper.NavigateTo("/roles"))'>
                 Administrer roller
@@ -85,6 +86,9 @@
 
                                         <label for="email" class="control-label"> Email</label>
                                         <input type="text" for="email" class="form-control" @bind="@user.Email" /><br />
+
+                                        <label for="birthdate" class="control-label"> Fødselsdato</label>
+                                        <input type="date" for="birthdate" class="form-control" @bind="@user.BirthDate" /><br />
 
                                         <label for="roles" class="control-label"> Roller</label>
                                         @if (userRoleList.Count > 0)
@@ -228,7 +232,6 @@
 
     // Role manager (viser alle roller i systemet)
     private List<ApplicationRole> roleList;
-    private ApplicationRole role;
 
     protected async Task GetRoles()
     {

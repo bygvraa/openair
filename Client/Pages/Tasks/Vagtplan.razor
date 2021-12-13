@@ -18,9 +18,14 @@
         else
         {
             <div class="form-group">
-                <label asp-for="categories">Vælg en jobkategori</label>
-                <select @bind="category" @onclick="@(async()=> await Getcategories(category))" asp-for="category" class="form-control">
-                    <option value="Sceneopsætning">Sceneopsætning</option>
+                <label asp-for="categories" class="control-label">
+                    Vælg en jobkategori
+                </label>
+                <select asp-for="categories" class="form-control"
+                        @bind="category"
+                        @onclick="@(async () => await GetTaskCategory(category))">
+                    <option value="Alle"> Vis alle kategorier</option>
+                    <option value="Sceneopsætning"> Sceneopsætning</option>
                     <option value="Rengøring">Rengøring</option>
                     <option value="Bar">Bar</option>
                     <option value="Entre">Entre</option>
@@ -42,15 +47,11 @@
                         <th>Sluttid</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @foreach (var _task in taskList)
                     {
-
-
                         @if (_task.Type == "Frivillig")
                         {
-
                             <tr>
                                 <td>@_task.Description</td>
                                 <td>@_task.Location</td>
@@ -58,45 +59,12 @@
                                 <td>@_task.Category</td>
                                 <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-
                             </tr>
                         }
                     }
                 </tbody>
-
             </table>
         }
-
-        <div class="form-group">
-            <form method="post" asp-page-handler"FilterGenerated">
-                <label asp-for="categories">Vælg en jobkategori</label>
-                <select asp-for="categories" class="form-control">
-                    <option value="Sceneopsætning">Sceneopsætning</option>
-                    <option value="Rengøring">Rengøring</option>
-                    <option value="Bar">Bar</option>
-                    <option value="Entre">Entre</option>
-                    <option value="Vagt">Vagt</option>
-                    <option value="Madbod">Madbod</option>
-                    <option value="Backstage">Backstage</option>
-                    <option value="Andet">Andet</option>
-                </select>
-            </form>
-        </div>
-        <tbody>
-            @foreach (var _task in taskList)
-            {
-                    <tr>
-                        <td>@_task.Description</td>
-                        <td>@_task.Location</td>
-                        <td>@_task.User</td>
-                        <td>@_task.Category</td>
-                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-
-                    </tr>
-            }
-        </tbody>
-        <br />
 
     </Authorized>
     <NotAuthorized>
@@ -115,7 +83,26 @@
         var user = authState.User;
 
         if (user.Identity.IsAuthenticated)
-            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+        {
+            await GetTasks();
+        }
+    }
+
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+    }
+
+    protected async Task GetTaskCategory(string _category)
+    {
+        if (_category == "Alle" || _category == null)
+        {
+            await GetTasks();
+        }
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
+        }
     }
 
 }

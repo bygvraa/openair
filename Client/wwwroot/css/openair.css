@@ -196,7 +196,7 @@
 
         text-align: center;
         grid-template-areas:
-            "Partout Billet1 Billet2 Billet-3";
+            "Partout Billet1 Billet2 Billet3";
     }
 
     .Partout {
@@ -211,8 +211,8 @@
         grid-area: Billet2;
     }
 
-    .Billet-3 {
-        grid-area: Billet-3;
+    .Billet3 {
+        grid-area: Billet3;
     }
 
 

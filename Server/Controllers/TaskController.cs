@@ -82,5 +82,12 @@ namespace OpenAir.Server.Controllers
             return Ok();
         }
 
+
+        [HttpGet("Category/{category}")]
+        public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetTasksInCategory(string category)
+        {
+            return await _service.GetAllTasksCategory(category);
+        }
+
     }
 }
