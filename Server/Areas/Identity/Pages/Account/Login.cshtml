@@ -2,19 +2,11 @@
 @model LoginModel
 @using OpenAir.Client;
 
-<div class="cloud-overlay" aria-hidden="true">
-</div>
-
-<<<<<<< HEAD
-    <img class="cloud-img" src="images/skyer.png" aria-hidden="true" />
-=======
-<img class="cloud-img" src="images/skyer.png" aria-hidden="true" />
->>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6
+<div class="cloud-overlay" aria-hidden="true"></div>
 
 @{
     ViewData["Title"] = "Log ind";
 }
-
 
 <h1>@ViewData["Title"]</h1>
 <div class="row">
@@ -41,12 +33,6 @@
                             <input asp-for="Input.RememberMe" />
                             @Html.DisplayNameFor(m => m.Input.RememberMe)
                         </label>
-<<<<<<< HEAD
-                    </div>
-                    <div class="form-group">
-                        <button type="submit" class="btn btn-primary">Log ind</button>
-=======
->>>>>>> a16da7a6f55a9f2076604ed467ac187f03ec4ba6
                     </div>
                 </div>
                 <div class="form-group">
@@ -64,6 +50,13 @@
                     </p>
                 </div>
             </form>
+        </section>
+    </div>
+    <div class="col-md-6 col-md-offset-2 text-center ml-auto mr-auto mt-2 mb-auto">
+        <section>
+            <div class="p-2">
+                <img class="cloud-img" src="~/images/openairlogo_small.png" aria-hidden="true" />
+            </div>
         </section>
     </div>
 </div>

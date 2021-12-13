@@ -5,7 +5,6 @@
 
 @attribute [Authorize(Roles = "Administrator, Frivillig")]
 
-
 <AuthorizeView>
     <Authorized>
 
@@ -40,10 +39,10 @@
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
+                        <th>Jobkategori</th>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Koordinator</th>
-                        <th>Jobkategori</th>
                         <th>Starttid</th>
                         <th>Sluttid</th>
                     </tr>
@@ -53,11 +52,11 @@
                     {
                         @if (_task.Type == "Frivillig")
                         {
-                            <tr>
+                            <tr>        
+                                <td>@_task.Category</td>
                                 <td>@_task.Description</td>
                                 <td>@_task.Location</td>
                                 <td>@_task.User</td>
-                                <td>@_task.Category</td>
                                 <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
                             </tr>
@@ -65,7 +64,6 @@
                     }
                 </tbody>
             </table>
-            <br />
         }
 
     </Authorized>

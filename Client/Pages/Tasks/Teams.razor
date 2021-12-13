@@ -10,8 +10,6 @@
 
         <h2>VAGTPLAN FOR TEAMS</h2>
         <p>Liste over alle vagter</p>
-        <br />
-        <br />
 
         @if (taskList == null)
         {
@@ -19,16 +17,34 @@
         }
         else
         {
+            <div class="form-group">
+                <label asp-for="categories" class="control-label">
+                    Vælg en jobkategori
+                </label>
+                <select asp-for="categories" class="form-control"
+                        @bind="category"
+                        @onclick="@(async () => await GetTaskCategory(category))">
+                    <option value="Alle"> Vis alle kategorier</option>
+                    <option value="Sceneopsætning"> Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
+                </select>
+            </div>
+
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
+                        <th>Jobkategori</th>
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Koordinator</th>
                         <th>Starttid</th>
                         <th>Sluttid</th>
-                        @*<th style="width: 0px">&nbsp;</th>
-                            <th style="width: 0px">&nbsp;</th>*@
                     </tr>
                 </thead>
                 <tbody>
@@ -37,91 +53,19 @@
                         @if (_task.Type == "Kontaktperson")
                         {
                             <tr>
+                                <td>@_task.Category</td>
                                 <td>@_task.Description</td>
                                 <td>@_task.Location</td>
                                 <td>@_task.User</td>
                                 <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-                                @*<td>
-                                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                            <span class="oi oi-wrench" aria-hidden="true"></span>
-                                        </button>
-                                    </td>
-                                    <td>
-                                        <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                            <span class="oi oi-trash" aria-hidden="true"></span>
-                                        </button>
-                                    </td>*@
                             </tr>
                         }
                     }
                 </tbody>
             </table>
-
-            if (isEdit)
-            {
-                <div class="modal" tabindex="-1" style="display: block" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content modal-openair">
-                            <div class="modal-header" style="border: none">
-                                <h3 class="modal-title">Rediger vagt</h3>
-                                <button type="button" class="close" @onclick="@this.CloseModal">
-                                    <span aria-hidden="true">
-                                        &times;
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
-                                <form>
-                                    <div class="form-group">
-
-                                        <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
-                                        <textarea type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.Description" /><br />
-
-                                        <label for="TaskLokation" class="control-label"> Lokation</label>
-                                        <input type="text" for="TaskLokation" class="form-control" @bind="@task.Location" /><br />
-
-                                        <label for="TaskVolunteer" class="control-label"> Frivillig</label>
-                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.User" /><br />
-
-                                        <label for="TaskStartTime" class="control-label"> Starttid</label>
-                                        <input for="TaskStartTime" class="form-control" type="datetime-local"
-                                               min="@todayDateTime"
-                                               @bind="@task.StartTime"
-                                               @bind:format="yyyy-MM-ddTHH:mm" />
-
-                                        <label for="TaskStopTime" class="control-label"> Stoptid</label>
-                                        <input for="TaskStopTime" class="form-control" type="datetime-local"
-                                               min="@todayDateTime"
-                                               @bind="@task.StopTime"
-                                               @bind:format="yyyy-MM-ddTHH:mm" />
-
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer" style="border: none">
-                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
-                                    Fortryd
-                                </button>
-                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveTask())" data-dismiss="modal">
-                                    Gem
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            }
         }
 
-        @if (DeleteDialogOpen)
-        {
-            <UserDialog Title="Fjern vagt"
-                        Text="Er du sikker på, at du ønsker at slette denne vagt?"
-                        OnClose="@CloseDeleteDialog"
-                        DialogType="UserDialog.Type.DeleteCancel">
-
-            </UserDialog>
-        }
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
@@ -130,9 +74,7 @@
 
 @code {
     private List<ApplicationTask> taskList;
-    private ApplicationTask task;
-
-    string todayDateTime = (DateTime.Now.ToString("yyyy-MM-dd")) + "T00:00";
+    public string category;
 
 
     protected override async Task OnInitializedAsync()
@@ -145,65 +87,21 @@
             await GetTasks();
         }
     }
-
     protected async Task GetTasks()
     {
         taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
     }
 
-    protected async Task EditTask(int id)
+    protected async Task GetTaskCategory(string _category)
     {
-        task = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + id);
-
-        this.isEdit = true;
-        await GetTasks().ConfigureAwait(false);
-    }
-
-    protected async Task SaveTask()
-    {
-        await Http.PutAsJsonAsync("Task", task);
-
-        this.isEdit = false;
-        await GetTasks();
-    }
-
-    protected async Task DeleteTask(int id)
-    {
-        await Http.DeleteAsync("Task/" + id);
-    }
-
-
-    // Modal
-    protected void CloseModal()
-    {
-        this.isEdit = false;
-    }
-
-    // Edit task modal
-    protected Boolean isEdit = false;
-
-    // Delete task modal
-    public bool DeleteDialogOpen { get; set; }
-
-    private void OpenDeleteDialog(ApplicationTask _task)
-    {
-        DeleteDialogOpen = true;
-        task = _task;
-        StateHasChanged();
-    }
-
-    private async Task CloseDeleteDialog(bool accepted)
-    {
-        if (accepted)
+        if (_category == "Alle" || _category == null)
         {
-            await DeleteTask(task.Id);
-            taskList.Remove(task);
+            await GetTasks();
         }
-
-        task = null;
-
-        DeleteDialogOpen = false;
-        StateHasChanged();
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
+        }
     }
 
 }

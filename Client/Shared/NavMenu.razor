@@ -23,20 +23,20 @@
     <div class="navbar-collapse @NavMenuCssClass" @onclick="ToggleNavMenu">
         <ul class="navbar-nav mr-auto">
 
-            <li class="nav-item px-1">
+            <li class="nav-item">
                 <NavLink class="nav-link" href="program">
                     <span class="oi oi-list-rich" aria-hidden="true"></span> Program
                 </NavLink>
             </li>
 
-            <li class="nav-item px-1">
+            <li class="nav-item">
                 <NavLink class="nav-link" href="ticket">
                     <span class="oi oi-musical-note" aria-hidden="true"></span> Billetter
                 </NavLink>
             </li>
 
             <AuthorizeView Roles="Administrator, Kontaktperson">
-                <li class="nav-item px-1">
+                <li class="nav-item">
                     <NavLink class="nav-link" href="teams">
                         <span class="oi oi-people" aria-hidden="true"></span> Teams
                     </NavLink>
@@ -44,7 +44,7 @@
             </AuthorizeView>
 
             <AuthorizeView Roles="Administrator, Frivillig">
-                <li class="nav-item px-1">
+                <li class="nav-item">
                     <NavLink class="nav-link" href="vagtplan">
                         <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
                     </NavLink>
@@ -52,7 +52,7 @@
             </AuthorizeView>
 
             <AuthorizeView Roles="Administrator, Koordinator">
-                <li class="nav-item px-1">
+                <li class="nav-item">
                     <NavLink class="nav-link" href="koordinator">
                         <span class="oi oi-briefcase" aria-hidden="true"></span> Koordinator
                     </NavLink>
@@ -60,7 +60,7 @@
             </AuthorizeView>
 
             <AuthorizeView Roles="Administrator, Koordinator">
-                <li class="nav-item px-1">
+                <li class="nav-item">
                     <NavLink class="nav-link" href="users">
                         <span class="oi oi-person" aria-hidden="true"></span> Brugere
                     </NavLink>
@@ -68,7 +68,7 @@
             </AuthorizeView>
 
             <AuthorizeView Roles="Administrator">
-                <li class="nav-item px-1">
+                <li class="nav-item">
                     <NavLink class="nav-link" href="admin">
                         <span class="oi oi-wrench" aria-hidden="true"></span> Admin
                     </NavLink>

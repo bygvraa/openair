@@ -1,6 +1,39 @@
 ﻿@page "/authentication/{action}"
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-<RemoteAuthenticatorView Action="@Action" />
+
+<div class="text-center">
+    <RemoteAuthenticatorView Action="@Action">
+
+        <LoggingIn>
+            <p>Bekræfter adgang, vent venligst...</p>
+        </LoggingIn>
+
+        <CompletingLoggingIn>
+            <AuthorizeView>
+                <Authorized>
+                    <p>Hej @context.User.FindFirst("given_name").Value, vi logger dig ind, vent venligst...</p>
+                 </Authorized>
+                <NotAuthorized>
+                    <p>Vi logger dig ind, vent venligst...</p>
+                </NotAuthorized>
+            </AuthorizeView>
+        </CompletingLoggingIn>
+
+        <LogOut>
+            <p>Du logges ud, vent venligst...</p>
+        </LogOut>
+
+        @*<CompletingLogOut>
+        </CompletingLogOut>
+        <LogInFailed>
+        </LogInFailed>*@
+
+        <LogOutSucceeded>
+            <p>Du er nu logget ud.</p>
+            <RedirectToIndex />
+        </LogOutSucceeded>
+
+    </RemoteAuthenticatorView>
+</div>
 
 @code{
     [Parameter] public string Action { get; set; }

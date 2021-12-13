@@ -25,7 +25,7 @@
         }
         else
         {
-            <table class="table table-borderless table-openair table-hover">
+            <table class="table table-borderless table-openair table-hover" style="backdrop-filter: none">
                 <thead>
                     <tr>
                         <th>Navn</th>
@@ -65,7 +65,7 @@
             {
                 <div class="modal" tabindex="-1" style="display: block" role="dialog">
                     <div class="modal-dialog">
-                        <div class="modal-content modal-openair">
+                        <div class="modal-content modal-openair" style="backdrop-filter: none">
                             <div class="modal-header" style="border: none">
                                 <h3 class="modal-title">Rediger bruger</h3>
                                 <button type="button" class="close" @onclick="@this.CloseModal">
@@ -96,7 +96,7 @@
                                             @foreach (var _role in userRoleList)
                                             {
                                                 <div class="card card-openair-sm">
-                                                    <div class="card-header p-1">
+                                                    <div class="card-header p-1 bg-white">
                                                         <button type="button" class="close close-openair-sm" @onclick="@(async () => await RemoveRoleFromUser(user, _role))">
                                                             <span aria-hidden="true">
                                                                 &times;
