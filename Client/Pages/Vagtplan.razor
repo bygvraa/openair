@@ -15,18 +15,17 @@
         }
         else
         {
-            <table class="table table-borderless table-openair table-hover">
+            <table id="vagtTable" class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
-                        <th>Beskrivelse</th>
+                        <th onclick="sortTable(0)">Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Koordinator</th>
                         <th>Jobkategori</th>
-                        <th>Starttid</th>
+                        <th onclick="sortTable(1)">Starttid</th>
                         <th>Sluttid</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     @foreach (var _task in taskList)
                     {
@@ -47,50 +46,23 @@
                         }
                     }
                 </tbody>
-
             </table>
+
+
+            @*<div class="form-group">
+                    <label for="categories">Vælg en jobkategori</label>
+                    <select class="form-control" @bind="@Soegefelt">
+                        <option value="Sceneopsætning">Sceneopsætning</option>
+                        <option value="Rengøring">Rengøring</option>
+                        <option value="Bar">Bar</option>
+                        <option value="Entre">Entre</option>
+                        <option value="Vagt">Vagt</option>
+                        <option value="Madbod">Madbod</option>
+                        <option value="Backstage">Backstage</option>
+                        <option value="Andet">Andet</option>
+                    </select>
+                </div>*@ <br />
         }
-
-        <div class="form-group">
-            <label for="categories">Vælg en jobkategori</label>
-            <select class="form-control" @bind="@Soegefelt">
-                <option value="Sceneopsætning">Sceneopsætning</option>
-                <option value="Rengøring">Rengøring</option>
-                <option value="Bar">Bar</option>
-                <option value="Entre">Entre</option>
-                <option value="Vagt">Vagt</option>
-                <option value="Madbod">Madbod</option>
-                <option value="Backstage">Backstage</option>
-                <option value="Andet">Andet</option>
-            </select>
-        </div>
-        <tbody>
-            @foreach (var _task in taskList)
-            {
-
-                @if (_task.Category == (Soegefelt))
-                {
-
-                    <tr>
-                        <td>@_task.Description</td>
-                        <td>@_task.Location</td>
-                        <td>@_task.User</td>
-                        <td>@_task.Category</td>
-                        <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                        <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
-
-                    </tr>
-                }
-            }
-        </tbody>
-
-
-
-
-
-        <br />
-
-
     </Authorized>
     <NotAuthorized>
         <p>Du har ikke adgang til denne side.</p>
@@ -99,8 +71,6 @@
 
 @code {
     private List<ApplicationTask> taskList;
-
-    public string Soegefelt;
 
     protected override async Task OnInitializedAsync()
     {
@@ -111,7 +81,59 @@
             taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
     }
 
+    @*function sortTable(n)
+        {
+            var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
+            table = Vagtplan.getElementbyId("vagtTable");
+            switching = true;
 
+            dir = "asc";
+            while (switching)
+            {
+                switching = false;
+                rows = table.rows;
 
+                for (i = 1; i < (rows.length - 1); i++)
+                {
 
+                    shouldSwitch = false;
+
+                    x = rows[i].getElementsByTagName("TD")[0];
+                    y = rows[i + 1].getElementsByTagName("TD")[1];
+
+                    if (dir == "asc")
+                    {
+                        if (x.innerHTML.toLowerCase() > y.innerHTML.toLowerCase())
+                        {
+                            shouldSwitch = true;
+                            break;
+                        }
+
+                    }
+                    else if (dir == "desc")
+                    {
+                        if (x.innerHTML.toLowerCase() < y.innerHTML.toLowerCase())
+                        {
+                            shouldSwitch = true;
+                            break;
+                        }
+                    }
+                }
+                if (shouldSwitch)
+                {
+
+                    rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+                    switching = true;
+                    switchcount++;
+                }
+                else
+                {
+                    if (switchcount == 0 && dir == "asc")
+                    {
+                        dir = "desc";
+                        switching = true;
+                    }
+                }
+            }
+        }*@
 }
