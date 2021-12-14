@@ -58,6 +58,8 @@ namespace OpenAir.Server.Data.Repositories
                 await _dBContext.SaveChangesAsync();
          }
 
+        // -------------------------------------------------
+
         public async Task<List<ApplicationTask>> GetAllTasksCategory(string category)
         {
             var tasksCategory = _dBContext.task
@@ -66,6 +68,14 @@ namespace OpenAir.Server.Data.Repositories
 
             return await tasksCategory;
         }
+
+
+        public async Task UpdateTaskBooking(ApplicationTask task)
+        {
+            _dBContext.task.Update(task);
+            await _dBContext.SaveChangesAsync();
+        }
+
 
         // -------------------------------------------------
     }

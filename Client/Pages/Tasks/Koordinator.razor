@@ -34,6 +34,7 @@
                         <th>Beskrivelse</th>
                         <th>Lokation</th>
                         <th>Koordinator</th>
+                        <th>Frivillig</th>
                         <th>Starttid</th>
                         <th>Sluttid</th>
                         <th style="width: 0px">&nbsp;</th>
@@ -44,13 +45,14 @@
                     @foreach (var _task in taskList)
                     {
                         <tr>
-                            <td>@_task.Type</td>
-                            <td>@_task.Category</td>
-                            <td>@_task.Description</td>
-                            <td>@_task.Location</td>
-                            <td>@_task.User</td>
-                            <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_task.GetUserType()</td>
+                            <td>@_task.GetCategory()</td>
+                            <td>@_task.GetDescription()</td>
+                            <td>@_task.GetLocation()</td>
+                            <td>@_task.GetCoordinator()</td>
+                            <td>@_task.GetVolunteer()</td>
+                            <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>
                                 <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
                                     <span class="oi oi-wrench" aria-hidden="true"></span>
@@ -107,23 +109,23 @@
                                             </select>
                                         </div>
 
-                                        <label for="TaskBeskrivelse" class="control-label"> Beskrivelse</label>
-                                        <textarea type="text" for="TaskBeskrivelse" class="form-control" @bind="@task.Description" /><br />
+                                        <label for="description" class="control-label"> Beskrivelse</label>
+                                        <textarea type="text" for="description" class="form-control" @bind="@task.Description" /><br />
 
-                                        <label for="TaskLokation" class="control-label"> Lokation</label>
-                                        <input type="text" for="TaskLokation" class="form-control" @bind="@task.Location" /><br />
+                                        <label for="location" class="control-label"> Lokation</label>
+                                        <input type="text" for="location" class="form-control" @bind="@task.Location" /><br />
 
-                                        <label for="TaskVolunteer" class="control-label"> Koordinator</label>
-                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@task.User" /><br />
+                                        <label for="coordinator" class="control-label"> Koordinator</label>
+                                        <input type="text" for="coordinator" class="form-control" @bind="@task.Coordinator" /><br />
 
-                                        <label for="TaskStartTime" class="control-label"> Starttid</label>
-                                        <input for="TaskStartTime" class="form-control" type="datetime-local"
+                                        <label for="starttime" class="control-label"> Starttid</label>
+                                        <input for="starttime" class="form-control" type="datetime-local"
                                                min="@todayDateTime"
                                                @bind="@task.StartTime"
                                                @bind:format="yyyy-MM-ddTHH:mm" />
 
-                                        <label for="TaskStopTime" class="control-label"> Stoptid</label>
-                                        <input for="TaskStopTime" class="form-control" type="datetime-local"
+                                        <label for="stoptime" class="control-label"> Sluttid</label>
+                                        <input for="stoprime" class="form-control" type="datetime-local"
                                                min="@todayDateTime"
                                                @bind="@task.StopTime"
                                                @bind:format="yyyy-MM-ddTHH:mm" />

@@ -1,12 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using OpenAir.Shared.Models;
 using OpenAir.Server.Data.Repositories;
-using Microsoft.EntityFrameworkCore;
+using OpenAir.Shared.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpenAir.Server.Controllers
 {
@@ -16,13 +14,12 @@ namespace OpenAir.Server.Controllers
     {
         private readonly ITaskRepository _service;
 
-
         public TaskController(ITaskRepository service)
         {
             _service = service;
         }
 
-        // GET: api/task
+
         // Bruger en metode ('GetAllTasks()') fra 'TaskRepository' til at retunere en liste over alle opgaver
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetAll()
@@ -30,7 +27,7 @@ namespace OpenAir.Server.Controllers
             return await _service.GetAllTasks();
         }
 
-        // GET: api/task/5
+
         // Tager id'et på en bestemt opgave og retunerer alle oplysninger på opgaven
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationTask>> Get(int id)
@@ -43,17 +40,7 @@ namespace OpenAir.Server.Controllers
             return task;
         }
 
-        // Filtrering
-        [HttpGet("{category}")]
 
-        public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetAllCategories(string category)
-        {
-            Console.WriteLine("LOUISE");
-            return await _service.GetAllTasksCategory(category);
-        }
-
-
-        // POST: api/task
         // Laver en ny opgave
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] ApplicationTask task)
@@ -63,15 +50,15 @@ namespace OpenAir.Server.Controllers
             return Ok();
         }
 
-        // PUT: api/task
-        // Tager en opgave som argument og opdateren den eksisterende opgave med en ny
+
+        // Tager en opgave som argument og opdaterer den eksisterende opgave med en ny
         [HttpPut]
         public async Task Update([FromBody] ApplicationTask task)
         {
             await _service.UpdateTask(task);
         }
 
-        // DELETE: api/task/5
+
         // Tager et id som argument og fjerner den tilhørende opgave
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(int id)
@@ -82,12 +69,22 @@ namespace OpenAir.Server.Controllers
             return Ok();
         }
 
+        // -------------------------------------------------
 
+        // Tager en kategori som argument, og retunerer alle tasks med denne kategori
         [HttpGet("Category/{category}")]
         public async Task<ActionResult<IEnumerable<ApplicationTask>>> GetTasksInCategory(string category)
         {
             return await _service.GetAllTasksCategory(category);
         }
 
+
+        // 
+        [Authorize(Roles = "Administrator, Kontaktperson")]
+        [HttpPut("UpdateBooking")]
+        public async Task Book([FromBody] ApplicationTask task)
+        {
+            await _service.UpdateTask(task);
+        }
     }
 }
