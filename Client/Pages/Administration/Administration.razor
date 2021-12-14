@@ -4,272 +4,280 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 @attribute [Authorize(Roles = "Administrator")]
+    <style>
+        @@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
 
-<AuthorizeView>
-    <Authorized>
-
-        <h2>Administration</h2>
-        <p>Administratorside</p>
-        <br />
-
-        <div style="float: left; margin-bottom: 5px">
-            <button type="button" class="btn btn-primary"
-                    @onclick='@(() => UriHelper.NavigateTo("/roles"))'>
-                Administrer roller
-            </button>
-        </div>
-
-        @if (userList == null)
-        {
-            <p><em>Indlæser, vent venligst...</em></p>
+        body {
+            margin: 0;
+            font-family: 'Work Sans';
+            color: #4d4d4d;
         }
-        else
-        {
-            <table class="table table-borderless table-openair table-hover" style="backdrop-filter: none">
-                <thead>
-                    <tr>
-                        <th>Navn</th>
-                        <th>Email</th>
-                        <th>Fødselsdato</th>
-                        <th>Oprettelsesdato</th>
-                        <th>Seneste ændring</th>
-                        <th style="width: 0px">&nbsp;</th>
-                        <th style="width: 0px">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var _user in userList)
-                    {
-                        <tr>
-                            <td>@_user.GetFullName()</td>
-                            <td>@_user.GetEmail()</td>
-                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
-                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                            <td>
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+    </style>
+    <AuthorizeView>
+        <Authorized>
 
-            if (isEdit)
+            <h2>Administration</h2>
+            <p>Administratorside</p>
+            <br />
+
+            <div style="float: left; margin-bottom: 5px">
+                <button type="button" class="btn btn-primary"
+                        @onclick='@(() => UriHelper.NavigateTo("/roles"))'>
+                    Administrer roller
+                </button>
+            </div>
+
+            @if (userList == null)
             {
-                <div class="modal" tabindex="-1" style="display: block" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content modal-openair" style="backdrop-filter: none">
-                            <div class="modal-header" style="border: none">
-                                <h3 class="modal-title">Rediger bruger</h3>
-                                <button type="button" class="close" @onclick="@this.CloseModal">
-                                    <span aria-hidden="true">
-                                        &times;
-                                    </span>
-                                </button>
-                            </div>
-                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
-                                <form>
-                                    <div class="form-group">
+                <p><em>Indlæser, vent venligst...</em></p>
+            }
+            else
+            {
+                <table class="table table-borderless table-openair table-hover" style="backdrop-filter: none">
+                    <thead>
+                        <tr>
+                            <th>Navn</th>
+                            <th>Email</th>
+                            <th>Fødselsdato</th>
+                            <th>Oprettelsesdato</th>
+                            <th>Seneste ændring</th>
+                            <th style="width: 0px">&nbsp;</th>
+                            <th style="width: 0px">&nbsp;</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var _user in userList)
+                        {
+                            <tr>
+                                <td>@_user.GetFullName()</td>
+                                <td>@_user.GetEmail()</td>
+                                <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                                <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>
+                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                        <span class="oi oi-wrench" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                                <td>
+                                    <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                        <span class="oi oi-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
 
-                                        <label for="first" class="control-label"> Fornavn</label>
-                                        <input type="text" for="first" class="form-control" @bind="@user.FirstName" /><br />
+                if (isEdit)
+                {
+                    <div class="modal" tabindex="-1" style="display: block" role="dialog">
+                        <div class="modal-dialog">
+                            <div class="modal-content modal-openair" style="backdrop-filter: none">
+                                <div class="modal-header" style="border: none">
+                                    <h3 class="modal-title">Rediger bruger</h3>
+                                    <button type="button" class="close" @onclick="@this.CloseModal">
+                                        <span aria-hidden="true">
+                                            &times;
+                                        </span>
+                                    </button>
+                                </div>
+                                <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                                    <form>
+                                        <div class="form-group">
 
-                                        <label for="lastname" class="control-label"> Efternavn</label>
-                                        <input type="text" for="lastname" class="form-control" @bind="@user.LastName" /><br />
+                                            <label for="first" class="control-label"> Fornavn</label>
+                                            <input type="text" for="first" class="form-control" @bind="@user.FirstName" /><br />
 
-                                        <label for="email" class="control-label"> Email</label>
-                                        <input type="text" for="email" class="form-control" @bind="@user.Email" /><br />
+                                            <label for="lastname" class="control-label"> Efternavn</label>
+                                            <input type="text" for="lastname" class="form-control" @bind="@user.LastName" /><br />
 
-                                        <label for="birthdate" class="control-label"> Fødselsdato</label>
-                                        <input type="date" for="birthdate" class="form-control" @bind="@user.BirthDate" /><br />
+                                            <label for="email" class="control-label"> Email</label>
+                                            <input type="text" for="email" class="form-control" @bind="@user.Email" /><br />
 
-                                        <label for="roles" class="control-label"> Roller</label>
-                                        @if (userRoleList.Count > 0)
-                                        {
-                                            @foreach (var _role in userRoleList)
+                                            <label for="birthdate" class="control-label"> Fødselsdato</label>
+                                            <input type="date" for="birthdate" class="form-control" @bind="@user.BirthDate" /><br />
+
+                                            <label for="roles" class="control-label"> Roller</label>
+                                            @if (userRoleList.Count > 0)
                                             {
-                                                <div class="card card-openair-sm">
-                                                    <div class="card-header p-1 bg-white">
-                                                        <button type="button" class="close close-openair-sm" @onclick="@(async () => await RemoveRoleFromUser(user, _role))">
-                                                            <span aria-hidden="true">
-                                                                &times;
-                                                            </span>
-                                                        </button>
-                                                        <div class="card-body card-body-openair-sm">
-                                                            @_role
+                                                @foreach (var _role in userRoleList)
+                                                {
+                                                    <div class="card card-openair-sm">
+                                                        <div class="card-header p-1 bg-white">
+                                                            <button type="button" class="close close-openair-sm" @onclick="@(async () => await RemoveRoleFromUser(user, _role))">
+                                                                <span aria-hidden="true">
+                                                                    &times;
+                                                                </span>
+                                                            </button>
+                                                            <div class="card-body card-body-openair-sm">
+                                                                @_role
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
+                                                }
                                             }
-                                        }
-                                        else
-                                        {
-                                            <p>Brugeren har ingen roller.</p>
-                                        }
-                                        <br />
-
-                                        <label for="role" class="control-label"> Tilføj til ny rolle</label>
-                                        <select class="form-control" @bind="@userRole">
-                                            <option value="">--- Vælg ---</option>
-                                            @foreach (var _role in roleList)
+                                            else
                                             {
-                                                <option value="@_role.Name">@_role.Name</option>
+                                                <p>Brugeren har ingen roller.</p>
                                             }
-                                        </select>
+                                            <br />
 
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer" style="border: none">
-                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
-                                    Fortryd
-                                </button>
-                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveUser())" data-dismiss="modal">
-                                    Gem
-                                </button>
+                                            <label for="role" class="control-label"> Tilføj til ny rolle</label>
+                                            <select class="form-control" @bind="@userRole">
+                                                <option value="">--- Vælg ---</option>
+                                                @foreach (var _role in roleList)
+                                                {
+                                                    <option value="@_role.Name">@_role.Name</option>
+                                                }
+                                            </select>
+
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="modal-footer" style="border: none">
+                                    <button type="button" class="btn btn-warning" @onclick="@CloseModal">
+                                        Fortryd
+                                    </button>
+                                    <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveUser())" data-dismiss="modal">
+                                        Gem
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                }
+            }
+
+            @if (DeleteDialogOpen)
+            {
+                <UserDialog Title="Fjern"
+                            Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
+                            OnClose="@CloseDeleteDialog"
+                            DialogType="UserDialog.Type.DeleteCancel">
+                </UserDialog>
+            }
+
+        </Authorized>
+        <NotAuthorized>
+            <p>Du har ikke adgang til denne side.</p>
+        </NotAuthorized>
+    </AuthorizeView>
+
+    @code {
+        protected override async Task OnInitializedAsync()
+        {
+            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+            var user = authState.User;
+
+            if (user.Identity.IsAuthenticated)
+            {
+                await GetUsers();
+                await GetRoles();
             }
         }
 
-        @if (DeleteDialogOpen)
+        // User
+        private List<ApplicationUser> userList;
+        private ApplicationUser user;
+
+        protected async Task GetUsers()
         {
-            <UserDialog Title="Fjern"
-                        Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
-                        OnClose="@CloseDeleteDialog"
-                        DialogType="UserDialog.Type.DeleteCancel">
-            </UserDialog>
+            userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
         }
 
-    </Authorized>
-    <NotAuthorized>
-        <p>Du har ikke adgang til denne side.</p>
-    </NotAuthorized>
-</AuthorizeView>
-
-@code {
-    protected override async Task OnInitializedAsync()
-    {
-        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-        var user = authState.User;
-
-        if (user.Identity.IsAuthenticated)
+        protected async Task EditUser(string id)
         {
+            user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
+
+            await GetUserRoles(user.Id);
+
+            this.isEdit = true;
+            await GetUsers().ConfigureAwait(false);
+        }
+
+        protected async Task SaveUser()
+        {
+            await Http.PutAsJsonAsync("User", user);
+
+            await AddRoleToUser(user, userRole);
+
+            this.isEdit = false;
             await GetUsers();
-            await GetRoles();
         }
-    }
 
-    // User
-    private List<ApplicationUser> userList;
-    private ApplicationUser user;
-
-    protected async Task GetUsers()
-    {
-        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
-    }
-
-    protected async Task EditUser(string id)
-    {
-        user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
-
-        await GetUserRoles(user.Id);
-
-        this.isEdit = true;
-        await GetUsers().ConfigureAwait(false);
-    }
-
-    protected async Task SaveUser()
-    {
-        await Http.PutAsJsonAsync("User", user);
-
-        await AddRoleToUser(user, userRole);
-
-        this.isEdit = false;
-        await GetUsers();
-    }
-
-    protected async Task DeleteUser(string id)
-    {
-        await Http.DeleteAsync("User/" + id);
-    }
-
-
-
-    // User manager (vedrører kun en specifik bruger ad gangen)
-    private List<string> userRoleList;
-    private string userRole;
-
-    protected async Task GetUserRoles(string id)
-    {
-        userRoleList = await Http.GetFromJsonAsync<List<string>>("Admin/" + id);
-    }
-
-
-    protected async Task AddRoleToUser(ApplicationUser _user, string _role)
-    {
-        UserRoleClass userRoleClass = new UserRoleClass { User = _user, Role = _role };
-
-        await Http.PutAsJsonAsync("Admin", userRoleClass);
-    }
-
-    protected async Task RemoveRoleFromUser(ApplicationUser _user, string _role)
-    {
-        await Http.DeleteAsync($"Admin/{_user.Id}/{_role}");
-        userRoleList.Remove(_role);
-    }
-
-
-
-    // Role manager (viser alle roller i systemet)
-    private List<ApplicationRole> roleList;
-
-    protected async Task GetRoles()
-    {
-        roleList = await Http.GetFromJsonAsync<List<ApplicationRole>>("Role");
-    }
-
-
-
-    // Modal
-    protected void CloseModal()
-    {
-        this.isEdit = false;
-    }
-
-    // Edit user modal
-    protected Boolean isEdit = false;
-
-    // Delete user modal
-    public bool DeleteDialogOpen { get; set; }
-
-    private void OpenDeleteDialog(ApplicationUser _user)
-    {
-        DeleteDialogOpen = true;
-        user = _user;
-        StateHasChanged();
-    }
-    private async Task CloseDeleteDialog(bool accepted)
-    {
-        if (accepted)
+        protected async Task DeleteUser(string id)
         {
-            await DeleteUser(user.Id);
-            userList.Remove(user);
+            await Http.DeleteAsync("User/" + id);
         }
 
-        user = null;
 
-        DeleteDialogOpen = false;
-        StateHasChanged();
+
+        // User manager (vedrører kun en specifik bruger ad gangen)
+        private List<string> userRoleList;
+        private string userRole;
+
+        protected async Task GetUserRoles(string id)
+        {
+            userRoleList = await Http.GetFromJsonAsync<List<string>>("Admin/" + id);
+        }
+
+
+        protected async Task AddRoleToUser(ApplicationUser _user, string _role)
+        {
+            UserRoleClass userRoleClass = new UserRoleClass { User = _user, Role = _role };
+
+            await Http.PutAsJsonAsync("Admin", userRoleClass);
+        }
+
+        protected async Task RemoveRoleFromUser(ApplicationUser _user, string _role)
+        {
+            await Http.DeleteAsync($"Admin/{_user.Id}/{_role}");
+            userRoleList.Remove(_role);
+        }
+
+
+
+        // Role manager (viser alle roller i systemet)
+        private List<ApplicationRole> roleList;
+
+        protected async Task GetRoles()
+        {
+            roleList = await Http.GetFromJsonAsync<List<ApplicationRole>>("Role");
+        }
+
+
+
+        // Modal
+        protected void CloseModal()
+        {
+            this.isEdit = false;
+        }
+
+        // Edit user modal
+        protected Boolean isEdit = false;
+
+        // Delete user modal
+        public bool DeleteDialogOpen { get; set; }
+
+        private void OpenDeleteDialog(ApplicationUser _user)
+        {
+            DeleteDialogOpen = true;
+            user = _user;
+            StateHasChanged();
+        }
+        private async Task CloseDeleteDialog(bool accepted)
+        {
+            if (accepted)
+            {
+                await DeleteUser(user.Id);
+                userList.Remove(user);
+            }
+
+            user = null;
+
+            DeleteDialogOpen = false;
+            StateHasChanged();
+        }
+
     }
-
-}
