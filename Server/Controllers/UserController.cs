@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using OpenAir.Server.Data.Repositories;
 using OpenAir.Shared.Models;
-using System.Security.Claims;
 
 namespace OpenAir.Server.Controllers
 {
@@ -22,7 +19,6 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // GET: api/user
         // Bruger en metode ('GetAllUsers()') fra 'UserRepository' til at retunere en liste over alle brugere
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetAll()
@@ -31,7 +27,6 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // GET: api/user/5
         // Tager id'et på en bestemt bruger og retunerer alle oplysninger på brugeren
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationUser>> Get(string id)
@@ -45,7 +40,6 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // POST: api/user
         // Laver en ny bruger med et unikt id (guid)
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] ApplicationUser user)
@@ -58,7 +52,6 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // PUT: api/user
         // Tager en bruger som argument og retunerer alle brugerens oplysninger
         [HttpPut]
         public async Task<ActionResult<ApplicationUser>> Update([FromBody] ApplicationUser user)
@@ -70,7 +63,6 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // DELETE: api/user/5
         // Tager et id som argument og fjerner den tilhørende bruger
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
@@ -80,12 +72,6 @@ namespace OpenAir.Server.Controllers
 
             return Ok();
         }
-
-
-
-
-
-
 
     }
 }
