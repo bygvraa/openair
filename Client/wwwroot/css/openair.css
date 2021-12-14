@@ -172,10 +172,11 @@
             font-size: 25px;
         }
 
-    .program_overskrift {
-        text-align: center;
-        padding: 20px;
-    }
+.program_overskrift {
+    text-align: center;
+    padding: 20px;
+  
+}
 
 
 /* Billetside */
