@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using OpenAir.Server.Data;
@@ -9,9 +10,10 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211214194418_RenamedUserColumnInTaskModel")]
+    partial class RenamedUserColumnInTaskModel
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -291,9 +293,6 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Type")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Volunteer")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
