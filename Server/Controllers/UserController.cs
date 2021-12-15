@@ -73,5 +73,25 @@ namespace OpenAir.Server.Controllers
             return Ok();
         }
 
+
+        // -------------------------------------------------
+
+        [HttpGet("Type/{type}")]
+        public async Task<ActionResult<IEnumerable<ApplicationUser>>> GetAllUsersInType(string type)
+        {
+            List<ApplicationUser> userRoleList;
+
+            async Task GetUsersInRole(string role)
+            {
+
+            }
+
+            var userList = await _service.GetAllUsers();
+
+            
+
+            return await _service.GetAllUsers();
+        }
+
     }
 }

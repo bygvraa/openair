@@ -31,6 +31,15 @@ namespace OpenAir.Server.Controllers
         }
 
 
+        [HttpGet("UserRole/{role}")]
+        public async Task<List<ApplicationUser>> GetUsersInRole(string role)
+        {
+            var users = await userManager.GetUsersInRoleAsync(role);
+            var userList = users.ToList();
+
+            return userList;
+        }
+
 
         [HttpPut]
         public async Task AddRoleToUser([FromBody] UserRoleClass userRole)
