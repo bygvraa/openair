@@ -4,22 +4,12 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 @attribute [Authorize(Roles = "Administrator, Koordinator")]
-    <style>
-        @@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
-
-        body {
-            margin: 0;
-            font-family: 'Work Sans';
-            color: #4d4d4d;
-        }
-    </style>
-
 
 <AuthorizeView>
     <Authorized>
 
-        <h2>Brugere</h2>
-        <p>Liste over alle sidens brugere</p>
+        <h2>Frivillige</h2>
+        <p>Liste over alle frivillige</p>
 
         <div style="text-align: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -89,14 +79,17 @@
                                 <form>
                                     <div class="form-group">
 
-                                        <label for="UserFirstName" class="control-label"> Fornavn</label>
-                                        <input type="text" for="UserFirstName" class="form-control" @bind="@user.FirstName" /><br />
+                                        <label for="firstname" class="control-label"> Fornavn</label>
+                                        <input type="text" for="firstname" class="form-control" @bind="@user.FirstName" /><br />
 
-                                        <label for="UserLastName" class="control-label"> Efternavn</label>
-                                        <input type="text" for="UserLastName" class="form-control" @bind="@user.LastName" /><br />
+                                        <label for="lastname" class="control-label"> Efternavn</label>
+                                        <input type="text" for="lastname" class="form-control" @bind="@user.LastName" /><br />
 
-                                        <label for="TaskVolunteer" class="control-label"> Email</label>
-                                        <input type="text" for="TaskFrivillig" class="form-control" @bind="@user.Email" /><br />
+                                        <label for="volunteer" class="control-label"> Email</label>
+                                        <input type="text" for="volunteer" class="form-control" @bind="@user.Email" /><br />
+
+                                        <label for="skills" class="control-label"> Email</label>
+                                        <textarea type="text" for="skills" class="form-control" @bind="@user.Skills" /><br />
 
                                     </div>
                                 </form>
@@ -142,7 +135,8 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            await GetUsers();
+            //await GetUsers();
+            await GetUsersInRole("Frivillig");
         }
     }
 
@@ -156,7 +150,7 @@
         user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
 
         this.isEdit = true;
-        await GetUsers().ConfigureAwait(false);
+        //await GetUsers().ConfigureAwait(false);
     }
 
     protected async Task SaveUser()
@@ -164,7 +158,7 @@
         await Http.PutAsJsonAsync("User", user);
 
         this.isEdit = false;
-        await GetUsers();
+        await GetUsersInRole("Frivillig");
     }
 
     protected async Task DeleteUser(string id)
@@ -172,6 +166,10 @@
         await Http.DeleteAsync("User/" + id);
     }
 
+    protected async Task GetUsersInRole(string role)
+    {
+        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("Admin/UserRole/" + role);
+    }
 
     // Modal
     protected void CloseModal()
