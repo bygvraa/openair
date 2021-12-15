@@ -1,0 +1,65 @@
+﻿@page "/blivfrivillig"
+
+<style>
+    @@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
+
+    body {
+        margin: 0;
+        font-family: 'Work Sans';
+        color: #4d4d4d;
+    }
+</style>
+
+<div class="frivillig_tekst">
+    <h1>BLIV FRIVILLIG</h1>
+    <br /> <br />
+    <h4>Kunne du tænke dig at blive frivillig? Open Air Festvial er drevet af frivillige og vi har altid brug for flere hænder.</h4>
+    <br />
+    <h4>Tilmeld dig nedenfor og sæt kryd ved dine kompetencer, så kontakter vi dig hurtigst muligt med yderligere information</h4>
+    <br />
+</div>
+
+    <form>
+        <br />
+        <div class="container">
+            <h1>Tilmelding - frivillig</h1>
+
+            <hr>
+
+            <label for="emateril"><b></b></label>
+            <input type="text" placeholder="Fulde navn" name="navn" id="navn" class="emateril" required>
+
+            <input type="date" placeholder="Fødselsdag" name="alder" id="alder" class="emateril" required>
+            <input type="text" placeholder="Udfyld Email" name="email" id="email" class="emateril" required>
+            <p>Kryds af ved kompetencer</p>
+            <input type="checkbox" id="Bar" name="Bar" value="Bar">
+            <label for="Bar">Bar</label>
+            <input type="checkbox" id="Servering" name="Servering" value="Servering">
+            <label for="Servering">Servering</label>
+            <input type="checkbox" id="Rengøring" name="Rengøring" value="Rengøring">
+            <label for="Rengøring">Rengøring</label>
+            <input type="checkbox" id="Logistik" name="Logistik" value="Logistik">
+            <label for="Logistik">Logistik</label>
+            <input type="checkbox" id="Madlavning" name="Madlavning" value="Madlavning">
+            <label for="Madlavning">Madlavning</label>
+            <input type="checkbox" id="Vagt" name="Vagt" value="Vagt">
+            <label for="Vagt">Vagt</label>
+            <input type="checkbox" id="Opsætning" name="Opsætning" value="Opsætning">
+            <label for="Opsætning">Opsætning</label>
+            <hr>
+
+            <button @onclick="@(async () => change())" class="registerbtn">@button_text</button>
+            
+        </div>
+
+    </form>
+
+@code {
+
+    private string button_text = "Send tilmelding";
+
+    private void change()
+{
+    button_text = "Tak for din tilmelding";
+}
+}

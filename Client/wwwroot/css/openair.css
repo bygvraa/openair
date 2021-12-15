@@ -68,6 +68,7 @@
     margin-left: auto;
     margin-right: auto;
     text-align: center;
+    color: black;
 
     background-color: #fcfcfc42;
     /*    backdrop-filter: blur(10px);*/
@@ -175,10 +176,17 @@
 .program_overskrift {
     text-align: center;
     padding: 20px;
+    color: black;
   
 }
 
+/*Frivillig tilmeldingsside*/
 
+.frivillig_tekst{
+    text-align: center;
+    padding: 100px;
+
+}
 /* Billetside */
 .container_billet {
     display: grid;
@@ -224,6 +232,7 @@
     box-sizing: border-box
 
 }
+
 
 /* Add padding to containers */
 .container{
@@ -316,6 +325,7 @@ a {
         display: block;
         margin-left: auto;
         margin-right: auto;
+        color: black;
     }
 }
 

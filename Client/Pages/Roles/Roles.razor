@@ -12,194 +12,194 @@
             font-family: 'Work Sans';
             color: #4d4d4d;
         }
-    </style>s
-    <AuthorizeView>
-        <Authorized>
+    </style>
+<AuthorizeView>
+    <Authorized>
 
-            <h2>Rolleadministration</h2>
-            <p>Liste over alle roller</p>
-            <br />
+        <h2>Rolleadministration</h2>
+        <p>Liste over alle roller</p>
+        <br />
 
-            <div style="float: left; margin-bottom: 5px">
-                <button type="button" class="btn btn-primary"
-                        @onclick='@(() => UriHelper.NavigateTo("/admin"))'>
-                    Administrer brugere
-                </button>
-            </div>
+        <div style="float: left; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/admin"))'>
+                Administrer brugere
+            </button>
+        </div>
 
-            <div style="float: right; margin-bottom: 5px">
-                <button type="button" class="btn btn-primary"
-                        @onclick='@(() => UriHelper.NavigateTo("/createrole"))'>
-                    Opret rolle
-                </button>
-            </div>
+        <div style="float: right; margin-bottom: 5px">
+            <button type="button" class="btn btn-primary"
+                    @onclick='@(() => UriHelper.NavigateTo("/createrole"))'>
+                Opret rolle
+            </button>
+        </div>
 
 
-            @if (roleList == null)
-            {
-                <p><em>Indlæser, vent venligst...</em></p>
-            }
-            else
-            {
-                <table class="table table-borderless table-openair table-hover">
-                    <thead>
+        @if (roleList == null)
+        {
+            <p><em>Indlæser, vent venligst...</em></p>
+        }
+        else
+        {
+            <table class="table table-borderless table-openair table-hover">
+                <thead>
+                    <tr>
+                        <th>Navn</th>
+                        <th>Beskrivelse</th>
+                        <th style="width: 0px">&nbsp;</th>
+                        <th style="width: 0px">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _role in roleList)
+                    {
                         <tr>
-                            <th>Navn</th>
-                            <th>Beskrivelse</th>
-                            <th style="width: 0px">&nbsp;</th>
-                            <th style="width: 0px">&nbsp;</th>
+                            <td>@_role.Name</td>
+                            <td>@_role.Description</td>
+                            <td>
+                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditRole(_role.Id))">
+                                    <span class="oi oi-wrench" aria-hidden="true"></span>
+                                </button>
+                            </td>
+                            <td>
+                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_role)">
+                                    <span class="oi oi-trash" aria-hidden="true"></span>
+                                </button>
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var _role in roleList)
-                        {
-                            <tr>
-                                <td>@_role.Name</td>
-                                <td>@_role.Description</td>
-                                <td>
-                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditRole(_role.Id))">
-                                        <span class="oi oi-wrench" aria-hidden="true"></span>
-                                    </button>
-                                </td>
-                                <td>
-                                    <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_role)">
-                                        <span class="oi oi-trash" aria-hidden="true"></span>
-                                    </button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                    }
+                </tbody>
+            </table>
 
-                if (isEdit)
-                {
-                    <div class="modal" tabindex="-1" style="display: block" role="dialog">
-                        <div class="modal-dialog">
-                            <div class="modal-content modal-openair">
-                                <div class="modal-header" style="border: none">
-                                    <h3 class="modal-title">Rediger rolle</h3>
-                                    <button type="button" class="close" @onclick="@this.CloseModal">
-                                        <span aria-hidden="true">
-                                            &times;
-                                        </span>
-                                    </button>
-                                </div>
-                                <div class="modal-body" style=" overflow: auto; max-height: 75vh">
-                                    <form>
-                                        <div class="form-group">
+            if (isEdit)
+            {
+                <div class="modal" tabindex="-1" style="display: block" role="dialog">
+                    <div class="modal-dialog">
+                        <div class="modal-content modal-openair">
+                            <div class="modal-header" style="border: none">
+                                <h3 class="modal-title">Rediger rolle</h3>
+                                <button type="button" class="close" @onclick="@this.CloseModal">
+                                    <span aria-hidden="true">
+                                        &times;
+                                    </span>
+                                </button>
+                            </div>
+                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                                <form>
+                                    <div class="form-group">
 
-                                            <label for="RoleName" class="control-label"> Navn</label>
-                                            <input type="text" for="RoleName" class="form-control" @bind="@role.Name" /><br />
+                                        <label for="RoleName" class="control-label"> Navn</label>
+                                        <input type="text" for="RoleName" class="form-control" @bind="@role.Name" /><br />
 
-                                            <label for="RoleDescription" class="control-label"> Beskrivelse</label>
-                                            <textarea type="text" for="RoleDescription" class="form-control" @bind="@role.Description" /><br />
+                                        <label for="RoleDescription" class="control-label"> Beskrivelse</label>
+                                        <textarea type="text" for="RoleDescription" class="form-control" @bind="@role.Description" /><br />
 
-                                        </div>
-                                    </form>
-                                </div>
-                                <div class="modal-footer" style="border: none">
-                                    <button type="button" class="btn btn-warning" @onclick="@CloseModal">
-                                        Fortryd
-                                    </button>
-                                    <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveRole())" data-dismiss="modal">
-                                        Gem
-                                    </button>
-                                </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer" style="border: none">
+                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
+                                    Fortryd
+                                </button>
+                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveRole())" data-dismiss="modal">
+                                    Gem
+                                </button>
                             </div>
                         </div>
                     </div>
-                }
-            }
-
-            @if (DeleteDialogOpen)
-            {
-                <UserDialog Title="Fjern"
-                            Text="Er du sikker på, at du ønsker du at fjerne denne rolle?"
-                            OnClose="@CloseDeleteDialog"
-                            DialogType="UserDialog.Type.DeleteCancel">
-                </UserDialog>
-            }
-
-
-        </Authorized>
-        <NotAuthorized>
-            <p>Du har ikke adgang til denne side.</p>
-        </NotAuthorized>
-    </AuthorizeView>
-
-    @code {
-        private List<ApplicationRole> roleList;
-        private ApplicationRole role;
-
-
-        protected override async Task OnInitializedAsync()
-        {
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var user = authState.User;
-
-            if (user.Identity.IsAuthenticated)
-            {
-                await GetRoles();
+                </div>
             }
         }
 
-        protected async Task GetRoles()
+        @if (DeleteDialogOpen)
         {
-            roleList = await Http.GetFromJsonAsync<List<ApplicationRole>>("Role");
+            <UserDialog Title="Fjern"
+                        Text="Er du sikker på, at du ønsker du at fjerne denne rolle?"
+                        OnClose="@CloseDeleteDialog"
+                        DialogType="UserDialog.Type.DeleteCancel">
+            </UserDialog>
         }
 
-        protected async Task EditRole(string id)
+
+    </Authorized>
+    <NotAuthorized>
+        <p>Du har ikke adgang til denne side.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private List<ApplicationRole> roleList;
+    private ApplicationRole role;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
         {
-            role = await Http.GetFromJsonAsync<ApplicationRole>("Role/" + id);
-
-            this.isEdit = true;
-            await GetRoles().ConfigureAwait(false);
-        }
-
-        protected async Task SaveRole()
-        {
-            await Http.PutAsJsonAsync("Role", role);
-
-            this.isEdit = false;
             await GetRoles();
         }
-
-        protected async Task DeleteRole(string id)
-        {
-            await Http.DeleteAsync("Role/" + id);
-        }
-
-
-        // Modal
-        protected void CloseModal()
-        {
-            this.isEdit = false;
-        }
-
-        // Edit role modal
-        protected Boolean isEdit = false;
-
-        // Delete role modal
-        public bool DeleteDialogOpen { get; set; }
-
-        private void OpenDeleteDialog(ApplicationRole _role)
-        {
-            DeleteDialogOpen = true;
-            role = _role;
-            StateHasChanged();
-        }
-        private async Task CloseDeleteDialog(bool accepted)
-        {
-            if (accepted)
-            {
-                await DeleteRole(role.Id);
-                roleList.Remove(role);
-            }
-
-            role = null;
-
-            DeleteDialogOpen = false;
-            StateHasChanged();
-        }
-
     }
+
+    protected async Task GetRoles()
+    {
+        roleList = await Http.GetFromJsonAsync<List<ApplicationRole>>("Role");
+    }
+
+    protected async Task EditRole(string id)
+    {
+        role = await Http.GetFromJsonAsync<ApplicationRole>("Role/" + id);
+
+        this.isEdit = true;
+        await GetRoles().ConfigureAwait(false);
+    }
+
+    protected async Task SaveRole()
+    {
+        await Http.PutAsJsonAsync("Role", role);
+
+        this.isEdit = false;
+        await GetRoles();
+    }
+
+    protected async Task DeleteRole(string id)
+    {
+        await Http.DeleteAsync("Role/" + id);
+    }
+
+
+    // Modal
+    protected void CloseModal()
+    {
+        this.isEdit = false;
+    }
+
+    // Edit role modal
+    protected Boolean isEdit = false;
+
+    // Delete role modal
+    public bool DeleteDialogOpen { get; set; }
+
+    private void OpenDeleteDialog(ApplicationRole _role)
+    {
+        DeleteDialogOpen = true;
+        role = _role;
+        StateHasChanged();
+    }
+    private async Task CloseDeleteDialog(bool accepted)
+    {
+        if (accepted)
+        {
+            await DeleteRole(role.Id);
+            roleList.Remove(role);
+        }
+
+        role = null;
+
+        DeleteDialogOpen = false;
+        StateHasChanged();
+    }
+
+}
