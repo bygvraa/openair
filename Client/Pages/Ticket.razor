@@ -20,8 +20,8 @@
 <AuthorizeView>
     <Authorized>
 
-        <h1>KØB DIN BILLET HER</h1>
-        @if (TicketListe == null)
+        <h1>SE PRISER PÅ BILLETTER HER</h1>
+        @*@if (TicketListe == null)
         {
             <p><em>DER ER LIGE NU IKKE NOGLE TILGÆNGLIGE BILLETTER</em></p>
         }
@@ -42,14 +42,62 @@
                             <td>@Ticketsss.Price</td>
                             <td>
                                 <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                    <span class="oi oi-dollar" aria-hidden="true"></span>
+                                    <span aria-hidden="true">RESERVER</span>
                                 </button>
                             </td>
                         </tr>
                     }
                 </tbody>
             </table>
-        }
+        }*@
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>BILLETTER</th>
+                    <th>PRIS</th>
+                    <th style="width: 0px">&nbsp;</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>PARTOUT</td>
+                    <td>2499</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                            <span aria-hidden="true">RESERVER</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>TORSDAG</td>
+                    <td>899</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                            <span aria-hidden="true">RESERVER</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>FREDAG</td>
+                    <td>899</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                            <span aria-hidden="true">RESERVER</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>LØRDAG</td>
+                    <td>899</td>
+                    <td>
+                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                            <span aria-hidden="true">RESERVER</span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
     </Authorized>
     <NotAuthorized>
         <h3>BILLETTER</h3>
@@ -64,37 +112,37 @@
             <tbody>
                 <tr>
                     <td>PARTOUT</td>
-                    <td>9999</td>
+                    <td>2499</td>
                     <td>
                         <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                            <span aria-hidden="true">RESERVER</span>
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td>TORSDAG</td>
-                    <td>250</td>
+                    <td>899</td>
                     <td>
                         <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                            <span aria-hidden="true">RESERVER</span>
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td>FREDAG</td>
-                    <td>500</td>
+                    <td>899</td>
                     <td>
                         <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                            <span aria-hidden="true">RESERVER</span>
                         </button>
                     </td>
                 </tr>
                 <tr>
                     <td>LØRDAG</td>
-                    <td>500</td>
+                    <td>899</td>
                     <td>
                         <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span class="oi oi-dollar" aria-hidden="true"></span>
+                            <span aria-hidden="true">RESERVER</span>
                         </button>
                     </td>
                 </tr>
@@ -131,6 +179,24 @@
     void BuySite()
     {
         UriHelper.NavigateTo("/authentication/login");
+    }
+
+
+    protected async Task GetTicket()
+    {
+        TicketListe = await Http.GetFromJsonAsync<List<TicketClass>>("Ticket");
+    }
+
+    protected async Task GetTicketTitle(string Title)
+    {
+        if (Title == "Alle" || Title == null)
+        {
+            await GetTicket();
+        }
+        else
+        {
+            TicketListe = await Http.GetFromJsonAsync<List<TicketClass>>("Ticket/Title/" + Title);
+        }
     }
 }
 

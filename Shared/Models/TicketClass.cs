@@ -13,6 +13,7 @@ namespace OpenAir.Shared.Models
         public int Price { get; set; }
         public string Email { get; set; }
 
+
         public TicketClass() { }
         public TicketClass(int Id, string Title, int Price, string Email)
         {
@@ -20,6 +21,7 @@ namespace OpenAir.Shared.Models
             this.Title = Title;
             this.Price = Price;
             this.Email = Email;
+
         }
     }
 }

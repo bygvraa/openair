@@ -15,26 +15,35 @@
     </style>
 
 
-<h3>KØB BILLET</h3>
+<h3>RESERVER BILLET</h3>
 <hr />
 
 <div class="row" style=" text-align: center; place-content: center">
     <div class="col-md-4">
-        <form>
+        <EditForm Model="ticket" OnValidSubmit="@(async () => await AddTicket())">
             <div class="form-group">
-                <input for="Title" class="form-control" placeholder="Title" @bind="@ticket.Title" />
+                <label for="Title">Vælg en billet</label>
+                <select class="form-control" @bind="@ticket.Title">
+
+
+                    <option value="">--Vælg--</option>
+                    <option value="PARTOUT">PARTOUT</option>
+                    <option value="TORSDAG">TORSDAG</option>
+                    <option value="FREDAG">FREDAG</option>
+                    <option value="LØRDAG">LØRDAG</option>
+                </select>
             </div>
             <div class="form-group">
-                <input for="Price" class="form-control" placeholder="Price" @bind="@ticket.Price" />
+                <input for="Antal" class="form-control" placeholder="Antal" @bind="@ticket.Price" />
             </div>
             <div class="form-group">
-                <input for="Price" class="form-control" placeholder="Email" @bind="@ticket.Email" />
+                <input for="Email" class="form-control" placeholder="Email" @bind="@ticket.Email" />
             </div>
             <div class="form-group">
                 <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="button" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Opret Billet" />
+                <input type="button" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Reserver Billet" />
             </div>
-        </form>
+            </EditForm>
     </div>
 </div>
 
@@ -49,20 +58,22 @@
 
     async Task AddTicket()
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Do you want to buy - {ticket.Title}?"))
+        if (await js.InvokeAsync<bool>("confirm", $"Vil du resevere {ticket.Price + " billetter til " + ticket.Title}?"))
         {
             foreach (var _ticket in ticketsss)
             {
                 if (_ticket.Id != ticket.Id && !string.IsNullOrEmpty(ticket.Title))
                 {
+
                     await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Price, ticket.Email));
-                    await js.InvokeVoidAsync("alert", $"Created successfully!");
+                    await js.InvokeVoidAsync("alert", $"Reseveret");
                     UriHelper.NavigateTo("/Index");
                 }
                 else
                 {
                     await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
                 }
+                break;
             }
 
         }
