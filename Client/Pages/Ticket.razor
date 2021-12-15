@@ -1,136 +1,124 @@
 ﻿@page "/ticket"
-@using OpenAir.Shared.Models;
-@using System;
 @using System.Collections.Generic;
 @inject HttpClient Http
 @inject NavigationManager UriHelper
-@inject IJSRuntime js
 @inject AuthenticationStateProvider AuthenticationStateProvider
-    <style>
-        @@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
-
-        body {
-            margin: 0;
-            font-family: 'Work Sans';
-            color: #4d4d4d;
-        }
-    </style>
-
+@inject IJSRuntime js
 
 <AuthorizeView>
     <Authorized>
 
         <h1>SE PRISER PÅ BILLETTER HER</h1>
         @*@if (TicketListe == null)
-        {
-            <p><em>DER ER LIGE NU IKKE NOGLE TILGÆNGLIGE BILLETTER</em></p>
-        }
-        else
-        {
-            <table class="table">
+            {
+                <p><em>DER ER LIGE NU IKKE NOGLE TILGÆNGLIGE BILLETTER</em></p>
+            }
+            else
+            {
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>BILLETTER</th>
+                            <th>PRIS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var Ticketsss in TicketListe)
+                        {
+                            <tr>
+                                <td>@Ticketsss.Title</td>
+                                <td>@Ticketsss.Price</td>
+                                <td>
+                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                        <span aria-hidden="true">RESERVER</span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }*@
+        <div class="container_billet">
+            <div class="card Partout" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">PARTOUT</h5>
+                    <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
+                </div>
+            </div>
+            <div class="card Billet1" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">TORSDAG</h5>
+                    <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
+                </div>
+            </div>
+            <div class="card Billet2" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">FREDAG</h5>
+                    <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
+                </div>
+            </div>
+            <div class="card Billet3" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <h5 class="card-title">LØRDAG</h5>
+                    <p class="card-text">BANGER BANGER BANGER</p>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
+                </div>
+            </div>
+        </div>
+        @*<table class="table">
                 <thead>
                     <tr>
                         <th>BILLETTER</th>
                         <th>PRIS</th>
+                        <th style="width: 0px">&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var Ticketsss in TicketListe)
-                    {
-                        <tr>
-                            <td>@Ticketsss.Title</td>
-                            <td>@Ticketsss.Price</td>
-                            <td>
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                    <span aria-hidden="true">RESERVER</span>
-                                </button>
-                            </td>
-                        </tr>
-                    }
+                    <tr>
+                        <td>PARTOUT</td>
+                        <td>2499</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TORSDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>FREDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LØRDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
                 </tbody>
-            </table>
-        }*@
-    <div class="container_billet">
-        <div class="card Partout" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">PARTOUT</h5>
-                <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
-                <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-            </div>
-        </div>
-        <div class="card Billet1" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">TORSDAG</h5>
-                <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
-                <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-            </div>
-        </div>
-        <div class="card Billet2" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">FREDAG</h5>
-                <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
-                <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-            </div>
-        </div>
-        <div class="card Billet3" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <h5 class="card-title">LØRDAG</h5>
-                <p class="card-text">BANGER BANGER BANGER</p>
-                <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-            </div>
-        </div>
-    </div>
-        @*<table class="table">
-            <thead>
-                <tr>
-                    <th>BILLETTER</th>
-                    <th>PRIS</th>
-                    <th style="width: 0px">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>PARTOUT</td>
-                    <td>2499</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>TORSDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>FREDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>LØRDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>*@
+            </table>*@
 
     </Authorized>
     <NotAuthorized>
@@ -171,53 +159,53 @@
         </div>
 
         @*<h3>BILLETTER</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>BILLETTER</th>
-                    <th>PRIS</th>
-                    <th style="width: 0px">&nbsp;</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>PARTOUT</td>
-                    <td>2499</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>TORSDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>FREDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>LØRDAG</td>
-                    <td>899</td>
-                    <td>
-                        <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                            <span aria-hidden="true">RESERVER</span>
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>*@
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>BILLETTER</th>
+                        <th>PRIS</th>
+                        <th style="width: 0px">&nbsp;</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>PARTOUT</td>
+                        <td>2499</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>TORSDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>FREDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>LØRDAG</td>
+                        <td>899</td>
+                        <td>
+                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
+                                <span aria-hidden="true">RESERVER</span>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>*@
 
     </NotAuthorized>
 </AuthorizeView>

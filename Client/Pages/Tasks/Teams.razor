@@ -5,150 +5,150 @@
 
 @attribute [Authorize(Roles = "Administrator, Kontaktperson")]
 
-    <AuthorizeView>
-        <Authorized>
+<AuthorizeView>
+    <Authorized>
 
-            <h2>VAGTPLAN FOR TEAMS</h2>
-            <p>Liste over alle vagter</p>
+        <h2>VAGTPLAN FOR TEAMS</h2>
+        <p>Liste over alle vagter</p>
 
-            @if (taskList == null)
-            {
-                <p><em>Indlæser, vent venligst...</em></p>
-            }
-            else
-            {
-                <div class="form-group">
-                    <label asp-for="categories" class="control-label">
-                        Vælg en jobkategori
-                    </label>
-                    <select asp-for="categories" class="form-control"
-                            @bind="category"
-                            @onclick="@(async () => await GetTaskCategory(category))">
-                        <option value="Alle"> Vis alle kategorier</option>
-                        @foreach (var _category in Enum.GetValues(typeof(Category)))
+        @if (taskList == null)
+        {
+            <p><em>Indlæser, vent venligst...</em></p>
+        }
+        else
+        {
+            <div class="form-group">
+                <label asp-for="categories" class="control-label">
+                    Vælg en jobkategori
+                </label>
+                <select asp-for="categories" class="form-control"
+                        @bind="category"
+                        @onclick="@(async () => await GetTaskCategory(category))">
+                    <option value="Alle"> Vis alle kategorier</option>
+                    @foreach (var _category in Enum.GetValues(typeof(Category)))
+                    {
+                        <option value="@_category">@_category</option>
+                    }
+                </select>
+            </div>
+
+            <table class="table table-borderless table-openair table-hover">
+                <thead>
+                    <tr>
+                        <th>Jobkategori</th>
+                        <th>Beskrivelse</th>
+                        <th>Lokation</th>
+                        <th>Koordinator</th>
+                        <th>Starttid</th>
+                        <th>Sluttid</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _task in taskList)
+                    {
+                        @if (_task.GetUserType() == "Kontaktperson")
                         {
-                            <option value="@_category">@_category</option>
+                            <tr>
+                                <td>@_task.GetCategory()</td>
+                                <td>@_task.GetDescription()</td>
+                                <td>@_task.GetLocation()</td>
+                                <td>@_task.GetCoordinator()</td>
+                                <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td class="text-right">
+                                    @if (_task.GetVolunteer() == context.User.Identity.Name)
+                                    {
+                                        <button class="btn btn-danger openair-red-btn" style="padding: 1px 6px"
+                                                @onclick="@(async () => await UnBookTask(_task.GetId()))">
+                                            <span aria-hidden="true">Fjern dig fra vagt</span>
+                                        </button>
+                                    }
+                                    else if (_task.GetVolunteer() is not null)
+                                    {
+                                        <span aria-hidden="true">Denne vagt er allerede optaget</span>
+                                    }
+                                    else
+                                    {
+                                        <button class="btn btn-primary openair-blue-btn" style="padding: 1px 6px"
+                                                @onclick="@(async () => await BookTask(_task.GetId(), context.User.Identity.Name))">
+                                            <span aria-hidden="true">Tag vagt</span>
+                                        </button>
+                                    }
+                                </td>
+                            </tr>
                         }
-                    </select>
-                </div>
-
-                <table class="table table-borderless table-openair table-hover">
-                    <thead>
-                        <tr>
-                            <th>Jobkategori</th>
-                            <th>Beskrivelse</th>
-                            <th>Lokation</th>
-                            <th>Koordinator</th>
-                            <th>Starttid</th>
-                            <th>Sluttid</th>
-                            <th>Status</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var _task in taskList)
-                        {
-                            @if (_task.GetUserType() == "Kontaktperson")
-                            {
-                                <tr>
-                                    <td>@_task.GetCategory()</td>
-                                    <td>@_task.GetDescription()</td>
-                                    <td>@_task.GetLocation()</td>
-                                    <td>@_task.GetCoordinator()</td>
-                                    <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                    <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                    <td class="text-right">
-                                        @if (_task.GetVolunteer() == context.User.Identity.Name)
-                                        {
-                                            <button class="btn btn-danger openair-red-btn" style="padding: 1px 6px"
-                                                    @onclick="@(async () => await UnBookTask(_task.GetId()))">
-                                                <span aria-hidden="true">Fjern dig fra vagt</span>
-                                            </button>
-                                        }
-                                        else if (_task.GetVolunteer() is not null)
-                                        {
-                                            <span aria-hidden="true">Denne vagt er allerede optaget</span>
-                                        }
-                                        else
-                                        {
-                                            <button class="btn btn-primary openair-blue-btn" style="padding: 1px 6px"
-                                                    @onclick="@(async () => await BookTask(_task.GetId(), context.User.Identity.Name))">
-                                                <span aria-hidden="true">Tag vagt</span>
-                                            </button>
-                                        }
-                                    </td>
-                                </tr>
-                            }
-                        }
-                    </tbody>
-                </table>
-            }
-
-        </Authorized>
-        <NotAuthorized>
-            <p>Du har ikke adgang til denne side.</p>
-        </NotAuthorized>
-    </AuthorizeView>
-
-    @code {
-        private List<ApplicationTask> taskList;
-        private ApplicationTask currentTask;
-
-        public string category;
-
-
-        protected override async Task OnInitializedAsync()
-        {
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var user = authState.User;
-
-            if (user.Identity.IsAuthenticated)
-            {
-                await GetTasks();
-            }
-        }
-        protected async Task GetTasks()
-        {
-            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+                    }
+                </tbody>
+            </table>
         }
 
-        protected async Task GetTaskCategory(string _category)
+    </Authorized>
+    <NotAuthorized>
+        <p>Du har ikke adgang til denne side.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private List<ApplicationTask> taskList;
+    private ApplicationTask currentTask;
+
+    public string category;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
         {
-            if (_category == "Alle" || _category == null)
-            {
-                await GetTasks();
-            }
-            else
-            {
-                taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
-            }
-        }
-
-        protected async Task BookTask(int task_id, string volunteer_email)
-        {
-            // Find den specifikke task i db og kald den 'currentTask'
-            currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
-
-            // Book currentTask ved at indsætte kontaktpersonens email
-            currentTask.Volunteer = volunteer_email;
-
-            // Send currentTask til controller for at indsætte den bookede task i databasen
-            await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);
-
             await GetTasks();
         }
-
-        protected async Task UnBookTask(int task_id)
-        {
-            // Find den specifikke task i db og kald den 'currentTask'
-            currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
-
-            // Fjern booking af currentTask ved at indsætte 'Volunteer'-feltet til null
-            currentTask.Volunteer = null;
-
-            // Send currentTask til controller for at indsættede den i databasen
-            await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);
-
-            await GetTasks();
-        }
-
     }
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+    }
+
+    protected async Task GetTaskCategory(string _category)
+    {
+        if (_category == "Alle" || _category == null)
+        {
+            await GetTasks();
+        }
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
+        }
+    }
+
+    protected async Task BookTask(int task_id, string volunteer_email)
+    {
+        // Find den specifikke task i db og kald den 'currentTask'
+        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
+
+        // Book currentTask ved at indsætte kontaktpersonens email
+        currentTask.Volunteer = volunteer_email;
+
+        // Send currentTask til controller for at indsætte den bookede task i databasen
+        await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);
+
+        await GetTasks();
+    }
+
+    protected async Task UnBookTask(int task_id)
+    {
+        // Find den specifikke task i db og kald den 'currentTask'
+        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
+
+        // Fjern booking af currentTask ved at indsætte 'Volunteer'-feltet til null
+        currentTask.Volunteer = null;
+
+        // Send currentTask til controller for at indsættede den i databasen
+        await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);
+
+        await GetTasks();
+    }
+
+}

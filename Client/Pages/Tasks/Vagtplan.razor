@@ -4,111 +4,103 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 
 @attribute [Authorize(Roles = "Administrator, Frivillig")]
-    <style>
-        @@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
 
-        body {
-            margin: 0;
-            font-family: 'Work Sans';
-            color: #4d4d4d;
+<AuthorizeView>
+    <Authorized>
+
+        <h2>VAGTPLAN FOR FRIVILLIGE</h2>
+        <p>Liste over alle vagter</p>
+
+        @if (taskList == null)
+        {
+            <p><em>Indlæser...</em></p>
         }
-    </style>
-    <AuthorizeView>
-        <Authorized>
+        else
+        {
+            <div class="form-group">
+                <label asp-for="categories" class="control-label">
+                    Vælg en jobkategori
+                </label>
+                <select asp-for="categories" class="form-control"
+                        @bind="category"
+                        @onclick="@(async () => await GetTaskCategory(category))">
+                    <option value="Alle"> Vis alle kategorier</option>
+                    <option value="Sceneopsætning"> Sceneopsætning</option>
+                    <option value="Rengøring">Rengøring</option>
+                    <option value="Bar">Bar</option>
+                    <option value="Entre">Entre</option>
+                    <option value="Vagt">Vagt</option>
+                    <option value="Madbod">Madbod</option>
+                    <option value="Backstage">Backstage</option>
+                    <option value="Andet">Andet</option>
+                </select>
+            </div>
 
-            <h2>VAGTPLAN FOR FRIVILLIGE</h2>
-            <p>Liste over alle vagter</p>
-
-            @if (taskList == null)
-            {
-                <p><em>Indlæser...</em></p>
-            }
-            else
-            {
-                <div class="form-group">
-                    <label asp-for="categories" class="control-label">
-                        Vælg en jobkategori
-                    </label>
-                    <select asp-for="categories" class="form-control"
-                            @bind="category"
-                            @onclick="@(async () => await GetTaskCategory(category))">
-                        <option value="Alle"> Vis alle kategorier</option>
-                        <option value="Sceneopsætning"> Sceneopsætning</option>
-                        <option value="Rengøring">Rengøring</option>
-                        <option value="Bar">Bar</option>
-                        <option value="Entre">Entre</option>
-                        <option value="Vagt">Vagt</option>
-                        <option value="Madbod">Madbod</option>
-                        <option value="Backstage">Backstage</option>
-                        <option value="Andet">Andet</option>
-                    </select>
-                </div>
-
-                <table class="table table-borderless table-openair table-hover">
-                    <thead>
-                        <tr>
-                            <th>Jobkategori</th>
-                            <th>Beskrivelse</th>
-                            <th>Lokation</th>
-                            <th>Koordinator</th>
-                            <th>Starttid</th>
-                            <th>Sluttid</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var _task in taskList)
+            <table class="table table-borderless table-openair table-hover">
+                <thead>
+                    <tr>
+                        <th>Jobkategori</th>
+                        <th>Beskrivelse</th>
+                        <th>Lokation</th>
+                        <th>Koordinator</th>
+                        <th>Starttid</th>
+                        <th>Sluttid</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var _task in taskList)
+                    {
+                        @if (_task.Type == "Frivillig")
                         {
-                            @if (_task.Type == "Frivillig")
-                            {
-                                <tr>
-                                    <td>@_task.GetCategory()</td>
-                                    <td>@_task.GetDescription()</td>
-                                    <td>@_task.GetLocation()</td>
-                                    <td>@_task.GetCoordinator()</td>
-                                    <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                    <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                </tr>
-                            }
+                            <tr>
+                                <td>@_task.GetCategory()</td>
+                                <td>@_task.GetDescription()</td>
+                                <td>@_task.GetLocation()</td>
+                                <td>@_task.GetCoordinator()</td>
+                                <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
+                            </tr>
                         }
-                    </tbody>
-                </table>
-            }
-
-        </Authorized>
-        <NotAuthorized>
-            <p>Du har ikke adgang til denne side.</p>
-        </NotAuthorized>
-    </AuthorizeView>
-
-    @code {
-        private List<ApplicationTask> taskList;
-        public string category;
-
-
-        protected override async Task OnInitializedAsync()
-        {
-            var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
-            var user = authState.User;
-
-            if (user.Identity.IsAuthenticated)
-            {
-                await GetTasks();
-            }
-        }
-        protected async Task GetTasks()
-        {
-            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+                    }
+                </tbody>
+            </table>
         }
 
-        protected async Task GetTaskCategory(string _category)
+    </Authorized>
+    <NotAuthorized>
+        <p>Du har ikke adgang til denne side.</p>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private List<ApplicationTask> taskList;
+    public string category;
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
         {
-            if (_category == "Alle" || _category == null)
-            {
-                await GetTasks();
-            }
-            else
-            {
-                taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
-            }
+            await GetTasks();
         }
     }
+    protected async Task GetTasks()
+    {
+        taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task");
+    }
+
+    protected async Task GetTaskCategory(string _category)
+    {
+        if (_category == "Alle" || _category == null)
+        {
+            await GetTasks();
+        }
+        else
+        {
+            taskList = await Http.GetFromJsonAsync<List<ApplicationTask>>("Task/Category/" + _category);
+        }
+    }
+}
