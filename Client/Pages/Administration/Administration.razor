@@ -13,14 +13,14 @@
             color: #4d4d4d;
         }
     </style>
+
     <AuthorizeView>
         <Authorized>
 
             <h2>Administration</h2>
             <p>Administratorside</p>
-            <br />
 
-            <div style="float: left; margin-bottom: 5px">
+            <div style="text-align: right; margin-bottom: 5px">
                 <button type="button" class="btn btn-primary"
                         @onclick='@(() => UriHelper.NavigateTo("/roles"))'>
                     Administrer roller

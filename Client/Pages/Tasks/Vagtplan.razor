@@ -61,12 +61,12 @@
                             @if (_task.Type == "Frivillig")
                             {
                                 <tr>
-                                    <td>@_task.Category</td>
-                                    <td>@_task.Description</td>
-                                    <td>@_task.Location</td>
-                                    <td>@_task.Coordinator</td>
-                                    <td>@_task.StartTime.ToString("dd-MM-yyyy HH:mm")</td>
-                                    <td>@_task.StopTime.ToString("dd-MM-yyyy HH:mm")</td>
+                                    <td>@_task.GetCategory()</td>
+                                    <td>@_task.GetDescription()</td>
+                                    <td>@_task.GetLocation()</td>
+                                    <td>@_task.GetCoordinator()</td>
+                                    <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                    <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
                                 </tr>
                             }
                         }
