@@ -34,6 +34,18 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
 
         public class InputModel
         {
+            [StringLength(100, ErrorMessage = "Fornavnet skal være på mellem {2} og {1} bogstaver.", MinimumLength = 1)]
+            [Display(Name = "Fornavn")]
+            public string FirstName { get; set; }
+
+            [StringLength(100, ErrorMessage = "Efternavnet skal være på mellem {2} og {1} bogstaver.", MinimumLength = 1)]
+            [Display(Name = "Efternavn")]
+            public string LastName { get; set; }
+
+            [DataType(DataType.Date)]
+            [Display(Name = "Fødselsdato")]
+            public DateTime BirthDate { get; set; }
+
             [Phone]
             [Display(Name = "Telefonnummer")]
             public string PhoneNumber { get; set; }
@@ -44,10 +56,16 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            var firstName = user.FirstName;
+            var lastName = user.LastName;
+            var birthDate = user.BirthDate;
             Username = userName;
 
             Input = new InputModel
             {
+                FirstName = firstName,
+                LastName = lastName,
+                BirthDate = birthDate,
                 PhoneNumber = phoneNumber
             };
         }

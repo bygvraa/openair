@@ -60,7 +60,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
             [Required(ErrorMessage = "Indtast en fødselsdato")]
             [DataType(DataType.Date)]
             [Display(Name = "Fødselsdato")]
-            public DateTime BirthDay { get; set; }
+            public DateTime BirthDate { get; set; }
 
             [Required(ErrorMessage = "Indtast en mailadresse")]
             [EmailAddress]
@@ -94,7 +94,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
                 var user = new ApplicationUser {
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    BirthDate = Input.BirthDay,
+                    BirthDate = Input.BirthDate,
                     UserName = Input.Email, 
                     Email = Input.Email, 
                     Created = DateTime.UtcNow,
