@@ -16,11 +16,12 @@ namespace OpenAir.Shared.Models
         public override string Email { get; set; }
         public string Password { get; set; }
         public DateTime BirthDate { get; set; }
+        public string Skills { get; set; }
         public DateTime Created { get; set; }
         public DateTime Modified { get; set; }
 
         public ApplicationUser() { }
-        public ApplicationUser(string Id, string FirstName, string LastName, string Email, string Password, DateTime BirthDate, DateTime Created)
+        public ApplicationUser(string Id, string FirstName, string LastName, string Email, string Password, DateTime BirthDate, string Skills, DateTime Created)
         {
             this.Id = Id;
             this.FirstName = FirstName;
@@ -28,6 +29,7 @@ namespace OpenAir.Shared.Models
             this.Email = Email;
             this.Password = Password;
             this.BirthDate = BirthDate;
+            this.Skills = Skills;
             this.Created = Created;
         }
 
@@ -43,5 +45,7 @@ namespace OpenAir.Shared.Models
         public DateTime GetCreated() { return Created; }
 
         public DateTime GetModified() { return Modified; }
+
+        public string GetSkills() { return Skills; }
     }
 }

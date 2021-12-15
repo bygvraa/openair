@@ -67,7 +67,7 @@
 
                     await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Price, ticket.Email));
                     await js.InvokeVoidAsync("alert", $"Reseveret");
-                    UriHelper.NavigateTo("/Index");
+                    UriHelper.NavigateTo("/cart");
                 }
                 else
                 {
