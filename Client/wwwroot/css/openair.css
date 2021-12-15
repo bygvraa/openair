@@ -181,12 +181,12 @@
 }
 
 /*Frivillig tilmeldingsside*/
-
-.frivillig_tekst{
+.frivillig_tekst {
+    color: black;
     text-align: center;
-    padding: 100px;
-
+    padding: 20px 100px 100px;
 }
+
 /* Billetside */
 .container_billet {
     display: grid;

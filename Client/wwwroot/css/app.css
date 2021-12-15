@@ -1,11 +1,14 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans');
 
 html, body {
     font-family: 'Work Sans';
+    color: #4d4d4d;
+    margin: 0;
     /*    background-color: #B3D8FF;
     background-image: url(../images/skyer.png);*/
-    /*    background: linear-gradient(#81bbf885,#2f93fc85,#2586ec85,#0455ab85) scroll, url(../images/skyer.png) fixed;
-*/ background-repeat: no-repeat;
+    /*    background: linear-gradient(#81bbf885,#2f93fc85,#2586ec85,#0455ab85) scroll, url(../images/skyer.png) fixed;*/
+    background-repeat: no-repeat;
     background-size: cover;
 }
 
