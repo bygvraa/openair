@@ -8,7 +8,7 @@
     <AuthorizeView>
         <Authorized>
 
-            <h2>Administration</h2>
+            <h2>ADMINISTRATION</h2>
             <p>Administratorside</p>
 
             <div style="text-align: right; margin-bottom: 5px">
@@ -32,8 +32,7 @@
                             <th>Fødselsdato</th>
                             <th>Oprettelsesdato</th>
                             <th>Seneste ændring</th>
-                            <th style="width: 0px">&nbsp;</th>
-                            <th style="width: 0px">&nbsp;</th>
+                            <th>&nbsp;</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -45,12 +44,11 @@
                                 <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
                                 <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
                                 <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                                <td>
+                                <td class="text-right">
                                     <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
                                         <span class="oi oi-wrench" aria-hidden="true"></span>
                                     </button>
-                                </td>
-                                <td>
+
                                     <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
                                         <span class="oi oi-trash" aria-hidden="true"></span>
                                     </button>

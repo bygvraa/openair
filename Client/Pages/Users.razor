@@ -8,8 +8,8 @@
 <AuthorizeView>
     <Authorized>
 
-        <h2>Frivillige</h2>
-        <p>Liste over alle frivillige</p>
+        <h2>FRIVILLIGE OG KONTAKTPERSONER</h2>
+        <p>Liste over alle frivillige og kontaktpersoner for diverse foreninger.</p>
 
         <div style="text-align: right; margin-bottom: 5px">
             <button type="button" class="btn btn-primary"
@@ -27,32 +27,52 @@
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
-                        <th>Navn</th>
+                        <th>Person</th>
                         <th>Email</th>
                         <th>Fødselsdato</th>
                         <th>Kompetencer</th>
                         <th>Oprettelsesdato</th>
                         <th>Seneste ændring</th>
-                        <th style="width: 0px">&nbsp;</th>
-                        <th style="width: 0px">&nbsp;</th>
+                        <th>&nbsp;</th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var _user in userList)
                     {
                         <tr>
-                            <td>@_user.GetFullName()</td>
+                            <td data-toggle="tooltip" title="Frivillig">
+                                <span class="oi oi-person mr-2"></span>
+                                @_user.GetFullName()</td>
                             <td>@_user.GetEmail()</td>
                             <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
                             <td>@_user.GetSkills()</td>
                             <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>
+                            <td class="text-right">
                                 <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
                                     <span class="oi oi-wrench" aria-hidden="true"></span>
                                 </button>
+                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                    <span class="oi oi-trash" aria-hidden="true"></span>
+                                </button>
                             </td>
-                            <td>
+                        </tr>
+                    }
+                    @foreach (var _user in teamList)
+                    {
+                        <tr>
+                            <td data-toggle="tooltip" title="Kontaktperson for en organisation">
+                                <span class="oi oi-people mr-2" aria-hidden="true"></span>
+                                @_user.GetFullName()</td>
+                            <td>@_user.GetEmail()</td>
+                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                            <td>@_user.GetSkills()</td>
+                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                            <td class="text-right">
+                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                    <span class="oi oi-wrench" aria-hidden="true"></span>
+                                </button>
                                 <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
                                     <span class="oi oi-trash" aria-hidden="true"></span>
                                 </button>
@@ -88,7 +108,7 @@
                                         <label for="volunteer" class="control-label"> Email</label>
                                         <input type="text" for="volunteer" class="form-control" @bind="@user.Email" /><br />
 
-                                        <label for="skills" class="control-label"> Email</label>
+                                        <label for="skills" class="control-label"> Kompetencer</label>
                                         <textarea type="text" for="skills" class="form-control" @bind="@user.Skills" /><br />
 
                                     </div>
@@ -125,6 +145,7 @@
 
 @code {
     private List<ApplicationUser> userList;
+    private List<ApplicationUser> teamList;
     private ApplicationUser user;
 
 
@@ -135,14 +156,14 @@
 
         if (user.Identity.IsAuthenticated)
         {
-            //await GetUsers();
-            await GetUsersInRole("Frivillig");
+            await GetUsers();
         }
     }
 
     protected async Task GetUsers()
     {
-        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("User");
+        userList = await GetUsersInRole("Frivillig");
+        teamList = await GetUsersInRole("Kontaktperson");
     }
 
     protected async Task EditUser(string id)
@@ -150,7 +171,7 @@
         user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
 
         this.isEdit = true;
-        //await GetUsers().ConfigureAwait(false);
+        await GetUsers().ConfigureAwait(false);
     }
 
     protected async Task SaveUser()
@@ -158,7 +179,7 @@
         await Http.PutAsJsonAsync("User", user);
 
         this.isEdit = false;
-        await GetUsersInRole("Frivillig");
+        await GetUsers();
     }
 
     protected async Task DeleteUser(string id)
@@ -166,9 +187,9 @@
         await Http.DeleteAsync("User/" + id);
     }
 
-    protected async Task GetUsersInRole(string role)
+    protected async Task<List<ApplicationUser>> GetUsersInRole(string role)
     {
-        userList = await Http.GetFromJsonAsync<List<ApplicationUser>>("Admin/UserRole/" + role);
+        return await Http.GetFromJsonAsync<List<ApplicationUser>>("Admin/UserRole/" + role);
     }
 
     // Modal
