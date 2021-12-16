@@ -9,39 +9,10 @@
     <Authorized>
 
         <h1>SE PRISER PÅ BILLETTER HER</h1>
-        @*@if (TicketListe == null)
-            {
-                <p><em>DER ER LIGE NU IKKE NOGLE TILGÆNGLIGE BILLETTER</em></p>
-            }
-            else
-            {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>BILLETTER</th>
-                            <th>PRIS</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var Ticketsss in TicketListe)
-                        {
-                            <tr>
-                                <td>@Ticketsss.Title</td>
-                                <td>@Ticketsss.Price</td>
-                                <td>
-                                    <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                        <span aria-hidden="true">RESERVER</span>
-                                    </button>
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }*@
-    <div class="container_billet">
-        <div class="card Partout" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
+            <div class="container_billet">
+            <div class="card Partout" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
                 <b> 2499,- DKK </b>
                 <p></p>
                 <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
@@ -81,54 +52,7 @@
             </div>
         </div>
     </div>
-        @*<table class="table">
-                <thead>
-                    <tr>
-                        <th>BILLETTER</th>
-                        <th>PRIS</th>
-                        <th style="width: 0px">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>PARTOUT</td>
-                        <td>2499</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TORSDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>FREDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>LØRDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuyTicket">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>*@
-
+        
     </Authorized>
     <NotAuthorized>
         <h2>HUSK AT VÆRE LOGGET IND FOR AT RESERVERE EN BILLET</h2>
