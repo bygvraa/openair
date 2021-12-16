@@ -59,20 +59,20 @@
     .openair-forside-billede {
         display: block;
         margin: auto;
-        margin-bottom: 10%;
+        margin-bottom: 80px;
     }
 
-.openair-forside-indhold {
-    display: block;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    color: black;
+    .openair-forside-indhold {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: black;
 
-    background-color: #fcfcfc42;
-    /*    backdrop-filter: blur(10px);*/
-}
+        background-color: #fcfcfc42;
+        /*backdrop-filter: blur(10px);*/
+    }
 
 
   
@@ -180,9 +180,15 @@
   
 }
 
-/*Frivillig tilmeldingsside*/
-.frivillig_tekst {
+/* Nyhedsbrev */
+.container_nyhedsbrev {
+    margin-top: 80px;
+}
+
+/* Frivillig tilmeldingsside */
+.container_frivillig {
     color: black;
+    margin: auto;
     text-align: center;
     padding: 20px 100px 100px;
 }
@@ -227,10 +233,8 @@
     font-size: 17px;
 }
 
-/*email forside*/
 * {
     box-sizing: border-box
-
 }
 
 
@@ -307,6 +311,32 @@ a {
         border: 1px solid #ccc;
     }
 
+    .openair-forside-indhold {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+    }
+
+    .openair-forside-billede {
+        width: 100%;
+    }
+
+    .container_nyhedsbrev {
+        width: 100%;
+    }
+
+    .emateril {
+        width: 100%;
+    }
+
+    .container_frivillig {
+        width: 100%;
+        padding: 0;
+    }
+
     .container_program {
         width: 100%;
         text-align: center;
@@ -317,15 +347,6 @@ a {
         /*    backdrop-filter: blur(10px);*/
         padding: 20px;
         border-radius: 10px;
-    }
-
-    .openair-forside-indhold {
-        width: 100%;
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        color: black;
     }
 }
 

@@ -130,11 +130,10 @@
 
         @if (DeleteDialogOpen)
         {
-            <UserDialog Title="Fjern"
+            <DeleteDialog Title="Fjern"
                         Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
-                        OnClose="@CloseDeleteDialog"
-                        DialogType="UserDialog.Type.DeleteCancel">
-            </UserDialog>
+                        OnClose="@CloseDeleteDialog">
+            </DeleteDialog>
         }
 
     </Authorized>

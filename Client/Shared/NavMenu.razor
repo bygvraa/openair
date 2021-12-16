@@ -92,14 +92,7 @@
         </ul>
     </div>
 
-
 </nav>
-
-@if (LoginDialogOpen)
-{
-    <LoginDialog OnClose="@(() => LoginDialogOpen = false)">
-    </LoginDialog>
-}
 
 @code {
     // NavMenu
@@ -111,8 +104,5 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-
-    // LoginDialog
-    public bool LoginDialogOpen { get; set; }
 
 }

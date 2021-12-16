@@ -145,12 +145,10 @@
 
         @if (DeleteDialogOpen)
         {
-            <UserDialog Title="Fjern vagt"
+            <DeleteDialog Title="Fjern vagt"
                         Text="Er du sikker på, at du ønsker at slette denne vagt?"
-                        OnClose="@CloseDeleteDialog"
-                        DialogType="UserDialog.Type.DeleteCancel">
-
-            </UserDialog>
+                        OnClose="@CloseDeleteDialog">
+            </DeleteDialog>
         }
     </Authorized>
     <NotAuthorized>
@@ -209,10 +207,10 @@
         this.isEdit = false;
     }
 
-    // Edit task modal
+    // Edit-task modal
     protected Boolean isEdit = false;
 
-    // Delete task modal
+    // Delete-task modal
     public bool DeleteDialogOpen { get; set; }
 
     private void OpenDeleteDialog(ApplicationTask _task)
