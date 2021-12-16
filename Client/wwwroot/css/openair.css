@@ -177,7 +177,6 @@
     text-align: center;
     padding: 20px;
     color: black;
-  
 }
 
 /* Nyhedsbrev */
@@ -194,15 +193,23 @@
 }
 
 /* Billetside */
+.billet_overskrift {
+    text-align: center;
+    padding: 20px;
+    color: black;
+}
+
 .container_billet {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 20px 20px;
     grid-auto-flow: row;
-    text-align: center;
     grid-template-areas:
         "Partout Billet1 Billet2 Billet3";
+    text-align: center;
+    justify-content: center;
 }
 
     .Partout {

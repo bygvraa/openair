@@ -1,5 +1,4 @@
 ﻿@page "/ticket"
-@using System.Collections.Generic;
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
@@ -8,54 +7,55 @@
 <AuthorizeView>
     <Authorized>
 
-        <h1>SE PRISER PÅ BILLETTER HER</h1>
-            <div class="container_billet">
+        <h1 class="billet_overskrift">SE PRISER PÅ BILLETTER HER</h1>
+        <div class="container_billet">
             <div class="card Partout" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                <b> 2499,- DKK </b>
-                <p></p>
-                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
-                <p></p>
-                <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
+                    <b> 2499,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
+                    <p></p>
+                    <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
 
+                </div>
+            </div>
+            <div class="card Billet1" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
+                    <p></p>
+                    <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
+                </div>
+            </div>
+            <div class="card Billet2" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
+                    <p></p>
+                    <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
+                </div>
+            </div>
+            <div class="card Billet3" style="width: 18rem;">
+                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+                <div class="card-body">
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
+                    <p></p>
+                    <p class="card-text">BANGER BANGER BANGER</p>
+                </div>
             </div>
         </div>
-        <div class="card Billet1" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <b> 899,- DKK </b>
-                <p></p>
-                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
-                <p></p>
-                <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
-            </div>
-        </div>
-        <div class="card Billet2" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <b> 899,- DKK </b>
-                <p></p>
-                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
-                <p></p>
-                <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
-            </div>
-        </div>
-        <div class="card Billet3" style="width: 18rem;">
-            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-                <b> 899,- DKK </b>
-                <p></p>
-                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
-                <p></p>
-                <p class="card-text">BANGER BANGER BANGER</p>
-            </div>
-        </div>
-    </div>
-        
+
     </Authorized>
     <NotAuthorized>
-        <h2>HUSK AT VÆRE LOGGET IND FOR AT RESERVERE EN BILLET</h2>
+
+        <h1 class="billet_overskrift">LOG IND FOR AT RESERVERE EN BILLET</h1>
         <div class="container_billet">
             <div class="card Partout" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
@@ -198,4 +198,3 @@
         }
     }
 }
-
