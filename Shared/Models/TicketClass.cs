@@ -10,16 +10,16 @@ namespace OpenAir.Shared.Models
         [Key]
         public int Id { get; set; }
         public string Title { get; set; }
-        public int Price { get; set; }
+        public int Amount { get; set; }
         public string Email { get; set; }
 
 
         public TicketClass() { }
-        public TicketClass(int Id, string Title, int Price, string Email)
+        public TicketClass(int Id, string Title, int Amount, string Email)
         {
             this.Id = Id;
             this.Title = Title;
-            this.Price = Price;
+            this.Amount = Amount;
             this.Email = Email;
 
         }

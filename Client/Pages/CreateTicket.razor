@@ -24,7 +24,7 @@
                 </select>
             </div>
             <div class="form-group">
-                <input for="Antal" class="form-control" placeholder="Antal" @bind="@ticket.Price" />
+                <input for="Antal" class="form-control" placeholder="Antal" @bind="@ticket.Amount" />
             </div>
             <div class="form-group">
                 <input for="Email" class="form-control" placeholder="Email" @bind="@ticket.Email" />
@@ -48,14 +48,14 @@
 
     async Task AddTicket()
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Vil du resevere {ticket.Price + " billetter til " + ticket.Title}?"))
+        if (await js.InvokeAsync<bool>("confirm", $"Vil du resevere {ticket.Amount + " billetter til " + ticket.Title}?"))
         {
             foreach (var _ticket in ticketsss)
             {
                 if (_ticket.Id != ticket.Id && !string.IsNullOrEmpty(ticket.Title))
                 {
 
-                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Price, ticket.Email));
+                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Amount, ticket.Email));
                     await js.InvokeVoidAsync("alert", $"Reseveret");
                     UriHelper.NavigateTo("/cart");
                 }
