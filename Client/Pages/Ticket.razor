@@ -38,40 +38,49 @@
                     </tbody>
                 </table>
             }*@
-        <div class="container_billet">
-            <div class="card Partout" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">PARTOUT</h5>
-                    <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
-                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-                </div>
-            </div>
-            <div class="card Billet1" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">TORSDAG</h5>
-                    <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
-                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-                </div>
-            </div>
-            <div class="card Billet2" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">FREDAG</h5>
-                    <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
-                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-                </div>
-            </div>
-            <div class="card Billet3" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title">LØRDAG</h5>
-                    <p class="card-text">BANGER BANGER BANGER</p>
-                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
-                </div>
+    <div class="container_billet">
+        <div class="card Partout" style="width: 18rem;">
+            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <b> 2499,- DKK </b>
+                <p></p>
+                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
+                <p></p>
+                <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
+
             </div>
         </div>
+        <div class="card Billet1" style="width: 18rem;">
+            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <b> 899,- DKK </b>
+                <p></p>
+                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
+                <p></p>
+                <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
+            </div>
+        </div>
+        <div class="card Billet2" style="width: 18rem;">
+            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <b> 899,- DKK </b>
+                <p></p>
+                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
+                <p></p>
+                <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
+            </div>
+        </div>
+        <div class="card Billet3" style="width: 18rem;">
+            <img src="/images/ticket.jpg" class="card-img-top" alt="...">
+            <div class="card-body">
+                <b> 899,- DKK </b>
+                <p></p>
+                <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
+                <p></p>
+                <p class="card-text">BANGER BANGER BANGER</p>
+            </div>
+        </div>
+    </div>
         @*<table class="table">
                 <thead>
                     <tr>
@@ -127,37 +136,45 @@
             <div class="card Partout" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">PARTOUT</h5>
+                    <b> 2499,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
+                    <p></p>
                     <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
+
                 </div>
             </div>
             <div class="card Billet1" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">TORSDAG</h5>
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
+                    <p></p>
                     <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
                 </div>
             </div>
             <div class="card Billet2" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">FREDAG</h5>
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
+                    <p></p>
                     <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
                 </div>
             </div>
             <div class="card Billet3" style="width: 18rem;">
                 <img src="/images/ticket.jpg" class="card-img-top" alt="...">
                 <div class="card-body">
-                    <h5 class="card-title">LØRDAG</h5>
+                    <b> 899,- DKK </b>
+                    <p></p>
+                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
+                    <p></p>
                     <p class="card-text">BANGER BANGER BANGER</p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">RESERVER</a>
                 </div>
             </div>
         </div>
-
         @*<h3>BILLETTER</h3>
             <table class="table">
                 <thead>
@@ -213,7 +230,7 @@
 @code{
     private List<TicketClass> TicketListe = new List<TicketClass>();
 
-    private TicketClass ticket;
+    // private TicketClass ticket;
 
     //authorize
     protected override async Task OnInitializedAsync()
