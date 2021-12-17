@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
+
 
 namespace OpenAir.Shared.Models
 {
@@ -14,7 +13,11 @@ namespace OpenAir.Shared.Models
         public string Email { get; set; }
 
 
-        public TicketClass() { }
+        // Konstruktør
+        public TicketClass()
+        {
+
+        }
         public TicketClass(int Id, string Title, int Amount, string Email)
         {
             this.Id = Id;

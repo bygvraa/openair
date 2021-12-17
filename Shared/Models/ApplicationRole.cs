@@ -1,9 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 
 namespace OpenAir.Shared.Models
 {
@@ -19,7 +16,6 @@ namespace OpenAir.Shared.Models
         public ApplicationRole() : base()
         {
         }
-
         public ApplicationRole(string roleName) : base(roleName)
         {
         }

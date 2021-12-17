@@ -122,13 +122,13 @@
         }
     }
 
-    protected async Task BookTask(int task_id, string volunteer_email)
+    protected async Task BookTask(int taskId, string volunteerEmail)
     {
         // Find den specifikke task i db og kald den 'currentTask'
-        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
+        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + taskId);
 
         // Book currentTask ved at indsætte kontaktpersonens email
-        currentTask.Volunteer = volunteer_email;
+        currentTask.VolunteerEmail = volunteerEmail;
 
         // Send currentTask til controller for at indsætte den bookede task i databasen
         await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);
@@ -136,13 +136,13 @@
         await GetTasks();
     }
 
-    protected async Task UnBookTask(int task_id)
+    protected async Task UnBookTask(int taskId)
     {
         // Find den specifikke task i db og kald den 'currentTask'
-        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + task_id);
+        currentTask = await Http.GetFromJsonAsync<ApplicationTask>("Task/" + taskId);
 
         // Fjern booking af currentTask ved at indsætte 'Volunteer'-feltet til null
-        currentTask.Volunteer = null;
+        currentTask.VolunteerEmail = null;
 
         // Send currentTask til controller for at indsættede den i databasen
         await Http.PutAsJsonAsync("Task/UpdateBooking", currentTask);

@@ -14,7 +14,7 @@
                 <div class="card-body">
                     <b> 2499,- DKK </b>
                     <p></p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
                     <p></p>
                     <p class="card-text">OPLEV ALLE KUNSTERE OG FÅ ADGANG TIL FESTIVALEN ALLE 3 DAGE!</p>
 
@@ -25,7 +25,7 @@
                 <div class="card-body">
                     <b> 899,- DKK </b>
                     <p></p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
                     <p></p>
                     <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
                 </div>
@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <b> 899,- DKK </b>
                     <p></p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
                     <p></p>
                     <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
                 </div>
@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <b> 899,- DKK </b>
                     <p></p>
-                    <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
+                    <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
                     <p></p>
                     <p class="card-text">BANGER BANGER BANGER</p>
                 </div>
@@ -171,7 +171,7 @@
     //køb billet /createticket page
     void BuyTicket()
     {
-        UriHelper.NavigateTo("/CreateTicket");
+        UriHelper.NavigateTo("/createticket");
 
     }
 

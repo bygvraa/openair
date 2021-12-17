@@ -2,22 +2,22 @@
 
 namespace OpenAir.Server.Data.Migrations
 {
-    public partial class RenamedTicketPriceToAmount : Migration
+    public partial class RenamedColumnUserPasswordHash : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "Price",
-                table: "ticket",
-                newName: "Amount");
+                name: "Password",
+                table: "user",
+                newName: "PasswordHash");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "Amount",
-                table: "ticket",
-                newName: "Price");
+                name: "PasswordHash",
+                table: "user",
+                newName: "Password");
         }
     }
 }

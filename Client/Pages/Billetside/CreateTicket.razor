@@ -3,9 +3,9 @@
 @inject NavigationManager UriHelper
 @inject IJSRuntime js
 
-@attribute [Authorize(Roles = "Administrator, Frivillig")]
+@attribute [Authorize(Roles = "Administrator, Bruger, Frivillig")]
 
-<h3>RESERVER BILLET</h3>
+<h1 class="billet_overskrift">RESERVER BILLET</h1>
 <hr />
 
 <div class="row" style=" text-align: center; place-content: center">
@@ -14,8 +14,6 @@
             <div class="form-group">
                 <label for="Title">Vælg en billet</label>
                 <select class="form-control" @bind="@ticket.Title">
-
-
                     <option value="">--Vælg--</option>
                     <option value="PARTOUT">PARTOUT</option>
                     <option value="TORSDAG">TORSDAG</option>

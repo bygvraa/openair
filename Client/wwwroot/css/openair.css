@@ -199,6 +199,10 @@
     color: black;
 }
 
+.billet_tekst {
+    text-align: center;
+}
+
 .container_billet {
     display: flex;
     flex-wrap: wrap;
