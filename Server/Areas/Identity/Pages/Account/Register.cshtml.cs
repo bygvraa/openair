@@ -62,6 +62,10 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
             [Display(Name = "Fødselsdato")]
             public DateTime BirthDay { get; set; }
 
+            [Required(ErrorMessage = "Indtast kompetencer")]
+            [Display(Name = "Kompetencer (Bar, Rengøring, Opsætning, Vagt, Madlavning)")]
+            public string Skills { get; set; }
+
             [Required(ErrorMessage = "Indtast en mailadresse")]
             [EmailAddress]
             [Display(Name = "Mailadresse")]
@@ -95,6 +99,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
                     BirthDate = Input.BirthDay,
+                    Skills = Input.Skills,
                     UserName = Input.Email, 
                     Email = Input.Email, 
                     Created = DateTime.UtcNow,
