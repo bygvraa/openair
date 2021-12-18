@@ -13,6 +13,8 @@ namespace OpenAir.Server.Data.Repositories
         Task UpdateTask(ApplicationTask task);
         Task DeleteTask(int id);
 
+        // -------------------------------------------------
+
         Task<List<ApplicationTask>> GetAllTasksCategory(string category);
 
         Task UpdateTaskBooking(ApplicationTask task);

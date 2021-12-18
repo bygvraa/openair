@@ -18,6 +18,11 @@ namespace OpenAir.Server.Controllers
             this.userManager = userManager;
         }
 
+        [HttpGet]
+        public async Task<string> GetName(ApplicationUser user)
+        {
+            return await userManager.GetUserNameAsync(user);
+        }
 
         [HttpGet("{id}")]
         public async Task<List<string>> GetUserRoles(string id)
@@ -30,6 +35,15 @@ namespace OpenAir.Server.Controllers
             return roleList;
         }
 
+
+        [HttpGet("UserRole/{role}")]
+        public async Task<List<ApplicationUser>> GetUsersInRole(string role)
+        {
+            var users = await userManager.GetUsersInRoleAsync(role);
+            var userList = users.ToList();
+
+            return userList;
+        }
 
 
         [HttpPut]

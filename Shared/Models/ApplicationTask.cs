@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace OpenAir.Shared.Models
@@ -15,7 +12,7 @@ namespace OpenAir.Shared.Models
         public string Category { get; set; }
         public string Description { get; set; }
         public string Coordinator { get; set; }
-        public string Volunteer { get; set; }
+        public string VolunteerEmail { get; set; }
         public string Location { get; set; }
         public DateTime StartTime { get; set; }
         public DateTime StopTime { get; set; }
@@ -29,7 +26,7 @@ namespace OpenAir.Shared.Models
         public string GetCategory() { return Category; }
         public string GetDescription() { return Description; }
         public string GetCoordinator() { return Coordinator; }
-        public string GetVolunteer() { return Volunteer; }
+        public string GetVolunteer() { return VolunteerEmail; }
         public string GetLocation() { return Location; }
         public DateTime GetStartTime() { return StartTime; }
         public DateTime GetStopTime() { return StopTime; }

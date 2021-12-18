@@ -59,20 +59,20 @@
     .openair-forside-billede {
         display: block;
         margin: auto;
-        margin-bottom: 10%;
+        margin-bottom: 80px;
     }
 
-.openair-forside-indhold {
-    display: block;
-    width: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    color: black;
+    .openair-forside-indhold {
+        display: block;
+        width: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+        color: black;
 
-    background-color: #fcfcfc42;
-    /*    backdrop-filter: blur(10px);*/
-}
+        background-color: #fcfcfc42;
+        /*backdrop-filter: blur(10px);*/
+    }
 
 
   
@@ -177,26 +177,43 @@
     text-align: center;
     padding: 20px;
     color: black;
-  
 }
 
-/*Frivillig tilmeldingsside*/
+/* Nyhedsbrev */
+.container_nyhedsbrev {
+    margin-top: 80px;
+}
 
-.frivillig_tekst{
+/* Frivillig tilmeldingsside */
+.container_frivillig {
+    color: black;
+    margin: auto;
     text-align: center;
-    padding: 100px;
-
+    padding: 20px 100px 100px;
 }
+
 /* Billetside */
+.billet_overskrift {
+    text-align: center;
+    padding: 20px;
+    color: black;
+}
+
+.billet_tekst {
+    text-align: center;
+}
+
 .container_billet {
-    display: grid;
+    display: flex;
+    flex-wrap: wrap;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr;
     gap: 20px 20px;
     grid-auto-flow: row;
-    text-align: center;
     grid-template-areas:
         "Partout Billet1 Billet2 Billet3";
+    text-align: center;
+    justify-content: center;
 }
 
     .Partout {
@@ -227,10 +244,8 @@
     font-size: 17px;
 }
 
-/*email forside*/
 * {
     box-sizing: border-box
-
 }
 
 
@@ -292,6 +307,14 @@ a {
     text-align: center;
 }
 
+/*billetside*/
+
+.card-img-top {
+    margin-top: 40px;
+    margin-bottom: 20px;
+    box-shadow: 10px;
+    
+}
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
     .topnav a, .topnav input[type=text] {
@@ -307,6 +330,32 @@ a {
         border: 1px solid #ccc;
     }
 
+    .openair-forside-indhold {
+        width: 100%;
+        text-align: center;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        color: black;
+    }
+
+    .openair-forside-billede {
+        width: 100%;
+    }
+
+    .container_nyhedsbrev {
+        width: 100%;
+    }
+
+    .emateril {
+        width: 100%;
+    }
+
+    .container_frivillig {
+        width: 100%;
+        padding: 0;
+    }
+
     .container_program {
         width: 100%;
         text-align: center;
@@ -317,15 +366,6 @@ a {
         /*    backdrop-filter: blur(10px);*/
         padding: 20px;
         border-radius: 10px;
-    }
-
-    .openair-forside-indhold {
-        width: 100%;
-        text-align: center;
-        display: block;
-        margin-left: auto;
-        margin-right: auto;
-        color: black;
     }
 }
 

@@ -80,7 +80,7 @@ namespace OpenAir.Server.Controllers
 
 
         // 
-        [Authorize(Roles = "Administrator, Kontaktperson")]
+        [Authorize(Roles = "Administrator, Kontaktperson, Frivillig")]
         [HttpPut("UpdateBooking")]
         public async Task Book([FromBody] ApplicationTask task)
         {

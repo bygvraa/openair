@@ -10,8 +10,8 @@ using OpenAir.Server.Data;
 namespace OpenAir.Server.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20211214194418_RenamedUserColumnInTaskModel")]
-    partial class RenamedUserColumnInTaskModel
+    [Migration("20211217212548_RenamedColumnTaskVolunteer")]
+    partial class RenamedColumnTaskVolunteer
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -20,56 +20,6 @@ namespace OpenAir.Server.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 63)
                 .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
-
-            modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.DeviceFlowCodes", b =>
-                {
-                    b.Property<string>("UserCode")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<string>("ClientId")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("Data")
-                        .IsRequired()
-                        .HasMaxLength(50000)
-                        .HasColumnType("character varying(50000)");
-
-                    b.Property<string>("Description")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<string>("DeviceCode")
-                        .IsRequired()
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.Property<DateTime?>("Expiration")
-                        .IsRequired()
-                        .HasColumnType("timestamp without time zone");
-
-                    b.Property<string>("SessionId")
-                        .HasMaxLength(100)
-                        .HasColumnType("character varying(100)");
-
-                    b.Property<string>("SubjectId")
-                        .HasMaxLength(200)
-                        .HasColumnType("character varying(200)");
-
-                    b.HasKey("UserCode");
-
-                    b.HasIndex("DeviceCode")
-                        .IsUnique();
-
-                    b.HasIndex("Expiration");
-
-                    b.ToTable("device_code");
-                });
 
             modelBuilder.Entity("IdentityServer4.EntityFramework.Entities.PersistedGrant", b =>
                 {
@@ -295,7 +245,12 @@ namespace OpenAir.Server.Data.Migrations
                     b.Property<string>("Type")
                         .HasColumnType("text");
 
+                    b.Property<string>("VolunteerEmail")
+                        .HasColumnType("character varying(256)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("VolunteerEmail");
 
                     b.ToTable("task");
                 });
@@ -319,6 +274,7 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("Email")
+                        .IsRequired()
                         .HasMaxLength(256)
                         .HasColumnType("character varying(256)");
 
@@ -363,6 +319,9 @@ namespace OpenAir.Server.Data.Migrations
                     b.Property<string>("SecurityStamp")
                         .HasColumnType("text");
 
+                    b.Property<string>("Skills")
+                        .HasColumnType("text");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("boolean");
 
@@ -389,16 +348,18 @@ namespace OpenAir.Server.Data.Migrations
                         .HasColumnType("integer")
                         .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn);
 
-                    b.Property<string>("Email")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Price")
+                    b.Property<int>("Amount")
                         .HasColumnType("integer");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("character varying(256)");
 
                     b.Property<string>("Title")
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Email");
 
                     b.ToTable("ticket");
                 });
@@ -452,6 +413,22 @@ namespace OpenAir.Server.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("OpenAir.Shared.Models.ApplicationTask", b =>
+                {
+                    b.HasOne("OpenAir.Shared.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("VolunteerEmail")
+                        .HasPrincipalKey("Email");
+                });
+
+            modelBuilder.Entity("OpenAir.Shared.Models.TicketClass", b =>
+                {
+                    b.HasOne("OpenAir.Shared.Models.ApplicationUser", null)
+                        .WithMany()
+                        .HasForeignKey("Email")
+                        .HasPrincipalKey("Email");
                 });
 #pragma warning restore 612, 618
         }

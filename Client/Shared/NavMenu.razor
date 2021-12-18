@@ -10,7 +10,7 @@
     </div>
 
     <!-- Registrer + log ind/ud -->
-    <ul class="nav flex-row login-box login-collapse ml-auto">
+    <ul class="nav flex-row login-collapse ml-auto">
         <LoginDisplay />
     </ul>
 
@@ -35,12 +35,15 @@
                 </NavLink>
             </li>
 
-
-            <li class="nav-item">
-                <NavLink class="nav-link" href="blivfrivillig">
-                    <span class="oi oi-heart" aria-hidden="true"></span> BLIV FRIVILLIG!
-                </NavLink>
-            </li>
+            <AuthorizeView>
+                <NotAuthorized>
+                    <li class="nav-item">
+                        <NavLink class="nav-link" href="blivfrivillig">
+                            <span class="oi oi-heart" aria-hidden="true"></span> BLIV FRIVILLIG!
+                        </NavLink>
+                    </li>
+                </NotAuthorized>
+            </AuthorizeView>
 
             <AuthorizeView Roles="Administrator, Kontaktperson">
                 <li class="nav-item">
@@ -53,7 +56,7 @@
             <AuthorizeView Roles="Administrator, Frivillig">
                 <li class="nav-item">
                     <NavLink class="nav-link" href="vagtplan">
-                        <span class="oi oi-list" aria-hidden="true"></span> Vagtplan
+                        <span class="oi oi-clock" aria-hidden="true"></span> Vagtplan
                     </NavLink>
                 </li>
             </AuthorizeView>
@@ -81,22 +84,15 @@
                     </NavLink>
                 </li>
             </AuthorizeView>
+        </ul>
 
+        <!-- Registrer + log ind/ud -->
+        <ul class="navbar-nav login-extend ml-auto">
+            <LoginDisplay />
         </ul>
     </div>
 
-    <!-- Registrer + log ind/ud -->
-    <ul class="nav flex-row login-box login-extend ml-auto">
-        <LoginDisplay />
-    </ul>
-
 </nav>
-
-@if (LoginDialogOpen)
-{
-    <LoginDialog OnClose="@(() => LoginDialogOpen = false)">
-    </LoginDialog>
-}
 
 @code {
     // NavMenu
@@ -108,8 +104,5 @@
     {
         collapseNavMenu = !collapseNavMenu;
     }
-
-    // LoginDialog
-    public bool LoginDialogOpen { get; set; }
 
 }

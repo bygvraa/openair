@@ -40,7 +40,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
             public string OldPassword { get; set; }
 
             [Required(ErrorMessage = "Indtast ny adgangskode")]
-            [StringLength(100, ErrorMessage = "Adgangskoden skal være på mellem {2} og {1} tegn.", MinimumLength = 6)]
+            [StringLength(100, ErrorMessage = "Adgangskoden skal være på mellem {2} og {1} tegn.", MinimumLength = 1)]
             [DataType(DataType.Password)]
             [Display(Name = "Ny adgangskode")]
             public string NewPassword { get; set; }
@@ -93,7 +93,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
 
             await _signInManager.RefreshSignInAsync(user);
             _logger.LogInformation("User changed their password successfully.");
-            StatusMessage = "Your password has been changed.";
+            StatusMessage = "Din adgangskode er blevet ændret.";
 
             return RedirectToPage();
         }

@@ -2,22 +2,22 @@
 
 namespace OpenAir.Server.Data.Migrations
 {
-    public partial class RenamedUserColumnInTaskModel : Migration
+    public partial class RenamedColumnUserPasswordHash : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "User",
-                table: "task",
-                newName: "Coordinator");
+                name: "Password",
+                table: "user",
+                newName: "PasswordHash");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.RenameColumn(
-                name: "Coordinator",
-                table: "task",
-                newName: "User");
+                name: "PasswordHash",
+                table: "user",
+                newName: "Password");
         }
     }
 }
