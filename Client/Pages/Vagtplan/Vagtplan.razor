@@ -31,55 +31,56 @@
                     }
                 </select>
             </div>
-
-            <table class="table table-borderless table-openair table-hover">
-                <thead>
-                    <tr>
-                        <th>Jobkategori</th>
-                        <th>Beskrivelse</th>
-                        <th>Lokation</th>
-                        <th>Koordinator</th>
-                        <th>Starttid</th>
-                        <th>Sluttid</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var _task in taskList)
-                    {
-                        @if (_task.Type == "Frivillig")
+            <div class="table-responsive">
+                <table class="table table-borderless table-openair table-hover">
+                    <thead>
+                        <tr>
+                            <th>Jobkategori</th>
+                            <th>Beskrivelse</th>
+                            <th>Lokation</th>
+                            <th>Koordinator</th>
+                            <th>Starttid</th>
+                            <th>Sluttid</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var _task in taskList)
                         {
-                            <tr>
-                                <td>@_task.GetCategory()</td>
-                                <td>@_task.GetDescription()</td>
-                                <td>@_task.GetLocation()</td>
-                                <td>@_task.GetCoordinator()</td>
-                                <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
-                                <td class="text-right">
-                                    @if (_task.GetVolunteer() == context.User.Identity.Name)
-                                    {
-                                        <button class="btn btn-danger openair-red-btn" style="padding: 1px 6px"
-                                                @onclick="@(async () => await UnBookTask(_task.GetId()))">
-                                            <span aria-hidden="true">Fjern dig fra vagt</span>
-                                        </button>
-                                    }
-                                    else if (_task.GetVolunteer() is not null)
-                                    {
-                                        <span aria-hidden="true">Denne vagt er allerede optaget</span>
-                                    }
-                                    else
-                                    {
-                                        <button class="btn btn-primary openair-blue-btn" style="padding: 1px 6px"
-                                                @onclick="@(async () => await BookTask(_task.GetId(), context.User.Identity.Name))">
-                                            <span aria-hidden="true">Tag vagt</span>
-                                        </button>
-                                    }
-                                </td>
-                            </tr>
+                            @if (_task.Type == "Frivillig")
+                            {
+                                <tr>
+                                    <td>@_task.GetCategory()</td>
+                                    <td>@_task.GetDescription()</td>
+                                    <td>@_task.GetLocation()</td>
+                                    <td>@_task.GetCoordinator()</td>
+                                    <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                    <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                    <td class="text-right">
+                                        @if (_task.GetVolunteer() == context.User.Identity.Name)
+                                        {
+                                            <button class="btn btn-danger openair-red-btn" style="padding: 1px 6px"
+                                                    @onclick="@(async () => await UnBookTask(_task.GetId()))">
+                                                <span aria-hidden="true">Fjern dig fra vagt</span>
+                                            </button>
+                                        }
+                                        else if (_task.GetVolunteer() is not null)
+                                        {
+                                            <span aria-hidden="true">Denne vagt er allerede optaget</span>
+                                        }
+                                        else
+                                        {
+                                            <button class="btn btn-primary openair-blue-btn" style="padding: 1px 6px"
+                                                    @onclick="@(async () => await BookTask(_task.GetId(), context.User.Identity.Name))">
+                                                <span aria-hidden="true">Tag vagt</span>
+                                            </button>
+                                        }
+                                    </td>
+                                </tr>
+                            }
                         }
-                    }
-                </tbody>
-            </table>
+                    </tbody>
+                </table>
+            </div>
         }
 
     </Authorized>

@@ -12,7 +12,7 @@
         <p>Side til at administrere vagter for frivillige og kontaktpersoner for diverse foreninger.</p>
 
         <div style="text-align: right; margin-bottom: 5px">
-            <button type="button" class="btn btn-primary"
+            <button type="button" class="btn btn-success"
                     @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
                 Opret vagt
             </button>
@@ -24,46 +24,47 @@
         }
         else
         {
-            <table class="table table-borderless table-openair table-hover">
-                <thead>
-                    <tr>
-                        <th>Jobgruppe</th>
-                        <th>Jobkategori</th>
-                        <th>Beskrivelse</th>
-                        <th>Lokation</th>
-                        <th>Koordinator</th>
-                        <th>Frivillig</th>
-                        <th>Starttid</th>
-                        <th>Sluttid</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var _task in taskList)
-                    {
+            <div class="table-responsive">
+                <table class="table table-borderless table-openair table-hover">
+                    <thead>
                         <tr>
-                            <td>@_task.GetUserType()</td>
-                            <td>@_task.GetCategory()</td>
-                            <td>@_task.GetDescription()</td>
-                            <td>@_task.GetLocation()</td>
-                            <td>@_task.GetCoordinator()</td>
-                            <td>@_task.GetVolunteer()</td>
-                            <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_task)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
+                            <th>Jobgruppe</th>
+                            <th>Jobkategori</th>
+                            <th>Beskrivelse</th>
+                            <th>Lokation</th>
+                            <th>Koordinator</th>
+                            <th>Frivillig</th>
+                            <th>Starttid</th>
+                            <th>Sluttid</th>
+                            <th>&nbsp;</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var _task in taskList)
+                        {
+                            <tr>
+                                <td>@_task.GetUserType()</td>
+                                <td>@_task.GetCategory()</td>
+                                <td>@_task.GetDescription()</td>
+                                <td>@_task.GetLocation()</td>
+                                <td>@_task.GetCoordinator()</td>
+                                <td>@_task.GetVolunteer()</td>
+                                <td>@_task.GetStartTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_task.GetStopTime().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td class="text-right">
+                                    <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditTask(_task.Id))">
+                                        <span class="oi oi-wrench" aria-hidden="true"></span>
+                                    </button>
 
+                                    <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_task)">
+                                        <span class="oi oi-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             if (isEdit)
             {
                 <div class="modal" tabindex="-1" style="display: block" role="dialog">
@@ -94,14 +95,10 @@
                                             <label for="categories">Vælg en jobkategori</label>
                                             <select class="form-control" @bind="@task.Category" required>
                                                 <option value="">--- Vælg ---</option>
-                                                <option value="Sceneopsætning">Sceneopsætning</option>
-                                                <option value="Rengøring">Rengøring</option>
-                                                <option value="Bar">Bar</option>
-                                                <option value="Entre">Entre</option>
-                                                <option value="Vagt">Vagt</option>
-                                                <option value="Madbod">Madbod</option>
-                                                <option value="Backstage">Backstage</option>
-                                                <option value="Andet">Andet</option>
+                                                @foreach (var _category in Enum.GetValues(typeof(Category)))
+                                                {
+                                                    <option value="@_category">@_category</option>
+                                                }
                                             </select>
                                         </div>
 
@@ -146,8 +143,8 @@
         @if (DeleteDialogOpen)
         {
             <DeleteDialog Title="Fjern vagt"
-                        Text="Er du sikker på, at du ønsker at slette denne vagt?"
-                        OnClose="@CloseDeleteDialog">
+                          Text="Er du sikker på, at du ønsker at slette denne vagt?"
+                          OnClose="@CloseDeleteDialog">
             </DeleteDialog>
         }
     </Authorized>

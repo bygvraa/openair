@@ -40,7 +40,7 @@
             transition-duration: 0.2s;
         }
 
-/* Knap */
+/* Knapper */
     .openair-blue-btn {
         color: #fff;
         background-color: #1b6ec261;
@@ -48,7 +48,20 @@
         white-space: nowrap;
     }
 
-    .openair-red-btn {
+    .openair-blue-btn-sm {
+        width: 40px;
+        height: 35px;
+        margin: 1px;
+        color: #fff;
+        background-color: #1b6ec261;
+        border-color: #ffffff0a;
+        white-space: nowrap;
+    }
+
+    .openair-red-btn-sm {
+        width: 40px;
+        height: 35px;
+        margin: 1px;
         color: #fff;
         background-color: #ea000061;
         border-color: #ffffff0a;

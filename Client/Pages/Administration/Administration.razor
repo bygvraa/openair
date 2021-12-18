@@ -8,11 +8,11 @@
 <AuthorizeView>
     <Authorized>
 
-        <h2>ADMINISTRATION</h2>
+        <h2>Brugeradministration</h2>
         <p>Administratorside</p>
 
-        <div style="text-align: right; margin-bottom: 5px">
-            <button type="button" class="btn btn-primary"
+        <div class="d-flex justify-content-between">
+            <button type="button" class="btn btn-primary mb-2 text-left"
                     @onclick='@(() => UriHelper.NavigateTo("/roles"))'>
                 Administrer roller
             </button>
@@ -24,40 +24,41 @@
         }
         else
         {
-            <table class="table table-borderless table-openair table-hover" style="backdrop-filter: none">
-                <thead>
-                    <tr>
-                        <th>Navn</th>
-                        <th>Email</th>
-                        <th>Fødselsdato</th>
-                        <th>Oprettelsesdato</th>
-                        <th>Seneste ændring</th>
-                        <th>&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var _user in userList)
-                    {
+            <div class="table-responsive">
+                <table class="table table-borderless table-openair table-hover" style="backdrop-filter: none">
+                    <thead>
                         <tr>
-                            <td>@_user.GetFullName()</td>
-                            <td>@_user.GetEmail()</td>
-                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
-                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
+                            <th>Navn</th>
+                            <th>Email</th>
+                            <th>Fødselsdato</th>
+                            <th>Oprettelsesdato</th>
+                            <th>Seneste ændring</th>
+                            <th>&nbsp;</th>
                         </tr>
-                    }
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach (var _user in userList)
+                        {
+                            <tr>
+                                <td>@_user.GetFullName()</td>
+                                <td>@_user.GetEmail()</td>
+                                <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                                <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                                <td class="text-right">
+                                    <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                        <span class="oi oi-wrench" aria-hidden="true"></span>
+                                    </button>
 
+                                    <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                        <span class="oi oi-trash" aria-hidden="true"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
             if (isEdit)
             {
                 <div class="modal" tabindex="-1" style="display: block" role="dialog">
