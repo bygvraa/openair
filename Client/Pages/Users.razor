@@ -13,10 +13,11 @@
 
         @if (userList == null)
         {
-            <p><em>Indlæser, vent venligst...</em></p>
+        <p><em>Indlæser, vent venligst...</em></p>
         }
         else
         {
+        <div class="table-responsive">
             <table class="table table-borderless table-openair table-hover">
                 <thead>
                     <tr>
@@ -32,101 +33,103 @@
                 <tbody>
                     @foreach (var _user in userList)
                     {
-                        <tr>
-                            <td data-toggle="tooltip" title="Frivillig">
-                                <span class="oi oi-person mr-2"></span>
-                                @_user.GetFullName()</td>
-                            <td>@_user.GetEmail()</td>
-                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
-                            <td>@_user.GetSkills()</td>
-                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-                                <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td data-toggle="tooltip" title="Frivillig">
+                            <span class="oi oi-person mr-2"></span>
+                            @_user.GetFullName()
+                        </td>
+                        <td>@_user.GetEmail()</td>
+                        <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                        <td>@_user.GetSkills()</td>
+                        <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td class="text-right">
+                            <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                <span class="oi oi-wrench" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                <span class="oi oi-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
                     }
                     @foreach (var _user in teamList)
                     {
-                        <tr>
-                            <td data-toggle="tooltip" title="Kontaktperson for en organisation">
-                                <span class="oi oi-people mr-2" aria-hidden="true"></span>
-                                @_user.GetFullName()</td>
-                            <td>@_user.GetEmail()</td>
-                            <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
-                            <td>@_user.GetSkills()</td>
-                            <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
-                            <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
-                                    <span class="oi oi-wrench" aria-hidden="true"></span>
-                                </button>
-                                <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
-                                    <span class="oi oi-trash" aria-hidden="true"></span>
-                                </button>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td data-toggle="tooltip" title="Kontaktperson for en organisation">
+                            <span class="oi oi-people mr-2" aria-hidden="true"></span>
+                            @_user.GetFullName()
+                        </td>
+                        <td>@_user.GetEmail()</td>
+                        <td>@_user.GetBirthDate().ToString("d. MMM yyyy")</td>
+                        <td>@_user.GetSkills()</td>
+                        <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
+                        <td class="text-right">
+                            <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                <span class="oi oi-wrench" aria-hidden="true"></span>
+                            </button>
+                            <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                <span class="oi oi-trash" aria-hidden="true"></span>
+                            </button>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>
-
+        </div>
             if (isEdit)
             {
-                <div class="modal" tabindex="-1" style="display: block" role="dialog">
-                    <div class="modal-dialog">
-                        <div class="modal-content modal-openair">
-                            <div class="modal-header" style="border: none">
-                                <h3 class="modal-title">Rediger bruger</h3>
-                                <button type="button" class="close" @onclick="@this.CloseModal">
-                                    <span aria-hidden="true">
-                                        &times;
-                                    </span>
-                                </button>
+        <div class="modal" tabindex="-1" style="display: block" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content modal-openair">
+                    <div class="modal-header" style="border: none">
+                        <h3 class="modal-title">Rediger bruger</h3>
+                        <button type="button" class="close" @onclick="@this.CloseModal">
+                            <span aria-hidden="true">
+                                &times;
+                            </span>
+                        </button>
+                    </div>
+                    <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                        <form>
+                            <div class="form-group">
+
+                                <label for="firstname" class="control-label"> Fornavn</label>
+                                <input type="text" for="firstname" class="form-control" @bind="@user.FirstName" /><br />
+
+                                <label for="lastname" class="control-label"> Efternavn</label>
+                                <input type="text" for="lastname" class="form-control" @bind="@user.LastName" /><br />
+
+                                <label for="volunteer" class="control-label"> Email</label>
+                                <input type="text" for="volunteer" class="form-control" @bind="@user.Email" /><br />
+
+                                <label for="skills" class="control-label"> Kompetencer</label>
+                                <textarea type="text" for="skills" class="form-control" @bind="@user.Skills" /><br />
+
                             </div>
-                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
-                                <form>
-                                    <div class="form-group">
-
-                                        <label for="firstname" class="control-label"> Fornavn</label>
-                                        <input type="text" for="firstname" class="form-control" @bind="@user.FirstName" /><br />
-
-                                        <label for="lastname" class="control-label"> Efternavn</label>
-                                        <input type="text" for="lastname" class="form-control" @bind="@user.LastName" /><br />
-
-                                        <label for="volunteer" class="control-label"> Email</label>
-                                        <input type="text" for="volunteer" class="form-control" @bind="@user.Email" /><br />
-
-                                        <label for="skills" class="control-label"> Kompetencer</label>
-                                        <textarea type="text" for="skills" class="form-control" @bind="@user.Skills" /><br />
-
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="modal-footer" style="border: none">
-                                <button type="button" class="btn btn-warning" @onclick="@CloseModal">
-                                    Fortryd
-                                </button>
-                                <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveUser())" data-dismiss="modal">
-                                    Gem
-                                </button>
-                            </div>
-                        </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer" style="border: none">
+                        <button type="button" class="btn btn-warning" @onclick="@CloseModal">
+                            Fortryd
+                        </button>
+                        <button type="button" class="btn btn-block btn-success" @onclick="@(async () => await SaveUser())" data-dismiss="modal">
+                            Gem
+                        </button>
                     </div>
                 </div>
+            </div>
+        </div>
             }
-        }
+            }
 
         @if (DeleteDialogOpen)
         {
-            <DeleteDialog Title="Fjern"
-                        Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
-                        OnClose="@CloseDeleteDialog">
-            </DeleteDialog>
+        <DeleteDialog Title="Fjern"
+                      Text="Er du sikker på, at du ønsker du at fjerne denne bruger?"
+                      OnClose="@CloseDeleteDialog">
+        </DeleteDialog>
         }
 
     </Authorized>
