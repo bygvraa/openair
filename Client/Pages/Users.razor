@@ -34,7 +34,7 @@
                     @foreach (var _user in userList)
                     {
                     <tr>
-                        <td data-toggle="tooltip" title="Frivillig">
+                        <td class="text-nowrap" data-toggle="tooltip" title="Frivillig" >
                             <span class="oi oi-person mr-2"></span>
                             @_user.GetFullName()
                         </td>
@@ -56,7 +56,7 @@
                     @foreach (var _user in teamList)
                     {
                     <tr>
-                        <td data-toggle="tooltip" title="Kontaktperson for en organisation">
+                        <td class="text-nowrap" data-toggle="tooltip" title="Kontaktperson for en organisation" >
                             <span class="oi oi-people mr-2" aria-hidden="true"></span>
                             @_user.GetFullName()
                         </td>
