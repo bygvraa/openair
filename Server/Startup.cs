@@ -122,7 +122,6 @@ namespace OpenAir.Server
             app.UseAuthorization();
 
 
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapRazorPages();

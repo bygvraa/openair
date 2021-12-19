@@ -20,7 +20,7 @@
         <div class="table-responsive">
             <table class="table table-borderless table-openair table-hover">
                 <thead>
-                    <tr>
+                    <tr class="text-nowrap">
                         <th>Person</th>
                         <th>Email</th>
                         <th>Fødselsdato</th>
@@ -80,9 +80,9 @@
         </div>
             if (isEdit)
             {
-        <div class="modal" tabindex="-1" style="display: block" role="dialog">
+        <div class="modal modal-openair" tabindex="-1" style="display: block" role="dialog">
             <div class="modal-dialog">
-                <div class="modal-content modal-openair">
+                <div class="modal-content modal-content-openair">
                     <div class="modal-header" style="border: none">
                         <h3 class="modal-title">Rediger bruger</h3>
                         <button type="button" class="close" @onclick="@this.CloseModal">
@@ -91,7 +91,7 @@
                             </span>
                         </button>
                     </div>
-                    <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                    <div class="modal-body modal-body-openair">
                         <form>
                             <div class="form-group">
 

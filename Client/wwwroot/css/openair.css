@@ -1,14 +1,26 @@
 ﻿
 /* Modal */
     .modal-openair {
-        background-color: #f7f7f7c9;
-        backdrop-filter: blur(10px);
+        background-color: #f7f7f780;
+    }
+
+    .modal-content-openair {
+        background-color: #f7f7f7fa;
+        margin-top: 100px;
+        border: solid #cfcfcf4f 4px;
+        border-radius: 8px;
+        /*backdrop-filter: blur(10px);*/
+    }
+
+    .modal-body-openair {
+        max-height: 70vh;
+        overflow: auto;
     }
 
 /* Tabel */
     .table-openair {
         background-color: #fcfcfc42;
-        backdrop-filter: blur(15px);
+        /*backdrop-filter: blur(15px);*/
         display: inline-table;
         border-radius: 0.25rem;
         border-collapse: collapse;
@@ -148,19 +160,16 @@
 .fredag {
     grid-area: fredag;
     margin-bottom: 30px;
-  
 }
 
 .torsdag {
     grid-area: torsdag;
-   
     margin-bottom: 30px;
 }
 
 .lørdag {
     grid-area: lørdag;
     margin-bottom: 30px;
- 
 }
 
 
@@ -208,7 +217,7 @@
 /* Billetside */
 .billet_overskrift {
     text-align: center;
-    padding: 20px;
+    padding: 0 10px 20px;
     color: black;
 }
 
@@ -224,27 +233,43 @@
     gap: 20px 20px;
     grid-auto-flow: row;
     grid-template-areas:
-        "Partout Billet1 Billet2 Billet3";
+        "partout billet1 billet2 billet3";
     text-align: center;
     justify-content: center;
 }
-
-    .Partout {
-        grid-area: Partout;
+    .card-billet {
+        background-color: transparent;
+        width: 18rem;
     }
 
-    .Billet1 {
-        grid-area: Billet1;
+    .card-body-billet {
+        background-color: #fcfcfc96;
     }
 
-    .Billet2 {
-        grid-area: Billet2;
+    .partout {
+        grid-area: partout;
     }
 
-    .Billet3 {
-        grid-area: Billet3;
+    .billet1 {
+        grid-area: billet1;
     }
 
+    .billet2 {
+        grid-area: billet2;
+    }
+
+    .billet3 {
+        grid-area: billet3;
+    }
+
+/* Billetside */
+    .card-img-top {
+        background-color: #072e4e29;
+        padding: 20px 10px;
+        /*margin-top: 40px;
+        margin-bottom: 20px;*/
+        box-shadow: 10px;
+    }
 
 
 /* Style the search box inside the navigation bar */
@@ -320,16 +345,12 @@ a {
     text-align: center;
 }
 
-/*billetside*/
-
-.card-img-top {
-    margin-top: 40px;
-    margin-bottom: 20px;
-    box-shadow: 10px;
-    
-}
 /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
 @media screen and (max-width: 600px) {
+    .content {
+        padding-top: 0;
+    }
+
     .topnav a, .topnav input[type=text] {
         float: none;
         display: block;
@@ -345,12 +366,17 @@ a {
 
     .openair-forside-indhold {
         width: 100%;
-        text-align: center;
         display: block;
+        padding: 2px;
         margin-left: auto;
         margin-right: auto;
         color: black;
+        text-align: center;
     }
+
+        .openair-forside-indhold h1 {
+            font-size: 2rem;
+        }
 
     .openair-forside-billede {
         width: 100%;
@@ -376,9 +402,14 @@ a {
         margin-left: auto;
         margin-right: auto;
         background-color: #fcfcfc42;
-        /*    backdrop-filter: blur(10px);*/
+        /*backdrop-filter: blur(10px);*/
         padding: 20px;
         border-radius: 10px;
+    }
+
+    .table-openair tbody tr td {
+        font-size: 14px;
+        padding: 0.5rem;
     }
 }
 

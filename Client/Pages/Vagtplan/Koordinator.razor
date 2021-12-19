@@ -67,9 +67,9 @@
             </div>
             if (isEdit)
             {
-                <div class="modal" tabindex="-1" style="display: block" role="dialog">
+                <div class="modal fade show" tabindex="-1" style="display: block; background-color: rgba(247, 247, 247, .7)" aria-modal="true" role="dialog">
                     <div class="modal-dialog">
-                        <div class="modal-content modal-openair">
+                        <div class="modal-content modal-content-openair">
                             <div class="modal-header" style="border: none">
                                 <h3 class="modal-title">Rediger vagt</h3>
                                 <button type="button" class="close" @onclick="@this.CloseModal">
@@ -78,7 +78,7 @@
                                     </span>
                                 </button>
                             </div>
-                            <div class="modal-body" style=" overflow: auto; max-height: 75vh">
+                            <div class="modal-body modal-body-openair">
                                 <form>
                                     <div class="form-group">
 

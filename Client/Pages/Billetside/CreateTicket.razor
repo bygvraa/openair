@@ -1,6 +1,7 @@
 ﻿@page "/createticket"
 @inject HttpClient Http
 @inject NavigationManager UriHelper
+@inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime js
 
 @attribute [Authorize(Roles = "Administrator, Bruger, Frivillig")]
@@ -12,9 +13,9 @@
     <div class="col-md-4">
         <EditForm Model="ticket" OnValidSubmit="@(async () => await AddTicket())">
             <div class="form-group">
-                <label for="Title">Vælg en billet</label>
-                <select class="form-control" @bind="@ticket.Title">
-                    <option value="">--Vælg--</option>
+                <label for="title">Vælg en billettype</label>
+                <select for="title" class="form-control" @bind="@ticket.Title" @onclick="CheckIfValid" >
+                    <option value="">-- Vælg --</option>
                     <option value="PARTOUT">PARTOUT</option>
                     <option value="TORSDAG">TORSDAG</option>
                     <option value="FREDAG">FREDAG</option>
@@ -22,16 +23,22 @@
                 </select>
             </div>
             <div class="form-group">
-                <input for="Antal" class="form-control" placeholder="Antal" @bind="@ticket.Amount" />
+                <label for="amount">Antal billetter (maks 5 pr. person)</label>
+                <input for="amount" class="form-control" type="number" placeholder="antal"
+                       @bind="@ticket.Amount"
+                       @onclick="CheckIfValid"
+                       min="0"
+                       max="5" />
             </div>
             <div class="form-group">
-                <input for="Email" class="form-control" placeholder="Email" @bind="@ticket.Email" />
+                <label for="email">Email til reservation</label>
+                <input for="email" class="form-control" value="@currentUserEmail" />
             </div>
             <div class="form-group">
                 <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="button" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Reserver Billet" />
+                <input type="submit" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Reserver" disabled="@formInvalid"/>
             </div>
-            </EditForm>
+        </EditForm>
     </div>
 </div>
 
@@ -39,9 +46,22 @@
     TicketClass ticket = new TicketClass();
     TicketClass[] ticketsss;
 
+    // Nuværende brugers email
+    private string currentUserEmail;
+
+    // Variabel til validering af form
+    private bool formInvalid = true;
+
     protected override async Task OnInitializedAsync()
     {
-        ticketsss = await Http.GetFromJsonAsync<TicketClass[]>("Ticket");
+        var authState = await AuthenticationStateProvider.GetAuthenticationStateAsync();
+        var user = authState.User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            ticketsss = await Http.GetFromJsonAsync<TicketClass[]>("Ticket");
+            currentUserEmail = user.Identity.Name;
+        }
     }
 
     async Task AddTicket()
@@ -53,7 +73,7 @@
                 if (_ticket.Id != ticket.Id && !string.IsNullOrEmpty(ticket.Title))
                 {
 
-                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Amount, ticket.Email));
+                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Amount, currentUserEmail));
                     await js.InvokeVoidAsync("alert", $"Reseveret");
                     UriHelper.NavigateTo("/cart");
                 }
@@ -64,6 +84,18 @@
                 break;
             }
 
+        }
+    }
+
+    private void CheckIfValid()
+    {
+        if (ticket.Title != "" && ticket.Amount > 0)
+        {
+            formInvalid = false;
+        }
+        else
+        {
+            formInvalid = true;
         }
     }
 
