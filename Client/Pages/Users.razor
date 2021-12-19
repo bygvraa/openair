@@ -9,14 +9,7 @@
     <Authorized>
 
         <h2>FRIVILLIGE OG KONTAKTPERSONER</h2>
-        <p>Liste over alle frivillige og kontaktpersoner for diverse foreninger.</p>
-
-        <div style="text-align: right; margin-bottom: 5px">
-            <button type="button" class="btn btn-primary"
-                    @onclick='@(() => UriHelper.NavigateTo("/createuser"))'>
-                Opret bruger
-            </button>
-        </div>
+        <p>Liste over alle frivillige og kontaktpersoner for diverse foreninger.</p><br />
 
         @if (userList == null)
         {
@@ -49,10 +42,10 @@
                             <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
                             <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
                                     <span class="oi oi-wrench" aria-hidden="true"></span>
                                 </button>
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
                                     <span class="oi oi-trash" aria-hidden="true"></span>
                                 </button>
                             </td>
@@ -70,10 +63,10 @@
                             <td>@_user.GetCreated().ToString("dd-MM-yyyy HH:mm")</td>
                             <td>@_user.GetModified().ToString("dd-MM-yyyy HH:mm")</td>
                             <td class="text-right">
-                                <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
+                                <button class="btn btn-primary openair-blue-btn-sm btn-sm" @onclick="@(async () => await EditUser(_user.Id))">
                                     <span class="oi oi-wrench" aria-hidden="true"></span>
                                 </button>
-                                <button class="btn btn-danger openair-red-btn btn-sm" @onclick="() => OpenDeleteDialog(_user)">
+                                <button class="btn btn-danger openair-red-btn-sm btn-sm" @onclick="() => OpenDeleteDialog(_user)">
                                     <span class="oi oi-trash" aria-hidden="true"></span>
                                 </button>
                             </td>

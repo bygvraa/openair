@@ -16,14 +16,18 @@
                     }
                     else
                     {
-                        <p>Du har ikke adgang til denne side.</p>
+                        <div style="text-align: center">
+                            <p>Du har ikke adgang til denne side.</p>
+                        </div>
                     }
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
         <NotFound>
             <LayoutView Layout="@typeof(MainLayout)">
-                <p>Beklager, der er ikke noget på denne side.</p>
+                <div style="text-align: center">
+                    <p>Beklager, denne side er tom.</p>
+                </div>
             </LayoutView>
         </NotFound>
     </Router>
