@@ -11,8 +11,8 @@
         <h2>KOORDINATORSIDE</h2>
         <p>Side til at administrere vagter for frivillige og kontaktpersoner for diverse foreninger.</p>
 
-        <div style="text-align: right; margin-bottom: 5px">
-            <button type="button" class="btn btn-success"
+        <div class="d-flex justify-content-right">
+            <button type="button" class="btn btn-success mb-2 text-right"
                     @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
                 Opret vagt
             </button>
@@ -85,9 +85,11 @@
                                         <div class="form-group">
                                             <label for="types">Vælg en vagttype</label>
                                             <select class="form-control" @bind="@task.Type" required>
-                                                <option title="" value="">--- Vælg ---</option>
-                                                <option value="Frivillig">Frivillig</option>
-                                                <option value="Kontaktperson">Kontaktperson</option>
+                                                <option value="">--- Vælg ---</option>
+                                                @foreach (var _type in Enum.GetValues(typeof(UserType)))
+                                                {
+                                                    <option value="@_type">@_type</option>
+                                                }
                                             </select>
                                         </div>
 

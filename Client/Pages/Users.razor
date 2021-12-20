@@ -20,7 +20,7 @@
         <div class="table-responsive">
             <table class="table table-borderless table-openair table-hover">
                 <thead>
-                    <tr class="text-nowrap">
+                    <tr>
                         <th>Person</th>
                         <th>Email</th>
                         <th>Fødselsdato</th>
@@ -34,7 +34,7 @@
                     @foreach (var _user in userList)
                     {
                     <tr>
-                        <td class="text-nowrap" data-toggle="tooltip" title="Frivillig" >
+                        <td data-toggle="tooltip" title="Frivillig" >
                             <span class="oi oi-person mr-2"></span>
                             @_user.GetFullName()
                         </td>
@@ -56,7 +56,7 @@
                     @foreach (var _user in teamList)
                     {
                     <tr>
-                        <td class="text-nowrap" data-toggle="tooltip" title="Kontaktperson for en organisation" >
+                        <td data-toggle="tooltip" title="Kontaktperson for en organisation" >
                             <span class="oi oi-people mr-2" aria-hidden="true"></span>
                             @_user.GetFullName()
                         </td>
