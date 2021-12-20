@@ -8,31 +8,29 @@
 <h1>Opret en vagt</h1>
 <br />
 
-<div class="row" style=" text-align: center; place-content: center">
+<div class="row text-center" style="place-content: center">
     <div class="col-md-4 text-left">
 
         <EditForm Model="task" OnValidSubmit="@(async () => await AddTask())">
             <div class="form-group">
                 <label for="types">Vælg en vagttype</label>
                 <select class="form-control" @bind="task.Type">
-                    <option value="">--Vælg--</option>
-                    <option value="Frivillig">Frivillig</option>
-                    <option value="Kontaktperson">Kontaktperson</option>
+                    <option value="">--- Vælg ---</option>
+                    @foreach (var _type in Enum.GetValues(typeof(UserType)))
+                    {
+                        <option value="@_type">@_type</option>
+                    }
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="categories">Vælg en jobkategori</label>
                 <select class="form-control" @bind="task.Category">
-                    <option value="">--Vælg--</option>
-                    <option value="Sceneopsætning">Sceneopsætning</option>
-                    <option value="Rengøring">Rengøring</option>
-                    <option value="Bar">Bar</option>
-                    <option value="Entre">Entre</option>
-                    <option value="Vagt">Vagt</option>
-                    <option value="Madbod">Madbod</option>
-                    <option value="Backstage">Backstage</option>
-                    <option value="Andet">Andet</option>
+                    <option value="">--- Vælg ---</option>
+                    @foreach (var _category in Enum.GetValues(typeof(Category)))
+                    {
+                        <option value="@_category">@_category</option>
+                    }
                 </select>
             </div>
 
