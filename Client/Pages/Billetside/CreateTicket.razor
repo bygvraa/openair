@@ -27,16 +27,16 @@
                 <input for="amount" class="form-control" type="number" placeholder="antal"
                        @bind="@ticket.Amount"
                        @onclick="CheckIfValid"
-                       min="0"
+                       min="1"
                        max="5" />
             </div>
             <div class="form-group">
                 <label for="email">Email til reservation</label>
-                <input for="email" class="form-control" value="@currentUserEmail" />
+                <input for="email" class="form-control" value="@currentUserEmail" disabled/>
             </div>
             <div class="form-group">
                 <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="submit" class="btn btn-success" @onclick="@(async () => await AddTicket())" value="Reserver" disabled="@formInvalid"/>
+                <input type="submit" class="btn btn-success" value="Reserver" disabled="@formInvalid"/>
             </div>
         </EditForm>
     </div>
@@ -66,35 +66,32 @@
 
     async Task AddTicket()
     {
-        if (await js.InvokeAsync<bool>("confirm", $"Vil du resevere {ticket.Amount + " billetter til " + ticket.Title}?"))
+        if (await js.InvokeAsync<bool>("confirm", $"Vil du resevere {ticket.Amount} billet(ter) til {ticket.Title}?"))
         {
-            foreach (var _ticket in ticketsss)
-            {
-                if (_ticket.Id != ticket.Id && !string.IsNullOrEmpty(ticket.Title))
-                {
+            ticket.Email = currentUserEmail;
 
-                    await Http.PostAsJsonAsync("ticket", new TicketClass(ticket.Id, ticket.Title, ticket.Amount, currentUserEmail));
-                    await js.InvokeVoidAsync("alert", $"Reseveret");
-                    UriHelper.NavigateTo("/cart");
-                }
-                else
-                {
-                    await js.InvokeVoidAsync("alert", "Pls fill out all fields correctly");
-                }
-                break;
-            }
+            await Http.PostAsJsonAsync("ticket", ticket);
+            await js.InvokeVoidAsync("alert", "Reseveret");
 
+            UriHelper.NavigateTo("/cart");
+        }
+        else
+        {
+            await js.InvokeVoidAsync("alert", "Fortrudt");
         }
     }
 
     private void CheckIfValid()
     {
-        if (ticket.Title != "" && ticket.Amount > 0)
+        // Checker om der er valgt en billettype, og at antallet af biletter er over 0
+        if ((ticket.Title != "") && (ticket.Amount > 0))
         {
+            // Hvis formen er udfyldt korrekt, så kan der reserveres
             formInvalid = false;
         }
         else
         {
+            // Hvis formen ikke er udfyldt som den skal, så kan der ikke reseveres
             formInvalid = true;
         }
     }
