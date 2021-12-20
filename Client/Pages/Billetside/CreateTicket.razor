@@ -4,43 +4,50 @@
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject IJSRuntime js
 
-@attribute [Authorize(Roles = "Administrator, Bruger, Frivillig")]
+<AuthorizeView>
+    <Authorized Context="AuthenticationStateProvider">
 
-<h1 class="billet_overskrift">RESERVER BILLET</h1>
-<hr />
+        <h1 class="billet_overskrift">RESERVER BILLET</h1>
+        <hr />
 
-<div class="row" style=" text-align: center; place-content: center">
-    <div class="col-md-4">
-        <EditForm Model="ticket" OnValidSubmit="@(async () => await AddTicket())">
-            <div class="form-group">
-                <label for="title">Vælg en billettype</label>
-                <select for="title" class="form-control" @bind="@ticket.Title" @onclick="CheckIfValid" >
-                    <option value="">-- Vælg --</option>
-                    <option value="PARTOUT">PARTOUT</option>
-                    <option value="TORSDAG">TORSDAG</option>
-                    <option value="FREDAG">FREDAG</option>
-                    <option value="LØRDAG">LØRDAG</option>
-                </select>
+        <div class="row" style=" text-align: center; place-content: center">
+            <div class="col-md-4">
+                <EditForm Model="ticket" OnValidSubmit="@(async () => await AddTicket())">
+                    <div class="form-group">
+                        <label for="title">Vælg en billettype</label>
+                        <select for="title" class="form-control" @bind="@ticket.Title" @onclick="CheckIfValid">
+                            <option value="">-- Vælg --</option>
+                            <option value="PARTOUT">PARTOUT</option>
+                            <option value="TORSDAG">TORSDAG</option>
+                            <option value="FREDAG">FREDAG</option>
+                            <option value="LØRDAG">LØRDAG</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="amount">Antal billetter (maks 5 pr. person)</label>
+                        <input for="amount" class="form-control" type="number" placeholder="antal"
+                                @bind="@ticket.Amount"
+                                @onclick="CheckIfValid"
+                                min="1"
+                                max="5" />
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email til reservation</label>
+                        <input for="email" class="form-control" value="@currentUserEmail" disabled />
+                    </div>
+                    <div class="form-group">
+                        <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
+                        <input type="submit" class="btn btn-success" value="Reserver" disabled="@formInvalid" />
+                    </div>
+                </EditForm>
             </div>
-            <div class="form-group">
-                <label for="amount">Antal billetter (maks 5 pr. person)</label>
-                <input for="amount" class="form-control" type="number" placeholder="antal"
-                       @bind="@ticket.Amount"
-                       @onclick="CheckIfValid"
-                       min="1"
-                       max="5" />
-            </div>
-            <div class="form-group">
-                <label for="email">Email til reservation</label>
-                <input for="email" class="form-control" value="@currentUserEmail" disabled/>
-            </div>
-            <div class="form-group">
-                <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Fortryd" />
-                <input type="submit" class="btn btn-success" value="Reserver" disabled="@formInvalid"/>
-            </div>
-        </EditForm>
-    </div>
-</div>
+        </div>
+
+    </Authorized>
+    <NotAuthorized>
+        <p>Du har ikke adgang til denne side.</p>
+    </NotAuthorized>
+</AuthorizeView>
 
 @code {
     TicketClass ticket = new TicketClass();

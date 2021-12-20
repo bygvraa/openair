@@ -2,16 +2,15 @@
 @inject HttpClient Http
 @inject NavigationManager UriHelper
 @inject AuthenticationStateProvider AuthenticationStateProvider
-@inject IJSRuntime js
 
 <AuthorizeView>
     <Authorized>
 
         <h1 class="billet_overskrift">RESERVER DINE BILLETTER HER</h1>
         <div class="container_billet">
-            <div class="card Partout" style="width: 18rem;">
-                <img src="/images/partoutbillet.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet partout" >
+                <img src="images/billetter/partoutbillet.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 2499,- DKK </b>
                     <p></p>
                     <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
@@ -20,9 +19,9 @@
 
                 </div>
             </div>
-            <div class="card Billet1" style="width: 18rem;">
-                <img src="/images/torsdag.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet1" >
+                <img src="images/billetter/torsdag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
@@ -30,9 +29,9 @@
                     <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
                 </div>
             </div>
-            <div class="card Billet2" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet2" >
+                <img src="images/billetter/fredag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
@@ -40,9 +39,9 @@
                     <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
                 </div>
             </div>
-            <div class="card Billet3" style="width: 18rem;">
-                <img src="/images/ticket.jpg" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet3" >
+                <img src="images/billetter/lørdag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuyTicket" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
@@ -57,9 +56,9 @@
 
         <h1 class="billet_overskrift">LOG IND FOR AT RESERVERE EN BILLET</h1>
         <div class="container_billet">
-            <div class="card Partout" style="width: 18rem;">
-                <img src="/images/partoutbillet.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet partout" >
+                <img src="images/billetter/partoutbillet.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 2499,- DKK </b>
                     <p></p>
                     <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">PARTOUT</a>
@@ -68,9 +67,9 @@
 
                 </div>
             </div>
-            <div class="card Billet1" style="width: 18rem;">
-                <img src="/images/torsdag.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet1" >
+                <img src="images/billetter/torsdag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">TORSDAG</a>
@@ -78,9 +77,9 @@
                     <p class="card-text">HEADLINER PÅ TORSDAG ER MILEY CYRUS</p>
                 </div>
             </div>
-            <div class="card Billet2" style="width: 18rem;">
-                <img src="/images/fredag.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet2" >
+                <img src="images/billetter/fredag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">FREDAG</a>
@@ -88,9 +87,9 @@
                     <p class="card-text">START WEEKENDEN STÆRKT PÅ OPENAIR</p>
                 </div>
             </div>
-            <div class="card Billet3" style="width: 18rem;">
-                <img src="/images/lørdag.png" class="card-img-top" alt="...">
-                <div class="card-body">
+            <div class="card card-billet billet3" >
+                <img src="images/billetter/lørdag.png" class="card-img-top" alt="...">
+                <div class="card-body card-body-billet">
                     <b> 899,- DKK </b>
                     <p></p>
                     <a @onclick="@BuySite" class="btn btn-primary openair-blue-btn btn-sm">LØRDAG</a>
