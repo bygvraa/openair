@@ -20,17 +20,16 @@ namespace OpenAir.Server.Controllers
         {
             _service = service;
         }
-        // GET: /<controller>/
 
-        // GET: api/task
-        // Bruger en metode ('GetAllTasks()') fra 'TaskRepository' til at retunere en liste over alle opgaver
+
+        // Finder alle tickets og retunerer dem som en liste
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TicketClass>>> GetAll()
         {
             return await _service.GetAllTickets();
         }
 
-
+        // Find en bestemt ticket
         [HttpGet("{Id}")]
         public async Task<ActionResult<TicketClass>> Get(int Id)
         {
@@ -41,16 +40,9 @@ namespace OpenAir.Server.Controllers
 
             return ticket;
         }
-        //update IsBought 
-        //[HttpPut]
-        //public async Task<ActionResult<TicketClass>> Update(TicketClass ticket)
-        //{
-        //    await _service.UpdateTicket(ticket);
 
-        //    return ticket;
-        //}
 
-        //Lav en billet
+        // Lav en ticket
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] TicketClass ticket)
         {

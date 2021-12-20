@@ -79,7 +79,7 @@ namespace OpenAir.Server.Controllers
         }
 
 
-        // 
+        // Opdater booking-status på en task (en frivillig kan tilføje eller fjerne sig fra en task)
         [Authorize(Roles = "Administrator, Kontaktperson, Frivillig")]
         [HttpPut("UpdateBooking")]
         public async Task Book([FromBody] ApplicationTask task)

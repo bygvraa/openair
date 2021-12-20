@@ -14,13 +14,13 @@ namespace OpenAir.Server.Controllers
     {
         private readonly RoleManager<ApplicationRole> roleManager;
 
-
         public RoleController(RoleManager<ApplicationRole> roleManager)
         {
             this.roleManager = roleManager;
         }
 
 
+        // Retunerer en liste over alle roller i appen
         [HttpGet]
         public async Task<ActionResult<IEnumerable<ApplicationRole>>> GetAll()
         {
@@ -28,6 +28,7 @@ namespace OpenAir.Server.Controllers
         }
 
 
+        // Returner en specifik rolle
         [HttpGet("{id}")]
         public async Task<ActionResult<ApplicationRole>> Get(string id)
         {
@@ -40,6 +41,7 @@ namespace OpenAir.Server.Controllers
         }
 
 
+        // Tilføj en ny rolle
         [HttpPost]
         public async Task<ActionResult> Create([FromBody] ApplicationRole role)
         {
@@ -51,6 +53,7 @@ namespace OpenAir.Server.Controllers
         }
 
 
+        // Opdater en rolle
         [HttpPut]
         public async Task<ActionResult<ApplicationRole>> Update([FromBody] ApplicationRole role)
         {
@@ -68,6 +71,7 @@ namespace OpenAir.Server.Controllers
         }
 
 
+        // Slet en rolle
         [HttpDelete("{id}")]
         public async Task<ActionResult> Delete(string id)
         {
