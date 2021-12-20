@@ -34,7 +34,13 @@ namespace OpenAir.Shared.Models
         public DateTime GetModified() { return Modified; }
     }
 
-    // Enum
+    // Enums
+    public enum UserType
+    {
+        Frivillig,
+        Kontaktperson
+    }
+
     public enum Category
     {
         Sceneopsætning,
