@@ -62,7 +62,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account
             [Display(Name = "Fødselsdato")]
             public DateTime BirthDate { get; set; }
 
-            [Required(ErrorMessage = "Indtast kompetencer")]
+            // [Required(ErrorMessage = "Indtast kompetencer")]
             [Display(Name = "Kompetencer (Bar, Rengøring, Opsætning, Vagt, Madlavning)")]
             public string Skills { get; set; }
 

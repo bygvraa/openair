@@ -10,7 +10,6 @@ namespace OpenAir.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    [Authorize(Roles = "Administrator")]        // Kun admins har adgang til denne controller
     public class AdminController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> userManager;

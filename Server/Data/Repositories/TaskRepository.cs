@@ -1,5 +1,4 @@
 ﻿using OpenAir.Shared.Models;
-using OpenAir.Server.Data;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;

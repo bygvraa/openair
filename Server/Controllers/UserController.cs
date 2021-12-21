@@ -54,12 +54,11 @@ namespace OpenAir.Server.Controllers
 
         // Tager en bruger som argument og retunerer alle brugerens oplysninger
         [HttpPut]
-        public async Task<ActionResult<ApplicationUser>> Update([FromBody] ApplicationUser user)
+        public async Task<ActionResult> Update([FromBody] ApplicationUser user)
         {
-            if (ModelState.IsValid)
-                await _service.UpdateUser(user);
+            await _service.UpdateUser(user);
 
-            return user;
+            return Ok();
         }
 
 

@@ -98,54 +98,6 @@
                 </div>
             </div>
         </div>
-        @*<h3>BILLETTER</h3>
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>BILLETTER</th>
-                        <th>PRIS</th>
-                        <th style="width: 0px">&nbsp;</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>PARTOUT</td>
-                        <td>2499</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>TORSDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>FREDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>LØRDAG</td>
-                        <td>899</td>
-                        <td>
-                            <button class="btn btn-primary openair-blue-btn btn-sm" @onclick="@BuySite">
-                                <span aria-hidden="true">RESERVER</span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>*@
 
     </NotAuthorized>
 </AuthorizeView>
@@ -171,7 +123,6 @@
     void BuyTicket()
     {
         UriHelper.NavigateTo("/createticket");
-
     }
 
     void BuySite()
