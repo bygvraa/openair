@@ -40,7 +40,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var _role in roleList)
+                        @foreach (var _role in roleList
+                            .OrderBy(_role => _role.Name))
                         {
                             <tr>
                                 <td>@_role.Name</td>
