@@ -70,6 +70,12 @@
         white-space: nowrap;
     }
 
+    .btn-primary.disabled, .btn-primary:disabled {
+        color: #fff;
+        background-color: #7899ba61;
+        border-color: #ffffff0a;
+    }
+
     .openair-red-btn-sm {
         width: 40px;
         height: 35px;
