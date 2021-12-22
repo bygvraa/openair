@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -46,27 +47,27 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
             [Display(Name = "Fødselsdato")]
             public DateTime BirthDate { get; set; }
 
-            [Phone]
-            [Display(Name = "Telefonnummer")]
-            public string PhoneNumber { get; set; }
+            //[Phone]
+            //[Display(Name = "Telefonnummer")]
+            //public string PhoneNumber { get; set; }
         }
 
         private async Task LoadAsync(ApplicationUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
+            Username = userName;
             var firstName = user.FirstName;
             var lastName = user.LastName;
             var birthDate = user.BirthDate;
-            Username = userName;
 
             Input = new InputModel
             {
                 FirstName = firstName,
                 LastName = lastName,
                 BirthDate = birthDate,
-                PhoneNumber = phoneNumber
+                //PhoneNumber = phoneNumber
             };
         }
 
@@ -85,6 +86,7 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
         public async Task<IActionResult> OnPostAsync()
         {
             var user = await _userManager.GetUserAsync(User);
+
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
@@ -96,16 +98,48 @@ namespace OpenAir.Server.Areas.Identity.Pages.Account.Manage
                 return Page();
             }
 
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
-            if (Input.PhoneNumber != phoneNumber)
+
+            if (Input.FirstName != user.FirstName)
             {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
+                // Opdater claim "given_name" (fornavn)
+                string oldName = user.FirstName;
+
+                var claimOld = new Claim("given_name", oldName);
+                var claimNew = new Claim("given_name", Input.FirstName);
+
+                var setClaimResult = await _userManager.ReplaceClaimAsync(user, claimOld, claimNew);
+
+                if (setClaimResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
-                    return RedirectToPage();
+                    // Opdater selve fornavnet
+                    user.FirstName = Input.FirstName;
+                    await _userManager.UpdateAsync(user);
                 }
             }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+                await _userManager.UpdateAsync(user);
+            }
+
+            if (Input.BirthDate != user.BirthDate)
+            {
+                user.BirthDate = Input.BirthDate;
+                await _userManager.UpdateAsync(user);
+            }
+
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
+            //if (Input.PhoneNumber != phoneNumber)
+            //{
+            //    var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
+            //    if (!setPhoneResult.Succeeded)
+            //    {
+            //        StatusMessage = "Unexpected error when trying to set phone number.";
+            //        return RedirectToPage();
+            //    }
+            //}
 
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Din profil er blevet opdateret";
