@@ -11,7 +11,7 @@
         <h2>KOORDINATORSIDE</h2>
         <p>Side til at administrere vagter for frivillige og kontaktpersoner for diverse foreninger.</p>
 
-        <div class="d-flex justify-content-right">
+        <div class="d-flex justify-content-end">
             <button type="button" class="btn btn-success mb-2 text-right"
                     @onclick='@(() => UriHelper.NavigateTo("/createtask"))'>
                 Opret vagt
@@ -40,7 +40,9 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var _task in taskList)
+                        @foreach (var _task in taskList
+                            .OrderBy(_task => _task.StartTime)
+                            .OrderBy(_task => _task.StopTime))
                         {
                             <tr>
                                 <td>@_task.GetUserType()</td>

@@ -31,7 +31,8 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var _user in userList)
+                    @foreach (var _user in userList
+                        .OrderBy(_user => _user.GetFullName()))
                     {
                     <tr>
                         <td data-toggle="tooltip" title="Frivillig" >
@@ -53,7 +54,8 @@
                         </td>
                     </tr>
                     }
-                    @foreach (var _user in teamList)
+                    @foreach (var _user in teamList
+                        .OrderBy(_user => _user.GetFullName()))
                     {
                     <tr>
                         <td data-toggle="tooltip" title="Kontaktperson for en organisation" >

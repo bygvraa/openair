@@ -37,7 +37,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (var _user in userList)
+                        @foreach (var _user in userList
+                            .OrderBy(_user => _user.GetFullName()))
                         {
                             <tr>
                                 <td>@_user.GetFullName()</td>
@@ -178,6 +179,7 @@
     protected async Task EditUser(string id)
     {
         user = await Http.GetFromJsonAsync<ApplicationUser>("User/" + id);
+        userRole = "";
 
         await GetUserRoles(user.Id);
 
@@ -189,7 +191,8 @@
     {
         await Http.PutAsJsonAsync("User", user);
 
-        await AddRoleToUser(user, userRole);
+        if (userRole != "")
+            await AddRoleToUser(user, userRole);
 
         this.isEdit = false;
         await GetUsers();
